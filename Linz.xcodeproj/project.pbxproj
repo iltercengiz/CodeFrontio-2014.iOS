@@ -19,6 +19,7 @@
 		7C422F9D18A8FE5F00195D6C /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C422F9C18A8FE5F00195D6C /* MasterViewController.m */; };
 		7CACCFDD18A906F900D66A15 /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CACCFDC18A906F900D66A15 /* MenuCell.m */; };
 		7CACCFE118A90B6200D66A15 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CACCFE018A90B6200D66A15 /* BaseViewController.m */; };
+		7CACCFE518A90CB200D66A15 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CACCFE418A90CB200D66A15 /* CalendarViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,8 @@
 		7CACCFDC18A906F900D66A15 /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 		7CACCFDF18A90B6200D66A15 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		7CACCFE018A90B6200D66A15 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		7CACCFE318A90CB200D66A15 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
+		7CACCFE418A90CB200D66A15 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +120,7 @@
 			children = (
 				7CACCFDE18A90B5600D66A15 /* Base */,
 				7C422F9A18A8FE5500195D6C /* Master */,
+				7CACCFE218A90C7600D66A15 /* Detail */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -146,6 +150,15 @@
 				7CACCFE018A90B6200D66A15 /* BaseViewController.m */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		7CACCFE218A90C7600D66A15 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				7CACCFE318A90CB200D66A15 /* CalendarViewController.h */,
+				7CACCFE418A90CB200D66A15 /* CalendarViewController.m */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,6 +232,7 @@
 				7CACCFE118A90B6200D66A15 /* BaseViewController.m in Sources */,
 				7C422F9D18A8FE5F00195D6C /* MasterViewController.m in Sources */,
 				7CACCFDD18A906F900D66A15 /* MenuCell.m in Sources */,
+				7CACCFE518A90CB200D66A15 /* CalendarViewController.m in Sources */,
 				7C00884418A8F84B00ED4B31 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
