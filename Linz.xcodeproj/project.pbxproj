@@ -13,8 +13,6 @@
 		7C00884218A8F84B00ED4B31 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C00884018A8F84B00ED4B31 /* InfoPlist.strings */; };
 		7C00884418A8F84B00ED4B31 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C00884318A8F84B00ED4B31 /* main.m */; };
 		7C00884818A8F84B00ED4B31 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C00884718A8F84B00ED4B31 /* AppDelegate.m */; };
-		7C00884E18A8F84B00ED4B31 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C00884D18A8F84B00ED4B31 /* MasterViewController.m */; };
-		7C00885118A8F84B00ED4B31 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C00885018A8F84B00ED4B31 /* DetailViewController.m */; };
 		7C00885318A8F84B00ED4B31 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C00885218A8F84B00ED4B31 /* Images.xcassets */; };
 		7C422F9118A8FA4800195D6C /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C422F9018A8FA4800195D6C /* iPad.storyboard */; };
 		7C422F9218A8FA6800195D6C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C422F9418A8FA6800195D6C /* Localizable.strings */; };
@@ -32,10 +30,6 @@
 		7C00884518A8F84B00ED4B31 /* Linz-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Linz-Prefix.pch"; sourceTree = "<group>"; };
 		7C00884618A8F84B00ED4B31 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7C00884718A8F84B00ED4B31 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		7C00884C18A8F84B00ED4B31 /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
-		7C00884D18A8F84B00ED4B31 /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
-		7C00884F18A8F84B00ED4B31 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		7C00885018A8F84B00ED4B31 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		7C00885218A8F84B00ED4B31 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7C422F9018A8FA4800195D6C /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPad.storyboard; sourceTree = "<group>"; };
 		7C422F9318A8FA6800195D6C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -92,10 +86,6 @@
 				7C00884618A8F84B00ED4B31 /* AppDelegate.h */,
 				7C00884718A8F84B00ED4B31 /* AppDelegate.m */,
 				7C422F9018A8FA4800195D6C /* iPad.storyboard */,
-				7C00884C18A8F84B00ED4B31 /* MasterViewController.h */,
-				7C00884D18A8F84B00ED4B31 /* MasterViewController.m */,
-				7C00884F18A8F84B00ED4B31 /* DetailViewController.h */,
-				7C00885018A8F84B00ED4B31 /* DetailViewController.m */,
 				7C00885218A8F84B00ED4B31 /* Images.xcassets */,
 				7C422F9918A8FE4A00195D6C /* Controller */,
 				7C00883E18A8F84B00ED4B31 /* Supporting Files */,
@@ -200,10 +190,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C00884818A8F84B00ED4B31 /* AppDelegate.m in Sources */,
-				7C00884E18A8F84B00ED4B31 /* MasterViewController.m in Sources */,
 				7C422F9D18A8FE5F00195D6C /* MasterViewController.m in Sources */,
 				7C00884418A8F84B00ED4B31 /* main.m in Sources */,
-				7C00885118A8F84B00ED4B31 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
