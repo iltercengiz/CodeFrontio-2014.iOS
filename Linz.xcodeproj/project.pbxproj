@@ -17,22 +17,7 @@
 		7C00884E18A8F84B00ED4B31 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C00884D18A8F84B00ED4B31 /* MasterViewController.m */; };
 		7C00885118A8F84B00ED4B31 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C00885018A8F84B00ED4B31 /* DetailViewController.m */; };
 		7C00885318A8F84B00ED4B31 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C00885218A8F84B00ED4B31 /* Images.xcassets */; };
-		7C00885A18A8F84B00ED4B31 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C00885918A8F84B00ED4B31 /* XCTest.framework */; };
-		7C00885B18A8F84B00ED4B31 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C00883718A8F84B00ED4B31 /* Foundation.framework */; };
-		7C00885C18A8F84B00ED4B31 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C00883B18A8F84B00ED4B31 /* UIKit.framework */; };
-		7C00886418A8F84C00ED4B31 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C00886218A8F84B00ED4B31 /* InfoPlist.strings */; };
-		7C00886618A8F84C00ED4B31 /* LinzTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C00886518A8F84C00ED4B31 /* LinzTests.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		7C00885D18A8F84B00ED4B31 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7C00882C18A8F84B00ED4B31 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7C00883318A8F84B00ED4B31;
-			remoteInfo = Linz;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		7C00883418A8F84B00ED4B31 /* Linz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Linz.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,11 +36,6 @@
 		7C00884F18A8F84B00ED4B31 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		7C00885018A8F84B00ED4B31 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		7C00885218A8F84B00ED4B31 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		7C00885818A8F84B00ED4B31 /* LinzTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinzTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7C00885918A8F84B00ED4B31 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		7C00886118A8F84B00ED4B31 /* LinzTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LinzTests-Info.plist"; sourceTree = "<group>"; };
-		7C00886318A8F84B00ED4B31 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		7C00886518A8F84C00ED4B31 /* LinzTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LinzTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,16 +49,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7C00885518A8F84B00ED4B31 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7C00885A18A8F84B00ED4B31 /* XCTest.framework in Frameworks */,
-				7C00885C18A8F84B00ED4B31 /* UIKit.framework in Frameworks */,
-				7C00885B18A8F84B00ED4B31 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -86,7 +56,6 @@
 			isa = PBXGroup;
 			children = (
 				7C00883D18A8F84B00ED4B31 /* Linz */,
-				7C00885F18A8F84B00ED4B31 /* LinzTests */,
 				7C00883618A8F84B00ED4B31 /* Frameworks */,
 				7C00883518A8F84B00ED4B31 /* Products */,
 			);
@@ -96,7 +65,6 @@
 			isa = PBXGroup;
 			children = (
 				7C00883418A8F84B00ED4B31 /* Linz.app */,
-				7C00885818A8F84B00ED4B31 /* LinzTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -107,7 +75,6 @@
 				7C00883718A8F84B00ED4B31 /* Foundation.framework */,
 				7C00883918A8F84B00ED4B31 /* CoreGraphics.framework */,
 				7C00883B18A8F84B00ED4B31 /* UIKit.framework */,
-				7C00885918A8F84B00ED4B31 /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -139,24 +106,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		7C00885F18A8F84B00ED4B31 /* LinzTests */ = {
-			isa = PBXGroup;
-			children = (
-				7C00886518A8F84C00ED4B31 /* LinzTests.m */,
-				7C00886018A8F84B00ED4B31 /* Supporting Files */,
-			);
-			path = LinzTests;
-			sourceTree = "<group>";
-		};
-		7C00886018A8F84B00ED4B31 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				7C00886118A8F84B00ED4B31 /* LinzTests-Info.plist */,
-				7C00886218A8F84B00ED4B31 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -177,24 +126,6 @@
 			productReference = 7C00883418A8F84B00ED4B31 /* Linz.app */;
 			productType = "com.apple.product-type.application";
 		};
-		7C00885718A8F84B00ED4B31 /* LinzTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7C00886C18A8F84C00ED4B31 /* Build configuration list for PBXNativeTarget "LinzTests" */;
-			buildPhases = (
-				7C00885418A8F84B00ED4B31 /* Sources */,
-				7C00885518A8F84B00ED4B31 /* Frameworks */,
-				7C00885618A8F84B00ED4B31 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7C00885E18A8F84B00ED4B31 /* PBXTargetDependency */,
-			);
-			name = LinzTests;
-			productName = LinzTests;
-			productReference = 7C00885818A8F84B00ED4B31 /* LinzTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -203,11 +134,6 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Ilter Cengiz";
-				TargetAttributes = {
-					7C00885718A8F84B00ED4B31 = {
-						TestTargetID = 7C00883318A8F84B00ED4B31;
-					};
-				};
 			};
 			buildConfigurationList = 7C00882F18A8F84B00ED4B31 /* Build configuration list for PBXProject "Linz" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -223,7 +149,6 @@
 			projectRoot = "";
 			targets = (
 				7C00883318A8F84B00ED4B31 /* Linz */,
-				7C00885718A8F84B00ED4B31 /* LinzTests */,
 			);
 		};
 /* End PBXProject section */
@@ -236,14 +161,6 @@
 				7C00885318A8F84B00ED4B31 /* Images.xcassets in Resources */,
 				7C00884218A8F84B00ED4B31 /* InfoPlist.strings in Resources */,
 				7C00884B18A8F84B00ED4B31 /* iPad.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7C00885618A8F84B00ED4B31 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7C00886418A8F84C00ED4B31 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,23 +178,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7C00885418A8F84B00ED4B31 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7C00886618A8F84C00ED4B31 /* LinzTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		7C00885E18A8F84B00ED4B31 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7C00883318A8F84B00ED4B31 /* Linz */;
-			targetProxy = 7C00885D18A8F84B00ED4B31 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		7C00884018A8F84B00ED4B31 /* InfoPlist.strings */ = {
@@ -294,14 +195,6 @@
 				7C00884A18A8F84B00ED4B31 /* Base */,
 			);
 			name = iPad.storyboard;
-			sourceTree = "<group>";
-		};
-		7C00886218A8F84B00ED4B31 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7C00886318A8F84B00ED4B31 /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -409,48 +302,6 @@
 			};
 			name = Release;
 		};
-		7C00886D18A8F84C00ED4B31 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Linz.app/Linz";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Linz/Linz-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "LinzTests/LinzTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		7C00886E18A8F84C00ED4B31 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Linz.app/Linz";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Linz/Linz-Prefix.pch";
-				INFOPLIST_FILE = "LinzTests/LinzTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -468,14 +319,6 @@
 			buildConfigurations = (
 				7C00886A18A8F84C00ED4B31 /* Debug */,
 				7C00886B18A8F84C00ED4B31 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-		};
-		7C00886C18A8F84C00ED4B31 /* Build configuration list for PBXNativeTarget "LinzTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7C00886D18A8F84C00ED4B31 /* Debug */,
-				7C00886E18A8F84C00ED4B31 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
