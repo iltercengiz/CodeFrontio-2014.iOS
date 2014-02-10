@@ -18,6 +18,7 @@
 		7C00885318A8F84B00ED4B31 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C00885218A8F84B00ED4B31 /* Images.xcassets */; };
 		7C422F9118A8FA4800195D6C /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C422F9018A8FA4800195D6C /* iPad.storyboard */; };
 		7C422F9218A8FA6800195D6C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C422F9418A8FA6800195D6C /* Localizable.strings */; };
+		7C422F9D18A8FE5F00195D6C /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C422F9C18A8FE5F00195D6C /* MasterViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,9 +38,11 @@
 		7C00885018A8F84B00ED4B31 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		7C00885218A8F84B00ED4B31 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7C422F9018A8FA4800195D6C /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPad.storyboard; sourceTree = "<group>"; };
-		7C422F9318A8FA6800195D6C /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7C422F9318A8FA6800195D6C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7C422F9518A8FA7000195D6C /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		7C422F9618A8FA7000195D6C /* tr */ = {isa = PBXFileReference; lastKnownFileType = file; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7C422F9618A8FA7000195D6C /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7C422F9B18A8FE5F00195D6C /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
+		7C422F9C18A8FE5F00195D6C /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +97,7 @@
 				7C00884F18A8F84B00ED4B31 /* DetailViewController.h */,
 				7C00885018A8F84B00ED4B31 /* DetailViewController.m */,
 				7C00885218A8F84B00ED4B31 /* Images.xcassets */,
+				7C422F9918A8FE4A00195D6C /* Controller */,
 				7C00883E18A8F84B00ED4B31 /* Supporting Files */,
 			);
 			path = Linz;
@@ -109,6 +113,23 @@
 				7C422F9418A8FA6800195D6C /* Localizable.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7C422F9918A8FE4A00195D6C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7C422F9A18A8FE5500195D6C /* Master */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		7C422F9A18A8FE5500195D6C /* Master */ = {
+			isa = PBXGroup;
+			children = (
+				7C422F9B18A8FE5F00195D6C /* MasterViewController.h */,
+				7C422F9C18A8FE5F00195D6C /* MasterViewController.m */,
+			);
+			path = Master;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,6 +201,7 @@
 			files = (
 				7C00884818A8F84B00ED4B31 /* AppDelegate.m in Sources */,
 				7C00884E18A8F84B00ED4B31 /* MasterViewController.m in Sources */,
+				7C422F9D18A8FE5F00195D6C /* MasterViewController.m in Sources */,
 				7C00884418A8F84B00ED4B31 /* main.m in Sources */,
 				7C00885118A8F84B00ED4B31 /* DetailViewController.m in Sources */,
 			);
