@@ -17,6 +17,7 @@
 		7C422F9118A8FA4800195D6C /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C422F9018A8FA4800195D6C /* iPad.storyboard */; };
 		7C422F9218A8FA6800195D6C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C422F9418A8FA6800195D6C /* Localizable.strings */; };
 		7C422F9D18A8FE5F00195D6C /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C422F9C18A8FE5F00195D6C /* MasterViewController.m */; };
+		7CACCFDD18A906F900D66A15 /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CACCFDC18A906F900D66A15 /* MenuCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,8 @@
 		7C422F9618A8FA7000195D6C /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7C422F9B18A8FE5F00195D6C /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		7C422F9C18A8FE5F00195D6C /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
+		7CACCFDB18A906F900D66A15 /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
+		7CACCFDC18A906F900D66A15 /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +90,7 @@
 				7C00884718A8F84B00ED4B31 /* AppDelegate.m */,
 				7C422F9018A8FA4800195D6C /* iPad.storyboard */,
 				7C00885218A8F84B00ED4B31 /* Images.xcassets */,
+				7CACCFDA18A906EB00D66A15 /* View */,
 				7C422F9918A8FE4A00195D6C /* Controller */,
 				7C00883E18A8F84B00ED4B31 /* Supporting Files */,
 			);
@@ -120,6 +124,15 @@
 				7C422F9C18A8FE5F00195D6C /* MasterViewController.m */,
 			);
 			path = Master;
+			sourceTree = "<group>";
+		};
+		7CACCFDA18A906EB00D66A15 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7CACCFDB18A906F900D66A15 /* MenuCell.h */,
+				7CACCFDC18A906F900D66A15 /* MenuCell.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,6 +204,7 @@
 			files = (
 				7C00884818A8F84B00ED4B31 /* AppDelegate.m in Sources */,
 				7C422F9D18A8FE5F00195D6C /* MasterViewController.m in Sources */,
+				7CACCFDD18A906F900D66A15 /* MenuCell.m in Sources */,
 				7C00884418A8F84B00ED4B31 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
