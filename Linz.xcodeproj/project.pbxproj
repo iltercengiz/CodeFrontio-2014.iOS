@@ -13,7 +13,7 @@
 		7C00884218A8F84B00ED4B31 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C00884018A8F84B00ED4B31 /* InfoPlist.strings */; };
 		7C00884418A8F84B00ED4B31 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C00884318A8F84B00ED4B31 /* main.m */; };
 		7C00884818A8F84B00ED4B31 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C00884718A8F84B00ED4B31 /* AppDelegate.m */; };
-		7C00884B18A8F84B00ED4B31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C00884918A8F84B00ED4B31 /* Main.storyboard */; };
+		7C00884B18A8F84B00ED4B31 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C00884918A8F84B00ED4B31 /* iPad.storyboard */; };
 		7C00884E18A8F84B00ED4B31 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C00884D18A8F84B00ED4B31 /* MasterViewController.m */; };
 		7C00885118A8F84B00ED4B31 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C00885018A8F84B00ED4B31 /* DetailViewController.m */; };
 		7C00885318A8F84B00ED4B31 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C00885218A8F84B00ED4B31 /* Images.xcassets */; };
@@ -45,7 +45,7 @@
 		7C00884518A8F84B00ED4B31 /* Linz-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Linz-Prefix.pch"; sourceTree = "<group>"; };
 		7C00884618A8F84B00ED4B31 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7C00884718A8F84B00ED4B31 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		7C00884A18A8F84B00ED4B31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7C00884A18A8F84B00ED4B31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/iPad.storyboard; sourceTree = "<group>"; };
 		7C00884C18A8F84B00ED4B31 /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		7C00884D18A8F84B00ED4B31 /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		7C00884F18A8F84B00ED4B31 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 			children = (
 				7C00884618A8F84B00ED4B31 /* AppDelegate.h */,
 				7C00884718A8F84B00ED4B31 /* AppDelegate.m */,
-				7C00884918A8F84B00ED4B31 /* Main.storyboard */,
+				7C00884918A8F84B00ED4B31 /* iPad.storyboard */,
 				7C00884C18A8F84B00ED4B31 /* MasterViewController.h */,
 				7C00884D18A8F84B00ED4B31 /* MasterViewController.m */,
 				7C00884F18A8F84B00ED4B31 /* DetailViewController.h */,
@@ -235,7 +235,7 @@
 			files = (
 				7C00885318A8F84B00ED4B31 /* Images.xcassets in Resources */,
 				7C00884218A8F84B00ED4B31 /* InfoPlist.strings in Resources */,
-				7C00884B18A8F84B00ED4B31 /* Main.storyboard in Resources */,
+				7C00884B18A8F84B00ED4B31 /* iPad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,12 +288,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		7C00884918A8F84B00ED4B31 /* Main.storyboard */ = {
+		7C00884918A8F84B00ED4B31 /* iPad.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				7C00884A18A8F84B00ED4B31 /* Base */,
 			);
-			name = Main.storyboard;
+			name = iPad.storyboard;
 			sourceTree = "<group>";
 		};
 		7C00886218A8F84B00ED4B31 /* InfoPlist.strings */ = {
@@ -389,6 +389,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Linz/Linz-Prefix.pch";
 				INFOPLIST_FILE = "Linz/Linz-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -402,6 +403,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Linz/Linz-Prefix.pch";
 				INFOPLIST_FILE = "Linz/Linz-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
