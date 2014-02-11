@@ -6,9 +6,20 @@
 //  Copyright (c) 2014 Ilter Cengiz. All rights reserved.
 //
 
+#pragma mark Controller
 #import "MasterViewController.h"
 
+#pragma mark Constants
+static const char *calendarSceneIdentifier = "CalendarScene";
+static const char *favouritesSceneIdentifier = "FavouritesScene";
+static const char *notesSceneIdentifier = "NotesScene";
+static const char *venueSceneIdentifier = "VenueScene";
+static const char *supportersSceneIdentifier = "SupportersScene";
+
 @interface MasterViewController ()
+
+// This will be used to cache the scenes through run time
+@property (nonatomic) NSMutableArray *scenes;
 
 @end
 
@@ -16,7 +27,30 @@
 
 #pragma mark - UIViewController
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
+    
+    // Prevent tableView from deselecting cells
+    self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Create the scenes array with NSNulls
+    self.scenes = [NSMutableArray arrayWithObjects:[NSNull null], [NSNull null], [NSNull null], [NSNull null], [NSNull null], nil];
+    
+    // Add calendar scene to the cache array
+    UINavigationController *navigationController = [self.splitViewController.viewControllers lastObject];
+    UIViewController *calendarViewController = navigationController.topViewController;
+    [self.scenes replaceObjectAtIndex:0 withObject:calendarViewController];
+    
+}
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    // Select 'Calendar' cell
+    [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                                animated:NO
+                          scrollPosition:UITableViewScrollPositionNone];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,6 +81,37 @@
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UIViewController *scene;
+    
+    // Check if the scene is available in cache array
+    id object = self.scenes[indexPath.row];
+    if (![object isEqual:[NSNull null]]) {
+        scene = object;
+    } else {
+        
+        // Set identifier
+        NSString *identifier;
+        switch (indexPath.row) {
+            case 0: identifier = [NSString stringWithUTF8String:calendarSceneIdentifier]; break;
+            case 1: identifier = [NSString stringWithUTF8String:favouritesSceneIdentifier]; break;
+            case 2: identifier = [NSString stringWithUTF8String:notesSceneIdentifier]; break;
+            case 3: identifier = [NSString stringWithUTF8String:venueSceneIdentifier]; break;
+            case 4: identifier = [NSString stringWithUTF8String:supportersSceneIdentifier]; break;
+            default: break;
+        }
+        
+        // Instantiate view controller
+        scene = [self.storyboard instantiateViewControllerWithIdentifier:identifier];
+        
+        // Add the scene to the cache
+        [self.scenes replaceObjectAtIndex:indexPath.row withObject:scene];
+        
+    }
+    
+    // Present the scene
+    UINavigationController *navigationController = [self.splitViewController.viewControllers lastObject];
+    navigationController.viewControllers = @[scene];
     
 }
 
