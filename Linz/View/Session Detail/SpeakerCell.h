@@ -10,4 +10,7 @@
 
 @interface SpeakerCell : UITableViewCell
 
+#pragma mark - Configurator
+- (void)configureCellForSpeaker:(NSDictionary *)speaker;
+
 @end

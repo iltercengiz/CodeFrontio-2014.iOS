@@ -10,4 +10,10 @@
 
 @interface PhotoCell : UICollectionViewCell
 
+#pragma mark - IBOutlets
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
+#pragma mark - Configurator
+- (void)configureCellForPhoto:(UIImage *)photo;
+
 @end

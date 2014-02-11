@@ -10,20 +10,12 @@
 
 @implementation SpeakerCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+#pragma mark - Configurator
+- (void)configureCellForSpeaker:(NSDictionary *)speaker {
+    
+    self.imageView.image = [UIImage imageNamed:@"kod-io-logo-black"];
+    self.textLabel.text = @"Kod.io rocx!!!1";
+    
 }
 
 @end

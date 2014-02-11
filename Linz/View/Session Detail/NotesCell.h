@@ -10,4 +10,10 @@
 
 @interface NotesCell : UITableViewCell
 
+#pragma mark - IBOutlets
+@property (weak, nonatomic) IBOutlet UITextView *textView;
+
+#pragma mark - Configurator
+- (void)configureCellForNote:(NSString *)note;
+
 @end

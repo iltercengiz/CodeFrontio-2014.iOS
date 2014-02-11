@@ -6,6 +6,11 @@
 //  Copyright (c) 2014 Ilter Cengiz. All rights reserved.
 //
 
+#pragma mark View
+#import "SpeakerCell.h"
+#import "NotesCell.h"
+#import "PhotosCell.h"
+
 #pragma mark Controller
 #import "SessionViewController.h"
 
@@ -33,18 +38,29 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *(^createSpeakerCell)() = ^UITableViewCell *(){
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"speakerCell" forIndexPath:indexPath];
+    SpeakerCell *(^createSpeakerCell)() = ^SpeakerCell *(){
+        SpeakerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"speakerCell" forIndexPath:indexPath];
+        [cell configureCellForSpeaker:nil];
         return cell;
     };
     
-    UITableViewCell *(^createNotesCell)() = ^UITableViewCell *(){
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"notesCell" forIndexPath:indexPath];
+    NotesCell *(^createNotesCell)() = ^NotesCell *(){
+        NotesCell *cell = [tableView dequeueReusableCellWithIdentifier:@"notesCell" forIndexPath:indexPath];
+        [cell configureCellForNote:nil];
         return cell;
     };
     
-    UITableViewCell *(^createPhotosCell)() = ^UITableViewCell *(){
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"photosCell" forIndexPath:indexPath];
+    PhotosCell *(^createPhotosCell)() = ^PhotosCell *(){
+        PhotosCell *cell = [tableView dequeueReusableCellWithIdentifier:@"photosCell" forIndexPath:indexPath];
+        [cell configureCellForPhotos:@[[UIImage imageNamed:@"kod-io-logo-black"],
+                                       [UIImage imageNamed:@"kod-io-logo-black"],
+                                       [UIImage imageNamed:@"kod-io-logo-black"],
+                                       [UIImage imageNamed:@"kod-io-logo-black"],
+                                       [UIImage imageNamed:@"kod-io-logo-black"],
+                                       [UIImage imageNamed:@"kod-io-logo-black"],
+                                       [UIImage imageNamed:@"kod-io-logo-black"],
+                                       [UIImage imageNamed:@"kod-io-logo-black"],
+                                       [UIImage imageNamed:@"kod-io-logo-black"]]];
         return cell;
     };
     
@@ -66,6 +82,15 @@
         return NSLocalizedString(@"Notes", nil);
     } else {
         return NSLocalizedString(@"Photos", nil);
+    }
+}
+
+#pragma mark - UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 2) {
+        return 128.0;
+    } else {
+        return tableView.rowHeight;
     }
 }
 
