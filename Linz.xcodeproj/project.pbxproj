@@ -17,6 +17,8 @@
 		7C422F9118A8FA4800195D6C /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C422F9018A8FA4800195D6C /* iPad.storyboard */; };
 		7C422F9218A8FA6800195D6C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C422F9418A8FA6800195D6C /* Localizable.strings */; };
 		7C422F9D18A8FE5F00195D6C /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C422F9C18A8FE5F00195D6C /* MasterViewController.m */; };
+		7CA9F27F18AA231E0023B766 /* CalendarTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA9F27E18AA231E0023B766 /* CalendarTimeCell.m */; };
+		7CA9F28218AA23600023B766 /* CalendarSessionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA9F28118AA23600023B766 /* CalendarSessionCell.m */; };
 		7CACCFDD18A906F900D66A15 /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CACCFDC18A906F900D66A15 /* MenuCell.m */; };
 		7CACCFE118A90B6200D66A15 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CACCFE018A90B6200D66A15 /* BaseViewController.m */; };
 		7CACCFE518A90CB200D66A15 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CACCFE418A90CB200D66A15 /* CalendarViewController.m */; };
@@ -41,6 +43,10 @@
 		7C422F9618A8FA7000195D6C /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7C422F9B18A8FE5F00195D6C /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		7C422F9C18A8FE5F00195D6C /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
+		7CA9F27D18AA231E0023B766 /* CalendarTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarTimeCell.h; sourceTree = "<group>"; };
+		7CA9F27E18AA231E0023B766 /* CalendarTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarTimeCell.m; sourceTree = "<group>"; };
+		7CA9F28018AA23600023B766 /* CalendarSessionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarSessionCell.h; sourceTree = "<group>"; };
+		7CA9F28118AA23600023B766 /* CalendarSessionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarSessionCell.m; sourceTree = "<group>"; };
 		7CACCFDB18A906F900D66A15 /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
 		7CACCFDC18A906F900D66A15 /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 		7CACCFDF18A90B6200D66A15 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -143,6 +149,10 @@
 			children = (
 				7CACCFDB18A906F900D66A15 /* MenuCell.h */,
 				7CACCFDC18A906F900D66A15 /* MenuCell.m */,
+				7CA9F27D18AA231E0023B766 /* CalendarTimeCell.h */,
+				7CA9F27E18AA231E0023B766 /* CalendarTimeCell.m */,
+				7CA9F28018AA23600023B766 /* CalendarSessionCell.h */,
+				7CA9F28118AA23600023B766 /* CalendarSessionCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -255,7 +265,9 @@
 				7C422F9D18A8FE5F00195D6C /* MasterViewController.m in Sources */,
 				7CACCFDD18A906F900D66A15 /* MenuCell.m in Sources */,
 				7CACCFE518A90CB200D66A15 /* CalendarViewController.m in Sources */,
+				7CA9F27F18AA231E0023B766 /* CalendarTimeCell.m in Sources */,
 				7C00884418A8F84B00ED4B31 /* main.m in Sources */,
+				7CA9F28218AA23600023B766 /* CalendarSessionCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
