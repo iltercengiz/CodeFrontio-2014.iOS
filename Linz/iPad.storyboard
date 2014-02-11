@@ -101,25 +101,118 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewLayout key="collectionViewLayout" id="akR-kZ-vln" customClass="RFQuiltLayout"/>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TimeCell" id="FDP-ec-A97">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TimeCell" id="FDP-ec-A97" customClass="CalendarTimeCell">
                                 <rect key="frame" x="0.0" y="192" width="256" height="64"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="256" height="64"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Clock" translatesAutoresizingMaskIntoConstraints="NO" id="QSg-ue-QlV">
+                                            <rect key="frame" x="20" y="16" width="32" height="32"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="14:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eFi-CS-hYP">
+                                            <rect key="frame" x="60" y="16" width="96" height="32"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <size key="customSize" width="256" height="64"/>
+                                <connections>
+                                    <outlet property="timeLabel" destination="eFi-CS-hYP" id="1gM-mv-leM"/>
+                                </connections>
                             </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SessionCell" id="gcy-94-4tJ">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SessionCell" id="gcy-94-4tJ" customClass="CalendarSessionCell">
                                 <rect key="frame" x="266" y="64" width="256" height="320"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="256" height="320"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kod-io-logo-black" translatesAutoresizingMaskIntoConstraints="NO" id="jq5-JV-YT2">
+                                            <rect key="frame" x="10" y="10" width="72" height="72"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="72" id="IcZ-2X-UGA"/>
+                                                <constraint firstAttribute="height" constant="72" id="VqR-h7-VQF"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2jS-d7-WoH">
+                                            <rect key="frame" x="90" y="10" width="156" height="72"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" text="Session detail" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vsz-LW-Wwd">
+                                            <rect key="frame" x="10" y="90" width="236" height="180"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="brx-5R-XjH">
+                                            <rect key="frame" x="10" y="278" width="114" height="32"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="114" id="550-E6-I1w"/>
+                                                <constraint firstAttribute="height" constant="32" id="EGI-Oc-XtW"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                            <state key="normal" title="Take Note" image="Note">
+                                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6WR-Eb-zQo">
+                                            <rect key="frame" x="132" y="278" width="114" height="32"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="32" id="SF9-LB-9N2"/>
+                                                <constraint firstAttribute="width" constant="114" id="juY-tf-Bca"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                            <state key="normal" title="Favourite" image="Star">
+                                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="brx-5R-XjH" firstAttribute="top" secondItem="Vsz-LW-Wwd" secondAttribute="bottom" constant="8" id="2gH-GZ-4Jj"/>
+                                    <constraint firstItem="Vsz-LW-Wwd" firstAttribute="leading" secondItem="brx-5R-XjH" secondAttribute="leading" id="50b-43-skK"/>
+                                    <constraint firstItem="brx-5R-XjH" firstAttribute="leading" secondItem="gcy-94-4tJ" secondAttribute="leading" constant="10" id="7J0-jj-Flt"/>
+                                    <constraint firstItem="Vsz-LW-Wwd" firstAttribute="top" secondItem="jq5-JV-YT2" secondAttribute="bottom" constant="8" symbolic="YES" id="8ip-wc-aqN"/>
+                                    <constraint firstItem="2jS-d7-WoH" firstAttribute="trailing" secondItem="Vsz-LW-Wwd" secondAttribute="trailing" id="Dmk-jf-kRd"/>
+                                    <constraint firstItem="Vsz-LW-Wwd" firstAttribute="top" secondItem="2jS-d7-WoH" secondAttribute="bottom" constant="8" symbolic="YES" id="MeQ-8p-izP"/>
+                                    <constraint firstItem="jq5-JV-YT2" firstAttribute="leading" secondItem="Vsz-LW-Wwd" secondAttribute="leading" id="Nph-wh-CAd"/>
+                                    <constraint firstItem="jq5-JV-YT2" firstAttribute="top" secondItem="gcy-94-4tJ" secondAttribute="top" constant="10" id="QJk-Xs-my4"/>
+                                    <constraint firstItem="6WR-Eb-zQo" firstAttribute="top" secondItem="Vsz-LW-Wwd" secondAttribute="bottom" constant="8" id="Vul-W6-WR0"/>
+                                    <constraint firstItem="6WR-Eb-zQo" firstAttribute="leading" secondItem="brx-5R-XjH" secondAttribute="trailing" constant="8" id="ch2-Hz-2AK"/>
+                                    <constraint firstItem="Vsz-LW-Wwd" firstAttribute="trailing" secondItem="6WR-Eb-zQo" secondAttribute="trailing" id="cug-E7-PiY"/>
+                                    <constraint firstAttribute="trailing" secondItem="6WR-Eb-zQo" secondAttribute="trailing" constant="10" id="hkU-SP-NfH"/>
+                                    <constraint firstItem="jq5-JV-YT2" firstAttribute="top" secondItem="2jS-d7-WoH" secondAttribute="top" id="qKi-yD-ILj"/>
+                                    <constraint firstItem="6WR-Eb-zQo" firstAttribute="leading" secondItem="brx-5R-XjH" secondAttribute="trailing" constant="8" id="ut8-ex-YqI"/>
+                                    <constraint firstAttribute="bottom" secondItem="brx-5R-XjH" secondAttribute="bottom" constant="10" id="yRc-9E-oU4"/>
+                                    <constraint firstAttribute="bottom" secondItem="6WR-Eb-zQo" secondAttribute="bottom" constant="10" id="zHZ-LW-y0d"/>
+                                    <constraint firstItem="2jS-d7-WoH" firstAttribute="leading" secondItem="jq5-JV-YT2" secondAttribute="trailing" constant="8" symbolic="YES" id="zSp-Sc-b5S"/>
+                                </constraints>
                                 <size key="customSize" width="256" height="320"/>
+                                <connections>
+                                    <outlet property="favouriteButton" destination="6WR-Eb-zQo" id="U4z-as-FlV"/>
+                                    <outlet property="imageView" destination="jq5-JV-YT2" id="WSV-1C-aIT"/>
+                                    <outlet property="nameLabel" destination="2jS-d7-WoH" id="upc-yu-Pr1"/>
+                                    <outlet property="sessionDetail" destination="Vsz-LW-Wwd" id="hDT-vS-DNa"/>
+                                    <outlet property="takeNoteButton" destination="brx-5R-XjH" id="kd0-PD-n7w"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -134,6 +227,12 @@
             <point key="canvasLocation" x="1271" y="324"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Clock" width="32" height="32"/>
+        <image name="Note" width="32" height="32"/>
+        <image name="Star" width="32" height="32"/>
+        <image name="kod-io-logo-black" width="200" height="200"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="lightContent"/>
         <simulatedOrientationMetrics key="orientation"/>

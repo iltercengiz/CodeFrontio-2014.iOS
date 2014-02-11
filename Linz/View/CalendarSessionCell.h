@@ -10,4 +10,15 @@
 
 @interface CalendarSessionCell : UICollectionViewCell
 
+#pragma mark - IBOutlets
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UITextView *sessionDetail;
+
+@property (weak, nonatomic) IBOutlet UIButton *takeNoteButton;
+@property (weak, nonatomic) IBOutlet UIButton *favouriteButton;
+
+#pragma mark - CalendarSessionCell
+- (void)configureCellForSession:(NSDictionary *)session;
+
 @end

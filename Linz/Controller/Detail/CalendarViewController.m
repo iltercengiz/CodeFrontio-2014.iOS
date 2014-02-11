@@ -6,10 +6,13 @@
 //  Copyright (c) 2014 Ilter Cengiz. All rights reserved.
 //
 
-#pragma mark - Controller
+#pragma mark View
+#import "CalendarSessionCell.h"
+
+#pragma mark Controller
 #import "CalendarViewController.h"
 
-#pragma mark - Libraries
+#pragma mark Libraries
 #import "RFQuiltLayout.h"
 
 @interface CalendarViewController () <RFQuiltLayoutDelegate>
@@ -43,23 +46,22 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSString *identifier;
+    CalendarSessionCell *(^createSessionCell)() = ^CalendarSessionCell *(){
+        CalendarSessionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"SessionCell" forIndexPath:indexPath];
+        [cell configureCellForSession:nil];
+        return cell;
+    };
+    
+    UICollectionViewCell *(^createTimeCell)() = ^UICollectionViewCell *(){
+        UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TimeCell" forIndexPath:indexPath];
+        return cell;
+    };
     
     if (indexPath.item % 3 == 0) {
-        identifier = @"TimeCell";
+        return createTimeCell();
     } else {
-        identifier = @"SessionCell";
+        return createSessionCell();
     }
-    
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-    
-    if (indexPath.item % 3 == 0) {
-        cell.backgroundColor = [UIColor grayColor];
-    } else {
-        cell.backgroundColor = [UIColor greenColor];
-    }
-    
-    return cell;
     
 }
 
