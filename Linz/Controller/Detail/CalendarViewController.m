@@ -6,33 +6,73 @@
 //  Copyright (c) 2014 Ilter Cengiz. All rights reserved.
 //
 
+#pragma mark - Controller
 #import "CalendarViewController.h"
 
-@interface CalendarViewController ()
+#pragma mark - Libraries
+#import "RFQuiltLayout.h"
+
+@interface CalendarViewController () <RFQuiltLayoutDelegate>
 
 @end
 
 @implementation CalendarViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)viewDidLoad
-{
+#pragma mark - UIViewController
+- (void)viewDidLoad {
+    
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    RFQuiltLayout *layout = (RFQuiltLayout *)self.collectionView.collectionViewLayout;
+    layout.delegate = self;
+    layout.blockPixels = CGSizeMake(256.0, 64.0);
+    layout.direction = UICollectionViewScrollDirectionHorizontal;
+    
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - UICollectionViewControllerDataSource
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return 33;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSString *identifier;
+    
+    if (indexPath.item % 3 == 0) {
+        identifier = @"TimeCell";
+    } else {
+        identifier = @"SessionCell";
+    }
+    
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    
+    if (indexPath.item % 3 == 0) {
+        cell.backgroundColor = [UIColor grayColor];
+    } else {
+        cell.backgroundColor = [UIColor greenColor];
+    }
+    
+    return cell;
+    
+}
+
+#pragma mark - UICollectionViewControllerDelegate
+
+
+#pragma mark - RFQuiltLayoutDelegate
+- (CGSize)blockSizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.item % 3 == 0) {
+        return (CGSize){.width = 1.0, .height = 1.0};
+    } else {
+        return (CGSize){.width = 1.0, .height = 5.0};
+    }
 }
 
 @end
