@@ -1,0 +1,31 @@
+//
+//  PhotoCell.m
+//  Linz
+//
+//  Created by Ilter Cengiz on 12/02/14.
+//  Copyright (c) 2014 Ilter Cengiz. All rights reserved.
+//
+
+#import "PhotoCell.h"
+
+@implementation PhotoCell
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        // Initialization code
+    }
+    return self;
+}
+
+/*
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect
+{
+    // Drawing code
+}
+*/
+
+@end
