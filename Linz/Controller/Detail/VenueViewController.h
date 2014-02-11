@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class iCarousel;
+
 @interface VenueViewController : UIViewController
+
+@property (weak, nonatomic) IBOutlet iCarousel *carousel;
 
 @end

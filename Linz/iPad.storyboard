@@ -254,10 +254,10 @@
             </objects>
             <point key="canvasLocation" x="3927" y="1520"/>
         </scene>
-        <!--View Controller-->
+        <!--Venue View Controller-->
         <scene sceneID="jGj-FP-3gC">
             <objects>
-                <viewController storyboardIdentifier="VenueScene" id="KkK-gM-Qq9" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VenueScene" id="KkK-gM-Qq9" customClass="VenueViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Qyt-4c-g56"/>
                         <viewControllerLayoutGuide type="bottom" id="Bb5-cb-6C9"/>
@@ -265,8 +265,25 @@
                     <view key="view" contentMode="scaleToFill" id="Tmz-tN-0oK">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hvr-hv-WnM" userLabel="Carousel" customClass="iCarousel">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hvr-hv-WnM" firstAttribute="top" secondItem="Tmz-tN-0oK" secondAttribute="top" id="Kyg-dK-lly"/>
+                            <constraint firstAttribute="trailing" secondItem="hvr-hv-WnM" secondAttribute="trailing" id="lcB-1U-4Ec"/>
+                            <constraint firstItem="hvr-hv-WnM" firstAttribute="leading" secondItem="Tmz-tN-0oK" secondAttribute="leading" id="qFH-7y-cPN"/>
+                            <constraint firstItem="Bb5-cb-6C9" firstAttribute="top" secondItem="hvr-hv-WnM" secondAttribute="bottom" id="wHx-3L-4uS"/>
+                        </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <connections>
+                        <outlet property="carousel" destination="hvr-hv-WnM" id="vHL-8q-oIX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i3q-vp-2FU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
