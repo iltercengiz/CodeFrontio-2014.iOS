@@ -88,7 +88,7 @@
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 2) {
-        return 128.0;
+        return 144.0;
     } else {
         return tableView.rowHeight;
     }

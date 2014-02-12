@@ -279,26 +279,26 @@
                                     <outlet property="textView" destination="Og4-WA-OwI" id="B39-AG-dQ4"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="photosCell" rowHeight="128" id="BpG-H4-7zH" userLabel="Photos Cell" customClass="PhotosCell">
-                                <rect key="frame" x="0.0" y="230" width="768" height="128"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="photosCell" rowHeight="144" id="BpG-H4-7zH" userLabel="Photos Cell" customClass="PhotosCell">
+                                <rect key="frame" x="0.0" y="230" width="768" height="144"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BpG-H4-7zH" id="80n-fg-vfZ">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="128"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="144"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="woW-zq-Gs9">
-                                            <rect key="frame" x="0.0" y="0.0" width="768" height="128"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="144"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="H0i-jz-ouA">
+                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="18" minimumInteritemSpacing="18" id="H0i-jz-ouA">
                                                 <size key="itemSize" width="108" height="108"/>
                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
+                                                <inset key="sectionInset" minX="18" minY="18" maxX="64" maxY="18"/>
                                             </collectionViewFlowLayout>
                                             <cells>
                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="photoCell" id="4qj-xl-3pi" customClass="PhotoCell">
-                                                    <rect key="frame" x="10" y="10" width="108" height="108"/>
+                                                    <rect key="frame" x="18" y="18" width="108" height="108"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                         <rect key="frame" x="0.0" y="0.0" width="108" height="108"/>
@@ -316,7 +316,7 @@
                                                     </connections>
                                                 </collectionViewCell>
                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="addPhotoCell" id="yRq-OZ-H6s">
-                                                    <rect key="frame" x="128" y="10" width="108" height="108"/>
+                                                    <rect key="frame" x="144" y="18" width="108" height="108"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                         <rect key="frame" x="0.0" y="0.0" width="108" height="108"/>
