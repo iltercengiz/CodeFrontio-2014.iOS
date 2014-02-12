@@ -10,6 +10,9 @@
 #import "PhotosCell.h"
 #import "PhotoCell.h"
 
+#pragma mark Pods
+#import <IDMPhotoBrowser/IDMPhotoBrowser.h>
+
 @interface PhotosCell () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic) NSArray *photos;
@@ -19,10 +22,15 @@
 @implementation PhotosCell
 
 #pragma mark - Configurator
-- (void)configureCellForPhotos:(NSArray *)photos {
+- (void)configureCellForTableView:(UITableView *)tableView withPhotos:(NSArray *)photos {
     
+    // Assign the tableView
+    self.tableView = tableView;
+    
+    // Assign the photos
     self.photos = photos;
     
+    // Set self as dataSource and delegate of the collection view
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
 
@@ -55,7 +63,20 @@
 
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"Photo selected!");
+    
+    // IDMPhotos
+    NSArray *photos = [IDMPhoto photosWithImages:self.photos];
+    
+    // The selected cell
+    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+    
+    // Browser object
+    IDMPhotoBrowser *browser = [[IDMPhotoBrowser alloc] initWithPhotos:photos animatedFromView:cell];
+    
+    // Present browser
+    id controller = self.tableView.dataSource;
+    [controller presentViewController:browser animated:YES completion:nil];
+    
 }
 
 @end
