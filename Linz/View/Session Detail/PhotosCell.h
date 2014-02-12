@@ -13,7 +13,10 @@
 #pragma mark - IBOutlets
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
+#pragma mark - Properties
+@property (weak, nonatomic) UITableView *tableView;
+
 #pragma mark - Configurator
-- (void)configureCellForPhotos:(NSArray *)photos;
+- (void)configureCellForTableView:(UITableView *)tableView withPhotos:(NSArray *)photos;
 
 @end

@@ -52,15 +52,16 @@
     
     PhotosCell *(^createPhotosCell)() = ^PhotosCell *(){
         PhotosCell *cell = [tableView dequeueReusableCellWithIdentifier:@"photosCell" forIndexPath:indexPath];
-        [cell configureCellForPhotos:@[[UIImage imageNamed:@"kod-io-logo-black"],
-                                       [UIImage imageNamed:@"kod-io-logo-black"],
-                                       [UIImage imageNamed:@"kod-io-logo-black"],
-                                       [UIImage imageNamed:@"kod-io-logo-black"],
-                                       [UIImage imageNamed:@"kod-io-logo-black"],
-                                       [UIImage imageNamed:@"kod-io-logo-black"],
-                                       [UIImage imageNamed:@"kod-io-logo-black"],
-                                       [UIImage imageNamed:@"kod-io-logo-black"],
-                                       [UIImage imageNamed:@"kod-io-logo-black"]]];
+        NSArray *photos = @[[UIImage imageNamed:@"kod-io-logo-black"],
+                            [UIImage imageNamed:@"kod-io-logo-black"],
+                            [UIImage imageNamed:@"kod-io-logo-black"],
+                            [UIImage imageNamed:@"kod-io-logo-black"],
+                            [UIImage imageNamed:@"kod-io-logo-black"],
+                            [UIImage imageNamed:@"kod-io-logo-black"],
+                            [UIImage imageNamed:@"kod-io-logo-black"],
+                            [UIImage imageNamed:@"kod-io-logo-black"],
+                            [UIImage imageNamed:@"kod-io-logo-black"]];
+        [cell configureCellForTableView:tableView withPhotos:photos];
         return cell;
     };
     
