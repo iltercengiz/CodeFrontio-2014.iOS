@@ -10,4 +10,7 @@
 
 @interface SponsorCell : UITableViewCell
 
+#pragma mark - IBOutlets
+@property (weak, nonatomic) IBOutlet UIImageView *sponsorImage;
+
 @end

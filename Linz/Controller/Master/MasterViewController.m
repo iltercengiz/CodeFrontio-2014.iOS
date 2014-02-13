@@ -14,7 +14,7 @@ static const char *calendarSceneIdentifier = "CalendarScene";
 static const char *favouritesSceneIdentifier = "FavouritesScene";
 static const char *notesSceneIdentifier = "NotesScene";
 static const char *venueSceneIdentifier = "VenueScene";
-static const char *supportersSceneIdentifier = "SupportersScene";
+static const char *supportersSceneIdentifier = "SponsorsScene";
 
 @interface MasterViewController ()
 
