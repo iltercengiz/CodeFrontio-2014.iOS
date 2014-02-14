@@ -8,6 +8,19 @@
 
 #import "LinzAPIClient.h"
 
+static NSString * const LinzAPIBaseURLString = @"192.168.2.87:9393/";
+
 @implementation LinzAPIClient
+
+#pragma mark - Singleton
++ (instancetype)sharedClient {
+    static LinzAPIClient *sharedClient = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSURL *baseURL = [NSURL URLWithString:LinzAPIBaseURLString];
+        sharedClient = [[LinzAPIClient alloc] initWithBaseURL:baseURL];
+    });
+    return sharedClient;
+}
 
 @end

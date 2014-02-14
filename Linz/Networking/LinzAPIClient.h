@@ -10,4 +10,7 @@
 
 @interface LinzAPIClient : AFHTTPSessionManager
 
+#pragma mark - Singleton
++ (instancetype)sharedClient;
+
 @end
