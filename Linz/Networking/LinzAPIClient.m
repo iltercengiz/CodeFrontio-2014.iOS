@@ -8,7 +8,7 @@
 
 #import "LinzAPIClient.h"
 
-static NSString * const LinzAPIBaseURLString = @"192.168.2.87:9393/";
+static NSString * const LinzAPIBaseURLString = @"http://192.168.2.87:9393/";
 
 @implementation LinzAPIClient
 
