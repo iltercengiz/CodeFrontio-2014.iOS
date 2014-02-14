@@ -19,6 +19,38 @@
 #pragma mark Libraries
 #import "RFQuiltLayout.h"
 
+@interface CalendarCollectionView : UICollectionView
+
+@end
+
+@implementation CalendarCollectionView
+
+- (void)drawRect:(CGRect)rect {
+    
+    UIBezierPath *path;
+    
+    // Background
+    path = [UIBezierPath bezierPathWithRect:rect];
+    [[UIColor colorWithRed:0.255 green:0.255 blue:0.259 alpha:1] setFill];
+    [path fill];
+    
+    // Dark place for time cells
+    path = [UIBezierPath bezierPathWithRect:CGRectMake(0.0, 0.0, CGRectGetWidth(rect), 64.0)];
+    [[UIColor colorWithRed:0.153 green:0.153 blue:0.157 alpha:1] setFill];
+    [path fill];
+    
+    // Thin line below the 'dark place'
+    path = [UIBezierPath bezierPath];
+    [path moveToPoint:CGPointMake(0.0, 64.0)];
+    [path addLineToPoint:CGPointMake(CGRectGetWidth(rect), 64.0)];
+    path.lineWidth = 1.0;
+    [[UIColor colorWithRed:0.278 green:0.278 blue:0.282 alpha:1] setStroke];
+    [path stroke];
+    
+}
+
+@end
+
 @interface CalendarViewController () <RFQuiltLayoutDelegate>
 
 @end
@@ -36,6 +68,9 @@
     layout.delegate = self;
     layout.blockPixels = CGSizeMake(128.0, 64.0);
     layout.direction = UICollectionViewScrollDirectionHorizontal;
+    
+    // Set background color of collectionView for custom drawing
+    self.collectionView.backgroundColor = [UIColor clearColor];
     
 }
 
