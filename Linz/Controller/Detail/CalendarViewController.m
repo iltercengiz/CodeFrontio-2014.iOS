@@ -20,9 +20,6 @@
 
 @interface CalendarViewController () <RFQuiltLayoutDelegate>
 
-@property (nonatomic) NSArray *speakers;
-@property (nonatomic) NSArray *sessions;
-
 @end
 
 @implementation CalendarViewController
@@ -40,43 +37,13 @@
     layout.direction = UICollectionViewScrollDirectionHorizontal;
     
 }
-- (void)viewWillAppear:(BOOL)animated {
-    
-    [[LinzAPIClient sharedClient] GET:@"/data"
-                           parameters:nil
-                              success:^(NSURLSessionDataTask *task, id responseObject) {
-                                  
-                                  // Assign speakers
-                                  self.speakers = responseObject[@"speakers"];
-                                  
-                                  // Loop through the sessions and add timeCell datas to the appropriate indexes
-                                  NSArray *sessions = responseObject[@"sessions"];
-                                  NSMutableArray *mutableSessions = [NSMutableArray array];
-                                  for (NSDictionary *session in sessions) {
-                                      // Add a small dictionary object to specify time cells
-                                      // Check type and track values of the sessions for appropriate placing
-                                      if ([session[@"type"] isEqualToNumber:@0] ||
-                                          [session[@"track"] isEqualToNumber:@1]) // We check the track info instead of type to not to add time data twice for simultaneous sessions
-                                      {
-                                          [mutableSessions addObject:@{@"track": @0, @"type": @(-1)}];
-                                      }
-                                      // Add the session to array
-                                      [mutableSessions addObject:session];
-                                  }
-                                  
-                                  // Assign sessions
-                                  self.sessions = mutableSessions;
-                                  
-                                  [self.collectionView reloadData];
-                                  
-                              } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                  NSLog(@"Error: %@", error.description);
-                              }];
-    
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)reloadCalendar {
+    [self.collectionView reloadData];
 }
 
 #pragma mark - UICollectionViewControllerDataSource

@@ -10,4 +10,9 @@
 
 @interface CalendarViewController : UICollectionViewController
 
+@property (nonatomic) NSArray *speakers;
+@property (nonatomic) NSArray *sessions;
+
+- (void)reloadCalendar;
+
 @end
