@@ -93,20 +93,12 @@
                                     <rect key="frame" x="0.0" y="0.0" width="128" height="64"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Clock" translatesAutoresizingMaskIntoConstraints="NO" id="QSg-ue-QlV">
-                                            <rect key="frame" x="8" y="16" width="32" height="32"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="32" id="6iy-Qy-7HZ"/>
-                                                <constraint firstAttribute="width" constant="32" id="L2c-wI-DWs"/>
-                                            </constraints>
-                                        </imageView>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="14:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eFi-CS-hYP">
-                                            <rect key="frame" x="36" y="16" width="56" height="32"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="14:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eFi-CS-hYP">
+                                            <rect key="frame" x="10" y="16" width="108" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="32" id="dea-7b-4if"/>
-                                                <constraint firstAttribute="width" constant="56" id="r6r-QI-VTI"/>
+                                                <constraint firstAttribute="width" constant="108" id="r6r-QI-VTI"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                             <nil key="highlightedColor"/>
@@ -116,10 +108,8 @@
                                 </view>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="eFi-CS-hYP" firstAttribute="leading" secondItem="FDP-ec-A97" secondAttribute="leading" constant="36" id="0fM-cA-I3Q"/>
-                                    <constraint firstItem="QSg-ue-QlV" firstAttribute="centerY" secondItem="FDP-ec-A97" secondAttribute="centerY" id="PnQ-jg-wTZ"/>
-                                    <constraint firstItem="QSg-ue-QlV" firstAttribute="leading" secondItem="FDP-ec-A97" secondAttribute="leading" constant="8" id="qCn-iN-yld"/>
-                                    <constraint firstItem="eFi-CS-hYP" firstAttribute="top" secondItem="QSg-ue-QlV" secondAttribute="top" id="yqt-9w-dgy"/>
+                                    <constraint firstItem="eFi-CS-hYP" firstAttribute="leading" secondItem="FDP-ec-A97" secondAttribute="leading" constant="10" id="0fM-cA-I3Q"/>
+                                    <constraint firstAttribute="centerY" secondItem="eFi-CS-hYP" secondAttribute="centerY" id="BDx-0R-eIf"/>
                                 </constraints>
                                 <size key="customSize" width="128" height="64"/>
                                 <connections>
@@ -497,7 +487,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Clock" width="32" height="32"/>
         <image name="Note" width="32" height="32"/>
         <image name="Plus" width="54" height="54"/>
         <image name="Star" width="32" height="32"/>

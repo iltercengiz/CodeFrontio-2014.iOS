@@ -10,21 +10,31 @@
 
 @implementation CalendarTimeCell
 
-#pragma mark - UIView
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
+#pragma mark - Configurator
+- (void)configureCellForTimeInterval:(NSTimeInterval)timeInterval {
+    
+    // Set background color for custom drawing
+    self.backgroundColor = [UIColor clearColor];
+    
+    // Set text color
+    self.timeLabel.textColor = [UIColor colorWithRed:0.925 green:0.925 blue:0.925 alpha:1];
+    
 }
 
+#pragma mark - UIView
 - (void)drawRect:(CGRect)rect {
     
-    UIBezierPath *path = [UIBezierPath bezierPathWithRect:rect];
-    path.lineWidth = 0.5;
+    UIBezierPath *path;
     
-    [[UIColor lightGrayColor] setStroke];
+    // Background
+    path = [UIBezierPath bezierPathWithRect:rect];
+    [[UIColor colorWithRed:0.153 green:0.153 blue:0.157 alpha:1] setFill];
+    [path fill];
+    
+    // Frame line
+    path = [UIBezierPath bezierPathWithRect:rect];
+    path.lineWidth = 1.0;
+    [[UIColor colorWithRed:0.278 green:0.278 blue:0.282 alpha:1] setStroke];
     [path stroke];
     
 }

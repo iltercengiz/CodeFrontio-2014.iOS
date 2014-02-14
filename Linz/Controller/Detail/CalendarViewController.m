@@ -10,6 +10,7 @@
 #import "LinzAPIClient.h"
 
 #pragma mark View
+#import "CalendarTimeCell.h"
 #import "CalendarSessionCell.h"
 
 #pragma mark Controller
@@ -53,8 +54,9 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    UICollectionViewCell *(^createTimeCell)() = ^UICollectionViewCell *(){
-        UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TimeCell" forIndexPath:indexPath];
+    CalendarTimeCell *(^createTimeCell)() = ^CalendarTimeCell *(){
+        CalendarTimeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TimeCell" forIndexPath:indexPath];
+        [cell configureCellForTimeInterval:0];
         return cell;
     };
     
