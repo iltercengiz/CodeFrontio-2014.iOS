@@ -9,6 +9,9 @@
 #pragma mark Networking
 #import "LinzAPIClient.h"
 
+#pragma mark View
+#import "MenuCell.h"
+
 #pragma mark Controller
 #import "MasterViewController.h"
 #import "CalendarViewController.h"
@@ -49,6 +52,9 @@ static const char *supportersSceneIdentifier = "SponsorsScene";
     UINavigationController *navigationController = [self.splitViewController.viewControllers lastObject];
     UIViewController *calendarViewController = navigationController.topViewController;
     [self.scenes replaceObjectAtIndex:0 withObject:calendarViewController];
+    
+    // Set background color
+    self.tableView.backgroundColor = [UIColor colorWithRed:0.255 green:0.255 blue:0.259 alpha:1];
     
 }
 - (void)viewWillAppear:(BOOL)animated {
@@ -144,7 +150,8 @@ static const char *supportersSceneIdentifier = "SponsorsScene";
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MenuCell" forIndexPath:indexPath];
+    MenuCell *cell = [tableView dequeueReusableCellWithIdentifier:@"menuCell" forIndexPath:indexPath];
+    [cell configureCell];
     
     // Set title
     switch (indexPath.row) {
@@ -197,28 +204,8 @@ static const char *supportersSceneIdentifier = "SponsorsScene";
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    
-    UIView *headerView = ({
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(tableView.frame), tableView.sectionHeaderHeight)];
-        view.backgroundColor = [UIColor whiteColor];
-        view;
-    });
-    
-    UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"kod-io-logo-black"]];
-    
-    // Adjust position of logo
-    logo.frame = ({
-        CGRect frame = logo.frame;
-        frame.origin.x = (CGRectGetWidth(headerView.frame) - CGRectGetWidth(frame)) / 2.0;
-        frame.origin.y = (CGRectGetHeight(headerView.frame) - CGRectGetHeight(frame)) / 2.0;
-        frame;
-    });
-    
-    // Add logo as subview
-    [headerView addSubview:logo];
-    
+    UIView *headerView = [[[NSBundle mainBundle] loadNibNamed:@"MasterViewHeader" owner:self options:nil] firstObject];
     return headerView;
-    
 }
 
 @end

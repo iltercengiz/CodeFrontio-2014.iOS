@@ -10,4 +10,7 @@
 
 @interface MenuCell : UITableViewCell
 
+#pragma mark - Configurator
+- (void)configureCell;
+
 @end
