@@ -15,27 +15,14 @@ static const CGFloat borderWidth = 1.0;
 
 @implementation CalendarSessionCell
 
-#pragma mark - UIView
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
-- (void)drawRect:(CGRect)rect {
-    
-    UIBezierPath *path = [UIBezierPath bezierPathWithRect:rect];
-    path.lineWidth = 0.5;
-    
-    [[UIColor lightGrayColor] setStroke];
-    [path stroke];
-    
-}
-
 #pragma mark - CalendarSessionCell
 - (void)configureCellForSession:(NSDictionary *)session {
+    
+    // Set background color for custom drawing
+    self.backgroundColor = [UIColor clearColor];
+    
+    self.imageView.layer.cornerRadius = 8.0;
+    self.imageView.clipsToBounds = YES;
     
     self.takeNoteButton.layer.cornerRadius = cornerRadius;
     self.takeNoteButton.layer.borderColor = [UIColor colorWithWhite:34.0/255.0 alpha:1.0].CGColor;
@@ -44,6 +31,24 @@ static const CGFloat borderWidth = 1.0;
     self.favouriteButton.layer.cornerRadius = cornerRadius;
     self.favouriteButton.layer.borderColor = [UIColor colorWithWhite:34.0/255.0 alpha:1.0].CGColor;
     self.favouriteButton.layer.borderWidth = borderWidth;
+    
+}
+
+#pragma mark - UIView
+- (void)drawRect:(CGRect)rect {
+    
+    UIBezierPath *path;
+    
+    // Background
+    path = [UIBezierPath bezierPathWithRect:rect];
+    [[UIColor whiteColor] setFill];
+    [path fill];
+    
+    // Frame
+    path = [UIBezierPath bezierPathWithRect:rect];
+    path.lineWidth = 1.0;
+    [[UIColor lightGrayColor] setStroke];
+    [path stroke];
     
 }
 

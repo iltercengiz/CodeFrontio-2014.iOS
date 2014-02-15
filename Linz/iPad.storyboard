@@ -123,7 +123,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="256" height="320"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kod-io-logo-black" translatesAutoresizingMaskIntoConstraints="NO" id="jq5-JV-YT2">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="jq5-JV-YT2">
                                             <rect key="frame" x="10" y="10" width="72" height="72"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <constraints>
@@ -488,9 +488,9 @@
     </scenes>
     <resources>
         <image name="Note" width="32" height="32"/>
+        <image name="Placeholder" width="200" height="200"/>
         <image name="Plus" width="54" height="54"/>
         <image name="Star" width="32" height="32"/>
-        <image name="kod-io-logo-black" width="200" height="200"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="lightContent"/>
