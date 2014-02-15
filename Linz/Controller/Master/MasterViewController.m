@@ -66,10 +66,11 @@ static const char *supportersSceneIdentifier = "SponsorsScene";
     
     __block NSArray *speakers;
     __block NSArray *sessions;
+    __block NSArray *sponsors;
     
     void (^proceedBlock)() = ^{
         
-        if (!speakers || !sessions) {
+        if (!speakers || !sessions || !sponsors) {
             return;
         }
         
@@ -100,7 +101,9 @@ static const char *supportersSceneIdentifier = "SponsorsScene";
     [[LinzAPIClient sharedClient] GET:@"/speakers"
                            parameters:nil
                               success:^(NSURLSessionDataTask *task, id responseObject) {
+                                  // Assign speakers
                                   speakers = responseObject;
+                                  // Proceed
                                   proceedBlock();
                               } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                   NSLog(@"Error: %@", error.description);
@@ -109,7 +112,6 @@ static const char *supportersSceneIdentifier = "SponsorsScene";
     [[LinzAPIClient sharedClient] GET:@"/sessions"
                            parameters:nil
                               success:^(NSURLSessionDataTask *task, id responseObject) {
-                                  
                                   // Loop through the sessions and add timeCell datas to the appropriate indexes
                                   NSArray *immutableSessions = responseObject;
                                   NSMutableArray *mutableSessions = [NSMutableArray array];
@@ -124,10 +126,21 @@ static const char *supportersSceneIdentifier = "SponsorsScene";
                                       // Add the session to array
                                       [mutableSessions addObject:session];
                                   }
-                                  
+                                  // Assign sessions
                                   sessions = mutableSessions;
+                                  // Proceed
                                   proceedBlock();
-                                  
+                              } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                  NSLog(@"Error: %@", error.description);
+                              }];
+    
+    [[LinzAPIClient sharedClient] GET:@"/sponsors"
+                           parameters:nil
+                              success:^(NSURLSessionDataTask *task, id responseObject) {
+                                  // Assign sponsors
+                                  sponsors = responseObject;
+                                  // Proceed
+                                  proceedBlock();
                               } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                   NSLog(@"Error: %@", error.description);
                               }];
