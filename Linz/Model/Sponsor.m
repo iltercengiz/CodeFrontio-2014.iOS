@@ -14,5 +14,7 @@
 @dynamic type;
 @dynamic imageURL;
 @dynamic websiteURL;
+@dynamic priority;
+@dynamic subpriority;
 
 @end

@@ -15,5 +15,7 @@
 @property (nonatomic, retain) NSString * type;
 @property (nonatomic, retain) NSString * imageURL;
 @property (nonatomic, retain) NSString * websiteURL;
+@property (nonatomic, retain) NSNumber * priority;
+@property (nonatomic, retain) NSNumber * subpriority;
 
 @end

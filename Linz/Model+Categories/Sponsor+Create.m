@@ -20,6 +20,8 @@
     sponsor.type = info[@"type"];
     sponsor.imageURL = info[@"imageURL"];
     sponsor.websiteURL = info[@"websiteURL"];
+    sponsor.priority = info[@"priority"];
+    sponsor.subpriority = info[@"subpriority"];
     
     // Save changes to the context
     [context saveToPersistentStoreAndWait];

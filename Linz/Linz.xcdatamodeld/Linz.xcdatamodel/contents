@@ -20,12 +20,14 @@
     </entity>
     <entity name="Sponsor" representedClassName="Sponsor" syncable="YES">
         <attribute name="imageURL" attributeType="String" syncable="YES"/>
+        <attribute name="priority" attributeType="Integer 16" defaultValueString="-1" syncable="YES"/>
+        <attribute name="subpriority" attributeType="Integer 16" defaultValueString="-1" syncable="YES"/>
         <attribute name="type" attributeType="String" syncable="YES"/>
         <attribute name="websiteURL" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
         <element name="Speaker" positionX="-2324" positionY="206" width="128" height="163"/>
         <element name="Session" positionX="-2169" positionY="180" width="128" height="133"/>
-        <element name="Sponsor" positionX="-2016" positionY="207" width="128" height="88"/>
+        <element name="Sponsor" positionX="-2016" positionY="207" width="128" height="118"/>
     </elements>
 </model>
