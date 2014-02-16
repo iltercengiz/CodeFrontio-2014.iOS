@@ -24,6 +24,7 @@
 		7C3BC58918B1011F00CA0FC0 /* Session+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC58818B1011F00CA0FC0 /* Session+Create.m */; };
 		7C3BC58C18B1012900CA0FC0 /* Speaker+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC58B18B1012900CA0FC0 /* Speaker+Create.m */; };
 		7C3BC58F18B1051E00CA0FC0 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC58E18B1051E00CA0FC0 /* Session.m */; };
+		7C3BC59618B10C9C00CA0FC0 /* Manager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC59518B10C9C00CA0FC0 /* Manager.m */; };
 		7C422F9118A8FA4800195D6C /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C422F9018A8FA4800195D6C /* iPad.storyboard */; };
 		7C422F9218A8FA6800195D6C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C422F9418A8FA6800195D6C /* Localizable.strings */; };
 		7C422F9D18A8FE5F00195D6C /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C422F9C18A8FE5F00195D6C /* MasterViewController.m */; };
@@ -73,6 +74,8 @@
 		7C3BC58B18B1012900CA0FC0 /* Speaker+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Speaker+Create.m"; sourceTree = "<group>"; };
 		7C3BC58D18B1051E00CA0FC0 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
 		7C3BC58E18B1051E00CA0FC0 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
+		7C3BC59418B10C9C00CA0FC0 /* Manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Manager.h; sourceTree = "<group>"; };
+		7C3BC59518B10C9C00CA0FC0 /* Manager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Manager.m; sourceTree = "<group>"; };
 		7C422F9018A8FA4800195D6C /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPad.storyboard; sourceTree = "<group>"; };
 		7C422F9318A8FA6800195D6C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7C422F9518A8FA7000195D6C /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -164,6 +167,7 @@
 				7C422F9018A8FA4800195D6C /* iPad.storyboard */,
 				7C3BC56E18B0FBE700CA0FC0 /* Linz.xcdatamodeld */,
 				7C00885218A8F84B00ED4B31 /* Images.xcassets */,
+				7C3BC59318B10C8F00CA0FC0 /* Manager */,
 				7C3BC56D18B0FAF300CA0FC0 /* Model */,
 				7C3BC58318B100F700CA0FC0 /* Model+Categories */,
 				7CCB106C18AE5B58007A2486 /* Categories */,
@@ -212,6 +216,15 @@
 				7C3BC58B18B1012900CA0FC0 /* Speaker+Create.m */,
 			);
 			path = "Model+Categories";
+			sourceTree = "<group>";
+		};
+		7C3BC59318B10C8F00CA0FC0 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				7C3BC59418B10C9C00CA0FC0 /* Manager.h */,
+				7C3BC59518B10C9C00CA0FC0 /* Manager.m */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		7C422F9918A8FE4A00195D6C /* Controller */ = {
@@ -456,6 +469,7 @@
 				7C3BC58C18B1012900CA0FC0 /* Speaker+Create.m in Sources */,
 				7C3BC58918B1011F00CA0FC0 /* Session+Create.m in Sources */,
 				7CCB107618AE5DF3007A2486 /* CalendarTimeCell.m in Sources */,
+				7C3BC59618B10C9C00CA0FC0 /* Manager.m in Sources */,
 				7C3BC58F18B1051E00CA0FC0 /* Session.m in Sources */,
 				7C3BC58618B1011500CA0FC0 /* Sponsor+Create.m in Sources */,
 				7C00884418A8F84B00ED4B31 /* main.m in Sources */,
