@@ -17,6 +17,7 @@
 		7C00885318A8F84B00ED4B31 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C00885218A8F84B00ED4B31 /* Images.xcassets */; };
 		7C3840FB18AC0B0300A85C31 /* SponsorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3840FA18AC0B0300A85C31 /* SponsorCell.m */; };
 		7C3840FE18AC0B4900A85C31 /* SponsorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3840FD18AC0B4900A85C31 /* SponsorsViewController.m */; };
+		7C3BC57018B0FBE700CA0FC0 /* Linz.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC56E18B0FBE700CA0FC0 /* Linz.xcdatamodeld */; };
 		7C422F9118A8FA4800195D6C /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C422F9018A8FA4800195D6C /* iPad.storyboard */; };
 		7C422F9218A8FA6800195D6C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C422F9418A8FA6800195D6C /* Localizable.strings */; };
 		7C422F9D18A8FE5F00195D6C /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C422F9C18A8FE5F00195D6C /* MasterViewController.m */; };
@@ -53,6 +54,7 @@
 		7C3840FA18AC0B0300A85C31 /* SponsorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SponsorCell.m; sourceTree = "<group>"; };
 		7C3840FC18AC0B4900A85C31 /* SponsorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SponsorsViewController.h; sourceTree = "<group>"; };
 		7C3840FD18AC0B4900A85C31 /* SponsorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SponsorsViewController.m; sourceTree = "<group>"; };
+		7C3BC56F18B0FBE700CA0FC0 /* Linz.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Linz.xcdatamodel; sourceTree = "<group>"; };
 		7C422F9018A8FA4800195D6C /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPad.storyboard; sourceTree = "<group>"; };
 		7C422F9318A8FA6800195D6C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7C422F9518A8FA7000195D6C /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				7C00884618A8F84B00ED4B31 /* AppDelegate.h */,
 				7C00884718A8F84B00ED4B31 /* AppDelegate.m */,
 				7C422F9018A8FA4800195D6C /* iPad.storyboard */,
+				7C3BC56E18B0FBE700CA0FC0 /* Linz.xcdatamodeld */,
 				7C00885218A8F84B00ED4B31 /* Images.xcassets */,
 				7CCB106C18AE5B58007A2486 /* Categories */,
 				7CCB106618AE1D04007A2486 /* Networking */,
@@ -397,6 +400,7 @@
 				7C83BB4E18AAD7B0003D3557 /* SpeakerCell.m in Sources */,
 				7C422F9D18A8FE5F00195D6C /* MasterViewController.m in Sources */,
 				7C83BB5118AAD7BE003D3557 /* NotesCell.m in Sources */,
+				7C3BC57018B0FBE700CA0FC0 /* Linz.xcdatamodeld in Sources */,
 				7CCB106918AE1D2A007A2486 /* LinzAPIClient.m in Sources */,
 				7CCB106F18AE5BAA007A2486 /* UIImage+FromUIColor.m in Sources */,
 				7C83BB5718AADD40003D3557 /* PhotoCell.m in Sources */,
@@ -567,6 +571,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7C3BC56E18B0FBE700CA0FC0 /* Linz.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7C3BC56F18B0FBE700CA0FC0 /* Linz.xcdatamodel */,
+			);
+			currentVersion = 7C3BC56F18B0FBE700CA0FC0 /* Linz.xcdatamodel */;
+			path = Linz.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 7C00882C18A8F84B00ED4B31 /* Project object */;
 }
