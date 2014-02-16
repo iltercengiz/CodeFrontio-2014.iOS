@@ -10,4 +10,7 @@
 
 @interface Sponsor (Create)
 
++ (Sponsor *)sponsorWithInfo:(NSDictionary *)info;
++ (BOOL)removeAllSponsors;
+
 @end

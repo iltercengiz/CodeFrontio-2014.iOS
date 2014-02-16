@@ -2,7 +2,6 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13B3116" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Session" representedClassName="Session" syncable="YES">
         <attribute name="detail" attributeType="String" syncable="YES"/>
-        <attribute name="identifier" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="timeInterval" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
         <attribute name="track" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -13,11 +12,11 @@
         <attribute name="avatar" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="detail" attributeType="String" syncable="YES"/>
         <attribute name="github" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="identifier" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="identifier" attributeType="Integer 16" defaultValueString="0" indexed="YES" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
         <attribute name="twitter" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="session" maxCount="1" deletionRule="Nullify" destinationEntity="Session" inverseName="speaker" inverseEntity="Session" syncable="YES"/>
+        <relationship name="session" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Session" inverseName="speaker" inverseEntity="Session" syncable="YES"/>
     </entity>
     <entity name="Sponsor" representedClassName="Sponsor" syncable="YES">
         <attribute name="imageURL" attributeType="String" syncable="YES"/>
@@ -26,7 +25,7 @@
     </entity>
     <elements>
         <element name="Speaker" positionX="-2324" positionY="206" width="128" height="163"/>
-        <element name="Session" positionX="-2169" positionY="180" width="128" height="148"/>
+        <element name="Session" positionX="-2169" positionY="180" width="128" height="133"/>
         <element name="Sponsor" positionX="-2016" positionY="207" width="128" height="88"/>
     </elements>
 </model>

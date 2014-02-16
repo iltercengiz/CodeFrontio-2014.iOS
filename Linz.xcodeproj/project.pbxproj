@@ -19,11 +19,11 @@
 		7C3840FE18AC0B4900A85C31 /* SponsorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3840FD18AC0B4900A85C31 /* SponsorsViewController.m */; };
 		7C3BC57018B0FBE700CA0FC0 /* Linz.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC56E18B0FBE700CA0FC0 /* Linz.xcdatamodeld */; };
 		7C3BC57C18B100A100CA0FC0 /* Speaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC57B18B100A100CA0FC0 /* Speaker.m */; };
-		7C3BC57F18B100A200CA0FC0 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC57E18B100A200CA0FC0 /* Session.m */; };
 		7C3BC58218B100A200CA0FC0 /* Sponsor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC58118B100A200CA0FC0 /* Sponsor.m */; };
 		7C3BC58618B1011500CA0FC0 /* Sponsor+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC58518B1011500CA0FC0 /* Sponsor+Create.m */; };
 		7C3BC58918B1011F00CA0FC0 /* Session+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC58818B1011F00CA0FC0 /* Session+Create.m */; };
 		7C3BC58C18B1012900CA0FC0 /* Speaker+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC58B18B1012900CA0FC0 /* Speaker+Create.m */; };
+		7C3BC58F18B1051E00CA0FC0 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC58E18B1051E00CA0FC0 /* Session.m */; };
 		7C422F9118A8FA4800195D6C /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C422F9018A8FA4800195D6C /* iPad.storyboard */; };
 		7C422F9218A8FA6800195D6C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C422F9418A8FA6800195D6C /* Localizable.strings */; };
 		7C422F9D18A8FE5F00195D6C /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C422F9C18A8FE5F00195D6C /* MasterViewController.m */; };
@@ -63,8 +63,6 @@
 		7C3BC56F18B0FBE700CA0FC0 /* Linz.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Linz.xcdatamodel; sourceTree = "<group>"; };
 		7C3BC57A18B100A100CA0FC0 /* Speaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Speaker.h; sourceTree = "<group>"; };
 		7C3BC57B18B100A100CA0FC0 /* Speaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Speaker.m; sourceTree = "<group>"; };
-		7C3BC57D18B100A200CA0FC0 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
-		7C3BC57E18B100A200CA0FC0 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
 		7C3BC58018B100A200CA0FC0 /* Sponsor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sponsor.h; sourceTree = "<group>"; };
 		7C3BC58118B100A200CA0FC0 /* Sponsor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sponsor.m; sourceTree = "<group>"; };
 		7C3BC58418B1011500CA0FC0 /* Sponsor+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Sponsor+Create.h"; sourceTree = "<group>"; };
@@ -73,6 +71,8 @@
 		7C3BC58818B1011F00CA0FC0 /* Session+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Session+Create.m"; sourceTree = "<group>"; };
 		7C3BC58A18B1012900CA0FC0 /* Speaker+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Speaker+Create.h"; sourceTree = "<group>"; };
 		7C3BC58B18B1012900CA0FC0 /* Speaker+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Speaker+Create.m"; sourceTree = "<group>"; };
+		7C3BC58D18B1051E00CA0FC0 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
+		7C3BC58E18B1051E00CA0FC0 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
 		7C422F9018A8FA4800195D6C /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPad.storyboard; sourceTree = "<group>"; };
 		7C422F9318A8FA6800195D6C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7C422F9518A8FA7000195D6C /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -191,10 +191,10 @@
 		7C3BC56D18B0FAF300CA0FC0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7C3BC58D18B1051E00CA0FC0 /* Session.h */,
+				7C3BC58E18B1051E00CA0FC0 /* Session.m */,
 				7C3BC58018B100A200CA0FC0 /* Sponsor.h */,
 				7C3BC58118B100A200CA0FC0 /* Sponsor.m */,
-				7C3BC57D18B100A200CA0FC0 /* Session.h */,
-				7C3BC57E18B100A200CA0FC0 /* Session.m */,
 				7C3BC57A18B100A100CA0FC0 /* Speaker.h */,
 				7C3BC57B18B100A100CA0FC0 /* Speaker.m */,
 			);
@@ -456,6 +456,7 @@
 				7C3BC58C18B1012900CA0FC0 /* Speaker+Create.m in Sources */,
 				7C3BC58918B1011F00CA0FC0 /* Session+Create.m in Sources */,
 				7CCB107618AE5DF3007A2486 /* CalendarTimeCell.m in Sources */,
+				7C3BC58F18B1051E00CA0FC0 /* Session.m in Sources */,
 				7C3BC58618B1011500CA0FC0 /* Sponsor+Create.m in Sources */,
 				7C00884418A8F84B00ED4B31 /* main.m in Sources */,
 				7C83BB5418AAD7C7003D3557 /* PhotosCell.m in Sources */,
@@ -463,7 +464,6 @@
 				7C83BB4A18AAD12A003D3557 /* SessionViewController.m in Sources */,
 				7C3BC57C18B100A100CA0FC0 /* Speaker.m in Sources */,
 				7C83BB4718AAA954003D3557 /* VenueViewController.m in Sources */,
-				7C3BC57F18B100A200CA0FC0 /* Session.m in Sources */,
 				7CCB107518AE5DF3007A2486 /* CalendarSessionCell.m in Sources */,
 				7C3840FE18AC0B4900A85C31 /* SponsorsViewController.m in Sources */,
 			);

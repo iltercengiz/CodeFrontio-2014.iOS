@@ -13,7 +13,6 @@
 
 @interface Session : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * identifier;
 @property (nonatomic, retain) NSString * detail;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSNumber * track;

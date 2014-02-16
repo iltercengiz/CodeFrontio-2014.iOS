@@ -12,7 +12,6 @@
 
 @implementation Session
 
-@dynamic identifier;
 @dynamic detail;
 @dynamic title;
 @dynamic track;
