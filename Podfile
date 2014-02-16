@@ -8,6 +8,7 @@ target :Linz do
 	pod 'iCarousel', :git => 'https://github.com/nicklockwood/iCarousel.git'
 	pod 'IDMPhotoBrowser', :git => 'https://github.com/ideaismobile/IDMPhotoBrowser.git'
 	pod 'CZPhotoPickerController'
+	pod 'MagicalRecord'
 	
 	xcodeproj 'Linz.xcodeproj'
 
