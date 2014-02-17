@@ -19,6 +19,7 @@
 		7C34A64618B2268A00EC31DA /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34A64518B2268A00EC31DA /* Session.m */; };
 		7C34A64918B2268A00EC31DA /* Speaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34A64818B2268A00EC31DA /* Speaker.m */; };
 		7C34A64B18B2379D00EC31DA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C34A64A18B2379D00EC31DA /* CoreData.framework */; };
+		7C34A64E18B24BE700EC31DA /* CalendarActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34A64D18B24BE700EC31DA /* CalendarActivityCell.m */; };
 		7C3840FB18AC0B0300A85C31 /* SponsorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3840FA18AC0B0300A85C31 /* SponsorCell.m */; };
 		7C3840FE18AC0B4900A85C31 /* SponsorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3840FD18AC0B4900A85C31 /* SponsorsViewController.m */; };
 		7C3BC57018B0FBE700CA0FC0 /* Linz.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC56E18B0FBE700CA0FC0 /* Linz.xcdatamodeld */; };
@@ -65,6 +66,8 @@
 		7C34A64718B2268A00EC31DA /* Speaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Speaker.h; sourceTree = "<group>"; };
 		7C34A64818B2268A00EC31DA /* Speaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Speaker.m; sourceTree = "<group>"; };
 		7C34A64A18B2379D00EC31DA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		7C34A64C18B24BE700EC31DA /* CalendarActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarActivityCell.h; sourceTree = "<group>"; };
+		7C34A64D18B24BE700EC31DA /* CalendarActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarActivityCell.m; sourceTree = "<group>"; };
 		7C3840F918AC0B0300A85C31 /* SponsorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SponsorCell.h; sourceTree = "<group>"; };
 		7C3840FA18AC0B0300A85C31 /* SponsorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SponsorCell.m; sourceTree = "<group>"; };
 		7C3840FC18AC0B4900A85C31 /* SponsorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SponsorsViewController.h; sourceTree = "<group>"; };
@@ -345,6 +348,8 @@
 				7CCB107218AE5DF3007A2486 /* CalendarSessionCell.m */,
 				7CCB107318AE5DF3007A2486 /* CalendarTimeCell.h */,
 				7CCB107418AE5DF3007A2486 /* CalendarTimeCell.m */,
+				7C34A64C18B24BE700EC31DA /* CalendarActivityCell.h */,
+				7C34A64D18B24BE700EC31DA /* CalendarActivityCell.m */,
 			);
 			path = "Calendar Scene";
 			sourceTree = "<group>";
@@ -457,6 +462,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C34A64E18B24BE700EC31DA /* CalendarActivityCell.m in Sources */,
 				7C00884818A8F84B00ED4B31 /* AppDelegate.m in Sources */,
 				7CACCFEA18A9142900D66A15 /* RFQuiltLayout.m in Sources */,
 				7CACCFE118A90B6200D66A15 /* BaseViewController.m in Sources */,
