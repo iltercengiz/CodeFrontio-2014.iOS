@@ -18,8 +18,8 @@
 #import <MagicalRecord/CoreData+MagicalRecord.h>
 
 #pragma mark Constants
-static const CGFloat cornerRadius = 4.0;
-static const CGFloat borderWidth = 1.0;
+static const CGFloat cornerRadius = 0.0;
+static const CGFloat borderWidth = 0.5;
 
 @implementation CalendarSessionCell
 
@@ -63,11 +63,11 @@ static const CGFloat borderWidth = 1.0;
     
     // Buttons
     self.takeNoteButton.layer.cornerRadius = cornerRadius;
-    self.takeNoteButton.layer.borderColor = [UIColor colorWithWhite:34.0/255.0 alpha:1.0].CGColor;
+    self.takeNoteButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.takeNoteButton.layer.borderWidth = borderWidth;
     
     self.favouriteButton.layer.cornerRadius = cornerRadius;
-    self.favouriteButton.layer.borderColor = [UIColor colorWithWhite:34.0/255.0 alpha:1.0].CGColor;
+    self.favouriteButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.favouriteButton.layer.borderWidth = borderWidth;
     
 }
