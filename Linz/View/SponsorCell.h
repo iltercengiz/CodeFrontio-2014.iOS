@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class Sponsor;
+
 @interface SponsorCell : UITableViewCell
 
 #pragma mark - IBOutlets
 @property (weak, nonatomic) IBOutlet UIImageView *sponsorImage;
+
+#pragma mark - Configurator
+- (void)configureCellForSponsor:(Sponsor *)sponsor;
 
 @end

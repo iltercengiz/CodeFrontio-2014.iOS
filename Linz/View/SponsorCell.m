@@ -6,12 +6,35 @@
 //  Copyright (c) 2014 Ilter Cengiz. All rights reserved.
 //
 
+#pragma mark Model
+#import "Sponsor.h"
+
+#pragma mark View
 #import "SponsorCell.h"
+
+#pragma mark Pods
+#import <AFNetworking/UIImageView+AFNetworking.h>
 
 @implementation SponsorCell
 
 #pragma mark - Configurator
-- (void)configureCellForSponsor:(NSDictionary *)sponsor {
+- (void)configureCellForSponsor:(Sponsor *)sponsor {
+    
+    // Set image
+    __weak typeof(self.imageView) weakImageView = self.sponsorImage;
+    
+    NSString *imageURLString = sponsor.imageURL;
+    NSURL *imageURL = [NSURL URLWithString:imageURLString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
+    
+    [self.sponsorImage setImageWithURLRequest:request
+                             placeholderImage:[UIImage imageNamed:@"Placeholder"]
+                                      success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                          // To-do: cache image
+                                          weakImageView.image = image;
+                                      } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                          NSLog(@"Error getting image: %@", error.description);
+                                      }];
     
 }
 
