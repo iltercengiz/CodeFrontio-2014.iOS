@@ -16,6 +16,5 @@ typedef NS_ENUM(NSInteger, ActivityType) {
 @interface Session (Create)
 
 + (Session *)sessionWithInfo:(NSDictionary *)info;
-+ (BOOL)removeAllSessions;
 
 @end

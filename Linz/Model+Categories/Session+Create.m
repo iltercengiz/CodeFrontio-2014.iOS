@@ -7,20 +7,16 @@
 //
 
 #import "Session+Create.h"
-#import "Speaker.h"
 
 #pragma mark Pods
-#import "CoreData+MagicalRecord.h"
+#import <MagicalRecord/CoreData+MagicalRecord.h>
 
 @implementation Session (Create)
 
 + (Session *)sessionWithInfo:(NSDictionary *)info {
     
-    // Context for current thread
-    NSManagedObjectContext *context = [NSManagedObjectContext MR_contextForCurrentThread];
-    
     // Create session object in context
-    Session *session = [Session MR_createInContext:context];
+    Session *session = [Session MR_createInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
     session.title = info[@"title"];
     session.detail = info[@"detail"];
     session.track = info[@"track"];
@@ -28,18 +24,17 @@
     session.timeInterval = info[@"time"];
     session.speakerIdentifier = info[@"speaker"];
     session.sortingIndex = info[@"sortingIndex"];
+    session.identifier = info[@"id"];
     
     // Save changes
-    [context MR_saveToPersistentStoreAndWait];
+    [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        if (success) NSLog(@"Save successful!");
+        else NSLog(@"Save failed with error: %@", error);
+    }];
     
     // Return
     return session;
     
-}
-
-+ (BOOL)removeAllSessions {
-    // Remove all sessions
-    return [Session MR_truncateAll];
 }
 
 @end

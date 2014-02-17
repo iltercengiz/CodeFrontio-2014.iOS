@@ -9,17 +9,14 @@
 #import "Speaker+Create.h"
 
 #pragma mark Pods
-#import "CoreData+MagicalRecord.h"
+#import <MagicalRecord/CoreData+MagicalRecord.h>
 
 @implementation Speaker (Create)
 
 + (Speaker *)speakerWithInfo:(NSDictionary *)info {
     
-    // Context for current thread
-    NSManagedObjectContext *context = [NSManagedObjectContext MR_contextForCurrentThread];
-    
     // Create speaker object in context
-    Speaker *speaker = [Speaker MR_createInContext:context];
+    Speaker *speaker = [Speaker MR_createInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
     speaker.name = info[@"full_name"];
     speaker.title = info[@"title"];
     speaker.detail = info[@"detail"];
@@ -29,16 +26,14 @@
     speaker.twitter = [info[@"twitter"] isEqualToString:@""] ? nil : [@"http://twitter.com/" stringByAppendingString:info[@"twitter"]];
     
     // Save changes
-    [context MR_saveToPersistentStoreAndWait];
+    [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        if (success) NSLog(@"Save successful!");
+        else NSLog(@"Save failed with error: %@", error);
+    }];
     
     // Return
     return speaker;
     
-}
-
-+ (BOOL)removeAllSpeakers {
-    // Remove all speakers
-    return [Speaker MR_truncateAll];
 }
 
 @end

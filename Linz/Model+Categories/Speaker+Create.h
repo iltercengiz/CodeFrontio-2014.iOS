@@ -11,6 +11,5 @@
 @interface Speaker (Create)
 
 + (Speaker *)speakerWithInfo:(NSDictionary *)info;
-+ (BOOL)removeAllSpeakers;
 
 @end
