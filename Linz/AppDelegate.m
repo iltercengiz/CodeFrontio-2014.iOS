@@ -30,8 +30,13 @@
     [MagicalRecord setupAutoMigratingCoreDataStack];
     
     /*** UI Customization ***/
+    // UINavigationBar coloring
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageWithUIColor:[UIColor colorWithRed:0.255 green:0.255 blue:0.259 alpha:1]]
                                        forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    
+    // Change style of status bar
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     return YES;
     
