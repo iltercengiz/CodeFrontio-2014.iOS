@@ -20,6 +20,10 @@
 #pragma mark Pods
 #import <MagicalRecord/CoreData+MagicalRecord.h>
 
+@interface Manager () <UIAlertViewDelegate>
+
+@end
+
 @implementation Manager
 
 #pragma mark - Singleton
@@ -51,42 +55,103 @@
 
 #pragma mark - Setup
 - (void)setupWithCompletion:(void (^)(BOOL successful))completion {
+    
+    // Get the latest download version info
+    NSMutableDictionary *localVersion = [[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"version"] mutableCopy];
+    // If there isn't any version stored, create a version data with zeros
+    if (!localVersion) {
+        localVersion = [NSMutableDictionary dictionaryWithObjectsAndKeys:@0, @"speakers", @0, @"sessions", @0, @"sponsors", nil];
+    }
+    
+    // Error block
+    // Will be used to terminate the app if there is an connection error
+    void (^errorBlock)(NSError *error) = ^(NSError *error) {
+        NSLog(@"Error: %@", error.description);
+        // Inform user that applciation will exit
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No connection!", nil)
+                                                        message:NSLocalizedString(@"In order to fetch initial data, I need an active internet connection.\nPlease check the internet connection and open me again.\nI'm killing myself now.", nil)
+                                                       delegate:self
+                                              cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
+                                              otherButtonTitles:nil, nil];
+        [alert show];
+    };
+    
     // Proceed block
-    void (^proceedBlock)() = ^{
-        if (!self.speakers || !self.sessions || !self.sponsors) {
+    void (^proceedBlock)(NSString *completionIdentifier, BOOL success, NSDictionary *version) = ^(NSString *completionIdentifier, BOOL success, NSDictionary *version) {
+        
+        // Check if successful, may be continued, or should terminate
+        if ([completionIdentifier isEqualToString:@"speakers"]) {
+            if (success)
+                [localVersion setObject:version[completionIdentifier] forKey:completionIdentifier];
+            else if (!success && self.speakers.count == 0)
+                errorBlock(nil);
+        }
+        if ([completionIdentifier isEqualToString:@"sessions"]) {
+            if (success)
+                [localVersion setObject:version[completionIdentifier] forKey:completionIdentifier];
+            else if (!success && self.sessions.count == 0)
+                errorBlock(nil);
+        }
+        if ([completionIdentifier isEqualToString:@"sponsors"]) { // Here I should do something else
+            if (success)
+                [localVersion setObject:version[completionIdentifier] forKey:completionIdentifier];
+            else if (!success && self.sponsors.count == 0)
+                errorBlock(nil);
+        }
+        
+        if (self.speakers.count == 0 || self.sessions.count == 0 || self.sponsors.count == 0) {
             return;
         }
+        
+        // Call completion block to proceed
         completion(YES);
+        
+        // Save the version data
+        [[NSUserDefaults standardUserDefaults] setObject:localVersion forKey:@"version"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
     };
-    // Fetch the latest version
+    
+    // Fetch the latest version numbers
     [[LinzAPIClient sharedClient] GET:@"/version"
                            parameters:nil
                               success:^(NSURLSessionDataTask *task, id responseObject) {
-                                  // Get the latest download version info
-                                  NSDictionary *version = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"version"];
-                                  // If there isn't any version stored, create a version data with zeros
-                                  if (!version) {
-                                      version = @{@"speakers": @0, @"sessions": @0, @"sponsors": @0};
-                                  }
                                   // Check versions and download new data if needed
-                                  if ([version[@"speakers"] compare:responseObject[@"speakers"]] == NSOrderedAscending) {
+                                  if ([localVersion[@"speakers"] compare:responseObject[@"speakers"]] == NSOrderedAscending) {
                                       [self removeAllSpeakers];
-                                      [self setupSpeakersWithCompletion:proceedBlock];
+                                      [self setupSpeakersWithCompletion:^(NSString *completionIdentifier, BOOL success) {
+                                          proceedBlock(completionIdentifier, success, responseObject);
+                                      }];
                                   }
-                                  if ([version[@"sessions"] compare:responseObject[@"sessions"]] == NSOrderedAscending) {
+                                  if ([localVersion[@"sessions"] compare:responseObject[@"sessions"]] == NSOrderedAscending) {
                                       [self removeAllSessions];
-                                      [self setupSessionsWithCompletion:proceedBlock];
+                                      [self setupSessionsWithCompletion:^(NSString *completionIdentifier, BOOL success) {
+                                          proceedBlock(completionIdentifier, success, responseObject);
+                                      }];
                                   }
-                                  if ([version[@"sponsors"] compare:responseObject[@"sponsors"]] == NSOrderedAscending) {
+                                  if ([localVersion[@"sponsors"] compare:responseObject[@"sponsors"]] == NSOrderedAscending) {
                                       [self removeAllSponsors];
-                                      [self setupSponsorsWithCompletion:proceedBlock];
+                                      [self setupSponsorsWithCompletion:^(NSString *completionIdentifier, BOOL success) {
+                                          proceedBlock(completionIdentifier, success, responseObject);
+                                      }];
                                   }
                               } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                  NSLog(@"Error: %@", error.description);
+                                  
+                                  double speakers = [localVersion[@"speakers"] doubleValue];
+                                  double sessions = [localVersion[@"sessions"] doubleValue];
+                                  double sponsors = [localVersion[@"sponsors"] doubleValue];
+                                  
+                                  // Check the latest download version
+                                  // And decide to proceed or terminate
+                                  if (speakers >= 1.0 && sessions >= 1.0 && sponsors >= 1.0) {
+                                      completion(YES);
+                                  } else {
+                                      errorBlock(error);
+                                  }
                               }];
 }
 
-- (void)setupSpeakersWithCompletion:(void (^)())completion {
+- (void)setupSpeakersWithCompletion:(void (^)(NSString *completionIdentifier, BOOL success))completion {
     // Fetch all speakers
     [[LinzAPIClient sharedClient] GET:@"/speakers"
                            parameters:nil
@@ -95,13 +160,12 @@
                                   for (NSDictionary *speakerInfo in responseObject) {
                                       [Speaker speakerWithInfo:speakerInfo];
                                   }
-                                  // Completion
-                                  completion();
+                                  completion(@"speakers", YES);
                               } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                  NSLog(@"Error: %@", error.description);
+                                  completion(@"speakers", NO);
                               }];
 }
-- (void)setupSessionsWithCompletion:(void (^)())completion {
+- (void)setupSessionsWithCompletion:(void (^)(NSString *completionIdentifier, BOOL success))completion {
     // Fetch all sessions
     [[LinzAPIClient sharedClient] GET:@"/sessions"
                            parameters:nil
@@ -129,13 +193,12 @@
                                       // Increment index
                                       sortingIndex++;
                                   }
-                                  // Completion
-                                  completion();
+                                  completion(@"sessions", YES);
                               } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                  NSLog(@"Error: %@", error.description);
+                                  completion(@"sessions", NO);
                               }];
 }
-- (void)setupSponsorsWithCompletion:(void (^)())completion {
+- (void)setupSponsorsWithCompletion:(void (^)(NSString *completionIdentifier, BOOL success))completion {
     // Fetch all sponsors
     [[LinzAPIClient sharedClient] GET:@"/sponsors"
                            parameters:nil
@@ -154,10 +217,9 @@
                                                                      @"subpriority": @(subpriority)}];
                                       }
                                   }
-                                  // Completion
-                                  completion();
+                                  completion(@"sponsors", YES);
                               } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                  NSLog(@"Error: %@", error.description);
+                                  completion(@"sponsors", NO);
                               }];
 }
 
@@ -170,6 +232,11 @@
 }
 - (void)removeAllSponsors {
     [Sponsor removeAllSponsors];
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    exit(0); // Kill the app!
 }
 
 @end
