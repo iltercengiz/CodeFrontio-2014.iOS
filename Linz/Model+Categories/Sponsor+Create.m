@@ -8,15 +8,18 @@
 
 #import "Sponsor+Create.h"
 
+#pragma mark Pods
+#import "CoreData+MagicalRecord.h"
+
 @implementation Sponsor (Create)
 
 + (Sponsor *)sponsorWithInfo:(NSDictionary *)info {
     
     // Context for current thread
-    NSManagedObjectContext *context = [NSManagedObjectContext contextForCurrentThread];
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_contextForCurrentThread];
     
     // Create sponsor object in context
-    Sponsor *sponsor = [Sponsor createInContext:context];
+    Sponsor *sponsor = [Sponsor MR_createInContext:context];
     sponsor.type = info[@"type"];
     sponsor.imageURL = info[@"imageURL"];
     sponsor.websiteURL = info[@"websiteURL"];
@@ -24,7 +27,7 @@
     sponsor.subpriority = info[@"subpriority"];
     
     // Save changes to the context
-    [context saveToPersistentStoreAndWait];
+    [context MR_saveToPersistentStoreAndWait];
     
     // Return
     return sponsor;
@@ -33,7 +36,7 @@
 
 + (BOOL)removeAllSponsors {
     // Remove all sponsors
-    return [Sponsor truncateAll];
+    return [Sponsor MR_truncateAll];
 }
 
 @end

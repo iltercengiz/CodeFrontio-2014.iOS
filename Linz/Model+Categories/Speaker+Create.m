@@ -8,37 +8,28 @@
 
 #import "Speaker+Create.h"
 
+#pragma mark Pods
+#import "CoreData+MagicalRecord.h"
+
 @implementation Speaker (Create)
 
 + (Speaker *)speakerWithInfo:(NSDictionary *)info {
     
     // Context for current thread
-    NSManagedObjectContext *context = [NSManagedObjectContext contextForCurrentThread];
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_contextForCurrentThread];
     
     // Create speaker object in context
-    Speaker *speaker = [Speaker createInContext:context];
-    speaker.name = info[@"name"];
-    speaker.identifier = info[@"identifier"];
-    if ([info[@"avatar"] isEqualToString:@""]) {
-        speaker.avatar = nil;
-    } else {
-        speaker.avatar = [@"http://linz.kod.io/public/images/speakers/" stringByAppendingString:info[@"avatar"]];
-    }
-    if ([info[@"github"] isEqualToString:@""]) {
-        speaker.github = nil;
-    } else {
-        speaker.github = [@"http://github.com/" stringByAppendingString:info[@"github"]];
-    }
-    if ([info[@"twitter"] isEqualToString:@""]) {
-        speaker.twitter = nil;
-    } else {
-        speaker.twitter = [@"http://twitter.com/" stringByAppendingString:info[@"twitter"]];
-    }
-    speaker.detail = info[@"detail"];
+    Speaker *speaker = [Speaker MR_createInContext:context];
+    speaker.name = info[@"full_name"];
     speaker.title = info[@"title"];
+    speaker.detail = info[@"detail"];
+    speaker.identifier = info[@"id"];
+    speaker.avatar = [info[@"avatar"] isEqualToString:@""] ? nil : [@"http://linz.kod.io/public/images/speakers/" stringByAppendingString:info[@"avatar"]];
+    speaker.github = [info[@"github"] isEqualToString:@""] ? nil : [@"http://github.com/" stringByAppendingString:info[@"github"]];
+    speaker.twitter = [info[@"twitter"] isEqualToString:@""] ? nil : [@"http://twitter.com/" stringByAppendingString:info[@"twitter"]];
     
     // Save changes
-    [context saveToPersistentStoreAndWait];
+    [context MR_saveToPersistentStoreAndWait];
     
     // Return
     return speaker;
@@ -47,7 +38,7 @@
 
 + (BOOL)removeAllSpeakers {
     // Remove all speakers
-    return [Speaker truncateAll];
+    return [Speaker MR_truncateAll];
 }
 
 @end
