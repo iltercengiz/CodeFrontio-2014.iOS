@@ -22,6 +22,7 @@
 
 #pragma mark Controller
 #import "CalendarViewController.h"
+#import "SessionViewController.h"
 
 #pragma mark Libraries
 #import "RFQuiltLayout.h"
@@ -120,6 +121,17 @@
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - Navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"sessionSegue"]) {
+        UICollectionViewCell *cell = (UICollectionViewCell *)sender;
+        NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+        Session *session = self.sessions[indexPath.item];
+        SessionViewController *svc = segue.destinationViewController;
+        svc.session = session;
+    }
+}
+
 #pragma mark - UICollectionViewControllerDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.sessions.count;
@@ -145,7 +157,7 @@
         return cell;
     };
     
-    Session *session = self.sessions[indexPath.row];
+    Session *session = self.sessions[indexPath.item];
     
     if ([session.track isEqualToNumber:@(SessionTypeBreak)]) {
         return createTimeCell(session);

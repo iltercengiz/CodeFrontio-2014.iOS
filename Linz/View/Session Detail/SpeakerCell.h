@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class Speaker;
+
 @interface SpeakerCell : UITableViewCell
 
 #pragma mark - Configurator
-- (void)configureCellForSpeaker:(NSDictionary *)speaker;
+- (void)configureCellForSpeaker:(Speaker *)speaker;
 
 @end

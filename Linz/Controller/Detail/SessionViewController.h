@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class Session;
+
 @interface SessionViewController : UITableViewController
+
+@property (nonatomic) Session *session;
 
 @end

@@ -6,6 +6,10 @@
 //  Copyright (c) 2014 Ilter Cengiz. All rights reserved.
 //
 
+#pragma mark Model
+#import "Session.h"
+#import "Speaker.h"
+
 #pragma mark View
 #import "SpeakerCell.h"
 #import "NotesCell.h"
@@ -13,6 +17,9 @@
 
 #pragma mark Controller
 #import "SessionViewController.h"
+
+#pragma mark Pods
+#import <MagicalRecord/CoreData+MagicalRecord.h>
 
 @interface SessionViewController ()
 
@@ -22,7 +29,12 @@
 
 #pragma mark - UIViewController
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
+    
+    // Set title
+    self.title = self.session.title;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,7 +52,8 @@
     
     SpeakerCell *(^createSpeakerCell)() = ^SpeakerCell *(){
         SpeakerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"speakerCell" forIndexPath:indexPath];
-        [cell configureCellForSpeaker:nil];
+        Speaker *speaker = [[Speaker MR_findByAttribute:@"identifier" withValue:self.session.speakerIdentifier] firstObject]; // Speaker of the session
+        [cell configureCellForSpeaker:speaker];
         return cell;
     };
     
@@ -53,14 +66,7 @@
     PhotosCell *(^createPhotosCell)() = ^PhotosCell *(){
         PhotosCell *cell = [tableView dequeueReusableCellWithIdentifier:@"photosCell" forIndexPath:indexPath];
         NSArray *photos = @[[UIImage imageNamed:@"kod-io-logo-black"],
-                            [UIImage imageNamed:@"kod-io-logo-black"],
-                            [UIImage imageNamed:@"kod-io-logo-black"],
-                            [UIImage imageNamed:@"kod-io-logo-black"],
-                            [UIImage imageNamed:@"kod-io-logo-black"],
-                            [UIImage imageNamed:@"kod-io-logo-black"],
-                            [UIImage imageNamed:@"kod-io-logo-black"],
-                            [UIImage imageNamed:@"kod-io-logo-black"],
-                            [UIImage imageNamed:@"kod-io-logo-black"]];
+                            [UIImage imageNamed:@"kod-io-logo-black"] ];
         [cell configureCellForTableView:tableView withPhotos:photos];
         return cell;
     };
