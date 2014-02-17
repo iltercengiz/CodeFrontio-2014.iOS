@@ -3,7 +3,7 @@
     <entity name="Session" representedClassName="Session" syncable="YES">
         <attribute name="detail" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="identifier" attributeType="Integer 16" defaultValueString="0" indexed="YES" syncable="YES"/>
-        <attribute name="sortingIndex" attributeType="Integer 16" defaultValueString="-1" syncable="YES"/>
+        <attribute name="sortingIndex" attributeType="Integer 16" defaultValueString="-1" indexed="YES" syncable="YES"/>
         <attribute name="speakerIdentifier" optional="YES" attributeType="Integer 16" defaultValueString="-1" syncable="YES"/>
         <attribute name="timeInterval" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
