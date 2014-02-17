@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class Session;
+
 @interface CalendarTimeCell : UICollectionViewCell
 
 #pragma mark - IBOutlets
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
 #pragma mark - Configurator
-- (void)configureCellForTimeInterval:(NSTimeInterval)timeInterval;
+- (void)configureCellForSession:(Session *)session;
 
 @end

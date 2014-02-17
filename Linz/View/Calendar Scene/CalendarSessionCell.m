@@ -6,8 +6,16 @@
 //  Copyright (c) 2014 Ilter Cengiz. All rights reserved.
 //
 
+#pragma mark Model
+#import "Session.h"
+#import "Speaker.h"
+
 #pragma mark View
 #import "CalendarSessionCell.h"
+
+#pragma mark Pods
+#import <AFNetworking/UIImageView+AFNetworking.h>
+#import <MagicalRecord/CoreData+MagicalRecord.h>
 
 #pragma mark Constants
 static const CGFloat cornerRadius = 4.0;
@@ -16,14 +24,44 @@ static const CGFloat borderWidth = 1.0;
 @implementation CalendarSessionCell
 
 #pragma mark - CalendarSessionCell
-- (void)configureCellForSession:(NSDictionary *)session {
+- (void)configureCellForSession:(Session *)session {
     
     // Set background color for custom drawing
-    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor whiteColor];
     
+    // Set frame
+    self.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.layer.borderWidth = 0.5;
+    
+    // Speaker of the session
+    Speaker *speaker = [[Speaker MR_findByAttribute:@"identifier" withValue:session.speakerIdentifier] firstObject];
+    
+    // Set image
     self.imageView.layer.cornerRadius = 8.0;
     self.imageView.clipsToBounds = YES;
     
+    __weak typeof(self.imageView) weakImageView = self.imageView;
+    
+    NSString *imageURLString = speaker.avatar;
+    NSURL *imageURL = [NSURL URLWithString:imageURLString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
+    
+    [self.imageView setImageWithURLRequest:request
+                          placeholderImage:[UIImage imageNamed:@"Placeholder"]
+                                   success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                       // To-do: cache image
+                                       weakImageView.image = image;
+                                   } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                       NSLog(@"Error getting image: %@", error.description);
+                                   }];
+    
+    // Set name
+    self.nameLabel.text = speaker.name;
+    
+    // Set session detail
+    self.sessionDetail.text = session.detail;
+    
+    // Buttons
     self.takeNoteButton.layer.cornerRadius = cornerRadius;
     self.takeNoteButton.layer.borderColor = [UIColor colorWithWhite:34.0/255.0 alpha:1.0].CGColor;
     self.takeNoteButton.layer.borderWidth = borderWidth;
@@ -31,24 +69,6 @@ static const CGFloat borderWidth = 1.0;
     self.favouriteButton.layer.cornerRadius = cornerRadius;
     self.favouriteButton.layer.borderColor = [UIColor colorWithWhite:34.0/255.0 alpha:1.0].CGColor;
     self.favouriteButton.layer.borderWidth = borderWidth;
-    
-}
-
-#pragma mark - UIView
-- (void)drawRect:(CGRect)rect {
-    
-    UIBezierPath *path;
-    
-    // Background
-    path = [UIBezierPath bezierPathWithRect:rect];
-    [[UIColor whiteColor] setFill];
-    [path fill];
-    
-    // Frame
-    path = [UIBezierPath bezierPathWithRect:rect];
-    path.lineWidth = 1.0;
-    [[UIColor lightGrayColor] setStroke];
-    [path stroke];
     
 }
 

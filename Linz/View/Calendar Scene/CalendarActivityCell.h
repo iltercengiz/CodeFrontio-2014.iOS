@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class Session;
+
 @interface CalendarActivityCell : UICollectionViewCell
+
+#pragma mark - IBOutlets
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
+#pragma mark - CalendarSessionCell
+- (void)configureCellForSession:(Session *)session;
 
 @end

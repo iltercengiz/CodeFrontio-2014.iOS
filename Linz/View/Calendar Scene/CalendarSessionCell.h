@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class Session;
+
 @interface CalendarSessionCell : UICollectionViewCell
 
 #pragma mark - IBOutlets
@@ -19,6 +21,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *favouriteButton;
 
 #pragma mark - CalendarSessionCell
-- (void)configureCellForSession:(NSDictionary *)session;
+- (void)configureCellForSession:(Session *)session;
 
 @end

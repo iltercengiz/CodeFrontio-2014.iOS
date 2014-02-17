@@ -18,6 +18,7 @@
 #pragma mark View
 #import "CalendarTimeCell.h"
 #import "CalendarSessionCell.h"
+#import "CalendarActivityCell.h"
 
 #pragma mark Controller
 #import "CalendarViewController.h"
@@ -89,6 +90,11 @@
     
     [super viewWillAppear:animated];
     
+    // If setup is already done, return
+    if (self.speakers && self.sessions) {
+        return;
+    }
+    
     // Show progress hud
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     
@@ -114,14 +120,6 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)reloadCalendar {
-    
-    self.speakers = [Manager sharedManager].speakers;
-    self.sessions = [Manager sharedManager].sessions;
-    
-    [self.collectionView reloadData];
-}
-
 #pragma mark - UICollectionViewControllerDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.sessions.count;
@@ -129,31 +127,32 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    CalendarTimeCell *(^createTimeCell)() = ^CalendarTimeCell *(){
+    CalendarTimeCell *(^createTimeCell)(Session *session) = ^CalendarTimeCell *(Session *session) {
         CalendarTimeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TimeCell" forIndexPath:indexPath];
-        [cell configureCellForTimeInterval:0];
+        [cell configureCellForSession:session];
         return cell;
     };
     
-    UICollectionViewCell *(^createActivityCell)() = ^UICollectionViewCell *(){
-        UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ActivityCell" forIndexPath:indexPath];
+    CalendarActivityCell *(^createActivityCell)(Session *session) = ^CalendarActivityCell *(Session *session) {
+        CalendarActivityCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ActivityCell" forIndexPath:indexPath];
+        [cell configureCellForSession:session];
         return cell;
     };
     
-    CalendarSessionCell *(^createSessionCell)() = ^CalendarSessionCell *(){
+    CalendarSessionCell *(^createSessionCell)(Session *session) = ^CalendarSessionCell *(Session *session) {
         CalendarSessionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"SessionCell" forIndexPath:indexPath];
-        [cell configureCellForSession:nil];
+        [cell configureCellForSession:session];
         return cell;
     };
     
     Session *session = self.sessions[indexPath.row];
     
-    if ([session.type isEqualToNumber:@(-1)]) {
-        return createTimeCell();
-    } else if ([session.type isEqualToNumber:@0]) {
-        return createActivityCell();
-    } else {
-        return createSessionCell();
+    if ([session.track isEqualToNumber:@(SessionTypeBreak)]) {
+        return createTimeCell(session);
+    } else if ([session.track isEqualToNumber:@(SessionTypeActivity)]) {
+        return createActivityCell(session);
+    } else { // if ([session.track isEqualToNumber:@1] || [session.track isEqualToNumber:@2])
+        return createSessionCell(session);
     }
     
 }
@@ -170,11 +169,17 @@
     // Size
     CGSize size = CGSizeZero;
     
-    if ([session.type isEqualToNumber:@(-1)]) {
-        size = (CGSize){.width = 2.0, .height = 1.0};
-    } else if ([session.type isEqualToNumber:@0]) {
-        size = (CGSize){.width = 2.0, .height = 10.0};
-    } else {
+    if ([session.track isEqualToNumber:@(SessionTypeBreak)]) { // Time cell level
+        if ([session.type isEqualToNumber:@(-1)])
+            size = (CGSize){.width = 1.0, .height = 1.0};
+        else
+            size = (CGSize){.width = 2.0, .height = 1.0};
+    } else if ([session.track isEqualToNumber:@(SessionTypeActivity)]) { // Activity
+        if ([session.type isEqualToNumber:@(-1)]) // Break, Lunch, etc.
+            size = (CGSize){.width = 1.0, .height = 10.0};
+        else // Registration, Welcome speech, etc.
+            size = (CGSize){.width = 2.0, .height = 10.0};
+    } else { // if ([session.track isEqualToNumber:@1] || [session.track isEqualToNumber:@2]) // Keynote
         size = (CGSize){.width = 2.0, .height = 5.0};
     }
     
