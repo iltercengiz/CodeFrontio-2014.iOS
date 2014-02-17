@@ -6,8 +6,14 @@
 //  Copyright (c) 2014 Ilter Cengiz. All rights reserved.
 //
 
+#pragma mark Manager
+#import "Manager.h"
+
 #pragma mark Networking
 #import "LinzAPIClient.h"
+
+#pragma mark Model
+#import "Session.h"
 
 #pragma mark View
 #import "CalendarTimeCell.h"
@@ -18,6 +24,9 @@
 
 #pragma mark Libraries
 #import "RFQuiltLayout.h"
+
+#pragma mark Pods
+#import <SVProgressHUD/SVProgressHUD.h>
 
 @interface CalendarCollectionView : UICollectionView
 
@@ -53,6 +62,9 @@
 
 @interface CalendarViewController () <RFQuiltLayoutDelegate>
 
+@property (nonatomic) NSArray *speakers;
+@property (nonatomic) NSArray *sessions;
+
 @end
 
 @implementation CalendarViewController
@@ -73,12 +85,40 @@
     self.collectionView.backgroundColor = [UIColor clearColor];
     
 }
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    // Show progress hud
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+    
+    void (^proceedBlock)(BOOL success) = ^(BOOL success){
+        
+        self.speakers = [Manager sharedManager].speakers;
+        self.sessions = [Manager sharedManager].sessions;
+        
+        // Reload calendar
+        [self.collectionView reloadData];
+        
+        // Dismiss progress hud
+        [SVProgressHUD showSuccessWithStatus:nil];
+        
+    };
+    
+    // Initiate setup
+    [[Manager sharedManager] setupWithCompletion:proceedBlock];
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
 - (void)reloadCalendar {
+    
+    self.speakers = [Manager sharedManager].speakers;
+    self.sessions = [Manager sharedManager].sessions;
+    
     [self.collectionView reloadData];
 }
 
@@ -106,11 +146,11 @@
         return cell;
     };
     
-    NSDictionary *session = self.sessions[indexPath.row];
+    Session *session = self.sessions[indexPath.row];
     
-    if ([session[@"type"] isEqualToNumber:@(-1)]) {
+    if ([session.type isEqualToNumber:@(-1)]) {
         return createTimeCell();
-    } else if ([session[@"type"] isEqualToNumber:@0]) {
+    } else if ([session.type isEqualToNumber:@0]) {
         return createActivityCell();
     } else {
         return createSessionCell();
@@ -125,14 +165,14 @@
 - (CGSize)blockSizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     // Session data
-    NSDictionary *session = self.sessions[indexPath.row];
+    Session *session = self.sessions[indexPath.row];
     
     // Size
     CGSize size = CGSizeZero;
     
-    if ([session[@"type"] isEqualToNumber:@(-1)]) {
+    if ([session.type isEqualToNumber:@(-1)]) {
         size = (CGSize){.width = 2.0, .height = 1.0};
-    } else if ([session[@"type"] isEqualToNumber:@0]) {
+    } else if ([session.type isEqualToNumber:@0]) {
         size = (CGSize){.width = 2.0, .height = 10.0};
     } else {
         size = (CGSize){.width = 2.0, .height = 5.0};
