@@ -16,5 +16,6 @@
 @dynamic subpriority;
 @dynamic type;
 @dynamic websiteURL;
+@dynamic identifier;
 
 @end

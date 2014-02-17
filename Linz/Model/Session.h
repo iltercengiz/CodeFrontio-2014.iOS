@@ -19,5 +19,6 @@
 @property (nonatomic, retain) NSNumber * track;
 @property (nonatomic, retain) NSNumber * type;
 @property (nonatomic, retain) NSNumber * speakerIdentifier;
+@property (nonatomic, retain) NSNumber * identifier;
 
 @end

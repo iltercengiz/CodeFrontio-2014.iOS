@@ -17,5 +17,6 @@
 @property (nonatomic, retain) NSNumber * subpriority;
 @property (nonatomic, retain) NSString * type;
 @property (nonatomic, retain) NSString * websiteURL;
+@property (nonatomic, retain) NSNumber * identifier;
 
 @end

@@ -15,9 +15,9 @@
 		7C00884418A8F84B00ED4B31 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C00884318A8F84B00ED4B31 /* main.m */; };
 		7C00884818A8F84B00ED4B31 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C00884718A8F84B00ED4B31 /* AppDelegate.m */; };
 		7C00885318A8F84B00ED4B31 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C00885218A8F84B00ED4B31 /* Images.xcassets */; };
-		7C34A63A18B208E300EC31DA /* Sponsor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34A63918B208E300EC31DA /* Sponsor.m */; };
-		7C34A63D18B208E400EC31DA /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34A63C18B208E400EC31DA /* Session.m */; };
-		7C34A64018B208E400EC31DA /* Speaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34A63F18B208E400EC31DA /* Speaker.m */; };
+		7C34A64318B2268A00EC31DA /* Sponsor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34A64218B2268A00EC31DA /* Sponsor.m */; };
+		7C34A64618B2268A00EC31DA /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34A64518B2268A00EC31DA /* Session.m */; };
+		7C34A64918B2268A00EC31DA /* Speaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34A64818B2268A00EC31DA /* Speaker.m */; };
 		7C3840FB18AC0B0300A85C31 /* SponsorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3840FA18AC0B0300A85C31 /* SponsorCell.m */; };
 		7C3840FE18AC0B4900A85C31 /* SponsorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3840FD18AC0B4900A85C31 /* SponsorsViewController.m */; };
 		7C3BC57018B0FBE700CA0FC0 /* Linz.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC56E18B0FBE700CA0FC0 /* Linz.xcdatamodeld */; };
@@ -57,12 +57,12 @@
 		7C00884618A8F84B00ED4B31 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7C00884718A8F84B00ED4B31 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7C00885218A8F84B00ED4B31 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		7C34A63818B208E300EC31DA /* Sponsor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sponsor.h; sourceTree = "<group>"; };
-		7C34A63918B208E300EC31DA /* Sponsor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sponsor.m; sourceTree = "<group>"; };
-		7C34A63B18B208E400EC31DA /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
-		7C34A63C18B208E400EC31DA /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
-		7C34A63E18B208E400EC31DA /* Speaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Speaker.h; sourceTree = "<group>"; };
-		7C34A63F18B208E400EC31DA /* Speaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Speaker.m; sourceTree = "<group>"; };
+		7C34A64118B2268A00EC31DA /* Sponsor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sponsor.h; sourceTree = "<group>"; };
+		7C34A64218B2268A00EC31DA /* Sponsor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sponsor.m; sourceTree = "<group>"; };
+		7C34A64418B2268A00EC31DA /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
+		7C34A64518B2268A00EC31DA /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
+		7C34A64718B2268A00EC31DA /* Speaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Speaker.h; sourceTree = "<group>"; };
+		7C34A64818B2268A00EC31DA /* Speaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Speaker.m; sourceTree = "<group>"; };
 		7C3840F918AC0B0300A85C31 /* SponsorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SponsorCell.h; sourceTree = "<group>"; };
 		7C3840FA18AC0B0300A85C31 /* SponsorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SponsorCell.m; sourceTree = "<group>"; };
 		7C3840FC18AC0B4900A85C31 /* SponsorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SponsorsViewController.h; sourceTree = "<group>"; };
@@ -195,12 +195,12 @@
 		7C3BC56D18B0FAF300CA0FC0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7C34A63E18B208E400EC31DA /* Speaker.h */,
-				7C34A63F18B208E400EC31DA /* Speaker.m */,
-				7C34A63B18B208E400EC31DA /* Session.h */,
-				7C34A63C18B208E400EC31DA /* Session.m */,
-				7C34A63818B208E300EC31DA /* Sponsor.h */,
-				7C34A63918B208E300EC31DA /* Sponsor.m */,
+				7C34A64718B2268A00EC31DA /* Speaker.h */,
+				7C34A64818B2268A00EC31DA /* Speaker.m */,
+				7C34A64418B2268A00EC31DA /* Session.h */,
+				7C34A64518B2268A00EC31DA /* Session.m */,
+				7C34A64118B2268A00EC31DA /* Sponsor.h */,
+				7C34A64218B2268A00EC31DA /* Sponsor.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -460,9 +460,9 @@
 				7C422F9D18A8FE5F00195D6C /* MasterViewController.m in Sources */,
 				7C83BB5118AAD7BE003D3557 /* NotesCell.m in Sources */,
 				7C3BC57018B0FBE700CA0FC0 /* Linz.xcdatamodeld in Sources */,
-				7C34A63A18B208E300EC31DA /* Sponsor.m in Sources */,
-				7C34A64018B208E400EC31DA /* Speaker.m in Sources */,
-				7C34A63D18B208E400EC31DA /* Session.m in Sources */,
+				7C34A64618B2268A00EC31DA /* Session.m in Sources */,
+				7C34A64918B2268A00EC31DA /* Speaker.m in Sources */,
+				7C34A64318B2268A00EC31DA /* Sponsor.m in Sources */,
 				7CCB106918AE1D2A007A2486 /* LinzAPIClient.m in Sources */,
 				7CCB106F18AE5BAA007A2486 /* UIImage+FromUIColor.m in Sources */,
 				7C83BB5718AADD40003D3557 /* PhotoCell.m in Sources */,

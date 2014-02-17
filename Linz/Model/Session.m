@@ -18,5 +18,6 @@
 @dynamic track;
 @dynamic type;
 @dynamic speakerIdentifier;
+@dynamic identifier;
 
 @end
