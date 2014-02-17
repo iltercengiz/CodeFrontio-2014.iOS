@@ -16,9 +16,6 @@
 #import "MasterViewController.h"
 #import "CalendarViewController.h"
 
-#pragma mark Pods
-#import <SVProgressHUD/SVProgressHUD.h>
-
 #pragma mark Constants
 static const char *calendarSceneIdentifier = "CalendarScene";
 static const char *favouritesSceneIdentifier = "FavouritesScene";
@@ -30,8 +27,6 @@ static const char *supportersSceneIdentifier = "SponsorsScene";
 
 // This will be used to cache the scenes through run time
 @property (nonatomic) NSMutableArray *scenes;
-
-@property (nonatomic, getter = isSetupDone) BOOL setupDone;
 
 @end
 
@@ -56,94 +51,10 @@ static const char *supportersSceneIdentifier = "SponsorsScene";
     // Set background color
     self.tableView.backgroundColor = [UIColor colorWithRed:0.255 green:0.255 blue:0.259 alpha:1];
     
-}
-- (void)viewWillAppear:(BOOL)animated {
-    
-    [super viewWillAppear:animated];
-    
-    // Show progress hud
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-    
-    __block NSArray *speakers;
-    __block NSArray *sessions;
-    __block NSArray *sponsors;
-    
-    void (^proceedBlock)() = ^{
-        
-        if (!speakers || !sessions || !sponsors) {
-            return;
-        }
-        
-        self.setupDone = YES;
-        
-        // Reload tableView
-        [self.tableView reloadData];
-        
-        // Select 'Calendar' cell
-        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
-                                    animated:NO
-                              scrollPosition:UITableViewScrollPositionNone];
-        
-        UISplitViewController *svc = self.splitViewController;
-        UINavigationController *nvc = [svc.viewControllers lastObject];
-        CalendarViewController *cvc = [nvc.viewControllers firstObject];
-        
-        cvc.speakers = speakers;
-        cvc.sessions = sessions;
-        
-        [cvc reloadCalendar];
-        
-        // Dismiss progress hud
-        [SVProgressHUD showSuccessWithStatus:nil];
-        
-    };
-    
-    [[LinzAPIClient sharedClient] GET:@"/speakers"
-                           parameters:nil
-                              success:^(NSURLSessionDataTask *task, id responseObject) {
-                                  // Assign speakers
-                                  speakers = responseObject;
-                                  // Proceed
-                                  proceedBlock();
-                              } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                  NSLog(@"Error: %@", error.description);
-                              }];
-    
-    [[LinzAPIClient sharedClient] GET:@"/sessions"
-                           parameters:nil
-                              success:^(NSURLSessionDataTask *task, id responseObject) {
-                                  // Loop through the sessions and add timeCell datas to the appropriate indexes
-                                  NSArray *immutableSessions = responseObject;
-                                  NSMutableArray *mutableSessions = [NSMutableArray array];
-                                  for (NSDictionary *session in immutableSessions) {
-                                      // Add a small dictionary object to specify time cells
-                                      // Check type and track values of the sessions for appropriate placing
-                                      if ([session[@"type"] isEqualToNumber:@0] ||
-                                          [session[@"track"] isEqualToNumber:@1]) // We check the track info instead of type to not to add time data twice for simultaneous sessions
-                                      {
-                                          [mutableSessions addObject:@{@"track": @0, @"type": @(-1)}];
-                                      }
-                                      // Add the session to array
-                                      [mutableSessions addObject:session];
-                                  }
-                                  // Assign sessions
-                                  sessions = mutableSessions;
-                                  // Proceed
-                                  proceedBlock();
-                              } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                  NSLog(@"Error: %@", error.description);
-                              }];
-    
-    [[LinzAPIClient sharedClient] GET:@"/sponsors"
-                           parameters:nil
-                              success:^(NSURLSessionDataTask *task, id responseObject) {
-                                  // Assign sponsors
-                                  sponsors = responseObject;
-                                  // Proceed
-                                  proceedBlock();
-                              } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                  NSLog(@"Error: %@", error.description);
-                              }];
+    // Select 'Calendar' cell
+    [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                                animated:NO
+                          scrollPosition:UITableViewScrollPositionNone];
     
 }
 
@@ -153,10 +64,7 @@ static const char *supportersSceneIdentifier = "SponsorsScene";
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if ([self isSetupDone]) {
-        return 1;
-    }
-    return 0;
+    return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 5;
