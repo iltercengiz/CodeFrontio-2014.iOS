@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 
+#pragma mark Categories
+#import "UIImage+FromUIColor.h"
+
 #pragma mark Pods
 #import <MagicalRecord/CoreData+MagicalRecord.h>
 
@@ -25,6 +28,10 @@
     
     /*** Database setup ***/
     [MagicalRecord setupAutoMigratingCoreDataStack];
+    
+    /*** UI Customization ***/
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageWithUIColor:[UIColor colorWithRed:0.255 green:0.255 blue:0.259 alpha:1]]
+                                       forBarMetrics:UIBarMetricsDefault];
     
     return YES;
     
