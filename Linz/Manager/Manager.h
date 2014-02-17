@@ -10,4 +10,20 @@
 
 @interface Manager : NSObject
 
+#pragma mark - Properties
+@property (nonatomic) NSArray *speakers;
+@property (nonatomic) NSArray *sessions;
+@property (nonatomic) NSArray *sponsors;
+
+#pragma mark - Singleton
++ (instancetype)sharedManager;
+
+#pragma mark - Setup
+- (void)setupWithCompletion:(void (^)(BOOL successful))completion;
+
+#pragma mark - Removers
+- (void)removeAllSpeakers;
+- (void)removeAllSessions;
+- (void)removeAllSponsors;
+
 @end
