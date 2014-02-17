@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, SessionType) {
+    SessionTypeBreak = -1,
+    SessionTypeActivity,
+    SessionTypeKeynote
+};
+
 @interface Manager : NSObject
 
 #pragma mark - Properties

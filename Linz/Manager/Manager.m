@@ -13,9 +13,9 @@
 #import "LinzAPIClient.h"
 
 #pragma mark Model
-#import "Sponsor+Create.h"
-#import "Session+Create.h"
-#import "Speaker+Create.h"
+#import "Sponsor.h"
+#import "Session.h"
+#import "Speaker.h"
 
 #pragma mark Pods
 #import <MagicalRecord/CoreData+MagicalRecord.h>
@@ -202,12 +202,12 @@
                                       for (NSDictionary *sessionInfo in responseObject) {
                                           // Add a small dictionary object to specify time cells
                                           // Check type and track values of the sessions for appropriate placing
-                                          if ([sessionInfo[@"type"] isEqualToNumber:@0] || [sessionInfo[@"track"] isEqualToNumber:@1]) { // We check the track info instead of type to not to add time data twice for simultaneous sessions
+                                          if ([sessionInfo[@"track"] isEqualToNumber:@0] || [sessionInfo[@"track"] isEqualToNumber:@1]) { // We check the track info instead of type to not to add time data twice for simultaneous sessions
                                               
                                               // Create a session entity
                                               Session *session = [Session MR_createInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
-                                              session.track = @0;
-                                              session.type = @(-1);
+                                              session.track = @(-1); // Track -1 means time cell level
+                                              session.type = sessionInfo[@"type"]; // Type will help us to adjust the width
                                               session.timeInterval = sessionInfo[@"time"];
                                               session.sortingIndex = @(sortingIndex);
                                               
