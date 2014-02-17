@@ -8,11 +8,6 @@
 
 #import "Session.h"
 
-typedef NS_ENUM(NSInteger, ActivityType) {
-    ActivityTypeActivity = 0,
-    ActivityTypeSession
-};
-
 @interface Session (Create)
 
 + (Session *)sessionWithInfo:(NSDictionary *)info;
