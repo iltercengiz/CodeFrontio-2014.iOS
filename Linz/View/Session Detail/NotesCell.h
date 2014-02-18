@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class Note;
+
 @interface NotesCell : UITableViewCell
 
 #pragma mark - IBOutlets
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 
 #pragma mark - Configurator
-- (void)configureCellForNote:(NSString *)note;
+- (void)configureCellForNote:(Note *)note;
 
 @end

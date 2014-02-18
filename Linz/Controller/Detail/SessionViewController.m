@@ -9,6 +9,7 @@
 #pragma mark Model
 #import "Session.h"
 #import "Speaker.h"
+#import "Note.h"
 
 #pragma mark View
 #import "SpeakerCell.h"
@@ -21,7 +22,10 @@
 #pragma mark Pods
 #import <MagicalRecord/CoreData+MagicalRecord.h>
 
-@interface SessionViewController ()
+@interface SessionViewController () <UITextViewDelegate>
+
+@property (nonatomic) Note *note;
+@property (nonatomic) UITextView *noteView;
 
 @end
 
@@ -39,6 +43,26 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark - Getter
+- (Note *)note {
+    if (!_note) {
+        // Try to get the Note object, if there is any, associated with this session
+        _note = [[Note MR_findByAttribute:@"sessionIdentifier" withValue:self.session.identifier] firstObject];
+        // If there isn't any Note object in db, create one
+        if (!_note) {
+            // Create entity
+            _note = [Note MR_createInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+            _note.sessionIdentifier = self.session.identifier;
+            // Save it to the db
+            [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+                if (success) NSLog(@"Save successful!");
+                else NSLog(@"Save failed with error: %@", error);
+            }];
+        }
+    }
+    return _note;
 }
 
 #pragma mark - UITableViewDataSource
@@ -59,7 +83,9 @@
     
     NotesCell *(^createNotesCell)() = ^NotesCell *(){
         NotesCell *cell = [tableView dequeueReusableCellWithIdentifier:@"notesCell" forIndexPath:indexPath];
-        [cell configureCellForNote:nil];
+        [cell configureCellForNote:self.note];
+        self.noteView = cell.textView;
+        self.noteView.delegate = self;
         return cell;
     };
     
@@ -94,11 +120,49 @@
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 2) {
+    if (indexPath.section == 1) {
+        
+        // If there is any saved note, calculate its text size
+        if (self.note) {
+            
+            CGSize size = [self.note.note boundingRectWithSize:CGSizeMake(CGRectGetWidth(tableView.frame) - 20.0, CGFLOAT_MAX)
+                                                       options:0
+                                                    attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14.0]}
+                                                       context:nil].size;
+            
+            if (size.height > 144.0) {
+                return size.height;
+            }
+            
+        }
+        
+        return 144.0;
+        
+    } else if (indexPath.section == 2) {
         return 144.0;
     } else {
         return tableView.rowHeight;
     }
+}
+
+#pragma mark - UITextViewDelegate
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    
+    // Check if any note is entered
+    // If entered, save it to the Note object
+    // Otherwise, remove the Note object from db
+    if (![self.noteView.text isEqualToString:@""]) {
+        self.note.note = self.noteView.text;
+    } else {
+        [self.note MR_deleteEntity];
+    }
+    
+    // Save db
+    [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        if (success) NSLog(@"Save successful!");
+        else NSLog(@"Save failed with error: %@", error);
+    }];
+    
 }
 
 @end

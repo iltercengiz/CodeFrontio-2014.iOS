@@ -274,15 +274,15 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="notesCell" id="bOU-xH-4Jw" userLabel="Notes Cell" customClass="NotesCell">
-                                <rect key="frame" x="0.0" y="158" width="768" height="72"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="notesCell" rowHeight="144" id="bOU-xH-4Jw" userLabel="Notes Cell" customClass="NotesCell">
+                                <rect key="frame" x="0.0" y="158" width="768" height="144"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bOU-xH-4Jw" id="zrh-FP-jIL">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="72"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="144"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" text="You can write anything here..." translatesAutoresizingMaskIntoConstraints="NO" id="Og4-WA-OwI">
-                                            <rect key="frame" x="10" y="0.0" width="748" height="72"/>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Og4-WA-OwI">
+                                            <rect key="frame" x="10" y="0.0" width="748" height="144"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -301,7 +301,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="photosCell" rowHeight="144" id="BpG-H4-7zH" userLabel="Photos Cell" customClass="PhotosCell">
-                                <rect key="frame" x="0.0" y="230" width="768" height="144"/>
+                                <rect key="frame" x="0.0" y="302" width="768" height="144"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BpG-H4-7zH" id="80n-fg-vfZ">
                                     <rect key="frame" x="0.0" y="0.0" width="768" height="144"/>

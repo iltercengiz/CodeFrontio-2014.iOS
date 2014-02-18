@@ -6,47 +6,32 @@
 //  Copyright (c) 2014 Ilter Cengiz. All rights reserved.
 //
 
+#pragma mark Model
+#import "Note.h"
+
+#pragma mark View
 #import "NotesCell.h"
 
-@interface NotesCell () <UITextViewDelegate>
+@interface NotesCell ()
 
-@property (nonatomic) BOOL textViewShouldClear;
+@property (nonatomic) Note *note;
 
 @end
 
 @implementation NotesCell
 
 #pragma mark - Configurator
-- (void)configureCellForNote:(NSString *)note {
+- (void)configureCellForNote:(Note *)note {
     
-    self.textView.delegate = self;
+    // Assign the note object
+    self.note = note;
     
-    if (!note) {
-        self.textView.text = NSLocalizedString(@"You can write anything here...", nil);
-        self.textView.textColor = [UIColor lightGrayColor];
-        self.textViewShouldClear = YES;
+    // Set the note
+    if (note.note) {
+        self.textView.text = note.note;
     }
     
-}
-
-#pragma mark - UITextViewDelegate
-- (void)textViewDidBeginEditing:(UITextView *)textView {
     
-    if (self.textViewShouldClear) {
-        textView.text = @"";
-        textView.textColor = [UIColor blackColor];
-    }
-    
-}
-- (void)textViewDidEndEditing:(UITextView *)textView {
-    
-    if ([textView.text isEqualToString:@""]) {
-        textView.text = NSLocalizedString(@"You can write anything here...", nil);
-        textView.textColor = [UIColor lightGrayColor];
-        self.textViewShouldClear = YES;
-    } else {
-        self.textViewShouldClear = NO;
-    }
     
 }
 
