@@ -80,6 +80,7 @@ static const CGFloat borderWidth = 0.5;
     self.favouriteButton.layer.cornerRadius = cornerRadius;
     self.favouriteButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.favouriteButton.layer.borderWidth = borderWidth;
+    self.favouriteButton.selected = [session.favourited boolValue];
     
 }
 
@@ -87,6 +88,12 @@ static const CGFloat borderWidth = 0.5;
     
     // Change state of session's favourite attr.
     self.session.favourited = @(![self.session.favourited boolValue]);
+    
+    // Save db
+    [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        if (success) NSLog(@"Save successful!");
+        else NSLog(@"Save failed with error: %@", error);
+    }];
     
     // De/Select favourite button
     self.favouriteButton.selected = [self.session.favourited boolValue];
