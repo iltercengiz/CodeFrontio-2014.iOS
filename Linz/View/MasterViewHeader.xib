@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="yEX-Ub-ZGH">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="354"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kod-io-logo-black" translatesAutoresizingMaskIntoConstraints="NO" id="wHa-hC-R0x">
+                    <rect key="frame" x="80" y="40" width="160" height="160"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="160" id="ZPg-R3-hDj"/>
+                        <constraint firstAttribute="width" constant="160" id="xFr-3Y-96B"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kod.io 2014" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K9L-sP-gyc">
+                    <rect key="frame" x="76" y="208" width="168" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="168" id="RMt-u7-gNs"/>
+                        <constraint firstAttribute="height" constant="40" id="w7w-a2-CEK"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="31"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Developer Conference" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YG8-Rz-h5z">
+                    <rect key="frame" x="76" y="244" width="168" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="168" id="Nah-12-Vfs"/>
+                        <constraint firstAttribute="height" constant="20" id="ayC-0n-WS8"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="webBox" translatesAutoresizingMaskIntoConstraints="NO" id="N4y-x9-eQZ">
+                    <rect key="frame" x="81" y="298" width="158" height="36"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="158" id="tSb-xF-Vs8"/>
+                        <constraint firstAttribute="height" constant="36" id="wx5-CM-tmw"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="by" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3r-eM-rr4">
+                    <rect key="frame" x="81" y="276" width="158" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.20392156862745098" green="0.40000000000000002" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.25490196078431371" green="0.25490196078431371" blue="0.25882352941176467" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="centerX" secondItem="N4y-x9-eQZ" secondAttribute="centerX" id="IKh-Gn-zTz"/>
+                <constraint firstItem="YG8-Rz-h5z" firstAttribute="top" secondItem="K9L-sP-gyc" secondAttribute="bottom" constant="-4" id="MDJ-cw-Olm"/>
+                <constraint firstItem="wHa-hC-R0x" firstAttribute="top" secondItem="yEX-Ub-ZGH" secondAttribute="top" constant="40" id="Mnt-Mw-8Sm"/>
+                <constraint firstAttribute="centerX" secondItem="K9L-sP-gyc" secondAttribute="centerX" id="UHV-2s-GVy"/>
+                <constraint firstItem="K9L-sP-gyc" firstAttribute="top" secondItem="wHa-hC-R0x" secondAttribute="bottom" constant="8" symbolic="YES" id="UhJ-bV-4J8"/>
+                <constraint firstAttribute="bottom" secondItem="N4y-x9-eQZ" secondAttribute="bottom" constant="20" id="byV-go-IKq"/>
+                <constraint firstAttribute="centerX" secondItem="YG8-Rz-h5z" secondAttribute="centerX" id="duN-Dr-OJc"/>
+                <constraint firstAttribute="centerX" secondItem="wHa-hC-R0x" secondAttribute="centerX" id="wT6-rr-XKM"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="kod-io-logo-black" width="200" height="200"/>
+        <image name="webBox" width="200" height="46"/>
+    </resources>
+</document>

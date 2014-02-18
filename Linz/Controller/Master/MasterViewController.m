@@ -6,15 +6,22 @@
 //  Copyright (c) 2014 Ilter Cengiz. All rights reserved.
 //
 
+#pragma mark Networking
+#import "LinzAPIClient.h"
+
+#pragma mark View
+#import "MenuCell.h"
+
 #pragma mark Controller
 #import "MasterViewController.h"
+#import "CalendarViewController.h"
 
 #pragma mark Constants
 static const char *calendarSceneIdentifier = "CalendarScene";
 static const char *favouritesSceneIdentifier = "FavouritesScene";
 static const char *notesSceneIdentifier = "NotesScene";
 static const char *venueSceneIdentifier = "VenueScene";
-static const char *supportersSceneIdentifier = "SupportersScene";
+static const char *supportersSceneIdentifier = "SponsorsScene";
 
 @interface MasterViewController ()
 
@@ -41,10 +48,8 @@ static const char *supportersSceneIdentifier = "SupportersScene";
     UIViewController *calendarViewController = navigationController.topViewController;
     [self.scenes replaceObjectAtIndex:0 withObject:calendarViewController];
     
-}
-- (void)viewWillAppear:(BOOL)animated {
-    
-    [super viewWillAppear:animated];
+    // Set background color
+    self.tableView.backgroundColor = [UIColor colorWithRed:0.255 green:0.255 blue:0.259 alpha:1];
     
     // Select 'Calendar' cell
     [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
@@ -58,12 +63,16 @@ static const char *supportersSceneIdentifier = "SupportersScene";
 }
 
 #pragma mark - UITableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 5;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MenuCell" forIndexPath:indexPath];
+    MenuCell *cell = [tableView dequeueReusableCellWithIdentifier:@"menuCell" forIndexPath:indexPath];
+    [cell configureCell];
     
     // Set title
     switch (indexPath.row) {
@@ -116,28 +125,8 @@ static const char *supportersSceneIdentifier = "SupportersScene";
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    
-    UIView *headerView = ({
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(tableView.frame), tableView.sectionHeaderHeight)];
-        view.backgroundColor = [UIColor whiteColor];
-        view;
-    });
-    
-    UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"kod-io-logo-black"]];
-    
-    // Adjust position of logo
-    logo.frame = ({
-        CGRect frame = logo.frame;
-        frame.origin.x = (CGRectGetWidth(headerView.frame) - CGRectGetWidth(frame)) / 2.0;
-        frame.origin.y = (CGRectGetHeight(headerView.frame) - CGRectGetHeight(frame)) / 2.0;
-        frame;
-    });
-    
-    // Add logo as subview
-    [headerView addSubview:logo];
-    
+    UIView *headerView = [[[NSBundle mainBundle] loadNibNamed:@"MasterViewHeader" owner:self options:nil] firstObject];
     return headerView;
-    
 }
 
 @end

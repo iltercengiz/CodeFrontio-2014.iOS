@@ -1,5 +1,5 @@
 //
-//  NotesCell.h
+//  SponsorCell.h
 //  Linz
 //
 //  Created by Ilter Cengiz on 12/02/14.
@@ -8,14 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@class Note;
+@class Sponsor;
 
-@interface NotesCell : UITableViewCell
+@interface SponsorCell : UITableViewCell
 
 #pragma mark - IBOutlets
-@property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (weak, nonatomic) IBOutlet UIImageView *sponsorImage;
 
 #pragma mark - Configurator
-- (void)configureCellForNote:(Note *)note;
+- (void)configureCellForSponsor:(Sponsor *)sponsor;
 
 @end
