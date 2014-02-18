@@ -27,6 +27,8 @@
 @property (nonatomic) Note *note;
 @property (nonatomic) UITextView *noteView;
 
+@property (nonatomic) CGFloat notesCellRowHeight;
+
 @end
 
 @implementation SessionViewController
@@ -38,6 +40,27 @@
     
     // Set title
     self.title = self.session.title;
+    
+    // Paragraph style
+    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
+    paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
+    
+    CGSize size = [self.note.note boundingRectWithSize:CGSizeMake(748.0, CGFLOAT_MAX)
+                                               options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin
+                                            attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14.0],
+                                                         NSParagraphStyleAttributeName: paragraphStyle}
+                                               context:nil].size;
+    
+    if (size.height < 144.0) {
+        self.notesCellRowHeight = 144.0;
+    } else if (size.height > 256.0) {
+        self.notesCellRowHeight = 256.0;
+    } else {
+        self.notesCellRowHeight = size.height;
+    }
+    
+    // Set note
+    self.noteView.text = self.note.note;
     
 }
 
@@ -121,31 +144,20 @@
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
-        
-        // If there is any saved note, calculate its text size
-        if (self.note) {
-            
-            CGSize size = [self.note.note boundingRectWithSize:CGSizeMake(CGRectGetWidth(tableView.frame) - 20.0, CGFLOAT_MAX)
-                                                       options:0
-                                                    attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14.0]}
-                                                       context:nil].size;
-            
-            if (size.height > 144.0) {
-                return size.height;
-            }
-            
-        }
-        
-        return 144.0;
-        
+        return self.notesCellRowHeight;
     } else if (indexPath.section == 2) {
         return 144.0;
-    } else {
-        return tableView.rowHeight;
     }
+    return tableView.rowHeight;
 }
 
 #pragma mark - UITextViewDelegate
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    // Scroll notes cell to top
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]
+                          atScrollPosition:UITableViewScrollPositionMiddle
+                                  animated:YES];
+}
 - (void)textViewDidEndEditing:(UITextView *)textView {
     
     // Check if any note is entered
@@ -162,6 +174,33 @@
         if (success) NSLog(@"Save successful!");
         else NSLog(@"Save failed with error: %@", error);
     }];
+    
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    
+    // Paragraph style
+    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
+    paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
+    
+    CGSize size = [textView.text boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.noteView.frame), CGFLOAT_MAX)
+                                              options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin
+                                           attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14.0],
+                                                        NSParagraphStyleAttributeName: paragraphStyle}
+                                              context:nil].size;
+    
+    if (size.height < 144.0) {
+        self.notesCellRowHeight = 144.0;
+    } else if (size.height > 256.0) {
+        self.notesCellRowHeight = 256.0;
+    } else {
+        self.notesCellRowHeight = size.height;
+    }
+    
+    self.note.note = textView.text;
+    
+    [self.tableView beginUpdates];
+    [self.tableView endUpdates];
     
 }
 

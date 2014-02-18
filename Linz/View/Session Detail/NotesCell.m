@@ -31,8 +31,6 @@
         self.textView.text = note.note;
     }
     
-    
-    
 }
 
 @end
