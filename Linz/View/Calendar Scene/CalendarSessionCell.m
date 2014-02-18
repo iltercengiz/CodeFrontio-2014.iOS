@@ -70,7 +70,17 @@ static const CGFloat borderWidth = 0.5;
     self.nameLabel.text = speaker.name;
     
     // Set session detail
-    self.sessionDetail.text = session.detail;
+    NSAttributedString *titleString = [[NSAttributedString alloc] initWithString:session.title
+                                                                      attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:16.0]}];
+    NSAttributedString *detailString = [[NSAttributedString alloc] initWithString:session.detail
+                                                                       attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14.0]}];
+    
+    NSMutableAttributedString *mutableAttributedString = [NSMutableAttributedString new];
+    [mutableAttributedString appendAttributedString:titleString];
+    [mutableAttributedString appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n\n"]];
+    [mutableAttributedString appendAttributedString:detailString];
+    
+    self.sessionDetail.attributedText = mutableAttributedString;
     
     // Buttons
     self.takeNoteButton.layer.cornerRadius = cornerRadius;
