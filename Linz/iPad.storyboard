@@ -168,10 +168,14 @@
                                                 <constraint firstAttribute="width" constant="128" id="juY-tf-Bca"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                                            <state key="normal" title="Favourite" image="Star">
+                                            <state key="normal" title="Favourite" image="Star-Unselected">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <state key="selected" image="Star-Selected"/>
+                                            <connections>
+                                                <action selector="favouriteTapped:" destination="gcy-94-4tJ" eventType="touchUpInside" id="cK8-Hy-y9d"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -517,7 +521,8 @@
         <image name="Note" width="32" height="32"/>
         <image name="Placeholder" width="200" height="200"/>
         <image name="Plus" width="54" height="54"/>
-        <image name="Star" width="32" height="32"/>
+        <image name="Star-Selected" width="36" height="36"/>
+        <image name="Star-Unselected" width="36" height="36"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="lightContent"/>

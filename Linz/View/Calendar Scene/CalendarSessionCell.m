@@ -21,6 +21,14 @@
 static const CGFloat cornerRadius = 0.0;
 static const CGFloat borderWidth = 0.5;
 
+@interface CalendarSessionCell ()
+
+- (IBAction)favouriteTapped:(id)sender;
+
+@property (nonatomic) Session *session;
+
+@end
+
 @implementation CalendarSessionCell
 
 #pragma mark - CalendarSessionCell
@@ -32,6 +40,9 @@ static const CGFloat borderWidth = 0.5;
     // Set frame
     self.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.layer.borderWidth = 0.5;
+    
+    // Assign session
+    self.session = session;
     
     // Speaker of the session
     Speaker *speaker = [[Speaker MR_findByAttribute:@"identifier" withValue:session.speakerIdentifier] firstObject];
@@ -69,6 +80,16 @@ static const CGFloat borderWidth = 0.5;
     self.favouriteButton.layer.cornerRadius = cornerRadius;
     self.favouriteButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.favouriteButton.layer.borderWidth = borderWidth;
+    
+}
+
+- (IBAction)favouriteTapped:(id)sender {
+    
+    // Change state of session's favourite attr.
+    self.session.favourited = @(![self.session.favourited boolValue]);
+    
+    // De/Select favourite button
+    self.favouriteButton.selected = [self.session.favourited boolValue];
     
 }
 
