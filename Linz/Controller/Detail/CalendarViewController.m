@@ -91,8 +91,9 @@
     
     [super viewWillAppear:animated];
     
-    // If setup is already done, return
+    // If setup is already done, reload and return
     if (self.speakers && self.sessions) {
+        [self.collectionView reloadData];
         return;
     }
     
