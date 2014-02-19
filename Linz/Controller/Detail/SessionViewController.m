@@ -114,9 +114,7 @@
     
     PhotosCell *(^createPhotosCell)() = ^PhotosCell *(){
         PhotosCell *cell = [tableView dequeueReusableCellWithIdentifier:@"photosCell" forIndexPath:indexPath];
-        NSArray *photos = @[[UIImage imageNamed:@"kod-io-logo-black"],
-                            [UIImage imageNamed:@"kod-io-logo-black"] ];
-        [cell configureCellForTableView:tableView withPhotos:photos];
+        [cell configureCellForSession:self.session andTableView:tableView];
         return cell;
     };
     
