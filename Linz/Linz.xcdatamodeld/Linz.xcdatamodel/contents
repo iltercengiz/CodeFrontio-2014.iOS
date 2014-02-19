@@ -5,6 +5,7 @@
         <attribute name="sessionIdentifier" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="Photo" representedClassName="Photo" syncable="YES">
+        <attribute name="identifier" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="photoURL" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="sessionIdentifier" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
@@ -41,6 +42,6 @@
         <element name="Session" positionX="-2162" positionY="171" width="128" height="178"/>
         <element name="Speaker" positionX="-2324" positionY="194" width="128" height="148"/>
         <element name="Sponsor" positionX="-1998" positionY="209" width="128" height="133"/>
-        <element name="Photo" positionX="-2079" positionY="369" width="128" height="73"/>
+        <element name="Photo" positionX="-2079" positionY="369" width="128" height="88"/>
     </elements>
 </model>

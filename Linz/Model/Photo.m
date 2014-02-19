@@ -13,5 +13,6 @@
 
 @dynamic photoURL;
 @dynamic sessionIdentifier;
+@dynamic identifier;
 
 @end

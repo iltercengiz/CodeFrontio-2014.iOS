@@ -14,5 +14,6 @@
 
 @property (nonatomic, retain) NSString * photoURL;
 @property (nonatomic, retain) NSNumber * sessionIdentifier;
+@property (nonatomic, retain) NSNumber * identifier;
 
 @end
