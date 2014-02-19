@@ -14,6 +14,7 @@
 - (void)configureCellForPhoto:(UIImage *)photo {
     
     self.imageView.image = photo;
+    self.imageView.contentMode = UIViewContentModeScaleAspectFill;
     
 }
 

@@ -17,6 +17,6 @@
 @property (weak, nonatomic) UITableView *tableView;
 
 #pragma mark - Configurator
-- (void)configureCellForTableView:(UITableView *)tableView withPhotos:(NSArray *)photos;
+- (void)configureCellForSession:(Session *)session andTableView:(UITableView *)tableView;
 
 @end
