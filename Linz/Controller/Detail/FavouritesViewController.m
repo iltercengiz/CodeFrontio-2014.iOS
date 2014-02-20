@@ -102,15 +102,15 @@
     cell.shouldAnimateIcons = NO;
     
     // Swipes
-    [cell setSwipeGestureWithView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Note"]]
-                            color:[UIColor colorWithRed:0.161 green:0.722 blue:0.812 alpha:1.0]
+    [cell setSwipeGestureWithView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"calendar-note"]]
+                            color:[UIColor colorWithRed:0.169 green:0.357 blue:0.616 alpha:1]
                              mode:MCSwipeTableViewCellModeExit
                             state:MCSwipeTableViewCellState1
                   completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
                       NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
                       [self takeNoteForSessionAtIndexPath:indexPath];
                   }];
-    [cell setSwipeGestureWithView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Star-Selected"]]
+    [cell setSwipeGestureWithView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"calendar-favourite-selected"]]
                             color:[UIColor colorWithRed:0.973 green:0.306 blue:0.306 alpha:1.0]
                              mode:MCSwipeTableViewCellModeExit
                             state:MCSwipeTableViewCellState3
