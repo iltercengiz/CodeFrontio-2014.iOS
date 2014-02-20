@@ -21,6 +21,8 @@
 
 @interface PhotosCell () <UICollectionViewDataSource, UICollectionViewDelegate>
 
+@property (weak, nonatomic) UITableView *tableView;
+
 @property (nonatomic) NSMutableArray *photos;
 @property (nonatomic) NSNumber *sessionIdentifier;
 

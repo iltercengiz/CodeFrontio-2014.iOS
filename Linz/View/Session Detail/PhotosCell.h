@@ -13,9 +13,6 @@
 #pragma mark - IBOutlets
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
-#pragma mark - Properties
-@property (weak, nonatomic) UITableView *tableView;
-
 #pragma mark - Configurator
 - (void)configureCellForSession:(Session *)session andTableView:(UITableView *)tableView;
 
