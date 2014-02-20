@@ -140,7 +140,7 @@
         NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
         
         [cell.imageView setImageWithURLRequest:request
-                              placeholderImage:[UIImage imageNamed:@"Placeholder"]
+                              placeholderImage:[UIImage imageNamed:@"image-placeholder"]
                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
                                            weakImageView.image = image;
                                            [[TMDiskCache sharedCache] setObject:image forKey:weakImageURLString];
