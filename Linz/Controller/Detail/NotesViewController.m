@@ -57,7 +57,11 @@
     
     // Set title
     NSRange range = [note.note rangeOfString:@"\n"];
-    cell.textLabel.text = [note.note substringToIndex:range.location];
+    if (range.length) {
+        cell.textLabel.text = [note.note substringToIndex:range.location];
+    } else {
+        cell.textLabel.text = note.note;
+    }
     
     // Set subtitle
     cell.detailTextLabel.text = session.title;
