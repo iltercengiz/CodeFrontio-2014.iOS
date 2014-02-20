@@ -24,7 +24,10 @@ static const CGFloat borderWidth = 0.5;
 
 @interface CalendarSessionCell ()
 
+- (IBAction)takeNoteTapped:(id)sender;
 - (IBAction)favouriteTapped:(id)sender;
+
+@property (weak, nonatomic) UICollectionView *collectionView;
 
 @property (nonatomic) Session *session;
 
@@ -33,7 +36,10 @@ static const CGFloat borderWidth = 0.5;
 @implementation CalendarSessionCell
 
 #pragma mark - CalendarSessionCell
-- (void)configureCellForSession:(Session *)session {
+- (void)configureCellForSession:(Session *)session andCollectionView:(UICollectionView *)collectionView {
+    
+    // Assign the collectionView
+    self.collectionView = collectionView;
     
     // Set background color for custom drawing
     self.backgroundColor = [UIColor whiteColor];
@@ -103,6 +109,10 @@ static const CGFloat borderWidth = 0.5;
 }
 
 #pragma mark - IBAction
+- (IBAction)takeNoteTapped:(id)sender {
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:self];
+    [self.collectionView.delegate collectionView:self.collectionView didSelectItemAtIndexPath:indexPath];
+}
 - (IBAction)favouriteTapped:(id)sender {
     
     UIButton *favouriteButton = (UIButton *)sender;
