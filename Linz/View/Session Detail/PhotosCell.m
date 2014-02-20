@@ -160,6 +160,7 @@
                                                                         weakSelf.picker = nil;
                                                                         
                                                                     }];
+        self.picker.saveToCameraRoll = NO;
         [self.picker showFromRect:self.frame];
         
     }
