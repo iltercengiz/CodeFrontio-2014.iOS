@@ -24,6 +24,7 @@
 		7C34A64B18B2379D00EC31DA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C34A64A18B2379D00EC31DA /* CoreData.framework */; };
 		7C34A64E18B24BE700EC31DA /* CalendarActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34A64D18B24BE700EC31DA /* CalendarActivityCell.m */; };
 		7C34A65118B26AD800EC31DA /* NSDictionary+SortedKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34A65018B26AD800EC31DA /* NSDictionary+SortedKeys.m */; };
+		7C355C8318B6727000BB72B0 /* VenueImages.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7C355C8218B6727000BB72B0 /* VenueImages.bundle */; };
 		7C3840FB18AC0B0300A85C31 /* SponsorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3840FA18AC0B0300A85C31 /* SponsorCell.m */; };
 		7C3840FE18AC0B4900A85C31 /* SponsorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3840FD18AC0B4900A85C31 /* SponsorsViewController.m */; };
 		7C3BC57018B0FBE700CA0FC0 /* Linz.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC56E18B0FBE700CA0FC0 /* Linz.xcdatamodeld */; };
@@ -81,6 +82,7 @@
 		7C34A64D18B24BE700EC31DA /* CalendarActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarActivityCell.m; sourceTree = "<group>"; };
 		7C34A64F18B26AD800EC31DA /* NSDictionary+SortedKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+SortedKeys.h"; sourceTree = "<group>"; };
 		7C34A65018B26AD800EC31DA /* NSDictionary+SortedKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+SortedKeys.m"; sourceTree = "<group>"; };
+		7C355C8218B6727000BB72B0 /* VenueImages.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = VenueImages.bundle; sourceTree = "<group>"; };
 		7C3840F918AC0B0300A85C31 /* SponsorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SponsorCell.h; sourceTree = "<group>"; };
 		7C3840FA18AC0B0300A85C31 /* SponsorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SponsorCell.m; sourceTree = "<group>"; };
 		7C3840FC18AC0B4900A85C31 /* SponsorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SponsorsViewController.h; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				7C422F9018A8FA4800195D6C /* iPad.storyboard */,
 				7C3BC56E18B0FBE700CA0FC0 /* Linz.xcdatamodeld */,
 				7C00885218A8F84B00ED4B31 /* Images.xcassets */,
+				7C355C8218B6727000BB72B0 /* VenueImages.bundle */,
 				7C3BC59318B10C8F00CA0FC0 /* Manager */,
 				7C3BC56D18B0FAF300CA0FC0 /* Model */,
 				7C3BC58318B100F700CA0FC0 /* Model+Categories */,
@@ -444,6 +447,7 @@
 				7C422F9218A8FA6800195D6C /* Localizable.strings in Resources */,
 				7CCB106B18AE4BF3007A2486 /* MasterViewHeader.xib in Resources */,
 				7C00884218A8F84B00ED4B31 /* InfoPlist.strings in Resources */,
+				7C355C8318B6727000BB72B0 /* VenueImages.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

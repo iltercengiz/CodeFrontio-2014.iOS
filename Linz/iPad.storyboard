@@ -453,18 +453,81 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ars Electronica Center" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zI9-hR-nOD">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="72"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="72" id="mLy-21-cah"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="32"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hvr-hv-WnM" userLabel="Carousel" customClass="iCarousel">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                                <rect key="frame" x="0.0" y="72" width="768" height="604"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ach-eO-xz4">
+                                <rect key="frame" x="64" y="692" width="640" height="114"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="114" id="Zq4-kb-XdE"/>
+                                </constraints>
+                                <string key="text">Art, technology, society.
+Since 1979, Ars Electronica has sought out interlinkages and congruities, causes and effects.</string>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="26"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qWU-da-Cod">
+                                <rect key="frame" x="64" y="806" width="640" height="96"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="96" id="4Hz-IE-5lF"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">The ideas circulating here are innovative, radical, eccentric in the best sense of that term. They influence our everyday life—our lifestyle, our way of life, every single day.</string>
+                                        <attributes>
+                                            <font key="NSFont" size="20" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" text="www.aec.at" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="oZ8-vJ-kKc">
+                                <rect key="frame" x="64" y="902" width="640" height="72"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="72" id="aWI-Ww-oaL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="hvr-hv-WnM" firstAttribute="top" secondItem="Tmz-tN-0oK" secondAttribute="top" id="Kyg-dK-lly"/>
-                            <constraint firstAttribute="trailing" secondItem="hvr-hv-WnM" secondAttribute="trailing" id="lcB-1U-4Ec"/>
-                            <constraint firstItem="hvr-hv-WnM" firstAttribute="leading" secondItem="Tmz-tN-0oK" secondAttribute="leading" id="qFH-7y-cPN"/>
-                            <constraint firstItem="Bb5-cb-6C9" firstAttribute="top" secondItem="hvr-hv-WnM" secondAttribute="bottom" id="wHx-3L-4uS"/>
+                            <constraint firstItem="qWU-da-Cod" firstAttribute="top" secondItem="ach-eO-xz4" secondAttribute="bottom" id="2nt-KU-eiW"/>
+                            <constraint firstItem="hvr-hv-WnM" firstAttribute="leading" secondItem="Tmz-tN-0oK" secondAttribute="leading" id="6qz-BI-0V1"/>
+                            <constraint firstItem="qWU-da-Cod" firstAttribute="leading" secondItem="Tmz-tN-0oK" secondAttribute="leading" constant="64" id="6vp-TT-ixO"/>
+                            <constraint firstItem="zI9-hR-nOD" firstAttribute="top" secondItem="Tmz-tN-0oK" secondAttribute="top" id="8QP-pT-nGt"/>
+                            <constraint firstItem="hvr-hv-WnM" firstAttribute="top" secondItem="zI9-hR-nOD" secondAttribute="bottom" id="J5K-Ut-fhf"/>
+                            <constraint firstItem="ach-eO-xz4" firstAttribute="top" secondItem="hvr-hv-WnM" secondAttribute="bottom" constant="16" id="LmX-bM-rqc"/>
+                            <constraint firstAttribute="trailing" secondItem="qWU-da-Cod" secondAttribute="trailing" constant="64" id="OV9-9A-pbK"/>
+                            <constraint firstItem="zI9-hR-nOD" firstAttribute="leading" secondItem="Tmz-tN-0oK" secondAttribute="leading" id="V8n-dn-3Qh"/>
+                            <constraint firstItem="ach-eO-xz4" firstAttribute="leading" secondItem="Tmz-tN-0oK" secondAttribute="leading" constant="64" id="beN-M1-zX3"/>
+                            <constraint firstItem="oZ8-vJ-kKc" firstAttribute="leading" secondItem="Tmz-tN-0oK" secondAttribute="leading" constant="64" id="eO4-EF-s0T"/>
+                            <constraint firstAttribute="trailing" secondItem="hvr-hv-WnM" secondAttribute="trailing" id="k6X-Cg-xyd"/>
+                            <constraint firstAttribute="trailing" secondItem="zI9-hR-nOD" secondAttribute="trailing" id="moW-jJ-cBV"/>
+                            <constraint firstAttribute="trailing" secondItem="ach-eO-xz4" secondAttribute="trailing" constant="64" id="tS3-qN-293"/>
+                            <constraint firstAttribute="trailing" secondItem="oZ8-vJ-kKc" secondAttribute="trailing" constant="64" id="tW2-QF-G18"/>
+                            <constraint firstItem="Bb5-cb-6C9" firstAttribute="top" secondItem="oZ8-vJ-kKc" secondAttribute="bottom" constant="50" id="v6R-9H-585"/>
+                            <constraint firstItem="oZ8-vJ-kKc" firstAttribute="top" secondItem="qWU-da-Cod" secondAttribute="bottom" id="yY9-zi-dvZ"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
