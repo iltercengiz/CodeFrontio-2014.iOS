@@ -157,7 +157,7 @@
                                                 <constraint firstAttribute="height" constant="50" id="EGI-Oc-XtW"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                                            <state key="normal" title="Take Note" image="Note">
+                                            <state key="normal" title="Take Note" image="calendar-note">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -174,11 +174,11 @@
                                                 <constraint firstAttribute="width" constant="128" id="juY-tf-Bca"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                                            <state key="normal" title="Favourite" image="Star-Unselected">
+                                            <state key="normal" title="Favourite" image="calendar-favourite">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
-                                            <state key="selected" image="Star-Selected"/>
+                                            <state key="selected" image="calendar-favourite-selected"/>
                                             <connections>
                                                 <action selector="favouriteTapped:" destination="gcy-94-4tJ" eventType="touchUpInside" id="cK8-Hy-y9d"/>
                                             </connections>
@@ -651,11 +651,11 @@ Since 1979, Ars Electronica has sought out interlinkages and congruities, causes
         </scene>
     </scenes>
     <resources>
-        <image name="Note" width="32" height="32"/>
         <image name="Placeholder" width="200" height="200"/>
-        <image name="Star-Selected" width="36" height="36"/>
-        <image name="Star-Unselected" width="36" height="36"/>
         <image name="add-picture" width="108" height="108"/>
+        <image name="calendar-favourite" width="36" height="36"/>
+        <image name="calendar-favourite-selected" width="36" height="36"/>
+        <image name="calendar-note" width="36" height="36"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="lightContent"/>
