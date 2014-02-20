@@ -7,7 +7,8 @@
     },
     {
       "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "add-picture@2x.png"
     }
   ],
   "info" : {
