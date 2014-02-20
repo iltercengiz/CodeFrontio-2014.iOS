@@ -70,22 +70,9 @@ static const char *supportersSceneIdentifier = "SponsorsScene";
     return 5;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     MenuCell *cell = [tableView dequeueReusableCellWithIdentifier:@"menuCell" forIndexPath:indexPath];
-    [cell configureCell];
-    
-    // Set title
-    switch (indexPath.row) {
-        case 0: cell.textLabel.text = NSLocalizedString(@"Calendar", nil); break;
-        case 1: cell.textLabel.text = NSLocalizedString(@"Favourites", nil); break;
-        case 2: cell.textLabel.text = NSLocalizedString(@"Notes", nil); break;
-        case 3: cell.textLabel.text = NSLocalizedString(@"Venue", nil); break;
-        case 4: cell.textLabel.text = NSLocalizedString(@"Supporters", nil); break;
-        default: break;
-    }
-    
+    [cell configureCellForType:indexPath.row];
     return cell;
-    
 }
 
 #pragma mark - UITableViewDelegate

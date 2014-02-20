@@ -8,9 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, ContentType) {
+    ContentTypeCalendar = 0,
+    ContentTypeFavourites,
+    ContentTypeNotes,
+    ContentTypeVenue,
+    ContentTypeSupporters
+};
+
 @interface MenuCell : UITableViewCell
 
 #pragma mark - Configurator
-- (void)configureCell;
+- (void)configureCellForType:(ContentType)contentType;
 
 @end

@@ -15,16 +15,55 @@
 @implementation MenuCell
 
 #pragma mark - Configurator
-- (void)configureCell {
+- (void)configureCellForType:(ContentType)contentType {
     
     // Set background color for custom drawing
     self.backgroundColor = [UIColor clearColor];
     self.selectedBackgroundView = [UIView new];
     self.selectedBackgroundView.backgroundColor = [UIColor clearColor];
     
-    // Set text color
+    // Set icon
+    self.imageView.image = [self imageForContentType:contentType];
+    self.imageView.highlightedImage = [self highlightedImageForContentType:contentType];
+    
+    // Set text
+    self.textLabel.text = [self stringForContentType:contentType];
     self.textLabel.textColor = [UIColor colorWithRed:0.925 green:0.925 blue:0.925 alpha:1];
     
+}
+
+- (NSString *)stringForContentType:(ContentType)contentType {
+    switch (contentType) {
+        case 0: return NSLocalizedString(@"Calendar", nil); break;
+        case 1: return NSLocalizedString(@"Favourites", nil); break;
+        case 2: return NSLocalizedString(@"Notes", nil); break;
+        case 3: return NSLocalizedString(@"Venue", nil); break;
+        case 4: return NSLocalizedString(@"Supporters", nil); break;
+        default: break;
+    }
+    return nil;
+}
+- (UIImage *)imageForContentType:(ContentType)contentType {
+    switch (contentType) {
+        case 0: return [UIImage imageNamed:@"side-menu-calendar"]; break;
+        case 1: return [UIImage imageNamed:@"side-menu-favourites"]; break;
+        case 2: return [UIImage imageNamed:@"side-menu-notes"]; break;
+        case 3: return [UIImage imageNamed:@"side-menu-venue"]; break;
+        case 4: return [UIImage imageNamed:@"side-menu-supporters"]; break;
+        default: break;
+    }
+    return nil;
+}
+- (UIImage *)highlightedImageForContentType:(ContentType)contentType {
+    switch (contentType) {
+        case 0: return [UIImage imageNamed:@"side-menu-calendar-selected"]; break;
+        case 1: return [UIImage imageNamed:@"side-menu-favourites-selected"]; break;
+        case 2: return [UIImage imageNamed:@"side-menu-notes-selected"]; break;
+        case 3: return [UIImage imageNamed:@"side-menu-venue-selected"]; break;
+        case 4: return [UIImage imageNamed:@"side-menu-supporters-selected"]; break;
+        default: break;
+    }
+    return nil;
 }
 
 #pragma mark - UIView
@@ -54,12 +93,14 @@
     [[UIColor colorWithRed:0.169 green:0.169 blue:0.173 alpha:1] setStroke];
     [bezierPath stroke];
     
-    // Selected indicator
+    // Selected indicator and icon highlighting
     bezierPath = [UIBezierPath bezierPathWithRect:CGRectMake(CGRectGetWidth(rect) - 21.0, 2.0, 20.0, CGRectGetHeight(rect) - 3.0)];
     if (self.selected) {
         [[UIColor colorWithRed:0.965 green:0.620 blue:0.153 alpha:1] setFill];
+        self.imageView.highlighted = YES;
     } else {
         [[UIColor colorWithRed:0.392 green:0.392 blue:0.400 alpha:1] setFill];
+        self.imageView.highlighted = NO;
     }
     [bezierPath fill];
     
