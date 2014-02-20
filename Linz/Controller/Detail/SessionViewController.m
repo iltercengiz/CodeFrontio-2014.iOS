@@ -69,29 +69,6 @@
     return _note;
 }
 
-#pragma mark - Helpers
-- (CGFloat)heightForNoteView {
-    
-    UITextView *textView = self.noteView;
-    CGFloat textViewWidth = CGRectGetWidth(self.noteView.frame);
-    
-    if (!textViewWidth || !textView.text) {
-        textView = [UITextView new];
-        textView.text = self.note.note;
-        textViewWidth = CGRectGetWidth(self.tableView.frame) - 20.0;
-    }
-    
-    CGSize size = [textView sizeThatFits:CGSizeMake(textViewWidth, CGFLOAT_MAX)];
-    
-    return size.height + 16.0;
-    
-}
-- (void)scrollToCursorForTextView:(UITextView *)textView {
-    CGRect cursorRect = [textView caretRectForPosition:textView.selectedTextRange.start];
-    cursorRect.size.height += 16;
-    [textView scrollRectToVisible:cursorRect animated:YES];
-}
-
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 3;
@@ -146,14 +123,7 @@
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
-        CGFloat height = [self heightForNoteView];
-        if (height < 144.0) {
-            return 144.0;
-        } else if (height > 280.0) {
-            return 280.0;
-        } else {
-            return height;
-        }
+        return 256.0;
     } else if (indexPath.section == 2) {
         return 144.0;
     }
@@ -163,16 +133,14 @@
 #pragma mark - UITextViewDelegate
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]
-                          atScrollPosition:UITableViewScrollPositionTop
+                          atScrollPosition:UITableViewScrollPositionMiddle
                                   animated:YES];
-    [self scrollToCursorForTextView:textView];
 }
 - (void)textViewDidEndEditing:(UITextView *)textView {
     
     // Check if any note is entered
     // If entered, save it to the Note object
     // Otherwise, remove the Note object from db
-    if (![self.noteView.text isEqualToString:@""]) {
     NSString *trimmedNote = [self.note.note stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]; // To prevent whitespace only notes
     
     if (![self.noteView.text isEqualToString:@""] && trimmedNote && [trimmedNote isEqualToString:@""]) {
@@ -189,13 +157,21 @@
     
 }
 
+// Thanks to @davidisdk for this great answer: http://stackoverflow.com/a/19276988/1931781
+// Makes the scroll follow caret
 - (void)textViewDidChange:(UITextView *)textView {
-    
-    [self.tableView beginUpdates];
-    [self.tableView endUpdates];
-    
-    [self scrollToCursorForTextView:textView];
-    
+    CGRect line = [textView caretRectForPosition:textView.selectedTextRange.start];
+    CGFloat overflow = line.origin.y + line.size.height - (textView.contentOffset.y + textView.bounds.size.height - textView.contentInset.bottom - textView.contentInset.top);
+    if (overflow > 0) {
+        // We are at the bottom of the visible text and introduced a line feed, scroll down (iOS 7 does not do it)
+        // Scroll caret to visible area
+        CGPoint offset = textView.contentOffset;
+        offset.y += overflow + 7; // leave 7 pixels margin
+        // Cannot animate with setContentOffset:animated: or caret will not appear
+        [UIView animateWithDuration:0.3 animations:^{
+            [textView setContentOffset:offset];
+        }];
+    }
 }
 
 @end

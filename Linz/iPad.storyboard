@@ -300,7 +300,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Og4-WA-OwI">
-                                            <rect key="frame" x="10" y="0.0" width="748" height="144"/>
+                                            <rect key="frame" x="10" y="0.0" width="758" height="144"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -311,7 +311,7 @@
                                         <constraint firstItem="Og4-WA-OwI" firstAttribute="leading" secondItem="zrh-FP-jIL" secondAttribute="leading" constant="10" id="6do-AV-Ggi"/>
                                         <constraint firstItem="Og4-WA-OwI" firstAttribute="top" secondItem="zrh-FP-jIL" secondAttribute="top" id="NZP-J5-wFt"/>
                                         <constraint firstAttribute="bottom" secondItem="Og4-WA-OwI" secondAttribute="bottom" id="jfa-sU-LAc"/>
-                                        <constraint firstAttribute="trailing" secondItem="Og4-WA-OwI" secondAttribute="trailing" constant="10" id="s5Y-x6-7Ty"/>
+                                        <constraint firstAttribute="trailing" secondItem="Og4-WA-OwI" secondAttribute="trailing" id="s5Y-x6-7Ty"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
