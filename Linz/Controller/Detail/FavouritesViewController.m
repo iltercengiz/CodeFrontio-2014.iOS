@@ -21,6 +21,7 @@
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import <MagicalRecord/CoreData+MagicalRecord.h>
 #import <MCSwipeTableViewCell/MCSwipeTableViewCell.h>
+#import <TMCache/TMDiskCache.h>
 
 @interface FavouritesViewController ()
 
@@ -126,20 +127,27 @@
     cell.imageView.layer.cornerRadius = 8.0;
     cell.imageView.clipsToBounds = YES;
     
-    __weak typeof(cell.imageView) weakImageView = cell.imageView;
-    
     NSString *imageURLString = speaker.avatar;
-    NSURL *imageURL = [NSURL URLWithString:imageURLString];
-    NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
+    UIImage *image = (UIImage *)[[TMDiskCache sharedCache] objectForKey:imageURLString];
     
-    [cell.imageView setImageWithURLRequest:request
-                          placeholderImage:[UIImage imageNamed:@"Placeholder"]
-                                   success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                       // To-do: cache image
-                                       weakImageView.image = image;
-                                   } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                       NSLog(@"Error getting image: %@", error.description);
-                                   }];
+    if (image) {
+        cell.imageView.image = image;
+    } else {
+        __weak typeof(cell.imageView) weakImageView = cell.imageView;
+        __weak typeof(imageURLString) weakImageURLString = imageURLString;
+        
+        NSURL *imageURL = [NSURL URLWithString:imageURLString];
+        NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
+        
+        [cell.imageView setImageWithURLRequest:request
+                              placeholderImage:[UIImage imageNamed:@"Placeholder"]
+                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                           weakImageView.image = image;
+                                           [[TMDiskCache sharedCache] setObject:image forKey:weakImageURLString];
+                                       } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                           NSLog(@"Error getting image: %@", error.description);
+                                       }];
+    }
     
     // Set title
     cell.textLabel.text = session.title;

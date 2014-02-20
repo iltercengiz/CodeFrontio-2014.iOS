@@ -16,6 +16,7 @@
 #pragma mark Pods
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import <MagicalRecord/CoreData+MagicalRecord.h>
+#import <TMCache/TMDiskCache.h>
 
 #pragma mark Constants
 static const CGFloat cornerRadius = 0.0;
@@ -51,20 +52,27 @@ static const CGFloat borderWidth = 0.5;
     self.imageView.layer.cornerRadius = 8.0;
     self.imageView.clipsToBounds = YES;
     
-    __weak typeof(self.imageView) weakImageView = self.imageView;
-    
     NSString *imageURLString = speaker.avatar;
-    NSURL *imageURL = [NSURL URLWithString:imageURLString];
-    NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
+    UIImage *image = (UIImage *)[[TMDiskCache sharedCache] objectForKey:imageURLString];
     
-    [self.imageView setImageWithURLRequest:request
-                          placeholderImage:[UIImage imageNamed:@"Placeholder"]
-                                   success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                       // To-do: cache image
-                                       weakImageView.image = image;
-                                   } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                       NSLog(@"Error getting image: %@", error.description);
-                                   }];
+    if (image) {
+        self.imageView.image = image;
+    } else {
+        __weak typeof(self.imageView) weakImageView = self.imageView;
+        __weak typeof(imageURLString) weakImageURLString = imageURLString;
+        
+        NSURL *imageURL = [NSURL URLWithString:imageURLString];
+        NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
+        
+        [self.imageView setImageWithURLRequest:request
+                              placeholderImage:[UIImage imageNamed:@"Placeholder"]
+                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                           weakImageView.image = image;
+                                           [[TMDiskCache sharedCache] setObject:image forKey:weakImageURLString];
+                                       } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                           NSLog(@"Error getting image: %@", error.description);
+                                       }];
+    }
     
     // Set name
     self.nameLabel.text = speaker.name;

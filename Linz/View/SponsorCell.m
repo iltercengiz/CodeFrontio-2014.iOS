@@ -14,6 +14,7 @@
 
 #pragma mark Pods
 #import <AFNetworking/UIImageView+AFNetworking.h>
+#import <TMCache/TMDiskCache.h>
 
 @implementation SponsorCell
 
@@ -21,20 +22,27 @@
 - (void)configureCellForSponsor:(Sponsor *)sponsor {
     
     // Set image
-    __weak typeof(self.imageView) weakImageView = self.sponsorImage;
-    
     NSString *imageURLString = sponsor.imageURL;
-    NSURL *imageURL = [NSURL URLWithString:imageURLString];
-    NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
+    UIImage *image = (UIImage *)[[TMDiskCache sharedCache] objectForKey:imageURLString];
     
-    [self.sponsorImage setImageWithURLRequest:request
-                             placeholderImage:[UIImage imageNamed:@"Placeholder"]
-                                      success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                          // To-do: cache image
-                                          weakImageView.image = image;
-                                      } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                          NSLog(@"Error getting image: %@", error.description);
-                                      }];
+    if (image) {
+        self.sponsorImage.image = image;
+    } else {
+        __weak typeof(self.imageView) weakImageView = self.sponsorImage;
+        __weak typeof(imageURLString) weakImageURLString = imageURLString;
+        
+        NSURL *imageURL = [NSURL URLWithString:imageURLString];
+        NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
+        
+        [self.sponsorImage setImageWithURLRequest:request
+                                 placeholderImage:[UIImage imageNamed:@"Placeholder"]
+                                          success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                              weakImageView.image = image;
+                                              [[TMDiskCache sharedCache] setObject:image forKey:weakImageURLString];
+                                          } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                              NSLog(@"Error getting image: %@", error.description);
+                                          }];
+    }
     
 }
 
