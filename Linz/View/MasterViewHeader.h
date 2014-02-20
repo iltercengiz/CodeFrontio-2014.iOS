@@ -10,4 +10,7 @@
 
 @interface MasterViewHeader : UIView
 
+- (IBAction)kodioButtonTapped:(id)sender;
+- (IBAction)webBoxButtonTapped:(id)sender;
+
 @end
