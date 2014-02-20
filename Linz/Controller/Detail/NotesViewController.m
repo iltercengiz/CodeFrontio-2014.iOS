@@ -12,13 +12,16 @@
 
 #pragma mark Controller
 #import "NotesViewController.h"
+#import "SessionViewController.h"
 
 #pragma mark Pods
 #import <MagicalRecord/CoreData+MagicalRecord.h>
+#import <MCSwipeTableViewCell/MCSwipeTableViewCell.h>
 
-@interface NotesViewController ()
+@interface NotesViewController () <UIAlertViewDelegate>
 
 @property (nonatomic) NSMutableArray *notes;
+@property (nonatomic) NSIndexPath *removingNoteIndexPath;
 
 @end
 
@@ -43,13 +46,62 @@
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - Navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"sessionSegue"]) {
+        NSIndexPath *indexPath = (NSIndexPath *)sender;
+        Note *note = self.notes[indexPath.row];
+        Session *session = [[Session MR_findByAttribute:@"identifier" withValue:note.sessionIdentifier] firstObject];
+        SessionViewController *svc = segue.destinationViewController;
+        svc.session = session;
+    }
+}
+
+#pragma mark - Helpers
+- (void)startEditingForNoteAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:@"sessionSegue" sender:indexPath];
+}
+- (void)removeNoteAtIndexPath:(NSIndexPath *)indexPath {
+    
+    self.removingNoteIndexPath = indexPath;
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Confirm Deletion", nil)
+                                                    message:NSLocalizedString(@"This can't be undone.\nContinue?", nil)
+                                                   delegate:self
+                                          cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                          otherButtonTitles:NSLocalizedString(@"Continue", nil), nil];
+    [alert show];
+}
+
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.notes.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"notesCell" forIndexPath:indexPath];
+    MCSwipeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"notesCell" forIndexPath:indexPath];
+    
+    // Cell customization
+    cell.defaultColor = [UIColor lightGrayColor];
+    cell.shouldAnimateIcons = NO;
+    
+    // Swipes
+    [cell setSwipeGestureWithView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Note"]]
+                            color:[UIColor colorWithRed:0.161 green:0.722 blue:0.812 alpha:1.0]
+                             mode:MCSwipeTableViewCellModeExit
+                            state:MCSwipeTableViewCellState1
+                  completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
+                      NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+                      [self startEditingForNoteAtIndexPath:indexPath];
+                  }];
+    [cell setSwipeGestureWithView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Star-Selected"]]
+                            color:[UIColor colorWithRed:0.973 green:0.306 blue:0.306 alpha:1.0]
+                             mode:MCSwipeTableViewCellModeExit
+                            state:MCSwipeTableViewCellState3
+                  completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
+                      NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+                      [self removeNoteAtIndexPath:indexPath];
+                  }];
     
     // Note & Session
     Note *note = self.notes[indexPath.row];
@@ -67,6 +119,42 @@
     cell.detailTextLabel.text = session.title;
     
     return cell;
+    
+}
+
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self startEditingForNoteAtIndexPath:indexPath];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if (buttonIndex == 1) {
+        
+        Note *note = self.notes[self.removingNoteIndexPath.row];
+        
+        [note MR_deleteEntity];
+        
+        // Save db
+        [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+            if (success) NSLog(@"Save successful!");
+            else NSLog(@"Save failed with error: %@", error);
+        }];
+        
+        // Remove note from array
+        [self.notes removeObjectAtIndex:self.removingNoteIndexPath.row];
+        
+        // Update tableView
+        [self.tableView beginUpdates];
+        [self.tableView deleteRowsAtIndexPaths:@[self.removingNoteIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
+        [self.tableView endUpdates];
+        
+    } else {
+        self.removingNoteIndexPath = nil;
+    }
+    
 }
 
 @end
