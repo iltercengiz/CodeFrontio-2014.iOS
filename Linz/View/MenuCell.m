@@ -38,7 +38,7 @@
         case 1: return NSLocalizedString(@"Favourites", nil); break;
         case 2: return NSLocalizedString(@"Notes", nil); break;
         case 3: return NSLocalizedString(@"Venue", nil); break;
-        case 4: return NSLocalizedString(@"Supporters", nil); break;
+        case 4: return NSLocalizedString(@"Sponsors", nil); break;
         default: break;
     }
     return nil;
