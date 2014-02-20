@@ -29,6 +29,8 @@
 
 @property (nonatomic) CGFloat notesCellRowHeight;
 
+@property (nonatomic) CGFloat keyboardHeight;
+
 @end
 
 @implementation SessionViewController
@@ -40,27 +42,6 @@
     
     // Set title
     self.title = self.session.title;
-    
-    // Paragraph style
-    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
-    paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
-    
-    CGSize size = [self.note.note boundingRectWithSize:CGSizeMake(748.0, CGFLOAT_MAX)
-                                               options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin
-                                            attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14.0],
-                                                         NSParagraphStyleAttributeName: paragraphStyle}
-                                               context:nil].size;
-    
-    if (size.height < 144.0) {
-        self.notesCellRowHeight = 144.0;
-    } else if (size.height > 256.0) {
-        self.notesCellRowHeight = 256.0;
-    } else {
-        self.notesCellRowHeight = size.height;
-    }
-    
-    // Set note
-    self.noteView.text = self.note.note;
     
 }
 
@@ -86,6 +67,29 @@
         }
     }
     return _note;
+}
+
+#pragma mark - Helpers
+- (CGFloat)heightForNoteView {
+    
+    UITextView *textView = self.noteView;
+    CGFloat textViewWidth = CGRectGetWidth(self.noteView.frame);
+    
+    if (!textViewWidth || !textView.text) {
+        textView = [UITextView new];
+        textView.text = self.note.note;
+        textViewWidth = CGRectGetWidth(self.tableView.frame) - 20.0;
+    }
+    
+    CGSize size = [textView sizeThatFits:CGSizeMake(textViewWidth, CGFLOAT_MAX)];
+    
+    return size.height + 16.0;
+    
+}
+- (void)scrollToCursorForTextView:(UITextView *)textView {
+    CGRect cursorRect = [textView caretRectForPosition:textView.selectedTextRange.start];
+    cursorRect.size.height += 16;
+    [textView scrollRectToVisible:cursorRect animated:YES];
 }
 
 #pragma mark - UITableViewDataSource
@@ -142,7 +146,14 @@
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
-        return self.notesCellRowHeight;
+        CGFloat height = [self heightForNoteView];
+        if (height < 144.0) {
+            return 144.0;
+        } else if (height > 280.0) {
+            return 280.0;
+        } else {
+            return height;
+        }
     } else if (indexPath.section == 2) {
         return 144.0;
     }
@@ -151,10 +162,10 @@
 
 #pragma mark - UITextViewDelegate
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-    // Scroll notes cell to top
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]
-                          atScrollPosition:UITableViewScrollPositionMiddle
+                          atScrollPosition:UITableViewScrollPositionTop
                                   animated:YES];
+    [self scrollToCursorForTextView:textView];
 }
 - (void)textViewDidEndEditing:(UITextView *)textView {
     
@@ -177,28 +188,10 @@
 
 - (void)textViewDidChange:(UITextView *)textView {
     
-    // Paragraph style
-    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
-    paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
-    
-    CGSize size = [textView.text boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.noteView.frame), CGFLOAT_MAX)
-                                              options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin
-                                           attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14.0],
-                                                        NSParagraphStyleAttributeName: paragraphStyle}
-                                              context:nil].size;
-    
-    if (size.height < 144.0) {
-        self.notesCellRowHeight = 144.0;
-    } else if (size.height > 256.0) {
-        self.notesCellRowHeight = 256.0;
-    } else {
-        self.notesCellRowHeight = size.height;
-    }
-    
-    self.note.note = textView.text;
-    
     [self.tableView beginUpdates];
     [self.tableView endUpdates];
+    
+    [self scrollToCursorForTextView:textView];
     
 }
 
