@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "side-menu-calendar.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "side-menu-calendar@2x.png"
+      "scale" : "2x"
     }
   ],
   "info" : {

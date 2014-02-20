@@ -347,7 +347,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="108" height="108"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Plus" translatesAutoresizingMaskIntoConstraints="NO" id="ATt-OA-W3K">
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="add-picture" translatesAutoresizingMaskIntoConstraints="NO" id="ATt-OA-W3K">
                                                                 <rect key="frame" x="0.0" y="0.0" width="108" height="108"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             </imageView>
@@ -562,9 +562,9 @@
     <resources>
         <image name="Note" width="32" height="32"/>
         <image name="Placeholder" width="200" height="200"/>
-        <image name="Plus" width="54" height="54"/>
         <image name="Star-Selected" width="36" height="36"/>
         <image name="Star-Unselected" width="36" height="36"/>
+        <image name="add-picture" width="108" height="108"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="lightContent"/>
