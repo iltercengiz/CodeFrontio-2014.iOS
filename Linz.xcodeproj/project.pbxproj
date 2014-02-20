@@ -15,6 +15,7 @@
 		7C00884418A8F84B00ED4B31 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C00884318A8F84B00ED4B31 /* main.m */; };
 		7C00884818A8F84B00ED4B31 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C00884718A8F84B00ED4B31 /* AppDelegate.m */; };
 		7C00885318A8F84B00ED4B31 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C00885218A8F84B00ED4B31 /* Images.xcassets */; };
+		7C01A55B18B6AB2D007284F5 /* MasterViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C01A55A18B6AB2D007284F5 /* MasterViewHeader.m */; };
 		7C213DCC18B34F2B00F96B01 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C213DCB18B34F2B00F96B01 /* Note.m */; };
 		7C213DCF18B3817300F96B01 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C213DCE18B3817300F96B01 /* Session.m */; };
 		7C213DD218B384B300F96B01 /* FavouritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C213DD118B384B300F96B01 /* FavouritesViewController.m */; };
@@ -65,6 +66,8 @@
 		7C00884618A8F84B00ED4B31 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7C00884718A8F84B00ED4B31 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7C00885218A8F84B00ED4B31 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7C01A55918B6AB2D007284F5 /* MasterViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewHeader.h; sourceTree = "<group>"; };
+		7C01A55A18B6AB2D007284F5 /* MasterViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewHeader.m; sourceTree = "<group>"; };
 		7C213DCA18B34F2B00F96B01 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
 		7C213DCB18B34F2B00F96B01 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 		7C213DCD18B3817300F96B01 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
@@ -295,6 +298,8 @@
 			children = (
 				7CACCFDB18A906F900D66A15 /* MenuCell.h */,
 				7CACCFDC18A906F900D66A15 /* MenuCell.m */,
+				7C01A55918B6AB2D007284F5 /* MasterViewHeader.h */,
+				7C01A55A18B6AB2D007284F5 /* MasterViewHeader.m */,
 				7CCB106A18AE4BF3007A2486 /* MasterViewHeader.xib */,
 				7CCB107018AE5DF3007A2486 /* Calendar Scene */,
 				7C83BB4B18AAD795003D3557 /* Session Detail */,
@@ -500,6 +505,7 @@
 				7C83BB5118AAD7BE003D3557 /* NotesCell.m in Sources */,
 				7C3BC57018B0FBE700CA0FC0 /* Linz.xcdatamodeld in Sources */,
 				7C34A65118B26AD800EC31DA /* NSDictionary+SortedKeys.m in Sources */,
+				7C01A55B18B6AB2D007284F5 /* MasterViewHeader.m in Sources */,
 				7C34A64918B2268A00EC31DA /* Speaker.m in Sources */,
 				7C34A64318B2268A00EC31DA /* Sponsor.m in Sources */,
 				7CCB106918AE1D2A007A2486 /* LinzAPIClient.m in Sources */,
