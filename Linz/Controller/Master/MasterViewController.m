@@ -63,9 +63,6 @@ static const char *supportersSceneIdentifier = "SponsorsScene";
 }
 
 #pragma mark - UITableViewDataSource
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 5;
 }
@@ -89,11 +86,11 @@ static const char *supportersSceneIdentifier = "SponsorsScene";
         // Set identifier
         NSString *identifier;
         switch (indexPath.row) {
-            case 0: identifier = [NSString stringWithUTF8String:calendarSceneIdentifier]; break;
-            case 1: identifier = [NSString stringWithUTF8String:favouritesSceneIdentifier]; break;
-            case 2: identifier = [NSString stringWithUTF8String:notesSceneIdentifier]; break;
-            case 3: identifier = [NSString stringWithUTF8String:venueSceneIdentifier]; break;
-            case 4: identifier = [NSString stringWithUTF8String:supportersSceneIdentifier]; break;
+            case ContentTypeCalendar: identifier = [NSString stringWithUTF8String:calendarSceneIdentifier]; break;
+            case ContentTypeFavourites: identifier = [NSString stringWithUTF8String:favouritesSceneIdentifier]; break;
+            case ContentTypeNotes: identifier = [NSString stringWithUTF8String:notesSceneIdentifier]; break;
+            case ContentTypeVenue: identifier = [NSString stringWithUTF8String:venueSceneIdentifier]; break;
+            case ContentTypeSponsors: identifier = [NSString stringWithUTF8String:supportersSceneIdentifier]; break;
             default: break;
         }
         

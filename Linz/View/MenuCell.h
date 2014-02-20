@@ -13,7 +13,7 @@ typedef NS_ENUM(NSInteger, ContentType) {
     ContentTypeFavourites,
     ContentTypeNotes,
     ContentTypeVenue,
-    ContentTypeSupporters
+    ContentTypeSponsors
 };
 
 @interface MenuCell : UITableViewCell

@@ -34,33 +34,33 @@
 
 - (NSString *)stringForContentType:(ContentType)contentType {
     switch (contentType) {
-        case 0: return NSLocalizedString(@"Calendar", nil); break;
-        case 1: return NSLocalizedString(@"Favourites", nil); break;
-        case 2: return NSLocalizedString(@"Notes", nil); break;
-        case 3: return NSLocalizedString(@"Venue", nil); break;
-        case 4: return NSLocalizedString(@"Sponsors", nil); break;
+        case ContentTypeCalendar: return NSLocalizedString(@"Calendar", nil); break;
+        case ContentTypeFavourites: return NSLocalizedString(@"Favourites", nil); break;
+        case ContentTypeNotes: return NSLocalizedString(@"Notes", nil); break;
+        case ContentTypeVenue: return NSLocalizedString(@"Venue", nil); break;
+        case ContentTypeSponsors: return NSLocalizedString(@"Sponsors", nil); break;
         default: break;
     }
     return nil;
 }
 - (UIImage *)imageForContentType:(ContentType)contentType {
     switch (contentType) {
-        case 0: return [UIImage imageNamed:@"side-menu-calendar"]; break;
-        case 1: return [UIImage imageNamed:@"side-menu-favourites"]; break;
-        case 2: return [UIImage imageNamed:@"side-menu-notes"]; break;
-        case 3: return [UIImage imageNamed:@"side-menu-venue"]; break;
-        case 4: return [UIImage imageNamed:@"side-menu-supporters"]; break;
+        case ContentTypeCalendar: return [UIImage imageNamed:@"side-menu-calendar"]; break;
+        case ContentTypeFavourites: return [UIImage imageNamed:@"side-menu-favourites"]; break;
+        case ContentTypeNotes: return [UIImage imageNamed:@"side-menu-notes"]; break;
+        case ContentTypeVenue: return [UIImage imageNamed:@"side-menu-venue"]; break;
+        case ContentTypeSponsors: return [UIImage imageNamed:@"side-menu-supporters"]; break;
         default: break;
     }
     return nil;
 }
 - (UIImage *)highlightedImageForContentType:(ContentType)contentType {
     switch (contentType) {
-        case 0: return [UIImage imageNamed:@"side-menu-calendar-selected"]; break;
-        case 1: return [UIImage imageNamed:@"side-menu-favourites-selected"]; break;
-        case 2: return [UIImage imageNamed:@"side-menu-notes-selected"]; break;
-        case 3: return [UIImage imageNamed:@"side-menu-venue-selected"]; break;
-        case 4: return [UIImage imageNamed:@"side-menu-supporters-selected"]; break;
+        case ContentTypeCalendar: return [UIImage imageNamed:@"side-menu-calendar-selected"]; break;
+        case ContentTypeFavourites: return [UIImage imageNamed:@"side-menu-favourites-selected"]; break;
+        case ContentTypeNotes: return [UIImage imageNamed:@"side-menu-notes-selected"]; break;
+        case ContentTypeVenue: return [UIImage imageNamed:@"side-menu-venue-selected"]; break;
+        case ContentTypeSponsors: return [UIImage imageNamed:@"side-menu-supporters-selected"]; break;
         default: break;
     }
     return nil;
