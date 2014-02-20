@@ -375,6 +375,7 @@
                             <outlet property="delegate" destination="OR0-dG-8hg" id="jYY-D8-fyz"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="l19-yL-emT"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c8f-D5-sTj" userLabel="First Responder" sceneMemberID="firstResponder"/>
