@@ -173,6 +173,9 @@
     // If entered, save it to the Note object
     // Otherwise, remove the Note object from db
     if (![self.noteView.text isEqualToString:@""]) {
+    NSString *trimmedNote = [self.note.note stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]; // To prevent whitespace only notes
+    
+    if (![self.noteView.text isEqualToString:@""] && trimmedNote && [trimmedNote isEqualToString:@""]) {
         self.note.note = self.noteView.text;
     } else {
         [self.note MR_deleteEntity];
