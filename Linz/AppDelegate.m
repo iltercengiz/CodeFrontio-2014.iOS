@@ -39,6 +39,9 @@
     // Change style of status bar
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
+    // Re-enable status bar
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    
     return YES;
     
 }

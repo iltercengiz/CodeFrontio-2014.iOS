@@ -42,7 +42,9 @@
     NSArray *sponsors = [Manager sharedManager].sponsors;
     
     for (Sponsor *sponsor in sponsors) {
-        [self addSponsor:sponsor];
+        if (![sponsor.websiteURL isEqualToString:@"http://linz.kod.io"]) {
+            [self addSponsor:sponsor];
+        }
     }
     
 }
@@ -139,8 +141,11 @@
     
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(tableView.frame), tableView.sectionHeaderHeight)];
     
+    titleLabel.backgroundColor = [UIColor colorWithRed:0.153 green:0.153 blue:0.157 alpha:1];
+    titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0];
     titleLabel.text = sponsor.type;
     titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.textColor = [UIColor colorWithRed:0.925 green:0.925 blue:0.925 alpha:1];
     
     return titleLabel;
     

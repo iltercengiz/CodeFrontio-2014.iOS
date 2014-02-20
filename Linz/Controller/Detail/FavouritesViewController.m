@@ -21,6 +21,7 @@
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import <MagicalRecord/CoreData+MagicalRecord.h>
 #import <MCSwipeTableViewCell/MCSwipeTableViewCell.h>
+#import <TMCache/TMDiskCache.h>
 
 @interface FavouritesViewController ()
 
@@ -101,15 +102,15 @@
     cell.shouldAnimateIcons = NO;
     
     // Swipes
-    [cell setSwipeGestureWithView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Note"]]
-                            color:[UIColor colorWithRed:0.161 green:0.722 blue:0.812 alpha:1.0]
+    [cell setSwipeGestureWithView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"calendar-note"]]
+                            color:[UIColor colorWithRed:0.169 green:0.357 blue:0.616 alpha:1]
                              mode:MCSwipeTableViewCellModeExit
                             state:MCSwipeTableViewCellState1
                   completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
                       NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
                       [self takeNoteForSessionAtIndexPath:indexPath];
                   }];
-    [cell setSwipeGestureWithView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Star-Selected"]]
+    [cell setSwipeGestureWithView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"calendar-favourite-selected"]]
                             color:[UIColor colorWithRed:0.973 green:0.306 blue:0.306 alpha:1.0]
                              mode:MCSwipeTableViewCellModeExit
                             state:MCSwipeTableViewCellState3
@@ -126,20 +127,27 @@
     cell.imageView.layer.cornerRadius = 8.0;
     cell.imageView.clipsToBounds = YES;
     
-    __weak typeof(cell.imageView) weakImageView = cell.imageView;
-    
     NSString *imageURLString = speaker.avatar;
-    NSURL *imageURL = [NSURL URLWithString:imageURLString];
-    NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
+    UIImage *image = (UIImage *)[[TMDiskCache sharedCache] objectForKey:imageURLString];
     
-    [cell.imageView setImageWithURLRequest:request
-                          placeholderImage:[UIImage imageNamed:@"Placeholder"]
-                                   success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                       // To-do: cache image
-                                       weakImageView.image = image;
-                                   } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                       NSLog(@"Error getting image: %@", error.description);
-                                   }];
+    if (image) {
+        cell.imageView.image = image;
+    } else {
+        __weak typeof(cell.imageView) weakImageView = cell.imageView;
+        __weak typeof(imageURLString) weakImageURLString = imageURLString;
+        
+        NSURL *imageURL = [NSURL URLWithString:imageURLString];
+        NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
+        
+        [cell.imageView setImageWithURLRequest:request
+                              placeholderImage:[UIImage imageNamed:@"image-placeholder"]
+                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                           weakImageView.image = image;
+                                           [[TMDiskCache sharedCache] setObject:image forKey:weakImageURLString];
+                                       } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                           NSLog(@"Error getting image: %@", error.description);
+                                       }];
+    }
     
     // Set title
     cell.textLabel.text = session.title;
@@ -149,6 +157,12 @@
     
     return cell;
     
+}
+
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self takeNoteForSessionAtIndexPath:indexPath];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

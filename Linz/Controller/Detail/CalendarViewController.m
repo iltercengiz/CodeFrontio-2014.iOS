@@ -125,15 +125,14 @@
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"sessionSegue"]) {
-        UICollectionViewCell *cell = (UICollectionViewCell *)sender;
-        NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+        NSIndexPath *indexPath = (NSIndexPath *)sender;
         Session *session = self.sessions[indexPath.item];
         SessionViewController *svc = segue.destinationViewController;
         svc.session = session;
     }
 }
 
-#pragma mark - UICollectionViewControllerDataSource
+#pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.sessions.count;
 }
@@ -154,7 +153,7 @@
     
     CalendarSessionCell *(^createSessionCell)(Session *session) = ^CalendarSessionCell *(Session *session) {
         CalendarSessionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"SessionCell" forIndexPath:indexPath];
-        [cell configureCellForSession:session];
+        [cell configureCellForSession:session andCollectionView:collectionView];
         return cell;
     };
     
@@ -170,8 +169,10 @@
     
 }
 
-#pragma mark - UICollectionViewControllerDelegate
-
+#pragma mark - UICollectionViewDelegate
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:@"sessionSegue" sender:indexPath];
+}
 
 #pragma mark - RFQuiltLayoutDelegate
 - (CGSize)blockSizeForItemAtIndexPath:(NSIndexPath *)indexPath {

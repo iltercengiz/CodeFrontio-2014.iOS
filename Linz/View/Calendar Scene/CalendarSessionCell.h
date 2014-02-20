@@ -21,6 +21,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *favouriteButton;
 
 #pragma mark - CalendarSessionCell
-- (void)configureCellForSession:(Session *)session;
+- (void)configureCellForSession:(Session *)session andCollectionView:(UICollectionView *)collectionView;
 
 @end

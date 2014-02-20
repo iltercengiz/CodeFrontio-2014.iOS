@@ -29,6 +29,8 @@
 
 @property (nonatomic) CGFloat notesCellRowHeight;
 
+@property (nonatomic) CGFloat keyboardHeight;
+
 @end
 
 @implementation SessionViewController
@@ -40,27 +42,6 @@
     
     // Set title
     self.title = self.session.title;
-    
-    // Paragraph style
-    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
-    paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
-    
-    CGSize size = [self.note.note boundingRectWithSize:CGSizeMake(748.0, CGFLOAT_MAX)
-                                               options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin
-                                            attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14.0],
-                                                         NSParagraphStyleAttributeName: paragraphStyle}
-                                               context:nil].size;
-    
-    if (size.height < 144.0) {
-        self.notesCellRowHeight = 144.0;
-    } else if (size.height > 256.0) {
-        self.notesCellRowHeight = 256.0;
-    } else {
-        self.notesCellRowHeight = size.height;
-    }
-    
-    // Set note
-    self.noteView.text = self.note.note;
     
 }
 
@@ -114,9 +95,7 @@
     
     PhotosCell *(^createPhotosCell)() = ^PhotosCell *(){
         PhotosCell *cell = [tableView dequeueReusableCellWithIdentifier:@"photosCell" forIndexPath:indexPath];
-        NSArray *photos = @[[UIImage imageNamed:@"kod-io-logo-black"],
-                            [UIImage imageNamed:@"kod-io-logo-black"] ];
-        [cell configureCellForTableView:tableView withPhotos:photos];
+        [cell configureCellForSession:self.session andTableView:tableView];
         return cell;
     };
     
@@ -144,7 +123,7 @@
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
-        return self.notesCellRowHeight;
+        return 256.0;
     } else if (indexPath.section == 2) {
         return 144.0;
     }
@@ -153,7 +132,6 @@
 
 #pragma mark - UITextViewDelegate
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-    // Scroll notes cell to top
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]
                           atScrollPosition:UITableViewScrollPositionMiddle
                                   animated:YES];
@@ -163,7 +141,9 @@
     // Check if any note is entered
     // If entered, save it to the Note object
     // Otherwise, remove the Note object from db
-    if (![self.noteView.text isEqualToString:@""]) {
+    NSString *trimmedNote = [self.note.note stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]; // To prevent whitespace only notes
+    
+    if (![self.noteView.text isEqualToString:@""] && trimmedNote && [trimmedNote isEqualToString:@""]) {
         self.note.note = self.noteView.text;
     } else {
         [self.note MR_deleteEntity];
@@ -177,31 +157,21 @@
     
 }
 
+// Thanks to @davidisdk for this great answer: http://stackoverflow.com/a/19276988/1931781
+// Makes the scroll follow caret
 - (void)textViewDidChange:(UITextView *)textView {
-    
-    // Paragraph style
-    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
-    paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
-    
-    CGSize size = [textView.text boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.noteView.frame), CGFLOAT_MAX)
-                                              options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin
-                                           attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14.0],
-                                                        NSParagraphStyleAttributeName: paragraphStyle}
-                                              context:nil].size;
-    
-    if (size.height < 144.0) {
-        self.notesCellRowHeight = 144.0;
-    } else if (size.height > 256.0) {
-        self.notesCellRowHeight = 256.0;
-    } else {
-        self.notesCellRowHeight = size.height;
+    CGRect line = [textView caretRectForPosition:textView.selectedTextRange.start];
+    CGFloat overflow = line.origin.y + line.size.height - (textView.contentOffset.y + textView.bounds.size.height - textView.contentInset.bottom - textView.contentInset.top);
+    if (overflow > 0) {
+        // We are at the bottom of the visible text and introduced a line feed, scroll down (iOS 7 does not do it)
+        // Scroll caret to visible area
+        CGPoint offset = textView.contentOffset;
+        offset.y += overflow + 7; // leave 7 pixels margin
+        // Cannot animate with setContentOffset:animated: or caret will not appear
+        [UIView animateWithDuration:0.3 animations:^{
+            [textView setContentOffset:offset];
+        }];
     }
-    
-    self.note.note = textView.text;
-    
-    [self.tableView beginUpdates];
-    [self.tableView endUpdates];
-    
 }
 
 @end

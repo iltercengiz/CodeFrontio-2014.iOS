@@ -4,6 +4,11 @@
         <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sessionIdentifier" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
+    <entity name="Photo" representedClassName="Photo" syncable="YES">
+        <attribute name="identifier" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="photoURL" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="sessionIdentifier" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
     <entity name="Session" representedClassName="Session" syncable="YES">
         <attribute name="detail" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="favourited" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
@@ -33,9 +38,10 @@
         <attribute name="websiteURL" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Session" positionX="-2169" positionY="180" width="128" height="178"/>
-        <element name="Speaker" positionX="-2324" positionY="197" width="128" height="148"/>
-        <element name="Sponsor" positionX="-2016" positionY="207" width="128" height="133"/>
-        <element name="Note" positionX="-2243" positionY="371" width="128" height="73"/>
+        <element name="Note" positionX="-2243" positionY="369" width="128" height="73"/>
+        <element name="Session" positionX="-2162" positionY="171" width="128" height="178"/>
+        <element name="Speaker" positionX="-2324" positionY="194" width="128" height="148"/>
+        <element name="Sponsor" positionX="-1998" positionY="209" width="128" height="133"/>
+        <element name="Photo" positionX="-2079" positionY="369" width="128" height="88"/>
     </elements>
 </model>

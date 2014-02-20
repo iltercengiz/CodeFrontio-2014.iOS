@@ -10,6 +10,7 @@ target :Linz do
 	pod 'CZPhotoPickerController', :inhibit_warnings => true
 	pod 'MagicalRecord', '~> 2.2', :inhibit_warnings => true
 	pod 'MCSwipeTableViewCell', '~> 2.1.0'
+	pod 'TMCache', '~> 1.2.0'
 	
 	xcodeproj 'Linz.xcodeproj'
 
