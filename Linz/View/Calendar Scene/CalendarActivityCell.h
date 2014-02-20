@@ -13,6 +13,7 @@
 @interface CalendarActivityCell : UICollectionViewCell
 
 #pragma mark - IBOutlets
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 #pragma mark - CalendarSessionCell
