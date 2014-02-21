@@ -117,7 +117,7 @@
         view.contentMode = UIViewContentModeScaleAspectFill;
     }
     
-    NSString *imageName = [NSString stringWithFormat:@"VenueImages.bundle/venue-%li.jpg", index + 1];
+    NSString *imageName = [NSString stringWithFormat:@"VenueImages.bundle/venue-%lu.jpg", index + 1];
     ((UIImageView *)view).image = [UIImage imageNamed:imageName];
     
     return view;
