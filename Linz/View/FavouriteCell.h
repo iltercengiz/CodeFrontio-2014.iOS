@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <MCSwipeTableViewCell/MCSwipeTableViewCell.h>
 
+@class Session;
+
 @interface FavouriteCell : MCSwipeTableViewCell
+
+#pragma mark - Configurator
+- (void)configureCellForSession:(Session *)session;
 
 @end

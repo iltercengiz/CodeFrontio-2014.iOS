@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MCSwipeTableViewCell/MCSwipeTableViewCell.h>
 
-@interface NoteCell : UITableViewCell
+@class Note;
+
+@interface NoteCell : MCSwipeTableViewCell
+
+#pragma mark - Configurator
+- (void)configureCellForNote:(Note *)note;
 
 @end

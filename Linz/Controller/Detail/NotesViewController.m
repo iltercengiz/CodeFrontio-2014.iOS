@@ -10,6 +10,9 @@
 #import "Note.h"
 #import "Session.h"
 
+#pragma mark View
+#import "NoteCell.h"
+
 #pragma mark Controller
 #import "NotesViewController.h"
 #import "SessionViewController.h"
@@ -78,12 +81,13 @@
     return self.notes.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    MCSwipeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"notesCell" forIndexPath:indexPath];
     
-    // Cell customization
-    cell.defaultColor = [UIColor lightGrayColor];
-    cell.shouldAnimateIcons = NO;
+    // Note
+    Note *note = self.notes[indexPath.row];
+    
+    // Create and configure cell
+    NoteCell *cell = [tableView dequeueReusableCellWithIdentifier:@"notesCell" forIndexPath:indexPath];
+    [cell configureCellForNote:note];
     
     // Swipes
     [cell setSwipeGestureWithView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"calendar-note"]]
@@ -102,21 +106,6 @@
                       NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
                       [self removeNoteAtIndexPath:indexPath];
                   }];
-    
-    // Note & Session
-    Note *note = self.notes[indexPath.row];
-    Session *session = [[Session MR_findByAttribute:@"identifier" withValue:note.sessionIdentifier] firstObject];
-    
-    // Set title
-    NSRange range = [note.note rangeOfString:@"\n"];
-    if (range.length) {
-        cell.textLabel.text = [note.note substringToIndex:range.location];
-    } else {
-        cell.textLabel.text = note.note;
-    }
-    
-    // Set subtitle
-    cell.detailTextLabel.text = session.title;
     
     return cell;
     
