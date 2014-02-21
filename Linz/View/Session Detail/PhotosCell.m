@@ -75,8 +75,8 @@
     
     // Save db
     [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if (success) NSLog(@"Save successful!");
-        else NSLog(@"Save failed with error: %@", error);
+        // if (success) NSLog(@"Save successful!");
+        // else NSLog(@"Save failed with error: %@", error);
     }];
     
     // Clear selectedPhotosIndexPaths
@@ -215,8 +215,8 @@
                                                                             
                                                                             // Save db
                                                                             [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-                                                                                if (success) NSLog(@"Save successful!");
-                                                                                else NSLog(@"Save failed with error: %@", error);
+                                                                                // if (success) NSLog(@"Save successful!");
+                                                                                // else NSLog(@"Save failed with error: %@", error);
                                                                             }];
                                                                             
                                                                             // Add photo to the array

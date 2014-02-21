@@ -76,7 +76,7 @@ static const CGFloat borderWidth = 0.5;
                                            weakImageView.image = image;
                                            [[TMDiskCache sharedCache] setObject:image forKey:weakImageURLString];
                                        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                           NSLog(@"Error getting image: %@", error.description);
+                                           // NSLog(@"Error getting image: %@", error.description);
                                        }];
     }
     
@@ -151,8 +151,8 @@ static const CGFloat borderWidth = 0.5;
     
     // Save db
     [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if (success) NSLog(@"Save successful!");
-        else NSLog(@"Save failed with error: %@", error);
+        // if (success) NSLog(@"Save successful!");
+        // else NSLog(@"Save failed with error: %@", error);
     }];
     
     // Create a local notification for the session
@@ -194,8 +194,8 @@ static const CGFloat borderWidth = 0.5;
     
     // Save db
     [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if (success) NSLog(@"Save successful!");
-        else NSLog(@"Save failed with error: %@", error);
+        // if (success) NSLog(@"Save successful!");
+        // else NSLog(@"Save failed with error: %@", error);
     }];
     
     // Get all scheduled notifications

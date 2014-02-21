@@ -71,8 +71,8 @@
             _note.sessionIdentifier = self.session.identifier;
             // Save it to the db
             [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-                if (success) NSLog(@"Save successful!");
-                else NSLog(@"Save failed with error: %@", error);
+                // if (success) NSLog(@"Save successful!");
+                // else NSLog(@"Save failed with error: %@", error);
             }];
         }
     }
@@ -93,8 +93,8 @@
     
     // Save db
     [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if (success) NSLog(@"Save successful!");
-        else NSLog(@"Save failed with error: %@", error);
+        // if (success) NSLog(@"Save successful!");
+        // else NSLog(@"Save failed with error: %@", error);
     }];
     
 }

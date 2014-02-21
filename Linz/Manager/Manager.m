@@ -83,7 +83,7 @@
     // Error block
     // Will be used to terminate the app if there is an connection error
     void (^errorBlock)(NSError *error) = ^(NSError *error) {
-        NSLog(@"Error: %@", error.description);
+        // NSLog(@"Error: %@", error.description);
         // Inform user that applciation will exit
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No connection!", nil)
                                                         message:NSLocalizedString(@"In order to fetch initial data, I need an active internet connection.\nPlease check the internet connection and open me again.\nI'm killing myself now.", nil)
@@ -175,8 +175,8 @@
                                           speaker.twitter = [speakerInfo[@"twitter"] isEqualToString:@""] ? nil : [@"http://twitter.com/" stringByAppendingString:speakerInfo[@"twitter"]];
                                           
                                           [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-                                              if (success) NSLog(@"Save successful!");
-                                              else NSLog(@"Save failed with error: %@", error);
+                                              // if (success) NSLog(@"Save successful!");
+                                              // else NSLog(@"Save failed with error: %@", error);
                                           }];
                                           
                                       }
@@ -212,8 +212,8 @@
                                               session.sortingIndex = @(sortingIndex);
                                               
                                               [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-                                                  if (success) NSLog(@"Save successful!");
-                                                  else NSLog(@"Save failed with error: %@", error);
+                                                  // if (success) NSLog(@"Save successful!");
+                                                  // else NSLog(@"Save failed with error: %@", error);
                                               }];
                                               
                                               // Increment index
@@ -233,8 +233,8 @@
                                           session.identifier = sessionInfo[@"id"];
                                           
                                           [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-                                              if (success) NSLog(@"Save successful!");
-                                              else NSLog(@"Save failed with error: %@", error);
+                                              // if (success) NSLog(@"Save successful!");
+                                              // else NSLog(@"Save failed with error: %@", error);
                                           }];
                                           
                                           // Increment index
@@ -280,8 +280,8 @@
                                               sponsor.identifier = sponsorInfo[@"id"];
                                               
                                               [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-                                                  if (success) NSLog(@"Save successful!");
-                                                  else NSLog(@"Save failed with error: %@", error);
+                                                  // if (success) NSLog(@"Save successful!");
+                                                  // else NSLog(@"Save failed with error: %@", error);
                                               }];
                                               
                                           }

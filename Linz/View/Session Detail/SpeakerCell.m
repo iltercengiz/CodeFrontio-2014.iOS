@@ -43,7 +43,7 @@
                                            weakImageView.image = image;
                                            [[TMDiskCache sharedCache] setObject:image forKey:weakImageURLString];
                                        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                           NSLog(@"Error getting image: %@", error.description);
+                                           // NSLog(@"Error getting image: %@", error.description);
                                        }];
     }
     
