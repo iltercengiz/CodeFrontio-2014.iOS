@@ -21,6 +21,7 @@
 		7C213DD218B384B300F96B01 /* FavouritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C213DD118B384B300F96B01 /* FavouritesViewController.m */; };
 		7C213DD518B3A25F00F96B01 /* NotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C213DD418B3A25F00F96B01 /* NotesViewController.m */; };
 		7C2F3B4F18B73A3300A8A034 /* FavouriteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2F3B4E18B73A3300A8A034 /* FavouriteCell.m */; };
+		7C2F3B5218B7417900A8A034 /* NoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2F3B5118B7417900A8A034 /* NoteCell.m */; };
 		7C34A64318B2268A00EC31DA /* Sponsor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34A64218B2268A00EC31DA /* Sponsor.m */; };
 		7C34A64918B2268A00EC31DA /* Speaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34A64818B2268A00EC31DA /* Speaker.m */; };
 		7C34A64B18B2379D00EC31DA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C34A64A18B2379D00EC31DA /* CoreData.framework */; };
@@ -79,6 +80,8 @@
 		7C213DD418B3A25F00F96B01 /* NotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesViewController.m; sourceTree = "<group>"; };
 		7C2F3B4D18B73A3300A8A034 /* FavouriteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouriteCell.h; sourceTree = "<group>"; };
 		7C2F3B4E18B73A3300A8A034 /* FavouriteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouriteCell.m; sourceTree = "<group>"; };
+		7C2F3B5018B7417900A8A034 /* NoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteCell.h; sourceTree = "<group>"; };
+		7C2F3B5118B7417900A8A034 /* NoteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteCell.m; sourceTree = "<group>"; };
 		7C34A64118B2268A00EC31DA /* Sponsor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sponsor.h; sourceTree = "<group>"; };
 		7C34A64218B2268A00EC31DA /* Sponsor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sponsor.m; sourceTree = "<group>"; };
 		7C34A64718B2268A00EC31DA /* Speaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Speaker.h; sourceTree = "<group>"; };
@@ -306,6 +309,8 @@
 				7CACCFDC18A906F900D66A15 /* MenuCell.m */,
 				7CCB107018AE5DF3007A2486 /* Calendar Scene */,
 				7C83BB4B18AAD795003D3557 /* Session Detail */,
+				7C2F3B5018B7417900A8A034 /* NoteCell.h */,
+				7C2F3B5118B7417900A8A034 /* NoteCell.m */,
 				7C2F3B4D18B73A3300A8A034 /* FavouriteCell.h */,
 				7C2F3B4E18B73A3300A8A034 /* FavouriteCell.m */,
 				7C3840F918AC0B0300A85C31 /* SponsorCell.h */,
@@ -532,6 +537,7 @@
 				7C83BB4A18AAD12A003D3557 /* SessionViewController.m in Sources */,
 				7C213DCF18B3817300F96B01 /* Session.m in Sources */,
 				7C83BB4718AAA954003D3557 /* VenueViewController.m in Sources */,
+				7C2F3B5218B7417900A8A034 /* NoteCell.m in Sources */,
 				7CCB107518AE5DF3007A2486 /* CalendarSessionCell.m in Sources */,
 				7CDE9FEB18B4B9DA00E2F619 /* Photo.m in Sources */,
 				7C3840FE18AC0B4900A85C31 /* SponsorsViewController.m in Sources */,

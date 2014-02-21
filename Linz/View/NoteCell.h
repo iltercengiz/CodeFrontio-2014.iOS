@@ -1,5 +1,5 @@
 //
-//  FavouriteCell.h
+//  NoteCell.h
 //  Linz
 //
 //  Created by Ilter Cengiz on 21/02/14.
@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <MCSwipeTableViewCell/MCSwipeTableViewCell.h>
 
-@class Session;
+@class Note;
 
-@interface FavouriteCell : MCSwipeTableViewCell
+@interface NoteCell : MCSwipeTableViewCell
 
 #pragma mark - Configurator
-- (void)configureCellForSession:(Session *)session;
+- (void)configureCellForNote:(Note *)note;
 
 @end
