@@ -44,6 +44,13 @@
     self.title = self.session.title;
     
 }
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [super viewWillDisappear:animated];
+    
+    [self saveNoteIfValid];
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -67,6 +74,28 @@
         }
     }
     return _note;
+}
+
+#pragma mark - Helpers
+- (void)saveNoteIfValid {
+    
+    // Check if any note is entered
+    // If entered, save it to the Note object
+    // Otherwise, remove the Note object from db
+    NSString *trimmedNote = [self.noteView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]; // To prevent whitespace only notes
+    
+    if (![self.noteView.text isEqualToString:@""] && trimmedNote && ![trimmedNote isEqualToString:@""]) {
+        self.note.note = self.noteView.text;
+    } else {
+        [self.note MR_deleteEntity];
+    }
+    
+    // Save db
+    [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        if (success) NSLog(@"Save successful!");
+        else NSLog(@"Save failed with error: %@", error);
+    }];
+    
 }
 
 #pragma mark - UITableViewDataSource
@@ -137,24 +166,7 @@
                                   animated:YES];
 }
 - (void)textViewDidEndEditing:(UITextView *)textView {
-    
-    // Check if any note is entered
-    // If entered, save it to the Note object
-    // Otherwise, remove the Note object from db
-    NSString *trimmedNote = [self.note.note stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]; // To prevent whitespace only notes
-    
-    if (![self.noteView.text isEqualToString:@""] && trimmedNote && [trimmedNote isEqualToString:@""]) {
-        self.note.note = self.noteView.text;
-    } else {
-        [self.note MR_deleteEntity];
-    }
-    
-    // Save db
-    [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if (success) NSLog(@"Save successful!");
-        else NSLog(@"Save failed with error: %@", error);
-    }];
-    
+    [self saveNoteIfValid];
 }
 
 // Thanks to @davidisdk for this great answer: http://stackoverflow.com/a/19276988/1931781
