@@ -11,17 +11,17 @@
 
 #pragma mark Model
 #import "Session.h"
-#import "Speaker.h"
+
+#pragma mark View
+#import "FavouriteCell.h"
 
 #pragma mark Controller
 #import "FavouritesViewController.h"
 #import "SessionViewController.h"
 
 #pragma mark Pods
-#import <AFNetworking/UIImageView+AFNetworking.h>
 #import <MagicalRecord/CoreData+MagicalRecord.h>
 #import <MCSwipeTableViewCell/MCSwipeTableViewCell.h>
-#import <TMCache/TMDiskCache.h>
 
 @interface FavouritesViewController ()
 
@@ -75,8 +75,8 @@
     
     // Save db
     [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if (success) NSLog(@"Save successful!");
-        else NSLog(@"Save failed with error: %@", error);
+        // if (success) NSLog(@"Save successful!");
+        // else NSLog(@"Save failed with error: %@", error);
     }];
     
     // Remove session from array
@@ -95,11 +95,12 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    MCSwipeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sessionCell" forIndexPath:indexPath];
+    // Session
+    Session *session = self.sessions[indexPath.row];
     
-    // Cell customization
-    cell.defaultColor = [UIColor lightGrayColor];
-    cell.shouldAnimateIcons = NO;
+    // Create and configure cell
+    FavouriteCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sessionCell" forIndexPath:indexPath];
+    [cell configureCellForSession:session];
     
     // Swipes
     [cell setSwipeGestureWithView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"calendar-note"]]
@@ -118,42 +119,6 @@
                       NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
                       [self removeSessionAtIndexPath:indexPath];
                   }];
-    
-    // Session & Speaker
-    Session *session = self.sessions[indexPath.row];
-    Speaker *speaker = [[Speaker MR_findByAttribute:@"identifier" withValue:session.speakerIdentifier] firstObject];
-    
-    // Set image
-    cell.imageView.layer.cornerRadius = 8.0;
-    cell.imageView.clipsToBounds = YES;
-    
-    NSString *imageURLString = speaker.avatar;
-    UIImage *image = (UIImage *)[[TMDiskCache sharedCache] objectForKey:imageURLString];
-    
-    if (image) {
-        cell.imageView.image = image;
-    } else {
-        __weak typeof(cell.imageView) weakImageView = cell.imageView;
-        __weak typeof(imageURLString) weakImageURLString = imageURLString;
-        
-        NSURL *imageURL = [NSURL URLWithString:imageURLString];
-        NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
-        
-        [cell.imageView setImageWithURLRequest:request
-                              placeholderImage:[UIImage imageNamed:@"image-placeholder"]
-                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                           weakImageView.image = image;
-                                           [[TMDiskCache sharedCache] setObject:image forKey:weakImageURLString];
-                                       } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                           NSLog(@"Error getting image: %@", error.description);
-                                       }];
-    }
-    
-    // Set title
-    cell.textLabel.text = session.title;
-    
-    // Set subtitle
-    cell.detailTextLabel.text = speaker.name;
     
     return cell;
     

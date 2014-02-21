@@ -14,4 +14,8 @@
 
 @property (weak, nonatomic) IBOutlet iCarousel *carousel;
 
+@property (weak, nonatomic) IBOutlet UITextView *headerTextView;
+@property (weak, nonatomic) IBOutlet UITextView *detailTextView;
+@property (weak, nonatomic) IBOutlet UITextView *linkTextView;
+
 @end

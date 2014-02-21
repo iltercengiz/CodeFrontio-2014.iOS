@@ -22,14 +22,12 @@
 #pragma mark Pods
 #import <MagicalRecord/CoreData+MagicalRecord.h>
 
-@interface SessionViewController () <UITextViewDelegate>
+@interface SessionViewController () <UIAlertViewDelegate, UITextViewDelegate>
 
 @property (nonatomic) Note *note;
-@property (nonatomic) UITextView *noteView;
 
-@property (nonatomic) CGFloat notesCellRowHeight;
-
-@property (nonatomic) CGFloat keyboardHeight;
+@property (nonatomic) NotesCell *notesCell;
+@property (nonatomic) PhotosCell *photosCell;
 
 @end
 
@@ -41,7 +39,19 @@
     [super viewDidLoad];
     
     // Set title
-    self.title = self.session.title;
+    self.navigationItem.title = self.session.title;
+    
+    // Edit button for note and photo editing
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+                                                                                           target:self
+                                                                                           action:@selector(editTapped:)];
+    
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [super viewWillDisappear:animated];
+    
+    [self saveNoteIfValid];
     
 }
 
@@ -61,12 +71,116 @@
             _note.sessionIdentifier = self.session.identifier;
             // Save it to the db
             [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-                if (success) NSLog(@"Save successful!");
-                else NSLog(@"Save failed with error: %@", error);
+                // if (success) NSLog(@"Save successful!");
+                // else NSLog(@"Save failed with error: %@", error);
             }];
         }
     }
     return _note;
+}
+
+#pragma mark - Helpers
+- (void)saveNoteIfValid {
+    
+    // Check if any note is entered
+    // If entered, save it to the Note object
+    // Otherwise, remove the Note object from db
+    if ([self isNoteValid]) {
+        self.note.note = self.notesCell.textView.text;
+    } else {
+        [self.note MR_deleteEntity];
+    }
+    
+    // Save db
+    [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        // if (success) NSLog(@"Save successful!");
+        // else NSLog(@"Save failed with error: %@", error);
+    }];
+    
+}
+- (BOOL)isNoteValid {
+    NSString *trimmedNote = [self.notesCell.textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]; // To prevent whitespace only notes
+    return ![self.notesCell.textView.text isEqualToString:@""] && trimmedNote && ![trimmedNote isEqualToString:@""];
+}
+
+#pragma mark - IBAction
+- (IBAction)editTapped:(id)sender {
+    
+    // Set title to nil
+    self.navigationItem.title = nil;
+    
+    // Change buttons
+    // Done button
+    UIBarButtonItem *doneBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                       target:self
+                                                                                       action:@selector(doneTapped:)];
+    // Delete photos button
+    UIBarButtonItem *deletePhotosBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Delete Selected Photos", nil)
+                                                                                  style:UIBarButtonItemStylePlain
+                                                                                 target:self
+                                                                                 action:@selector(deletePhotosTapped:)];
+    if (!self.photosCell.selectedPhotosIndexPaths.count) {
+        deletePhotosBarButtonItem.enabled = NO;
+    }
+    // Delete note button
+    UIBarButtonItem *deleteNoteBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Delete Note", nil)
+                                                                                style:UIBarButtonItemStylePlain
+                                                                               target:self
+                                                                               action:@selector(deleteNoteTapped:)];
+    if (![self isNoteValid]) {
+        deleteNoteBarButtonItem.enabled = NO;
+    }
+    
+    // Set buttons
+    self.navigationItem.rightBarButtonItems = @[doneBarButtonItem, deletePhotosBarButtonItem, deleteNoteBarButtonItem];
+    
+    // Set self as observer for changeInPhotoSelectionNotification
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"io.webBox.KodioLinz.changeInPhotoSelectionNotification"
+                                                      object:self.photosCell
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *note) {
+                                                      if (!self.photosCell.selectedPhotosIndexPaths.count) {
+                                                          deletePhotosBarButtonItem.enabled = NO;
+                                                      } else {
+                                                          deletePhotosBarButtonItem.enabled = YES;
+                                                      }
+                                                  }];
+    
+    // Set editing
+    self.notesCell.editing = YES;
+    self.photosCell.editing = YES;
+    
+}
+- (IBAction)deleteNoteTapped:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Confirm Deletion", nil)
+                                                    message:NSLocalizedString(@"This can't be undone.\nContinue?", nil)
+                                                   delegate:self
+                                          cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                          otherButtonTitles:NSLocalizedString(@"Continue", nil), nil];
+    [alert show];
+}
+- (IBAction)deletePhotosTapped:(id)sender {
+    [self.photosCell removeSelectedPhotos];
+}
+- (IBAction)doneTapped:(id)sender {
+    
+    // Set title back
+    self.navigationItem.title = self.session.title;
+    
+    // Change buttons
+    self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+                                                                                              target:self
+                                                                                              action:@selector(editTapped:)]];
+    
+    // Remove self from notification observers
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"io.webBox.KodioLinz.changeInPhotoSelectionNotification"
+                                                  object:self.photosCell];
+    
+    // Set editing
+    self.notesCell.editing = NO;
+    self.photosCell.editing = NO;
+    
 }
 
 #pragma mark - UITableViewDataSource
@@ -88,8 +202,7 @@
     NotesCell *(^createNotesCell)() = ^NotesCell *(){
         NotesCell *cell = [tableView dequeueReusableCellWithIdentifier:@"notesCell" forIndexPath:indexPath];
         [cell configureCellForNote:self.note];
-        self.noteView = cell.textView;
-        self.noteView.delegate = self;
+        cell.textView.delegate = self;
         return cell;
     };
     
@@ -102,9 +215,11 @@
     if (indexPath.section == 0) {
         return createSpeakerCell();
     } else if (indexPath.section == 1) {
-        return createNotesCell();
+        self.notesCell = createNotesCell();
+        return self.notesCell;
     } else {
-        return createPhotosCell();
+        self.photosCell = createPhotosCell();
+        return self.photosCell;
     }
     
 }
@@ -131,30 +246,20 @@
 }
 
 #pragma mark - UITextViewDelegate
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    if (self.notesCell.editing) {
+        return NO;
+    }
+    return YES;
+}
+
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]
                           atScrollPosition:UITableViewScrollPositionMiddle
                                   animated:YES];
 }
 - (void)textViewDidEndEditing:(UITextView *)textView {
-    
-    // Check if any note is entered
-    // If entered, save it to the Note object
-    // Otherwise, remove the Note object from db
-    NSString *trimmedNote = [self.note.note stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]; // To prevent whitespace only notes
-    
-    if (![self.noteView.text isEqualToString:@""] && trimmedNote && [trimmedNote isEqualToString:@""]) {
-        self.note.note = self.noteView.text;
-    } else {
-        [self.note MR_deleteEntity];
-    }
-    
-    // Save db
-    [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if (success) NSLog(@"Save successful!");
-        else NSLog(@"Save failed with error: %@", error);
-    }];
-    
+    [self saveNoteIfValid];
 }
 
 // Thanks to @davidisdk for this great answer: http://stackoverflow.com/a/19276988/1931781
@@ -171,6 +276,14 @@
         [UIView animateWithDuration:0.3 animations:^{
             [textView setContentOffset:offset];
         }];
+    }
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        self.notesCell.textView.text = nil;
+        [self saveNoteIfValid];
     }
 }
 

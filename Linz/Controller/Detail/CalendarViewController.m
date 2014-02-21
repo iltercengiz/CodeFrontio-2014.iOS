@@ -171,7 +171,10 @@
 
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [self performSegueWithIdentifier:@"sessionSegue" sender:indexPath];
+    Session *session = self.sessions[indexPath.item];
+    if ([session.type isEqualToNumber:@1] && ![session.track isEqualToNumber:@(-1)]) {
+        [self performSegueWithIdentifier:@"sessionSegue" sender:indexPath];
+    }
 }
 
 #pragma mark - RFQuiltLayoutDelegate

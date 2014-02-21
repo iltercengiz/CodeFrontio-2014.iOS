@@ -23,7 +23,6 @@
 
 @property (weak, nonatomic) UITableView *tableView;
 
-@property (nonatomic) NSMutableArray *photos;
 @property (nonatomic) NSNumber *sessionIdentifier;
 
 @property (nonatomic) CZPhotoPickerController *picker;
@@ -52,32 +51,77 @@
     
 }
 
+#pragma mark - Getter
+- (NSMutableArray *)selectedPhotosIndexPaths {
+    if (!_selectedPhotosIndexPaths) {
+        _selectedPhotosIndexPaths = [NSMutableArray array];
+    }
+    return _selectedPhotosIndexPaths;
+}
+
+#pragma mark - Helpers
+- (void)removeSelectedPhotos {
+    
+    NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSet];
+    
+    for (NSIndexPath *indexPath in self.selectedPhotosIndexPaths) {
+        Photo *photoEntity = self.photos[indexPath.item];
+        [photoEntity MR_deleteEntity];
+        [indexSet addIndex:indexPath.item];
+    }
+    
+    // Remove photos from array
+    [self.photos removeObjectsAtIndexes:indexSet];
+    
+    // Save db
+    [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        // if (success) NSLog(@"Save successful!");
+        // else NSLog(@"Save failed with error: %@", error);
+    }];
+    
+    // Clear selectedPhotosIndexPaths
+    [self.selectedPhotosIndexPaths removeAllObjects];
+    
+    // Post a notification to enable/disable delete bar button
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"io.webBox.KodioLinz.changeInPhotoSelectionNotification" object:self];
+    
+    // Reload collectionView
+    [self.collectionView reloadData];
+    
+}
+
+#pragma mark - UICollectionViewCell
+- (void)setEditing:(BOOL)editing {
+    
+    [super setEditing:editing];
+    
+    if (!editing) {
+        for (NSIndexPath *indexPath in self.selectedPhotosIndexPaths) {
+            PhotoCell *cell = (PhotoCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+            cell.marked = NO;
+        }
+        [self.selectedPhotosIndexPaths removeAllObjects];
+        self.selectedPhotosIndexPaths = nil;
+    }
+    
+    [self.collectionView reloadData];
+    
+}
+
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    if (self.editing) {
+        return self.photos.count;
+    }
     return self.photos.count + 1;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     PhotoCell *(^createPhotoCell)() = ^PhotoCell *(){
-        
         PhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"photoCell" forIndexPath:indexPath];
-        
-        // Photo entity
         Photo *photoEntity = self.photos[indexPath.item];
-        
-        // Get photo from disk
-        NSInteger sessionIdentifier = self.sessionIdentifier.integerValue;
-        NSInteger photoIdentifier = photoEntity.identifier.integerValue;
-        
-        NSString *photoPath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/Photo-%li-%li", (long)sessionIdentifier, (long)photoIdentifier]];
-        
-        UIImage *photo = [UIImage imageWithContentsOfFile:photoPath];
-        
-        // Configure cell for photo
-        [cell configureCellForPhoto:photo];
-        
+        [cell configureCellForPhoto:photoEntity];
         return cell;
-        
     };
     
     UICollectionViewCell *(^createAddPhotoCell)() = ^UICollectionViewCell *(){
@@ -99,14 +143,39 @@
     // The selected cell
     UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
     
+    if (self.editing) {
+        ((PhotoCell *)cell).marked = !((PhotoCell *)cell).marked;
+        if (((PhotoCell *)cell).marked) {
+            [self.selectedPhotosIndexPaths addObject:indexPath];
+        } else {
+            [self.selectedPhotosIndexPaths removeObject:indexPath];
+        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"io.webBox.KodioLinz.changeInPhotoSelectionNotification" object:self];
+        return;
+    }
+    
     // Check which cell is selected
     if (indexPath.item < self.photos.count) {
         
         // IDMPhotos
-        NSArray *photos = [IDMPhoto photosWithImages:self.photos];
+        NSMutableArray *photos = [NSMutableArray array];
+        
+        for (Photo *photoEntity in self.photos) {
+            
+            NSInteger sessionIdentifier = photoEntity.sessionIdentifier.integerValue;
+            NSInteger photoIdentifier = photoEntity.identifier.integerValue;
+            
+            NSString *photoPath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/Photo-%li-%li", (long)sessionIdentifier, (long)photoIdentifier]];
+            
+            UIImage *photo = [UIImage imageWithContentsOfFile:photoPath];
+            
+            [photos addObject:photo];
+            
+        }
         
         // Browser object
-        IDMPhotoBrowser *browser = [[IDMPhotoBrowser alloc] initWithPhotos:photos animatedFromView:cell];
+        IDMPhotoBrowser *browser = [[IDMPhotoBrowser alloc] initWithPhotos:[IDMPhoto photosWithImages:photos]
+                                                          animatedFromView:cell];
         [browser setInitialPageIndex:indexPath.item];
         
         // Present browser
@@ -146,8 +215,8 @@
                                                                             
                                                                             // Save db
                                                                             [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-                                                                                if (success) NSLog(@"Save successful!");
-                                                                                else NSLog(@"Save failed with error: %@", error);
+                                                                                // if (success) NSLog(@"Save successful!");
+                                                                                // else NSLog(@"Save failed with error: %@", error);
                                                                             }];
                                                                             
                                                                             // Add photo to the array
