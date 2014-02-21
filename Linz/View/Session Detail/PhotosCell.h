@@ -13,7 +13,14 @@
 #pragma mark - IBOutlets
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
+#pragma mark - Properties
+@property (nonatomic) NSMutableArray *photos;
+@property (nonatomic) NSMutableArray *selectedPhotosIndexPaths;
+
 #pragma mark - Configurator
 - (void)configureCellForSession:(Session *)session andTableView:(UITableView *)tableView;
+
+#pragma mark - Methods
+- (void)removeSelectedPhotos;
 
 @end

@@ -8,12 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class Photo;
+
 @interface PhotoCell : UICollectionViewCell
 
 #pragma mark - IBOutlets
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
+#pragma mark - Properties
+@property (nonatomic, getter = isMarked) BOOL marked;
+
 #pragma mark - Configurator
-- (void)configureCellForPhoto:(UIImage *)photo;
+- (void)configureCellForPhoto:(Photo *)photoEntity;
 
 @end
