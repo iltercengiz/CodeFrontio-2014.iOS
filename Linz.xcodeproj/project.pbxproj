@@ -20,6 +20,7 @@
 		7C213DCF18B3817300F96B01 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C213DCE18B3817300F96B01 /* Session.m */; };
 		7C213DD218B384B300F96B01 /* FavouritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C213DD118B384B300F96B01 /* FavouritesViewController.m */; };
 		7C213DD518B3A25F00F96B01 /* NotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C213DD418B3A25F00F96B01 /* NotesViewController.m */; };
+		7C2F3B4F18B73A3300A8A034 /* FavouriteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2F3B4E18B73A3300A8A034 /* FavouriteCell.m */; };
 		7C34A64318B2268A00EC31DA /* Sponsor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34A64218B2268A00EC31DA /* Sponsor.m */; };
 		7C34A64918B2268A00EC31DA /* Speaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34A64818B2268A00EC31DA /* Speaker.m */; };
 		7C34A64B18B2379D00EC31DA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C34A64A18B2379D00EC31DA /* CoreData.framework */; };
@@ -76,6 +77,8 @@
 		7C213DD118B384B300F96B01 /* FavouritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouritesViewController.m; sourceTree = "<group>"; };
 		7C213DD318B3A25F00F96B01 /* NotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesViewController.h; sourceTree = "<group>"; };
 		7C213DD418B3A25F00F96B01 /* NotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesViewController.m; sourceTree = "<group>"; };
+		7C2F3B4D18B73A3300A8A034 /* FavouriteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouriteCell.h; sourceTree = "<group>"; };
+		7C2F3B4E18B73A3300A8A034 /* FavouriteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouriteCell.m; sourceTree = "<group>"; };
 		7C34A64118B2268A00EC31DA /* Sponsor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sponsor.h; sourceTree = "<group>"; };
 		7C34A64218B2268A00EC31DA /* Sponsor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sponsor.m; sourceTree = "<group>"; };
 		7C34A64718B2268A00EC31DA /* Speaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Speaker.h; sourceTree = "<group>"; };
@@ -296,13 +299,15 @@
 		7CACCFDA18A906EB00D66A15 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				7CACCFDB18A906F900D66A15 /* MenuCell.h */,
-				7CACCFDC18A906F900D66A15 /* MenuCell.m */,
 				7C01A55918B6AB2D007284F5 /* MasterViewHeader.h */,
 				7C01A55A18B6AB2D007284F5 /* MasterViewHeader.m */,
 				7CCB106A18AE4BF3007A2486 /* MasterViewHeader.xib */,
+				7CACCFDB18A906F900D66A15 /* MenuCell.h */,
+				7CACCFDC18A906F900D66A15 /* MenuCell.m */,
 				7CCB107018AE5DF3007A2486 /* Calendar Scene */,
 				7C83BB4B18AAD795003D3557 /* Session Detail */,
+				7C2F3B4D18B73A3300A8A034 /* FavouriteCell.h */,
+				7C2F3B4E18B73A3300A8A034 /* FavouriteCell.m */,
 				7C3840F918AC0B0300A85C31 /* SponsorCell.h */,
 				7C3840FA18AC0B0300A85C31 /* SponsorCell.m */,
 			);
@@ -508,6 +513,7 @@
 				7C01A55B18B6AB2D007284F5 /* MasterViewHeader.m in Sources */,
 				7C34A64918B2268A00EC31DA /* Speaker.m in Sources */,
 				7C34A64318B2268A00EC31DA /* Sponsor.m in Sources */,
+				7C2F3B4F18B73A3300A8A034 /* FavouriteCell.m in Sources */,
 				7CCB106918AE1D2A007A2486 /* LinzAPIClient.m in Sources */,
 				7CCB106F18AE5BAA007A2486 /* UIImage+FromUIColor.m in Sources */,
 				7C83BB5718AADD40003D3557 /* PhotoCell.m in Sources */,

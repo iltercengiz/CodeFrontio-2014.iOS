@@ -52,4 +52,13 @@
     
 }
 
+#pragma mark - UIView
+- (void)layoutSubviews {
+    
+    [super layoutSubviews];
+    
+    self.imageView.frame = CGRectInset(self.imageView.frame, 4.0, 4.0);
+    
+}
+
 @end
