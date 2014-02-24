@@ -68,8 +68,8 @@
     
     self.removingNoteIndexPath = indexPath;
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Confirm Deletion", nil)
-                                                    message:NSLocalizedString(@"This can't be undone.\nContinue?", nil)
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Confirm deletion", nil)
+                                                    message:NSLocalizedString(@"Confirm deletion message", nil)
                                                    delegate:self
                                           cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                           otherButtonTitles:NSLocalizedString(@"Continue", nil), nil];

@@ -85,8 +85,8 @@
     void (^errorBlock)(NSError *error) = ^(NSError *error) {
         // NSLog(@"Error: %@", error.description);
         // Inform user that applciation will exit
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No connection!", nil)
-                                                        message:NSLocalizedString(@"In order to fetch initial data, I need an active internet connection.\nPlease check the internet connection and open me again.\nI'm killing myself now.", nil)
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No connection", nil)
+                                                        message:NSLocalizedString(@"Internet needed", nil)
                                                        delegate:self
                                               cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
                                               otherButtonTitles:nil, nil];

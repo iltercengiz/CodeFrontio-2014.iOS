@@ -115,7 +115,7 @@
                                                                                        target:self
                                                                                        action:@selector(doneTapped:)];
     // Delete photos button
-    UIBarButtonItem *deletePhotosBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Delete Selected Photos", nil)
+    UIBarButtonItem *deletePhotosBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Delete photos", nil)
                                                                                   style:UIBarButtonItemStylePlain
                                                                                  target:self
                                                                                  action:@selector(deletePhotosTapped:)];
@@ -123,7 +123,7 @@
         deletePhotosBarButtonItem.enabled = NO;
     }
     // Delete note button
-    UIBarButtonItem *deleteNoteBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Delete Note", nil)
+    UIBarButtonItem *deleteNoteBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Delete note", nil)
                                                                                 style:UIBarButtonItemStylePlain
                                                                                target:self
                                                                                action:@selector(deleteNoteTapped:)];
@@ -152,8 +152,8 @@
     
 }
 - (IBAction)deleteNoteTapped:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Confirm Deletion", nil)
-                                                    message:NSLocalizedString(@"This can't be undone.\nContinue?", nil)
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Confirm deletion", nil)
+                                                    message:NSLocalizedString(@"Confirm deletion message", nil)
                                                    delegate:self
                                           cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                           otherButtonTitles:NSLocalizedString(@"Continue", nil), nil];
