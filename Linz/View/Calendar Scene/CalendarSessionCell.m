@@ -156,32 +156,17 @@ static const CGFloat borderWidth = 0.5;
     
     // De/Select favourite button
     if (!favouriteButton.selected) {
-        favouriteButton.selected = [self scheduleNotification];
+        [self scheduleNotification];
     } else {
-        favouriteButton.selected = NO;
         [self cancelNotification];
     }
+    
+    favouriteButton.selected = !favouriteButton.selected;
     
 }
 
 #pragma mark - Helpers
-- (BOOL)scheduleNotification {
-    
-    NSTimeInterval timeInterval = [self.session.timeInterval doubleValue] + 15 * 60 + 5; // 15 mins + 5 secs
-    NSDate *sessionTime = [NSDate dateWithTimeIntervalSince1970:timeInterval];
-    
-    // Check if the session is in the future
-    if ([sessionTime compare:[NSDate date]] != NSOrderedDescending) {
-        // Inform user with an alert
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                        message:NSLocalizedString(@"Date passed error", nil)
-                                                       delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
-                                              otherButtonTitles:nil, nil];
-        [alert show];
-        // Return
-        return NO;
-    }
+- (void)scheduleNotification {
     
     // Change state of session's favourite attr.
     self.session.favourited = @YES;
@@ -191,6 +176,15 @@ static const CGFloat borderWidth = 0.5;
         // if (success) NSLog(@"Save successful!");
         // else NSLog(@"Save failed with error: %@", error);
     }];
+    
+    // Check if the session is in the future
+    NSTimeInterval timeInterval = [self.session.timeInterval doubleValue] + 15 * 60 + 5; // 15 mins + 5 secs
+    NSDate *sessionTime = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+    
+    if ([sessionTime compare:[NSDate date]] != NSOrderedDescending) {
+        // This session is passed, so there won't be any notification for this session
+        return;
+    }
     
     // Create a local notification for the session
     UILocalNotification *notification = ({
@@ -219,9 +213,6 @@ static const CGFloat borderWidth = 0.5;
     
     // Schedule local notification
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-    
-    // Return
-    return YES;
     
 }
 - (void)cancelNotification {
