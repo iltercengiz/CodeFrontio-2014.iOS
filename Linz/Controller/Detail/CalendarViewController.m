@@ -51,12 +51,28 @@
     [[UIColor colorWithRed:0.153 green:0.153 blue:0.157 alpha:1] setFill];
     [path fill];
     
+    // Thin line above the 'dark place'
+    path = [UIBezierPath bezierPath];
+    [path moveToPoint:CGPointMake(0.0, 0.0)];
+    [path addLineToPoint:CGPointMake(CGRectGetWidth(rect), 0.0)];
+    path.lineWidth = 1.0;
+    [[UIColor lightGrayColor] setStroke];
+    [path stroke];
+    
     // Thin line below the 'dark place'
     path = [UIBezierPath bezierPath];
     [path moveToPoint:CGPointMake(0.0, 64.0)];
     [path addLineToPoint:CGPointMake(CGRectGetWidth(rect), 64.0)];
     path.lineWidth = 1.0;
-    [[UIColor colorWithRed:0.278 green:0.278 blue:0.282 alpha:1] setStroke];
+    [[UIColor lightGrayColor] setStroke];
+    [path stroke];
+    
+    // Thin line at the bottom of collection view
+    path = [UIBezierPath bezierPath];
+    [path moveToPoint:CGPointMake(0.0, CGRectGetHeight(rect))];
+    [path addLineToPoint:CGPointMake(CGRectGetWidth(rect), CGRectGetHeight(rect))];
+    path.lineWidth = 1.0;
+    [[UIColor lightGrayColor] setStroke];
     [path stroke];
     
 }
