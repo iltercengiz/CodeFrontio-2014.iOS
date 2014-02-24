@@ -29,6 +29,8 @@
 @property (nonatomic) NotesCell *notesCell;
 @property (nonatomic) PhotosCell *photosCell;
 
+@property (nonatomic) UIBarButtonItem *editButton, *doneButton, *deletePhotosButton, *deleteNoteButton;
+
 @end
 
 @implementation SessionViewController
@@ -42,9 +44,7 @@
     self.navigationItem.title = self.session.title;
     
     // Edit button for note and photo editing
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
-                                                                                           target:self
-                                                                                           action:@selector(editTapped:)];
+    self.navigationItem.rightBarButtonItem = self.editButton;
     
 }
 - (void)viewWillDisappear:(BOOL)animated {
@@ -79,6 +79,41 @@
     return _note;
 }
 
+- (UIBarButtonItem *)editButton {
+    if (!_editButton) {
+        _editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+                                                                    target:self
+                                                                    action:@selector(editTapped:)];
+    }
+    return _editButton;
+}
+- (UIBarButtonItem *)doneButton {
+    if (!_doneButton) {
+        _doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                    target:self
+                                                                    action:@selector(doneTapped:)];
+    }
+    return _doneButton;
+}
+- (UIBarButtonItem *)deletePhotosButton {
+    if (!_deletePhotosButton) {
+        _deletePhotosButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Delete photos", nil)
+                                                               style:UIBarButtonItemStylePlain
+                                                              target:self
+                                                              action:@selector(deletePhotosTapped:)];
+    }
+    return _deletePhotosButton;
+}
+- (UIBarButtonItem *)deleteNoteButton {
+    if (!_deleteNoteButton) {
+        _deleteNoteButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Delete note", nil)
+                                                             style:UIBarButtonItemStylePlain
+                                                            target:self
+                                                            action:@selector(deleteNoteTapped:)];
+    }
+    return _deleteNoteButton;
+}
+
 #pragma mark - Helpers
 - (void)saveNoteIfValid {
     
@@ -109,30 +144,16 @@
     // Set title to nil
     self.navigationItem.title = nil;
     
-    // Change buttons
-    // Done button
-    UIBarButtonItem *doneBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                                       target:self
-                                                                                       action:@selector(doneTapped:)];
-    // Delete photos button
-    UIBarButtonItem *deletePhotosBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Delete photos", nil)
-                                                                                  style:UIBarButtonItemStylePlain
-                                                                                 target:self
-                                                                                 action:@selector(deletePhotosTapped:)];
+    // Enable/Disable the button
     if (!self.photosCell.selectedPhotosIndexPaths.count) {
-        deletePhotosBarButtonItem.enabled = NO;
+        self.deletePhotosButton.enabled = NO;
     }
-    // Delete note button
-    UIBarButtonItem *deleteNoteBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Delete note", nil)
-                                                                                style:UIBarButtonItemStylePlain
-                                                                               target:self
-                                                                               action:@selector(deleteNoteTapped:)];
     if (![self isNoteValid]) {
-        deleteNoteBarButtonItem.enabled = NO;
+        self.deleteNoteButton.enabled = NO;
     }
     
     // Set buttons
-    self.navigationItem.rightBarButtonItems = @[doneBarButtonItem, deletePhotosBarButtonItem, deleteNoteBarButtonItem];
+    self.navigationItem.rightBarButtonItems = @[self.doneButton, self.deletePhotosButton, self.deleteNoteButton];
     
     // Set self as observer for changeInPhotoSelectionNotification
     [[NSNotificationCenter defaultCenter] addObserverForName:@"io.webBox.KodioLinz.changeInPhotoSelectionNotification"
@@ -140,9 +161,9 @@
                                                        queue:nil
                                                   usingBlock:^(NSNotification *note) {
                                                       if (!self.photosCell.selectedPhotosIndexPaths.count) {
-                                                          deletePhotosBarButtonItem.enabled = NO;
+                                                          self.deletePhotosButton.enabled = NO;
                                                       } else {
-                                                          deletePhotosBarButtonItem.enabled = YES;
+                                                          self.deletePhotosButton.enabled = YES;
                                                       }
                                                   }];
     
@@ -254,12 +275,24 @@
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
+    
+    // Remove edit item
+    [self.navigationItem setRightBarButtonItem:nil animated:YES];
+    
+    // Scroll table view
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]
                           atScrollPosition:UITableViewScrollPositionMiddle
                                   animated:YES];
+    
 }
 - (void)textViewDidEndEditing:(UITextView *)textView {
+    
+    // Save note
     [self saveNoteIfValid];
+    
+    // Place the edit button back
+    [self.navigationItem setRightBarButtonItem:self.editButton animated:YES];
+    
 }
 
 // Thanks to @davidisdk for this great answer: http://stackoverflow.com/a/19276988/1931781
