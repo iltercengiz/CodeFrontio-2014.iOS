@@ -14,6 +14,7 @@
 
 #pragma mark Model
 #import "Session.h"
+#import "Speaker.h"
 
 #pragma mark View
 #import "CalendarTimeCell.h"
@@ -151,9 +152,9 @@
         return cell;
     };
     
-    CalendarSessionCell *(^createSessionCell)(Session *session) = ^CalendarSessionCell *(Session *session) {
+    CalendarSessionCell *(^createSessionCell)(Session *session, Speaker *speaker) = ^CalendarSessionCell *(Session *session, Speaker *speaker) {
         CalendarSessionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"SessionCell" forIndexPath:indexPath];
-        [cell configureCellForSession:session andCollectionView:collectionView];
+        [cell configureCellForSession:session speaker:speaker collectionView:collectionView];
         return cell;
     };
     
@@ -164,7 +165,8 @@
     } else if ([session.track isEqualToNumber:@(SessionTypeActivity)]) {
         return createActivityCell(session);
     } else { // if ([session.track isEqualToNumber:@1] || [session.track isEqualToNumber:@2])
-        return createSessionCell(session);
+        Speaker *speaker = [[self.speakers filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"identifier == %@", session.speakerIdentifier]] firstObject];
+        return createSessionCell(session, speaker);
     }
     
 }
