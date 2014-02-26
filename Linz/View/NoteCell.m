@@ -35,7 +35,11 @@
     if (range.length) {
         self.textLabel.text = [note.note substringToIndex:range.location];
     } else {
-        self.textLabel.text = note.note;
+        if (note.note && ![note.note isEqualToString:@""]) {
+            self.textLabel.text = note.note;
+        } else {
+            self.textLabel.text = NSLocalizedString(@"Photos", nil);
+        }
     }
     
     // Set subtitle
@@ -48,7 +52,7 @@
     
     [super layoutSubviews];
     
-    self.textLabel.frame = CGRectOffset(self.textLabel.frame, 8.0, 0.0); // CGRectInset(self.textLabel.frame, 8.0, 0.0);
+    self.textLabel.frame = CGRectOffset(self.textLabel.frame, 8.0, 0.0);
     self.detailTextLabel.frame = CGRectOffset(self.detailTextLabel.frame, 8.0, 0.0);
     
 }
