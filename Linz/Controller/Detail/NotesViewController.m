@@ -141,7 +141,13 @@
         [self.tableView endUpdates];
         
     } else {
-        self.removingNoteIndexPath = nil;
+        
+        NoteCell *cell = (NoteCell *)[self.tableView cellForRowAtIndexPath:self.removingNoteIndexPath];
+        
+        [cell swipeToOriginWithCompletion:^{
+            self.removingNoteIndexPath = nil;
+        }];
+        
     }
     
 }
