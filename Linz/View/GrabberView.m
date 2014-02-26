@@ -10,22 +10,66 @@
 
 @implementation GrabberView
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
+#pragma mark - UIView
+- (void)setup {
+    
+    // Set background color
+    self.backgroundColor = [UIColor whiteColor];
+    
+    self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    
+}
+
+- (id)init {
+    self = [super init];
     if (self) {
-        // Initialization code
+        [self setup];
     }
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self setup];
+    }
+    return self;
 }
-*/
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+
+- (void)drawRect:(CGRect)rect {
+    
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    
+    CGFloat step = 5.0;
+    CGFloat offset = 16.0;
+    
+    // Left grabber
+    [path moveToPoint:CGPointMake(step * 1.0, offset)];
+    [path addLineToPoint:CGPointMake(step * 1.0, CGRectGetHeight(rect) - offset)];
+    [path moveToPoint:CGPointMake(step * 2.0, offset)];
+    [path addLineToPoint:CGPointMake(step * 2.0, CGRectGetHeight(rect) - offset)];
+//    [path moveToPoint:CGPointMake(step * 3.0, offset)];
+//    [path addLineToPoint:CGPointMake(step * 3.0, CGRectGetHeight(rect) - offset)];
+    
+    // Right grabber
+    [path moveToPoint:CGPointMake(CGRectGetWidth(rect) - step * 1.0, offset)];
+    [path addLineToPoint:CGPointMake(CGRectGetWidth(rect) - step * 1.0, CGRectGetHeight(rect) - offset)];
+    [path moveToPoint:CGPointMake(CGRectGetWidth(rect) - step * 2.0, offset)];
+    [path addLineToPoint:CGPointMake(CGRectGetWidth(rect) - step * 2.0, CGRectGetHeight(rect) - offset)];
+//    [path moveToPoint:CGPointMake(CGRectGetWidth(rect) - step * 3.0, offset)];
+//    [path addLineToPoint:CGPointMake(CGRectGetWidth(rect) - step * 3.0, CGRectGetHeight(rect) - offset)];
+    
+    path.lineWidth = 0.5;
+    [[UIColor lightGrayColor] setStroke];
+    [path stroke];
+    
+}
 
 @end
