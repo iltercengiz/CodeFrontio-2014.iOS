@@ -42,6 +42,17 @@
     // Re-enable status bar
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
+    // A workaround to prevent the lag of keyboard
+    // Keyboard blocks the UI for 3-4 seconds at the very first time it will be visible
+    // This workaround extends the general loading time of the app, presenting the launch image for longer to the user
+    // But it enables UI to be butter like smooth
+    // Thanks to @Vadoff for his answer here: http://stackoverflow.com/a/20436797/1931781
+    UITextField *lagFreeField = [UITextField new];
+    [self.window addSubview:lagFreeField];
+    [lagFreeField becomeFirstResponder];
+    [lagFreeField resignFirstResponder];
+    [lagFreeField removeFromSuperview];
+    
     return YES;
     
 }
