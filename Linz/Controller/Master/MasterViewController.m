@@ -40,13 +40,9 @@ static const char *supportersSceneIdentifier = "SponsorsScene";
     // Prevent tableView from deselecting cells
     self.clearsSelectionOnViewWillAppear = NO;
     
-    // Create the scenes array with NSNulls
-    self.scenes = [NSMutableArray arrayWithObjects:[NSNull null], [NSNull null], [NSNull null], [NSNull null], [NSNull null], nil];
-    
-    // Add calendar scene to the cache array
-    UINavigationController *navigationController = [self.splitViewController.viewControllers lastObject];
-    UIViewController *calendarViewController = navigationController.topViewController;
-    [self.scenes replaceObjectAtIndex:0 withObject:calendarViewController];
+    // Create the scenes array with NSNulls but calendar scene
+    self.scenes = [NSMutableArray arrayWithObjects:[self.splitViewController.viewControllers lastObject],
+                   [NSNull null], [NSNull null], [NSNull null], [NSNull null], nil];
     
     // Set background color
     self.tableView.backgroundColor = [UIColor colorWithRed:0.255 green:0.255 blue:0.259 alpha:1];
@@ -95,7 +91,8 @@ static const char *supportersSceneIdentifier = "SponsorsScene";
         }
         
         // Instantiate view controller
-        scene = [self.storyboard instantiateViewControllerWithIdentifier:identifier];
+        UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:identifier];
+        scene = [[UINavigationController alloc] initWithRootViewController:vc];
         
         // Add the scene to the cache
         [self.scenes replaceObjectAtIndex:indexPath.row withObject:scene];
@@ -103,8 +100,7 @@ static const char *supportersSceneIdentifier = "SponsorsScene";
     }
     
     // Present the scene
-    UINavigationController *navigationController = [self.splitViewController.viewControllers lastObject];
-    navigationController.viewControllers = @[scene];
+    self.splitViewController.viewControllers = @[[self.splitViewController.viewControllers firstObject], scene];
     
 }
 
