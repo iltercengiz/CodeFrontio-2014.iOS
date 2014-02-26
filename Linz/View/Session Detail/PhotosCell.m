@@ -126,6 +126,9 @@
     
     UICollectionViewCell *(^createAddPhotoCell)() = ^UICollectionViewCell *(){
         UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"addPhotoCell" forIndexPath:indexPath];
+        cell.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        cell.layer.borderWidth = 0.5;
+        cell.layer.cornerRadius = 12.0;
         return cell;
     };
     
@@ -159,8 +162,11 @@
         
         // IDMPhotos
         NSMutableArray *photos = [NSMutableArray array];
-        
-        for (Photo *photoEntity in self.photos) {
+        Photo *photoEntity;
+        UIImage *scaleImage;
+        for (NSInteger i = 0; i < self.photos.count; i++) {
+            
+            photoEntity = self.photos[i];
             
             NSInteger sessionIdentifier = photoEntity.sessionIdentifier.integerValue;
             NSInteger photoIdentifier = photoEntity.identifier.integerValue;
@@ -169,6 +175,10 @@
             
             UIImage *photo = [UIImage imageWithContentsOfFile:photoPath];
             
+            if (i == indexPath.item) {
+                scaleImage = photo;
+            }
+            
             [photos addObject:photo];
             
         }
@@ -176,6 +186,7 @@
         // Browser object
         IDMPhotoBrowser *browser = [[IDMPhotoBrowser alloc] initWithPhotos:[IDMPhoto photosWithImages:photos]
                                                           animatedFromView:cell];
+        browser.scaleImage = scaleImage;
         [browser setInitialPageIndex:indexPath.item];
         
         // Present browser

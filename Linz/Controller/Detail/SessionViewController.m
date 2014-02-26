@@ -31,6 +31,8 @@
 
 @property (nonatomic) UIBarButtonItem *editButton, *doneButton, *deletePhotosButton, *deleteNoteButton;
 
+@property (nonatomic, getter = willTextViewBeFirstResponder) BOOL textViewWillBeFirstResponder;
+
 @end
 
 @implementation SessionViewController
@@ -259,7 +261,10 @@
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
-        return 256.0;
+        if ([self willTextViewBeFirstResponder]) {
+            return CGRectGetHeight(tableView.frame) - 1.0 * tableView.sectionHeaderHeight - 352.0;
+        }
+        return CGRectGetHeight(tableView.frame) - 3.0 * tableView.sectionHeaderHeight - tableView.rowHeight - 144.0;
     } else if (indexPath.section == 2) {
         return 144.0;
     }
@@ -268,10 +273,19 @@
 
 #pragma mark - UITextViewDelegate
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    
     if (self.notesCell.editing) {
         return NO;
     }
+    
+    // Update notes cell
+    self.textViewWillBeFirstResponder = YES;
+    
+    [self.tableView beginUpdates];
+    [self.tableView endUpdates];
+    
     return YES;
+    
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
@@ -281,7 +295,7 @@
     
     // Scroll table view
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]
-                          atScrollPosition:UITableViewScrollPositionMiddle
+                          atScrollPosition:UITableViewScrollPositionTop
                                   animated:YES];
     
 }
@@ -289,6 +303,12 @@
     
     // Save note
     [self saveNoteIfValid];
+    
+    // Update notes cell
+    self.textViewWillBeFirstResponder = NO;
+    
+    [self.tableView beginUpdates];
+    [self.tableView endUpdates];
     
     // Place the edit button back
     [self.navigationItem setRightBarButtonItem:self.editButton animated:YES];
