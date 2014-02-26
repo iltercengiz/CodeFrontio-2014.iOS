@@ -122,7 +122,7 @@
     // Check if any note is entered
     // If entered, save it to the Note object
     // Otherwise, remove the Note object from db
-    if ([self isNoteValid]) {
+    if ([self shouldNoteBeSaved]) {
         self.note.note = self.notesCell.textView.text;
     } else {
         [self.note MR_deleteEntity];
@@ -139,6 +139,12 @@
     NSString *trimmedNote = [self.notesCell.textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]; // To prevent whitespace only notes
     return ![self.notesCell.textView.text isEqualToString:@""] && trimmedNote && ![trimmedNote isEqualToString:@""];
 }
+- (BOOL)shouldNoteBeSaved {
+    if (self.photosCell.photos.count) {
+        return YES;
+    }
+    return [self isNoteValid];
+}
 
 #pragma mark - IBAction
 - (IBAction)editTapped:(id)sender {
@@ -147,12 +153,8 @@
     self.navigationItem.title = nil;
     
     // Enable/Disable the button
-    if (!self.photosCell.selectedPhotosIndexPaths.count) {
-        self.deletePhotosButton.enabled = NO;
-    }
-    if (![self isNoteValid]) {
-        self.deleteNoteButton.enabled = NO;
-    }
+    self.deletePhotosButton.enabled = self.photosCell.selectedPhotosIndexPaths.count;
+    self.deleteNoteButton.enabled = [self isNoteValid];
     
     // Set buttons
     self.navigationItem.rightBarButtonItems = @[self.doneButton, self.deletePhotosButton, self.deleteNoteButton];
@@ -336,6 +338,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
         self.notesCell.textView.text = nil;
+        self.deleteNoteButton.enabled = NO;
         [self saveNoteIfValid];
     }
 }
