@@ -12,22 +12,23 @@
 
 #pragma mark View
 #import "FavouriteCell.h"
+#import "GrabberView.h"
 
 #pragma mark Pods
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import <MagicalRecord/CoreData+MagicalRecord.h>
 #import <TMCache/TMDiskCache.h>
 
+@interface FavouriteCell ()
+
+@property (nonatomic) GrabberView *grabberView;
+
+@end
+
 @implementation FavouriteCell
 
 #pragma mark - Configurator
 - (void)configureCellForSession:(Session *)session {
-    
-    // Cell customization
-    self.backgroundColor = [UIColor clearColor];
-    
-    self.defaultColor = [UIColor lightGrayColor];
-    self.shouldAnimateIcons = NO;
     
     // Speaker
     Speaker *speaker = [[Speaker MR_findByAttribute:@"identifier" withValue:session.speakerIdentifier] firstObject];
@@ -67,6 +68,44 @@
 }
 
 #pragma mark - UIView
+- (void)setup {
+    
+    // Set background color for custom drawing
+    self.backgroundColor = [UIColor clearColor];
+    
+    if (!self.grabberView) {
+        self.grabberView = [[GrabberView alloc] initWithFrame:self.bounds];
+        [self.contentView insertSubview:self.grabberView atIndex:0];
+    }
+    
+    self.defaultColor = [UIColor lightGrayColor];
+    self.shouldAnimateIcons = NO;
+    
+}
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+
 - (void)layoutSubviews {
     
     [super layoutSubviews];
@@ -74,35 +113,6 @@
     self.imageView.frame = CGRectInset(self.imageView.frame, 16.0, 16.0);
     self.textLabel.frame = CGRectOffset(self.textLabel.frame, -16.0, 0.0);
     self.detailTextLabel.frame = CGRectOffset(self.detailTextLabel.frame, -16.0, 0.0);
-    
-}
-
-- (void)drawRect:(CGRect)rect {
-    
-    UIBezierPath *path = [UIBezierPath bezierPath];
-    
-    CGFloat step = 5.0;
-    CGFloat offset = 16.0;
-    
-    // Left grabber
-    [path moveToPoint:CGPointMake(step * 1.0, offset)];
-    [path addLineToPoint:CGPointMake(step * 1.0, CGRectGetHeight(rect) - offset)];
-    [path moveToPoint:CGPointMake(step * 2.0, offset)];
-    [path addLineToPoint:CGPointMake(step * 2.0, CGRectGetHeight(rect) - offset)];
-    [path moveToPoint:CGPointMake(step * 3.0, offset)];
-    [path addLineToPoint:CGPointMake(step * 3.0, CGRectGetHeight(rect) - offset)];
-    
-    // Right grabber
-    [path moveToPoint:CGPointMake(CGRectGetWidth(rect) - step * 1.0, offset)];
-    [path addLineToPoint:CGPointMake(CGRectGetWidth(rect) - step * 1.0, CGRectGetHeight(rect) - offset)];
-    [path moveToPoint:CGPointMake(CGRectGetWidth(rect) - step * 2.0, offset)];
-    [path addLineToPoint:CGPointMake(CGRectGetWidth(rect) - step * 2.0, CGRectGetHeight(rect) - offset)];
-    [path moveToPoint:CGPointMake(CGRectGetWidth(rect) - step * 3.0, offset)];
-    [path addLineToPoint:CGPointMake(CGRectGetWidth(rect) - step * 3.0, CGRectGetHeight(rect) - offset)];
-    
-    path.lineWidth = 0.5;
-    [[UIColor lightGrayColor] setStroke];
-    [path stroke];
     
 }
 

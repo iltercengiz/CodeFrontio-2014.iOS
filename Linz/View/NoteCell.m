@@ -12,20 +12,21 @@
 
 #pragma mark View
 #import "NoteCell.h"
+#import "GrabberView.h"
 
 #pragma mark Pods
 #import <MagicalRecord/CoreData+MagicalRecord.h>
+
+@interface NoteCell ()
+
+@property (nonatomic) GrabberView *grabberView;
+
+@end
 
 @implementation NoteCell
 
 #pragma mark - Configurator
 - (void)configureCellForNote:(Note *)note {
-    
-    // Cell customization
-    self.backgroundColor = [UIColor clearColor];
-    
-    self.defaultColor = [UIColor lightGrayColor];
-    self.shouldAnimateIcons = NO;
     
     // Session
     Session *session = [[Session MR_findByAttribute:@"identifier" withValue:note.sessionIdentifier] firstObject];
@@ -47,42 +48,64 @@
     
 }
 
+#pragma mark - UITableViewCell
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    
+    [super setEditing:editing animated:animated];
+    
+    [UIView animateWithDuration:0.28
+                     animations:^{
+                         self.grabberView.alpha = !editing;
+                         self.shouldDrag = !editing;
+                     }];
+    
+}
+
 #pragma mark - UIView
+- (void)setup {
+    
+    // Set background color for custom drawing
+    self.backgroundColor = [UIColor clearColor];
+    
+    if (!self.grabberView) {
+        self.grabberView = [[GrabberView alloc] initWithFrame:self.bounds];
+        [self.contentView insertSubview:self.grabberView atIndex:0];
+    }
+    
+    self.defaultColor = [UIColor lightGrayColor];
+    self.shouldAnimateIcons = NO;
+    
+}
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+
 - (void)layoutSubviews {
     
     [super layoutSubviews];
     
     self.textLabel.frame = CGRectOffset(self.textLabel.frame, 8.0, 0.0);
     self.detailTextLabel.frame = CGRectOffset(self.detailTextLabel.frame, 8.0, 0.0);
-    
-}
-
-- (void)drawRect:(CGRect)rect {
-    
-    UIBezierPath *path = [UIBezierPath bezierPath];
-    
-    CGFloat step = 5.0;
-    CGFloat offset = 16.0;
-    
-    // Left grabber
-    [path moveToPoint:CGPointMake(step * 1.0, offset)];
-    [path addLineToPoint:CGPointMake(step * 1.0, CGRectGetHeight(rect) - offset)];
-    [path moveToPoint:CGPointMake(step * 2.0, offset)];
-    [path addLineToPoint:CGPointMake(step * 2.0, CGRectGetHeight(rect) - offset)];
-    [path moveToPoint:CGPointMake(step * 3.0, offset)];
-    [path addLineToPoint:CGPointMake(step * 3.0, CGRectGetHeight(rect) - offset)];
-    
-    // Right grabber
-    [path moveToPoint:CGPointMake(CGRectGetWidth(rect) - step * 1.0, offset)];
-    [path addLineToPoint:CGPointMake(CGRectGetWidth(rect) - step * 1.0, CGRectGetHeight(rect) - offset)];
-    [path moveToPoint:CGPointMake(CGRectGetWidth(rect) - step * 2.0, offset)];
-    [path addLineToPoint:CGPointMake(CGRectGetWidth(rect) - step * 2.0, CGRectGetHeight(rect) - offset)];
-    [path moveToPoint:CGPointMake(CGRectGetWidth(rect) - step * 3.0, offset)];
-    [path addLineToPoint:CGPointMake(CGRectGetWidth(rect) - step * 3.0, CGRectGetHeight(rect) - offset)];
-    
-    path.lineWidth = 0.5;
-    [[UIColor lightGrayColor] setStroke];
-    [path stroke];
     
 }
 
