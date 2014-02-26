@@ -32,7 +32,12 @@
 
 #pragma mark - UIViewController
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
+    
+    // Edit button
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
 }
 - (void)viewWillAppear:(BOOL)animated {
     
@@ -113,8 +118,14 @@
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self startEditingForNoteAtIndexPath:indexPath];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (!self.editing) {
+        [self startEditingForNoteAtIndexPath:indexPath];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleNone;
 }
 
 #pragma mark - UIAlertViewDelegate
