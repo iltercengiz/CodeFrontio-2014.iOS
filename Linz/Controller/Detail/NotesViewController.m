@@ -9,6 +9,7 @@
 #pragma mark Model
 #import "Note.h"
 #import "Session.h"
+#import "Photo.h"
 
 #pragma mark View
 #import "NoteCell.h"
@@ -20,6 +21,9 @@
 #pragma mark Pods
 #import <MagicalRecord/CoreData+MagicalRecord.h>
 #import <MCSwipeTableViewCell/MCSwipeTableViewCell.h>
+
+#define TAG_SWIPE 1
+#define TAG_SELECTED 2
 
 @interface NotesViewController () <UIAlertViewDelegate>
 
@@ -47,7 +51,7 @@
                                                            action:@selector(selectAllTapped:)];
     self.deleteButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
                                                                       target:self
-                                                                      action:@selector(nilSymbol)];
+                                                                      action:@selector(deleteTapped:)];
     self.exportButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                       target:self
                                                                       action:@selector(nilSymbol)];
@@ -102,14 +106,28 @@
 }
 - (void)removeNoteAtIndexPath:(NSIndexPath *)indexPath {
     
-    self.removingNoteIndexPath = indexPath;
+    Note *note = self.notes[indexPath.row];
+    NSArray *photos = [Photo MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"sessionIdentifier == %@", note.sessionIdentifier]];
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Confirm deletion", nil)
-                                                    message:NSLocalizedString(@"Confirm deletion message", nil)
-                                                   delegate:self
-                                          cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                          otherButtonTitles:NSLocalizedString(@"Continue", nil), nil];
-    [alert show];
+    // First delete all photos from disk
+    for (Photo *photoEntity in photos) {
+        // Get path for the stored photo and remove it
+        NSString *photoPath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/Photo-%@-%@", photoEntity.sessionIdentifier, photoEntity.identifier]];
+        [[NSFileManager defaultManager] removeItemAtPath:photoPath error:nil];
+    }
+    
+    // Then delete all photo entities for the related session
+    [Photo MR_deleteAllMatchingPredicate:[NSPredicate predicateWithFormat:@"sessionIdentifier == %@", note.sessionIdentifier]];
+    
+    // Delete note entity
+    [note MR_deleteEntity];
+    
+    // Save db
+    [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        // if (success) NSLog(@"Save successful!");
+        // else NSLog(@"Save failed with error: %@", error);
+    }];
+    
 }
 
 #pragma mark - IBActions
@@ -132,6 +150,15 @@
     self.deleteButton.enabled = self.tableView.indexPathsForSelectedRows.count;
     self.exportButton.enabled = self.tableView.indexPathsForSelectedRows.count;
     
+}
+- (IBAction)deleteTapped:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Confirm deletion", nil)
+                                                    message:NSLocalizedString(@"Confirm deletion of notes and photos", nil)
+                                                   delegate:self
+                                          cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                          otherButtonTitles:NSLocalizedString(@"Continue", nil), nil];
+    alert.tag = TAG_SELECTED;
+    [alert show];
 }
 
 #pragma mark - UITableViewDataSource
@@ -161,8 +188,14 @@
                              mode:MCSwipeTableViewCellModeExit
                             state:MCSwipeTableViewCellState3
                   completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
-                      NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-                      [self removeNoteAtIndexPath:indexPath];
+                      self.removingNoteIndexPath = [self.tableView indexPathForCell:cell];
+                      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Confirm deletion", nil)
+                                                                      message:NSLocalizedString(@"Confirm deletion of notes and photos", nil)
+                                                                     delegate:self
+                                                            cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                                            otherButtonTitles:NSLocalizedString(@"Continue", nil), nil];
+                      alert.tag = TAG_SWIPE;
+                      [alert show];
                   }];
     
     return cell;
@@ -197,36 +230,51 @@
 #pragma mark - UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     
-    if (buttonIndex == 1) {
-        
-        Note *note = self.notes[self.removingNoteIndexPath.row];
-        
-        [note MR_deleteEntity];
-        
-        // Save db
-        [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-            // if (success) NSLog(@"Save successful!");
-            // else NSLog(@"Save failed with error: %@", error);
-        }];
-        
-        // Remove note from array
-        [self.notes removeObjectAtIndex:self.removingNoteIndexPath.row];
-        
-        // Update tableView
-        [self.tableView beginUpdates];
-        [self.tableView deleteRowsAtIndexPaths:@[self.removingNoteIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
-        [self.tableView endUpdates];
-        
-    } else {
-        
-        NoteCell *cell = (NoteCell *)[self.tableView cellForRowAtIndexPath:self.removingNoteIndexPath];
-        
-        [cell swipeToOriginWithCompletion:^{
-            self.removingNoteIndexPath = nil;
-        }];
-        
+    if (alertView.tag == TAG_SELECTED) {
+        if (buttonIndex == 1) {
+            
+            NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSet];
+            
+            // For every selected row
+            for (NSIndexPath *indexPath in self.tableView.indexPathsForSelectedRows) {
+                [self removeNoteAtIndexPath:indexPath];
+                [indexSet addIndex:indexPath.row];
+            }
+            
+            // Remove the indexPaths from array
+            [self.notes removeObjectsAtIndexes:indexSet];
+            
+            // Update tableView
+            [self.tableView beginUpdates];
+            [self.tableView deleteRowsAtIndexPaths:self.tableView.indexPathsForSelectedRows withRowAnimation:UITableViewRowAnimationLeft];
+            [self.tableView endUpdates];
+            
+            // Enable/Disable buttons
+            self.deleteButton.enabled = self.tableView.indexPathsForSelectedRows.count;
+            self.exportButton.enabled = self.tableView.indexPathsForSelectedRows.count;
+            
+        }
+    } else { // if (alertView.tag == TAG_SWIPE)
+        if (buttonIndex == 1) {
+            
+            [self removeNoteAtIndexPath:self.removingNoteIndexPath];
+            
+            // Remove note from array
+            [self.notes removeObjectAtIndex:self.removingNoteIndexPath.row];
+            
+            // Update tableView
+            [self.tableView beginUpdates];
+            [self.tableView deleteRowsAtIndexPaths:@[self.removingNoteIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
+            [self.tableView endUpdates];
+            
+        } else {
+            NoteCell *cell = (NoteCell *)[self.tableView cellForRowAtIndexPath:self.removingNoteIndexPath];
+            
+            [cell swipeToOriginWithCompletion:^{
+                self.removingNoteIndexPath = nil;
+            }];
+        }
     }
-    
 }
 
 @end
