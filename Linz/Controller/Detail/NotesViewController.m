@@ -26,6 +26,8 @@
 @property (nonatomic) NSMutableArray *notes;
 @property (nonatomic) NSIndexPath *removingNoteIndexPath;
 
+@property (nonatomic) UIBarButtonItem *selectAllButton, *deleteButton, *exportButton;
+
 @end
 
 @implementation NotesViewController
@@ -37,6 +39,22 @@
     
     // Edit button
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    // Set toolbar items
+    self.selectAllButton = [[UIBarButtonItem alloc] initWithTitle:@"Select All"
+                                                            style:UIBarButtonItemStylePlain
+                                                           target:self
+                                                           action:@selector(selectAllTapped:)];
+    self.deleteButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
+                                                                      target:self
+                                                                      action:@selector(nilSymbol)];
+    self.exportButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                                                      target:self
+                                                                      action:@selector(nilSymbol)];
+    
+    UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    self.toolbarItems = @[self.selectAllButton, space, self.deleteButton, space, self.exportButton];
     
 }
 - (void)viewWillAppear:(BOOL)animated {
@@ -65,6 +83,19 @@
     }
 }
 
+#pragma mark - Setter
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    
+    [super setEditing:editing animated:animated];
+    
+    // Disable deleteButton and exportButton as initially no cells will be selected
+    self.deleteButton.enabled = NO;
+    self.exportButton.enabled = NO;
+    
+    [self.navigationController setToolbarHidden:!editing animated:animated];
+    
+}
+
 #pragma mark - Helpers
 - (void)startEditingForNoteAtIndexPath:(NSIndexPath *)indexPath {
     [self performSegueWithIdentifier:@"sessionSegue" sender:indexPath];
@@ -79,6 +110,28 @@
                                           cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                           otherButtonTitles:NSLocalizedString(@"Continue", nil), nil];
     [alert show];
+}
+
+#pragma mark - IBActions
+- (IBAction)selectAllTapped:(id)sender {
+    
+    // De/Select all cells
+    if ([self.selectAllButton.title isEqualToString:@"Select All"]) {
+        for (NSInteger i = 0; i < self.notes.count; i++) {
+            [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
+        }
+        self.selectAllButton.title = @"Deselect All";
+    } else {
+        for (NSInteger i = 0; i < self.notes.count; i++) {
+            [self.tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0] animated:NO];
+        }
+        self.selectAllButton.title = @"Select All";
+    }
+    
+    // Enable/Disable buttons
+    self.deleteButton.enabled = self.tableView.indexPathsForSelectedRows.count;
+    self.exportButton.enabled = self.tableView.indexPathsForSelectedRows.count;
+    
 }
 
 #pragma mark - UITableViewDataSource
@@ -118,9 +171,22 @@
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // If tableView is not in editing mode, push Session scene
     if (!self.editing) {
         [self startEditingForNoteAtIndexPath:indexPath];
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    } else {
+        // Enable/Disable buttons
+        self.deleteButton.enabled = self.tableView.indexPathsForSelectedRows.count;
+        self.exportButton.enabled = self.tableView.indexPathsForSelectedRows.count;
+    }
+}
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Update buttons
+    if (self.editing) {
+        // Enable/Disable buttons
+        self.deleteButton.enabled = self.tableView.indexPathsForSelectedRows.count;
+        self.exportButton.enabled = self.tableView.indexPathsForSelectedRows.count;
     }
 }
 
