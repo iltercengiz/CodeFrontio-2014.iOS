@@ -22,6 +22,7 @@
 
 "Confirm deletion" = "Confirm deletion";
 "Confirm deletion message" = "This can't be undone.\nContinue?";
+"Confirm deletion of notes and photos" = "This will remove notes and related photos.\nThis can't be undone.\nContinue?";
 
 "Delete Photos" = "Delete Photos";
 "Delete Note" = "Delete Note";
