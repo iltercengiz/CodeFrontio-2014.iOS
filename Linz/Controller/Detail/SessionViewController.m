@@ -129,6 +129,7 @@
         self.note.note = self.notesCell.textView.text;
     } else {
         [self.note MR_deleteEntity];
+        self.note = nil;
     }
     
     // Save db
