@@ -24,10 +24,7 @@
 - (void)configureCellForPhoto:(Photo *)photoEntity {
     
     // Get photo from disk
-    NSInteger sessionIdentifier = photoEntity.sessionIdentifier.integerValue;
-    NSInteger photoIdentifier = photoEntity.identifier.integerValue;
-    
-    NSString *photoPath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/Photo-%li-%li", (long)sessionIdentifier, (long)photoIdentifier]];
+    NSString *photoPath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/Photo-%@-%@", photoEntity.sessionIdentifier, photoEntity.identifier]];
     
     UIImage *photo = [UIImage imageWithContentsOfFile:photoPath];
     

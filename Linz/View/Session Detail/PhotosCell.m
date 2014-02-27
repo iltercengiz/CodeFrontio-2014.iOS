@@ -179,10 +179,7 @@
             
             photoEntity = self.photos[i];
             
-            NSInteger sessionIdentifier = photoEntity.sessionIdentifier.integerValue;
-            NSInteger photoIdentifier = photoEntity.identifier.integerValue;
-            
-            NSString *photoPath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/Photo-%li-%li", (long)sessionIdentifier, (long)photoIdentifier]];
+            NSString *photoPath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/Photo-%@-%@", photoEntity.sessionIdentifier, photoEntity.identifier]];
             
             UIImage *photo = [UIImage imageWithContentsOfFile:photoPath];
             
@@ -253,8 +250,17 @@
                                                                         weakSelf.picker = nil;
                                                                         
                                                                     }];
+        // We don't want the image to be saved to the camera roll
         self.picker.saveToCameraRoll = NO;
-        [self.picker showFromRect:self.frame];
+        
+        // The rect that action sheet will be shown from
+        CGRect rect;
+        rect = cell.bounds;
+        rect = [collectionView convertRect:rect fromView:cell];
+        rect = [self.tableView convertRect:rect fromView:collectionView];
+        
+        // Present action sheet
+        [self.picker showFromRect:rect];
         
     }
     
