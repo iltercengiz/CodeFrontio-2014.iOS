@@ -54,7 +54,7 @@
                                                                       action:@selector(deleteTapped:)];
     self.exportButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                       target:self
-                                                                      action:@selector(nilSymbol)];
+                                                                      action:@selector(exportTapped:)];
     
     UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
@@ -159,6 +159,31 @@
                                           otherButtonTitles:NSLocalizedString(@"Continue", nil), nil];
     alert.tag = TAG_SELECTED;
     [alert show];
+}
+- (IBAction)exportTapped:(id)sender {
+    
+    NSMutableArray *notes = [NSMutableArray array];
+    
+    for (NSIndexPath *indexPath in self.tableView.indexPathsForSelectedRows) {
+        
+        Note *note = self.notes[indexPath.row];
+        Session *session = [[Session MR_findByAttribute:@"identifier" withValue:note.sessionIdentifier] firstObject];
+        NSArray *photos = [Photo MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"sessionIdentifier == %@", note.sessionIdentifier]];
+        
+        [notes addObject:[NSString stringWithFormat:@"%@\n\n%@\n\n", session.title, note.note]];
+        
+        // Get photos related with the note
+        for (Photo *photo in photos) {
+            NSString *photoPath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/Photo-%@-%@", photo.sessionIdentifier, photo.identifier]];
+            UIImage *photo = [UIImage imageWithContentsOfFile:photoPath];
+            [notes addObject:photo];
+        }
+        
+    }
+    
+    UIActivityViewController *activity = [[UIActivityViewController alloc] initWithActivityItems:notes applicationActivities:nil];
+    [self.splitViewController presentViewController:activity animated:YES completion:nil];
+    
 }
 
 #pragma mark - UITableViewDataSource
