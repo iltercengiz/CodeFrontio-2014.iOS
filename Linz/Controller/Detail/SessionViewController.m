@@ -22,6 +22,9 @@
 #pragma mark Pods
 #import <MagicalRecord/CoreData+MagicalRecord.h>
 
+#define TAG_NOTE 1
+#define TAG_PHOTO 2
+
 @interface SessionViewController () <UIAlertViewDelegate, UITextViewDelegate>
 
 @property (nonatomic) Note *note;
@@ -182,10 +185,17 @@
                                                    delegate:self
                                           cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                           otherButtonTitles:NSLocalizedString(@"Continue", nil), nil];
+    alert.tag = TAG_NOTE;
     [alert show];
 }
 - (IBAction)deletePhotosTapped:(id)sender {
-    [self.photosCell removeSelectedPhotos];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Confirm deletion", nil)
+                                                    message:NSLocalizedString(@"Confirm deletion message", nil)
+                                                   delegate:self
+                                          cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                          otherButtonTitles:NSLocalizedString(@"Continue", nil), nil];
+    alert.tag = TAG_PHOTO;
+    [alert show];
 }
 - (IBAction)doneTapped:(id)sender {
     
@@ -337,9 +347,13 @@
 #pragma mark - UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
-        self.notesCell.textView.text = nil;
-        self.deleteNoteButton.enabled = NO;
-        [self saveNoteIfValid];
+        if (alertView.tag == TAG_NOTE) {
+            self.notesCell.textView.text = nil;
+            self.deleteNoteButton.enabled = NO;
+            [self saveNoteIfValid];
+        } else {
+            [self.photosCell removeSelectedPhotos];
+        }
     }
 }
 

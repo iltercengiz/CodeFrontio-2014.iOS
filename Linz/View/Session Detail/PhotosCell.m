@@ -65,9 +65,20 @@
     NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSet];
     
     for (NSIndexPath *indexPath in self.selectedPhotosIndexPaths) {
+        
+        // Photo entity
         Photo *photoEntity = self.photos[indexPath.item];
+        
+        // Get path for the stored photo and remove it
+        NSString *photoPath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/Photo-%@-%@", photoEntity.sessionIdentifier, photoEntity.identifier]];
+        [[NSFileManager defaultManager] removeItemAtPath:photoPath error:nil];
+        
+        // Delete entity
         [photoEntity MR_deleteEntity];
+        
+        // Add indexPath to the indexSet to be removed from the photos array
         [indexSet addIndex:indexPath.item];
+        
     }
     
     // Remove photos from array
