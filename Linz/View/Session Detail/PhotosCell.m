@@ -65,9 +65,20 @@
     NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSet];
     
     for (NSIndexPath *indexPath in self.selectedPhotosIndexPaths) {
+        
+        // Photo entity
         Photo *photoEntity = self.photos[indexPath.item];
+        
+        // Get path for the stored photo and remove it
+        NSString *photoPath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/Photo-%@-%@", photoEntity.sessionIdentifier, photoEntity.identifier]];
+        [[NSFileManager defaultManager] removeItemAtPath:photoPath error:nil];
+        
+        // Delete entity
         [photoEntity MR_deleteEntity];
+        
+        // Add indexPath to the indexSet to be removed from the photos array
         [indexSet addIndex:indexPath.item];
+        
     }
     
     // Remove photos from array
@@ -126,6 +137,9 @@
     
     UICollectionViewCell *(^createAddPhotoCell)() = ^UICollectionViewCell *(){
         UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"addPhotoCell" forIndexPath:indexPath];
+        cell.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        cell.layer.borderWidth = 0.5;
+        cell.layer.cornerRadius = 12.0;
         return cell;
     };
     
@@ -159,15 +173,19 @@
         
         // IDMPhotos
         NSMutableArray *photos = [NSMutableArray array];
-        
-        for (Photo *photoEntity in self.photos) {
+        Photo *photoEntity;
+        UIImage *scaleImage;
+        for (NSInteger i = 0; i < self.photos.count; i++) {
             
-            NSInteger sessionIdentifier = photoEntity.sessionIdentifier.integerValue;
-            NSInteger photoIdentifier = photoEntity.identifier.integerValue;
+            photoEntity = self.photos[i];
             
-            NSString *photoPath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/Photo-%li-%li", (long)sessionIdentifier, (long)photoIdentifier]];
+            NSString *photoPath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/Photo-%@-%@", photoEntity.sessionIdentifier, photoEntity.identifier]];
             
             UIImage *photo = [UIImage imageWithContentsOfFile:photoPath];
+            
+            if (i == indexPath.item) {
+                scaleImage = photo;
+            }
             
             [photos addObject:photo];
             
@@ -176,6 +194,7 @@
         // Browser object
         IDMPhotoBrowser *browser = [[IDMPhotoBrowser alloc] initWithPhotos:[IDMPhoto photosWithImages:photos]
                                                           animatedFromView:cell];
+        browser.scaleImage = scaleImage;
         [browser setInitialPageIndex:indexPath.item];
         
         // Present browser
@@ -231,8 +250,17 @@
                                                                         weakSelf.picker = nil;
                                                                         
                                                                     }];
+        // We don't want the image to be saved to the camera roll
         self.picker.saveToCameraRoll = NO;
-        [self.picker showFromRect:self.frame];
+        
+        // The rect that action sheet will be shown from
+        CGRect rect;
+        rect = cell.bounds;
+        rect = [collectionView convertRect:rect fromView:cell];
+        rect = [self.tableView convertRect:rect fromView:collectionView];
+        
+        // Present action sheet
+        [self.picker showFromRect:rect];
         
     }
     

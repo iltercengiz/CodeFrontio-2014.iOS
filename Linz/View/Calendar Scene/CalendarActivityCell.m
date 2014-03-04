@@ -14,8 +14,19 @@
 
 @implementation CalendarActivityCell
 
-#pragma mark - CalendarSessionCell
+#pragma mark - Configurator
 - (void)configureCellForSession:(Session *)session {
+    
+    // Set image if any
+    self.imageView.image = [UIImage imageNamed:session.title];
+    
+    // Set title & detail
+    self.titleLabel.text = session.title;
+    
+}
+
+#pragma mark - CalendarActivityCell
+- (void)setup {
     
     // Set background color
     self.backgroundColor = [UIColor clearColor];
@@ -24,15 +35,29 @@
     self.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.layer.borderWidth = 0.5;
     
-    // Set image if any
-    self.imageView.image = [UIImage imageNamed:session.title];
-    
-    // Set title & detail
-    self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    self.titleLabel.numberOfLines = 0;
-    self.titleLabel.text = session.title;
-    self.titleLabel.textColor = [UIColor colorWithRed:0.925 green:0.925 blue:0.925 alpha:1];
-    
+}
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setup];
+    }
+    return self;
 }
 
 @end

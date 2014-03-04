@@ -16,7 +16,8 @@
 #pragma mark Pods
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import <MagicalRecord/CoreData+MagicalRecord.h>
-#import <TMCache/TMDiskCache.h>
+//#import <TMCache/TMDiskCache.h>
+#import <TMCache/TMCache.h>
 
 #pragma mark Constants
 static const CGFloat cornerRadius = 0.0;
@@ -30,55 +31,51 @@ static const CGFloat borderWidth = 0.5;
 @property (weak, nonatomic) UICollectionView *collectionView;
 
 @property (nonatomic) Session *session;
+@property (nonatomic) Speaker *speaker;
 
 @end
 
 @implementation CalendarSessionCell
 
-#pragma mark - CalendarSessionCell
-- (void)configureCellForSession:(Session *)session andCollectionView:(UICollectionView *)collectionView {
+#pragma mark - Configurator
+- (void)configureCellForSession:(Session *)session speaker:(Speaker *)speaker collectionView:(UICollectionView *)collectionView {
     
-    // Assign the collectionView
+    // Assign the collectionView, session & speaker
     self.collectionView = collectionView;
-    
-    // Set background color for custom drawing
-    self.backgroundColor = [UIColor whiteColor];
-    
-    // Set frame
-    self.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    self.layer.borderWidth = 0.5;
-    
-    // Assign session
     self.session = session;
-    
-    // Speaker of the session
-    Speaker *speaker = [[Speaker MR_findByAttribute:@"identifier" withValue:session.speakerIdentifier] firstObject];
+    self.speaker = speaker;
     
     // Set image
     self.imageView.layer.cornerRadius = 8.0;
     self.imageView.clipsToBounds = YES;
     
-    NSString *imageURLString = speaker.avatar;
-    UIImage *image = (UIImage *)[[TMDiskCache sharedCache] objectForKey:imageURLString];
-    
-    if (image) {
-        self.imageView.image = image;
-    } else {
-        __weak typeof(self.imageView) weakImageView = self.imageView;
-        __weak typeof(imageURLString) weakImageURLString = imageURLString;
-        
-        NSURL *imageURL = [NSURL URLWithString:imageURLString];
-        NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
-        
-        [self.imageView setImageWithURLRequest:request
-                              placeholderImage:[UIImage imageNamed:@"image-placeholder"]
-                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                           weakImageView.image = image;
-                                           [[TMDiskCache sharedCache] setObject:image forKey:weakImageURLString];
-                                       } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                           // NSLog(@"Error getting image: %@", error.description);
-                                       }];
-    }
+    __weak typeof(self.imageView) weakImageView = self.imageView;
+    __weak typeof(speaker.avatar) weakImageURLString = speaker.avatar;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        [[TMCache sharedCache] objectForKey:weakImageURLString
+                                      block:^(TMCache *cache, NSString *key, id object) {
+                                          UIImage *image = object;
+                                          if (image) {
+                                              dispatch_sync(dispatch_get_main_queue(), ^{
+                                                  weakImageView.image = image;
+                                              });
+                                          } else {
+                                              NSURL *imageURL = [NSURL URLWithString:weakImageURLString];
+                                              NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
+                                              
+                                              [weakImageView setImageWithURLRequest:request
+                                                                   placeholderImage:nil
+                                                                            success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                                                                dispatch_sync(dispatch_get_main_queue(), ^{
+                                                                                    weakImageView.image = image;
+                                                                                });
+                                                                                [cache setObject:image forKey:weakImageURLString];
+                                                                            } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                                                                
+                                                                            }];
+                                          }
+                                      }];
+    });
     
     // Set name
     self.nameLabel.text = speaker.name;
@@ -96,7 +93,7 @@ static const CGFloat borderWidth = 0.5;
     
     self.sessionDetail.attributedText = mutableAttributedString;
     
-    // Buttons
+    // Set buttons' properties
     self.takeNoteButton.layer.cornerRadius = cornerRadius;
     self.takeNoteButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.takeNoteButton.layer.borderWidth = borderWidth;
@@ -106,6 +103,46 @@ static const CGFloat borderWidth = 0.5;
     self.favouriteButton.layer.borderWidth = borderWidth;
     self.favouriteButton.selected = [session.favourited boolValue];
     
+}
+
+#pragma mark - CalendarSessionCell
+- (void)setup {
+    
+    // Set background color for custom drawing
+    self.backgroundColor = [UIColor whiteColor];
+    
+    // Set frame
+    self.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.layer.borderWidth = 0.5;
+    
+}
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+
+- (void)prepareForReuse {
+    // Remove previous image
+    self.imageView.image = [UIImage imageNamed:@"image-placeholder"];
 }
 
 #pragma mark - IBAction
@@ -119,32 +156,17 @@ static const CGFloat borderWidth = 0.5;
     
     // De/Select favourite button
     if (!favouriteButton.selected) {
-        favouriteButton.selected = [self scheduleNotification];
+        [self scheduleNotification];
     } else {
-        favouriteButton.selected = NO;
         [self cancelNotification];
     }
+    
+    favouriteButton.selected = !favouriteButton.selected;
     
 }
 
 #pragma mark - Helpers
-- (BOOL)scheduleNotification {
-    
-    NSTimeInterval timeInterval = [self.session.timeInterval doubleValue] + 15 * 60 + 5; // 15 mins + 5 secs
-    NSDate *sessionTime = [NSDate dateWithTimeIntervalSince1970:timeInterval];
-    
-    // Check if the session is in the future
-    if ([sessionTime compare:[NSDate date]] != NSOrderedDescending) {
-        // Inform user with an alert
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                        message:NSLocalizedString(@"Date passed error", nil)
-                                                       delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
-                                              otherButtonTitles:nil, nil];
-        [alert show];
-        // Return
-        return NO;
-    }
+- (void)scheduleNotification {
     
     // Change state of session's favourite attr.
     self.session.favourited = @YES;
@@ -154,6 +176,15 @@ static const CGFloat borderWidth = 0.5;
         // if (success) NSLog(@"Save successful!");
         // else NSLog(@"Save failed with error: %@", error);
     }];
+    
+    // Check if the session is in the future
+    NSTimeInterval timeInterval = [self.session.timeInterval doubleValue] + 15 * 60 + 5; // 15 mins + 5 secs
+    NSDate *sessionTime = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+    
+    if ([sessionTime compare:[NSDate date]] != NSOrderedDescending) {
+        // This session is passed, so there won't be any notification for this session
+        return;
+    }
     
     // Create a local notification for the session
     UILocalNotification *notification = ({
@@ -182,9 +213,6 @@ static const CGFloat borderWidth = 0.5;
     
     // Schedule local notification
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-    
-    // Return
-    return YES;
     
 }
 - (void)cancelNotification {

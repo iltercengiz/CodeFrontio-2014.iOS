@@ -14,6 +14,7 @@
 
 #pragma mark Model
 #import "Session.h"
+#import "Speaker.h"
 
 #pragma mark View
 #import "CalendarTimeCell.h"
@@ -50,12 +51,28 @@
     [[UIColor colorWithRed:0.153 green:0.153 blue:0.157 alpha:1] setFill];
     [path fill];
     
+    // Thin line above the 'dark place'
+    path = [UIBezierPath bezierPath];
+    [path moveToPoint:CGPointMake(0.0, 0.0)];
+    [path addLineToPoint:CGPointMake(CGRectGetWidth(rect), 0.0)];
+    path.lineWidth = 1.0;
+    [[UIColor lightGrayColor] setStroke];
+    [path stroke];
+    
     // Thin line below the 'dark place'
     path = [UIBezierPath bezierPath];
     [path moveToPoint:CGPointMake(0.0, 64.0)];
     [path addLineToPoint:CGPointMake(CGRectGetWidth(rect), 64.0)];
     path.lineWidth = 1.0;
-    [[UIColor colorWithRed:0.278 green:0.278 blue:0.282 alpha:1] setStroke];
+    [[UIColor lightGrayColor] setStroke];
+    [path stroke];
+    
+    // Thin line at the bottom of collection view
+    path = [UIBezierPath bezierPath];
+    [path moveToPoint:CGPointMake(0.0, CGRectGetHeight(rect))];
+    [path addLineToPoint:CGPointMake(CGRectGetWidth(rect), CGRectGetHeight(rect))];
+    path.lineWidth = 1.0;
+    [[UIColor lightGrayColor] setStroke];
     [path stroke];
     
 }
@@ -151,9 +168,9 @@
         return cell;
     };
     
-    CalendarSessionCell *(^createSessionCell)(Session *session) = ^CalendarSessionCell *(Session *session) {
+    CalendarSessionCell *(^createSessionCell)(Session *session, Speaker *speaker) = ^CalendarSessionCell *(Session *session, Speaker *speaker) {
         CalendarSessionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"SessionCell" forIndexPath:indexPath];
-        [cell configureCellForSession:session andCollectionView:collectionView];
+        [cell configureCellForSession:session speaker:speaker collectionView:collectionView];
         return cell;
     };
     
@@ -164,7 +181,8 @@
     } else if ([session.track isEqualToNumber:@(SessionTypeActivity)]) {
         return createActivityCell(session);
     } else { // if ([session.track isEqualToNumber:@1] || [session.track isEqualToNumber:@2])
-        return createSessionCell(session);
+        Speaker *speaker = [[self.speakers filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"identifier == %@", session.speakerIdentifier]] firstObject];
+        return createSessionCell(session, speaker);
     }
     
 }

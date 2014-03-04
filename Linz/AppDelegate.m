@@ -30,17 +30,18 @@
     [MagicalRecord setupAutoMigratingCoreDataStack];
     
     /*** UI Customization ***/
-    // UINavigationBar coloring
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageWithUIColor:[UIColor colorWithRed:0.255 green:0.255 blue:0.259 alpha:1]]
-                                       forBarMetrics:UIBarMetricsDefault];
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    [self customize];
     
-    // Change style of status bar
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    
-    // Re-enable status bar
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    // A workaround to prevent the lag of keyboard
+    // Keyboard blocks the UI for 3-4 seconds at the very first time it will be visible
+    // This workaround extends the general loading time of the app, presenting the launch image for longer to the user
+    // But it enables UI to be butter like smooth
+    // Thanks to @Vadoff for his answer here: http://stackoverflow.com/a/20436797/1931781
+    UITextField *lagFreeField = [UITextField new];
+    [self.window addSubview:lagFreeField];
+    [lagFreeField becomeFirstResponder];
+    [lagFreeField resignFirstResponder];
+    [lagFreeField removeFromSuperview];
     
     return YES;
     
@@ -57,11 +58,43 @@
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    /*** UI Customization ***/
+    [self customize];
+    
 }
 - (void)applicationWillTerminate:(UIApplication *)application {
+    
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    /*** Database stuff ***/
     [MagicalRecord cleanUp];
+    
+}
+
+#pragma mark - UI Customization
+- (void)customize {
+    
+    // UINavigationBar coloring
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageWithUIColor:[UIColor colorWithRed:0.255 green:0.255 blue:0.259 alpha:1]]
+                                       forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    
+    // UIToolbar
+    [[UIToolbar appearance] setBackgroundImage:[UIImage imageWithUIColor:[UIColor colorWithRed:0.255 green:0.255 blue:0.259 alpha:1]]
+                            forToolbarPosition:UIBarPositionAny
+                                    barMetrics:UIBarMetricsDefault];
+    [[UIToolbar appearance] setTintColor:[UIColor whiteColor]];
+    
+    // Change style of status bar
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    // Re-enable status bar
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    
 }
 
 @end

@@ -5,3 +5,29 @@
   Created by Ilter Cengiz on 10/02/14.
   Copyright (c) 2014 Ilter Cengiz. All rights reserved.
 */
+
+"Show" = "Show";
+"Dismiss" = "Dismiss";
+"Cancel" = "Cancel";
+"Continue" = "Continue";
+
+"No connection" = "No Internet connection!";
+"Internet needed" = "In order to fetch initial data, I need an active internet connection.\nPlease check the internet connection and open me again.\nI'm killing myself now.";
+
+"Calendar" = "Calendar";
+"Favourites" = "Favourites";
+"Notes" = "Notes";
+"Venue" = "Venue";
+"Sponsors" = "Sponsors";
+
+"Confirm deletion" = "Confirm deletion";
+"Confirm deletion message" = "This can't be undone.\nContinue?";
+"Confirm deletion of notes and photos" = "This will remove notes and related photos.\nThis can't be undone.\nContinue?";
+
+"Delete Photos" = "Delete Photos";
+"Delete Note" = "Delete Note";
+"Photos" = "Photos";
+
+"Speaker" = "Speaker";
+"Notes" = "Notes";
+"Photos" = "Photos";
