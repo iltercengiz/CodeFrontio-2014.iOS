@@ -14,7 +14,7 @@
 - (void)setup {
     
     // Set background color
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor clearColor];
     
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     
