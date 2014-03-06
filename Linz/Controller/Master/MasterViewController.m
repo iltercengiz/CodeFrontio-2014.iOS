@@ -17,11 +17,13 @@
 #import "CalendarViewController.h"
 
 #pragma mark Constants
-static const char *calendarSceneIdentifier = "CalendarScene";
-static const char *favouritesSceneIdentifier = "FavouritesScene";
-static const char *notesSceneIdentifier = "NotesScene";
-static const char *venueSceneIdentifier = "VenueScene";
-static const char *supportersSceneIdentifier = "SponsorsScene";
+// Thanks to @mkonutgan for warning me to change these to NSString from const char *
+// Greetings Mikael! :)
+static NSString * const calendarSceneIdentifier = @"CalendarScene";
+static NSString * const favouritesSceneIdentifier = @"FavouritesScene";
+static NSString * const notesSceneIdentifier = @"NotesScene";
+static NSString * const venueSceneIdentifier = @"VenueScene";
+static NSString * const supportersSceneIdentifier = @"SponsorsScene";
 
 @interface MasterViewController ()
 
@@ -82,11 +84,11 @@ static const char *supportersSceneIdentifier = "SponsorsScene";
         // Set identifier
         NSString *identifier;
         switch (indexPath.row) {
-            case ContentTypeCalendar: identifier = [NSString stringWithUTF8String:calendarSceneIdentifier]; break;
-            case ContentTypeFavourites: identifier = [NSString stringWithUTF8String:favouritesSceneIdentifier]; break;
-            case ContentTypeNotes: identifier = [NSString stringWithUTF8String:notesSceneIdentifier]; break;
-            case ContentTypeVenue: identifier = [NSString stringWithUTF8String:venueSceneIdentifier]; break;
-            case ContentTypeSponsors: identifier = [NSString stringWithUTF8String:supportersSceneIdentifier]; break;
+            case ContentTypeCalendar: identifier = calendarSceneIdentifier; break;
+            case ContentTypeFavourites: identifier = favouritesSceneIdentifier; break;
+            case ContentTypeNotes: identifier = notesSceneIdentifier; break;
+            case ContentTypeVenue: identifier = venueSceneIdentifier; break;
+            case ContentTypeSponsors: identifier = supportersSceneIdentifier; break;
             default: break;
         }
         
