@@ -37,6 +37,9 @@
         [self.sponsorImage setImageWithURLRequest:request
                                  placeholderImage:[UIImage imageNamed:@"Placeholder"]
                                           success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                              if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 1) {
+                                                  image = [image initWithCGImage:image.CGImage scale:2.0 orientation:UIImageOrientationUp];
+                                              }
                                               weakImageView.image = image;
                                               [[TMDiskCache sharedCache] setObject:image forKey:weakImageURLString];
                                           } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
