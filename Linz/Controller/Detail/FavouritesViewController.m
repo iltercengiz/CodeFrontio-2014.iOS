@@ -39,6 +39,10 @@
     
     [super viewWillAppear:animated];
     
+    if (self.sessions) {
+        return;
+    }
+    
     // Get sessions
     NSArray *sessions;
     sessions = [Manager sharedManager].sessions;

@@ -65,6 +65,10 @@
     
     [super viewWillAppear:animated];
     
+    if (self.notes) {
+        return;
+    }
+    
     // Get notes
     self.notes = [[Note MR_findAllSortedBy:@"sessionIdentifier" ascending:YES] mutableCopy];
     
