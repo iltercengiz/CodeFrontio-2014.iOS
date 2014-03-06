@@ -16,7 +16,6 @@
 #pragma mark Pods
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import <MagicalRecord/CoreData+MagicalRecord.h>
-//#import <TMCache/TMDiskCache.h>
 #import <TMCache/TMCache.h>
 
 #pragma mark Constants
@@ -46,6 +45,7 @@ static const CGFloat borderWidth = 0.5;
     self.speaker = speaker;
     
     // Set image
+    self.imageView.image = [UIImage imageNamed:@"Placeholder"];
     self.imageView.layer.cornerRadius = 8.0;
     self.imageView.clipsToBounds = YES;
     
@@ -56,7 +56,7 @@ static const CGFloat borderWidth = 0.5;
                                       block:^(TMCache *cache, NSString *key, id object) {
                                           UIImage *image = object;
                                           if (image) {
-                                              dispatch_sync(dispatch_get_main_queue(), ^{
+                                              dispatch_async(dispatch_get_main_queue(), ^{
                                                   weakImageView.image = image;
                                               });
                                           } else {
@@ -66,7 +66,7 @@ static const CGFloat borderWidth = 0.5;
                                               [weakImageView setImageWithURLRequest:request
                                                                    placeholderImage:nil
                                                                             success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                                                                dispatch_sync(dispatch_get_main_queue(), ^{
+                                                                                dispatch_async(dispatch_get_main_queue(), ^{
                                                                                     weakImageView.image = image;
                                                                                 });
                                                                                 [cache setObject:image forKey:weakImageURLString];

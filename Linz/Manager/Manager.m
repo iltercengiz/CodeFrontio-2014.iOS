@@ -22,7 +22,8 @@
 
 @interface Manager () <UIAlertViewDelegate>
 
-@property (nonatomic) NSMutableDictionary *localVersion;
+@property NSMutableDictionary *localVersion;
+@property NSMutableDictionary *localStatus;
 
 @end
 
@@ -71,17 +72,22 @@
 }
 
 #pragma mark - Setup
-- (void)setupWithCompletion:(void (^)(BOOL successful))completion {
+- (void)setupWithCompletion:(void (^)())completion {
     
     // Get the latest download version info
     self.localVersion = [[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"version"] mutableCopy];
     // If there isn't any version stored, create a version data with zeros
     if (!self.localVersion) {
-        self.localVersion = [NSMutableDictionary dictionaryWithObjectsAndKeys:@0, @"speakers", @0, @"sessions", @0, @"sponsors", nil];
+        self.localVersion = [@{@"speakers": @0, @"sessions": @0, @"sponsors": @0} mutableCopy];
+    }
+    
+    // Initiate localStatus
+    if (!self.localStatus) {
+        self.localStatus = [@{@"speakers": @NO, @"sessions": @NO, @"sponsors": @NO} mutableCopy];
     }
     
     // Error block
-    // Will be used to terminate the app if there is an connection error
+    // Will be used to terminate the app if there is an connection error and there's not any stored data
     void (^errorBlock)(NSError *error) = ^(NSError *error) {
         // NSLog(@"Error: %@", error.description);
         // Inform user that applciation will exit
@@ -93,39 +99,45 @@
         [alert show];
     };
     
-    // Proceed block
-    void (^proceedBlock)(NSString *completionIdentifier, BOOL success, NSDictionary *version) = ^(NSString *completionIdentifier, BOOL success, NSDictionary *version) {
+    // Completion block
+    void (^completionBlock)(NSString *identifier, NSNumber *versionNumber, BOOL success) = ^(NSString *identifier, NSNumber *versionNumber, BOOL success) {
         
-        // Check if successful, may be continued, or should terminate
-        if ([completionIdentifier isEqualToString:@"speakers"]) {
-            if (success)
-                [self.localVersion setObject:version[completionIdentifier] forKey:completionIdentifier];
-            else if (!success && self.speakers.count == 0)
-                errorBlock(nil);
-        }
-        if ([completionIdentifier isEqualToString:@"sessions"]) {
-            if (success)
-                [self.localVersion setObject:version[completionIdentifier] forKey:completionIdentifier];
-            else if (!success && self.sessions.count == 0)
-                errorBlock(nil);
-        }
-        if ([completionIdentifier isEqualToString:@"sponsors"]) { // Here I should do something else
-            if (success)
-                [self.localVersion setObject:version[completionIdentifier] forKey:completionIdentifier];
-            else if (!success && self.sponsors.count == 0)
-                errorBlock(nil);
-        }
-        
-        if (self.speakers.count == 0 || self.sessions.count == 0 || self.sponsors.count == 0) {
-            return;
-        }
-        
-        // Call completion block to proceed
-        completion(YES);
-        
-        // Save the version data
-        [[NSUserDefaults standardUserDefaults] setObject:self.localVersion forKey:@"version"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        // Get to main queue
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            // identifier is either @"speakers" or @"sessions" or @"sponsors"
+            // Check success status
+            if (success) {
+                [self.localVersion setObject:versionNumber forKey:identifier]; // Update local version
+                [self.localStatus setObject:@YES forKey:identifier]; // Update local status
+            } else {
+                // Check if there is any local data
+                NSArray *array = [self valueForKey:identifier]; // This gets either speakers or sessions or sponsors
+                if (array.count) {
+                    [self.localStatus setObject:@YES forKey:identifier]; // Update local status
+                } else {
+                    errorBlock(nil);
+                }
+            }
+            
+            // Check if all statuses are O.K.
+            if ([self.localStatus[@"speakers"] boolValue] &&
+                [self.localStatus[@"sessions"] boolValue] &&
+                [self.localStatus[@"sponsors"] boolValue])
+            {
+                
+                // Call completion
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion();
+                });
+                
+                // Save the version data
+                [[NSUserDefaults standardUserDefaults] setObject:self.localVersion forKey:@"version"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
+            }
+            
+        });
         
     };
     
@@ -133,9 +145,9 @@
     [[LinzAPIClient sharedClient] GET:@"/version"
                            parameters:nil
                               success:^(NSURLSessionDataTask *task, id responseObject) {
-                                  [self setupSessionsWithRemoteVersion:responseObject completion:proceedBlock];
-                                  [self setupSponsorsWithRemoteVersion:responseObject completion:proceedBlock];
-                                  [self setupSpeakersWithRemoteVersion:responseObject completion:proceedBlock];
+                                  [self setupSessionsWithRemoteVersion:responseObject completion:completionBlock];
+                                  [self setupSponsorsWithRemoteVersion:responseObject completion:completionBlock];
+                                  [self setupSpeakersWithRemoteVersion:responseObject completion:completionBlock];
                               } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                   
                                   double speakers = [self.localVersion[@"speakers"] doubleValue];
@@ -145,14 +157,15 @@
                                   // Check the latest download version
                                   // And decide to proceed or terminate
                                   if (speakers >= 1.0 && sessions >= 1.0 && sponsors >= 1.0) {
-                                      proceedBlock(nil, YES, self.localVersion);
+                                      // proceedBlock(nil, YES, self.localVersion);
+                                      completion();
                                   } else {
                                       errorBlock(error);
                                   }
                               }];
 }
 
-- (void)setupSpeakersWithRemoteVersion:(NSDictionary *)remoteVersion completion:(void (^)(NSString *completionIdentifier, BOOL success, NSDictionary *version))completion {
+- (void)setupSpeakersWithRemoteVersion:(NSDictionary *)remoteVersion completion:(void (^)(NSString *identifier, NSNumber *versionNumber, BOOL success))completion {
     // Check version and download new data if needed
     if ([self.localVersion[@"speakers"] compare:remoteVersion[@"speakers"]] == NSOrderedAscending) {
         // Remove local data
@@ -163,7 +176,6 @@
                                   success:^(NSURLSessionDataTask *task, id responseObject) {
                                       // responseObject holds info for all speakers
                                       for (NSDictionary *speakerInfo in responseObject) {
-                                          
                                           // Create a speaker entity
                                           Speaker *speaker = [Speaker MR_createInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
                                           speaker.name = speakerInfo[@"full_name"];
@@ -173,22 +185,22 @@
                                           speaker.avatar = [speakerInfo[@"avatar"] isEqualToString:@""] ? nil : [@"http://linz.kod.io/public/images/speakers/" stringByAppendingString:speakerInfo[@"avatar"]];
                                           speaker.github = [speakerInfo[@"github"] isEqualToString:@""] ? nil : [@"http://github.com/" stringByAppendingString:speakerInfo[@"github"]];
                                           speaker.twitter = [speakerInfo[@"twitter"] isEqualToString:@""] ? nil : [@"http://twitter.com/" stringByAppendingString:speakerInfo[@"twitter"]];
-                                          
-                                          [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-                                              // if (success) NSLog(@"Save successful!");
-                                              // else NSLog(@"Save failed with error: %@", error);
-                                          }];
-                                          
                                       }
-                                      completion(@"speakers", YES, remoteVersion);
+                                      
+                                      [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+                                          // if (success) NSLog(@"Save successful!");
+                                          // else NSLog(@"Save failed with error: %@", error);
+                                      }];
+                                      
+                                      completion(@"speakers", remoteVersion[@"speakers"], YES);
                                   } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                      completion(@"speakers", NO, remoteVersion);
+                                      completion(@"speakers", remoteVersion[@"speakers"], NO);
                                   }];
     } else {
-        completion(@"speakers", YES, self.localVersion);
+        completion(@"speakers", self.localVersion[@"speakers"], YES);
     }
 }
-- (void)setupSessionsWithRemoteVersion:(NSDictionary *)remoteVersion completion:(void (^)(NSString *completionIdentifier, BOOL success, NSDictionary *version))completion {
+- (void)setupSessionsWithRemoteVersion:(NSDictionary *)remoteVersion completion:(void (^)(NSString *identifier, NSNumber *versionNumber, BOOL success))completion {
     // Check version and download new data if needed
     if ([self.localVersion[@"sessions"] compare:remoteVersion[@"sessions"]] == NSOrderedAscending) {
         // Remove local data
@@ -203,24 +215,15 @@
                                           // Add a small dictionary object to specify time cells
                                           // Check type and track values of the sessions for appropriate placing
                                           if ([sessionInfo[@"track"] isEqualToNumber:@0] || [sessionInfo[@"track"] isEqualToNumber:@1]) { // We check the track info instead of type to not to add time data twice for simultaneous sessions
-                                              
                                               // Create a session entity
                                               Session *session = [Session MR_createInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
                                               session.track = @(-1); // Track -1 means time cell level
                                               session.type = sessionInfo[@"type"]; // Type will help us to adjust the width
                                               session.timeInterval = sessionInfo[@"time"];
                                               session.sortingIndex = @(sortingIndex);
-                                              
-                                              [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-                                                  // if (success) NSLog(@"Save successful!");
-                                                  // else NSLog(@"Save failed with error: %@", error);
-                                              }];
-                                              
                                               // Increment index
                                               sortingIndex++;
-                                              
                                           }
-                                          
                                           // Create a session entity
                                           Session *session = [Session MR_createInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
                                           session.title = sessionInfo[@"title"];
@@ -231,25 +234,24 @@
                                           session.speakerIdentifier = sessionInfo[@"speaker"];
                                           session.sortingIndex = @(sortingIndex);
                                           session.identifier = sessionInfo[@"id"];
-                                          
-                                          [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-                                              // if (success) NSLog(@"Save successful!");
-                                              // else NSLog(@"Save failed with error: %@", error);
-                                          }];
-                                          
                                           // Increment index
                                           sortingIndex++;
-                                          
                                       }
-                                      completion(@"sessions", YES, remoteVersion);
+                                      
+                                      [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+                                          // if (success) NSLog(@"Save successful!");
+                                          // else NSLog(@"Save failed with error: %@", error);
+                                      }];
+                                      
+                                      completion(@"sessions", remoteVersion[@"sessions"], YES);
                                   } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                      completion(@"sessions", NO, remoteVersion);
+                                      completion(@"sessions", remoteVersion[@"sessions"], NO);
                                   }];
     } else {
-        completion(@"sessions", YES, self.localVersion);
+        completion(@"sessions", self.localVersion[@"sessions"], YES);
     }
 }
-- (void)setupSponsorsWithRemoteVersion:(NSDictionary *)remoteVersion completion:(void (^)(NSString *completionIdentifier, BOOL success, NSDictionary *version))completion {
+- (void)setupSponsorsWithRemoteVersion:(NSDictionary *)remoteVersion completion:(void (^)(NSString *identifier, NSNumber *versionNumber, BOOL success))completion {
     // Check version and download new data if needed
     if ([self.localVersion[@"sponsors"] compare:remoteVersion[@"sponsors"]] == NSOrderedAscending) {
         // Remove local data
@@ -267,9 +269,7 @@
                                           NSInteger priority = [responseObject indexOfObject:groupInfo];
                                           
                                           for (NSDictionary *sponsorInfo in sponsors) {
-                                              
                                               NSInteger subpriority = [sponsors indexOfObject:sponsorInfo];
-                                              
                                               // Create a sponsor entity
                                               Sponsor *sponsor = [Sponsor MR_createInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
                                               sponsor.type = type;
@@ -278,20 +278,20 @@
                                               sponsor.priority = @(priority);
                                               sponsor.subpriority = @(subpriority);
                                               sponsor.identifier = sponsorInfo[@"id"];
-                                              
-                                              [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-                                                  // if (success) NSLog(@"Save successful!");
-                                                  // else NSLog(@"Save failed with error: %@", error);
-                                              }];
-                                              
                                           }
                                       }
-                                      completion(@"sponsors", YES, remoteVersion);
+                                      
+                                      [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+                                          // if (success) NSLog(@"Save successful!");
+                                          // else NSLog(@"Save failed with error: %@", error);
+                                      }];
+                                      
+                                      completion(@"sponsors", remoteVersion[@"sponsors"], YES);
                                   } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                      completion(@"sponsors", NO, remoteVersion);
+                                      completion(@"sponsors", remoteVersion[@"sponsors"], NO);
                                   }];
     } else {
-        completion(@"sponsors", YES, self.localVersion);
+        completion(@"sponsors", self.localVersion[@"sponsors"], YES);
     }
 }
 

@@ -117,7 +117,7 @@
     // Show progress hud
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     
-    void (^proceedBlock)(BOOL success) = ^(BOOL success){
+    void (^completion)() = ^{
         
         self.speakers = [Manager sharedManager].speakers;
         self.sessions = [Manager sharedManager].sessions;
@@ -131,7 +131,9 @@
     };
     
     // Initiate setup
-    [[Manager sharedManager] setupWithCompletion:proceedBlock];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        [[Manager sharedManager] setupWithCompletion:completion];
+    });
     
 }
 
