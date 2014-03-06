@@ -25,6 +25,6 @@ typedef NS_ENUM(NSInteger, SessionType) {
 + (instancetype)sharedManager;
 
 #pragma mark - Setup
-- (void)setupWithCompletion:(void (^)(BOOL successful))completion;
+- (void)setupWithCompletion:(void (^)())completion;
 
 @end
