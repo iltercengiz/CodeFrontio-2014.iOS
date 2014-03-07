@@ -65,6 +65,10 @@
     // Set subtitle
     self.detailTextLabel.text = speaker.name;
     
+    // Configure swipe stuff
+    self.defaultColor = [UIColor lightGrayColor];
+    self.shouldAnimateIcons = NO;
+    
 }
 
 #pragma mark - UIView
@@ -77,9 +81,6 @@
         self.grabberView = [[GrabberView alloc] initWithFrame:self.bounds];
         [self.contentView insertSubview:self.grabberView atIndex:0];
     }
-    
-    self.defaultColor = [UIColor lightGrayColor];
-    self.shouldAnimateIcons = NO;
     
 }
 

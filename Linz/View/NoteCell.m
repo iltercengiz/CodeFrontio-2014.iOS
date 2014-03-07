@@ -46,6 +46,10 @@
     // Set subtitle
     self.detailTextLabel.text = session.title;
     
+    // Configure swipe stuff
+    self.defaultColor = [UIColor lightGrayColor];
+    self.shouldAnimateIcons = NO;
+    
 }
 
 #pragma mark - UITableViewCell
@@ -71,9 +75,6 @@
         self.grabberView = [[GrabberView alloc] initWithFrame:self.bounds];
         [self.contentView insertSubview:self.grabberView atIndex:0];
     }
-    
-    self.defaultColor = [UIColor lightGrayColor];
-    self.shouldAnimateIcons = NO;
     
 }
 
