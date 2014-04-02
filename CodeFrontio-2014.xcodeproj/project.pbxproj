@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7819805F10F64DE5879FCC62 /* libPods-Linz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB896DBC3D9242F389498E2E /* libPods-Linz.a */; };
 		7C00883818A8F84B00ED4B31 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C00883718A8F84B00ED4B31 /* Foundation.framework */; };
 		7C00883A18A8F84B00ED4B31 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C00883918A8F84B00ED4B31 /* CoreGraphics.framework */; };
 		7C00883C18A8F84B00ED4B31 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C00883B18A8F84B00ED4B31 /* UIKit.framework */; };
@@ -31,7 +30,7 @@
 		7C355C8318B6727000BB72B0 /* VenueImages.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7C355C8218B6727000BB72B0 /* VenueImages.bundle */; };
 		7C3840FB18AC0B0300A85C31 /* SponsorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3840FA18AC0B0300A85C31 /* SponsorCell.m */; };
 		7C3840FE18AC0B4900A85C31 /* SponsorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3840FD18AC0B4900A85C31 /* SponsorsViewController.m */; };
-		7C3BC57018B0FBE700CA0FC0 /* Linz.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC56E18B0FBE700CA0FC0 /* Linz.xcdatamodeld */; };
+		7C3BC57018B0FBE700CA0FC0 /* CodeFrontio.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC56E18B0FBE700CA0FC0 /* CodeFrontio.xcdatamodeld */; };
 		7C3BC58618B1011500CA0FC0 /* Sponsor+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC58518B1011500CA0FC0 /* Sponsor+Create.m */; };
 		7C3BC58918B1011F00CA0FC0 /* Session+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC58818B1011F00CA0FC0 /* Session+Create.m */; };
 		7C3BC58C18B1012900CA0FC0 /* Speaker+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC58B18B1012900CA0FC0 /* Speaker+Create.m */; };
@@ -55,17 +54,18 @@
 		7CCB107518AE5DF3007A2486 /* CalendarSessionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB107218AE5DF3007A2486 /* CalendarSessionCell.m */; };
 		7CCB107618AE5DF3007A2486 /* CalendarTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB107418AE5DF3007A2486 /* CalendarTimeCell.m */; };
 		7CDE9FEB18B4B9DA00E2F619 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDE9FEA18B4B9DA00E2F619 /* Photo.m */; };
+		BCA93DB8D5A044DCBF5B4EA4 /* libPods-CodeFrontio-2014.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A302BFD5A71F4B95B3A6CFB0 /* libPods-CodeFrontio-2014.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7C00883418A8F84B00ED4B31 /* Linz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Linz.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C00883418A8F84B00ED4B31 /* CodeFrontio-2014.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CodeFrontio-2014.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C00883718A8F84B00ED4B31 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7C00883918A8F84B00ED4B31 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		7C00883B18A8F84B00ED4B31 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		7C00883F18A8F84B00ED4B31 /* Linz-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Linz-Info.plist"; sourceTree = "<group>"; };
+		7C00883F18A8F84B00ED4B31 /* CodeFrontio-2014-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CodeFrontio-2014-Info.plist"; sourceTree = "<group>"; };
 		7C00884118A8F84B00ED4B31 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7C00884318A8F84B00ED4B31 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		7C00884518A8F84B00ED4B31 /* Linz-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Linz-Prefix.pch"; sourceTree = "<group>"; };
+		7C00884518A8F84B00ED4B31 /* CodeFrontio-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CodeFrontio-Prefix.pch"; sourceTree = "<group>"; };
 		7C00884618A8F84B00ED4B31 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7C00884718A8F84B00ED4B31 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7C00885218A8F84B00ED4B31 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -99,7 +99,7 @@
 		7C3840FA18AC0B0300A85C31 /* SponsorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SponsorCell.m; sourceTree = "<group>"; };
 		7C3840FC18AC0B4900A85C31 /* SponsorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SponsorsViewController.h; sourceTree = "<group>"; };
 		7C3840FD18AC0B4900A85C31 /* SponsorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SponsorsViewController.m; sourceTree = "<group>"; };
-		7C3BC56F18B0FBE700CA0FC0 /* Linz.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Linz.xcdatamodel; sourceTree = "<group>"; };
+		7C3BC56F18B0FBE700CA0FC0 /* CodeFrontio.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CodeFrontio.xcdatamodel; sourceTree = "<group>"; };
 		7C3BC58418B1011500CA0FC0 /* Sponsor+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Sponsor+Create.h"; sourceTree = "<group>"; };
 		7C3BC58518B1011500CA0FC0 /* Sponsor+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Sponsor+Create.m"; sourceTree = "<group>"; };
 		7C3BC58718B1011F00CA0FC0 /* Session+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Session+Create.h"; sourceTree = "<group>"; };
@@ -145,8 +145,8 @@
 		7CCB107418AE5DF3007A2486 /* CalendarTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarTimeCell.m; sourceTree = "<group>"; };
 		7CDE9FE918B4B9DA00E2F619 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
 		7CDE9FEA18B4B9DA00E2F619 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
-		99A82EADC5E04BCF96463C72 /* Pods-Linz.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Linz.xcconfig"; path = "Pods/Pods-Linz.xcconfig"; sourceTree = "<group>"; };
-		EB896DBC3D9242F389498E2E /* libPods-Linz.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Linz.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A302BFD5A71F4B95B3A6CFB0 /* libPods-CodeFrontio-2014.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CodeFrontio-2014.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8D757C9049C42AEB515F8C2 /* Pods-CodeFrontio-2014.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CodeFrontio-2014.xcconfig"; path = "Pods/Pods-CodeFrontio-2014.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,7 +158,7 @@
 				7C00883A18A8F84B00ED4B31 /* CoreGraphics.framework in Frameworks */,
 				7C00883C18A8F84B00ED4B31 /* UIKit.framework in Frameworks */,
 				7C00883818A8F84B00ED4B31 /* Foundation.framework in Frameworks */,
-				7819805F10F64DE5879FCC62 /* libPods-Linz.a in Frameworks */,
+				BCA93DB8D5A044DCBF5B4EA4 /* libPods-CodeFrontio-2014.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,17 +168,17 @@
 		7C00882B18A8F84B00ED4B31 = {
 			isa = PBXGroup;
 			children = (
-				7C00883D18A8F84B00ED4B31 /* Linz */,
+				7C00883D18A8F84B00ED4B31 /* CodeFrontio-2014 */,
 				7C00883618A8F84B00ED4B31 /* Frameworks */,
 				7C00883518A8F84B00ED4B31 /* Products */,
-				99A82EADC5E04BCF96463C72 /* Pods-Linz.xcconfig */,
+				A8D757C9049C42AEB515F8C2 /* Pods-CodeFrontio-2014.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
 		7C00883518A8F84B00ED4B31 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7C00883418A8F84B00ED4B31 /* Linz.app */,
+				7C00883418A8F84B00ED4B31 /* CodeFrontio-2014.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -190,18 +190,18 @@
 				7C00883718A8F84B00ED4B31 /* Foundation.framework */,
 				7C00883918A8F84B00ED4B31 /* CoreGraphics.framework */,
 				7C00883B18A8F84B00ED4B31 /* UIKit.framework */,
-				EB896DBC3D9242F389498E2E /* libPods-Linz.a */,
+				A302BFD5A71F4B95B3A6CFB0 /* libPods-CodeFrontio-2014.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		7C00883D18A8F84B00ED4B31 /* Linz */ = {
+		7C00883D18A8F84B00ED4B31 /* CodeFrontio-2014 */ = {
 			isa = PBXGroup;
 			children = (
 				7C00884618A8F84B00ED4B31 /* AppDelegate.h */,
 				7C00884718A8F84B00ED4B31 /* AppDelegate.m */,
 				7C422F9018A8FA4800195D6C /* iPad.storyboard */,
-				7C3BC56E18B0FBE700CA0FC0 /* Linz.xcdatamodeld */,
+				7C3BC56E18B0FBE700CA0FC0 /* CodeFrontio.xcdatamodeld */,
 				7C00885218A8F84B00ED4B31 /* Images.xcassets */,
 				7C355C8218B6727000BB72B0 /* VenueImages.bundle */,
 				7C3BC59318B10C8F00CA0FC0 /* Manager */,
@@ -214,16 +214,16 @@
 				7CACCFE618A9141200D66A15 /* Libraries */,
 				7C00883E18A8F84B00ED4B31 /* Supporting Files */,
 			);
-			path = Linz;
+			path = "CodeFrontio-2014";
 			sourceTree = "<group>";
 		};
 		7C00883E18A8F84B00ED4B31 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				7C00883F18A8F84B00ED4B31 /* Linz-Info.plist */,
+				7C00883F18A8F84B00ED4B31 /* CodeFrontio-2014-Info.plist */,
 				7C00884018A8F84B00ED4B31 /* InfoPlist.strings */,
 				7C00884318A8F84B00ED4B31 /* main.m */,
-				7C00884518A8F84B00ED4B31 /* Linz-Prefix.pch */,
+				7C00884518A8F84B00ED4B31 /* CodeFrontio-Prefix.pch */,
 				7C422F9418A8FA6800195D6C /* Localizable.strings */,
 			);
 			name = "Supporting Files";
@@ -405,9 +405,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7C00883318A8F84B00ED4B31 /* Linz */ = {
+		7C00883318A8F84B00ED4B31 /* CodeFrontio-2014 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7C00886918A8F84C00ED4B31 /* Build configuration list for PBXNativeTarget "Linz" */;
+			buildConfigurationList = 7C00886918A8F84C00ED4B31 /* Build configuration list for PBXNativeTarget "CodeFrontio-2014" */;
 			buildPhases = (
 				44AB4C85EB2A4AB6AEE30F49 /* Check Pods Manifest.lock */,
 				7C00883018A8F84B00ED4B31 /* Sources */,
@@ -419,9 +419,9 @@
 			);
 			dependencies = (
 			);
-			name = Linz;
+			name = "CodeFrontio-2014";
 			productName = Linz;
-			productReference = 7C00883418A8F84B00ED4B31 /* Linz.app */;
+			productReference = 7C00883418A8F84B00ED4B31 /* CodeFrontio-2014.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -430,15 +430,15 @@
 		7C00882C18A8F84B00ED4B31 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Ilter Cengiz";
 				TargetAttributes = {
 					7C00883318A8F84B00ED4B31 = {
-						DevelopmentTeam = P8EBW8LF2M;
+						DevelopmentTeam = RTGTUFE5A5;
 					};
 				};
 			};
-			buildConfigurationList = 7C00882F18A8F84B00ED4B31 /* Build configuration list for PBXProject "Linz" */;
+			buildConfigurationList = 7C00882F18A8F84B00ED4B31 /* Build configuration list for PBXProject "CodeFrontio-2014" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -452,7 +452,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7C00883318A8F84B00ED4B31 /* Linz */,
+				7C00883318A8F84B00ED4B31 /* CodeFrontio-2014 */,
 			);
 		};
 /* End PBXProject section */
@@ -486,7 +486,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-Linz-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Pods-CodeFrontio-2014-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		44AB4C85EB2A4AB6AEE30F49 /* Check Pods Manifest.lock */ = {
@@ -518,7 +518,7 @@
 				7C83BB4E18AAD7B0003D3557 /* SpeakerCell.m in Sources */,
 				7C422F9D18A8FE5F00195D6C /* MasterViewController.m in Sources */,
 				7C83BB5118AAD7BE003D3557 /* NotesCell.m in Sources */,
-				7C3BC57018B0FBE700CA0FC0 /* Linz.xcdatamodeld in Sources */,
+				7C3BC57018B0FBE700CA0FC0 /* CodeFrontio.xcdatamodeld in Sources */,
 				7C34A65118B26AD800EC31DA /* NSDictionary+SortedKeys.m in Sources */,
 				7C01A55B18B6AB2D007284F5 /* MasterViewHeader.m in Sources */,
 				7C34A64918B2268A00EC31DA /* Speaker.m in Sources */,
@@ -579,7 +579,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -619,7 +618,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -651,34 +649,34 @@
 		};
 		7C00886A18A8F84C00ED4B31 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 99A82EADC5E04BCF96463C72 /* Pods-Linz.xcconfig */;
+			baseConfigurationReference = A8D757C9049C42AEB515F8C2 /* Pods-CodeFrontio-2014.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ilter Cengiz (32BC6VKTXF)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ugur Ozyilmazel (T85D88WSB2)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Linz/Linz-Prefix.pch";
-				INFOPLIST_FILE = "Linz/Linz-Info.plist";
+				GCC_PREFIX_HEADER = "CodeFrontio-2014/CodeFrontio-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/CodeFrontio-2014/CodeFrontio-2014-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "843EA569-A9E2-4F5F-ABD8-A7AAD1B3DA61";
+				PRODUCT_NAME = "CodeFrontio-2014";
+				PROVISIONING_PROFILE = "6F7FF16E-06B8-4EFD-A1B4-9329A04912D9";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		7C00886B18A8F84C00ED4B31 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 99A82EADC5E04BCF96463C72 /* Pods-Linz.xcconfig */;
+			baseConfigurationReference = A8D757C9049C42AEB515F8C2 /* Pods-CodeFrontio-2014.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Ilter Cengiz (P8EBW8LF2M)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ugur Ozyilmazel (RTGTUFE5A5)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Linz/Linz-Prefix.pch";
-				INFOPLIST_FILE = "Linz/Linz-Info.plist";
+				GCC_PREFIX_HEADER = "CodeFrontio-2014/CodeFrontio-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/CodeFrontio-2014/CodeFrontio-2014-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "A8DA5E3C-5627-49AE-A988-E921E4EE26F8";
+				PRODUCT_NAME = "CodeFrontio-2014";
+				PROVISIONING_PROFILE = "346B88E4-C2B1-43C1-B5E0-0D0D1DFA55E8";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -686,7 +684,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7C00882F18A8F84B00ED4B31 /* Build configuration list for PBXProject "Linz" */ = {
+		7C00882F18A8F84B00ED4B31 /* Build configuration list for PBXProject "CodeFrontio-2014" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7C00886718A8F84C00ED4B31 /* Debug */,
@@ -695,7 +693,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7C00886918A8F84C00ED4B31 /* Build configuration list for PBXNativeTarget "Linz" */ = {
+		7C00886918A8F84C00ED4B31 /* Build configuration list for PBXNativeTarget "CodeFrontio-2014" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7C00886A18A8F84C00ED4B31 /* Debug */,
@@ -707,13 +705,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		7C3BC56E18B0FBE700CA0FC0 /* Linz.xcdatamodeld */ = {
+		7C3BC56E18B0FBE700CA0FC0 /* CodeFrontio.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				7C3BC56F18B0FBE700CA0FC0 /* Linz.xcdatamodel */,
+				7C3BC56F18B0FBE700CA0FC0 /* CodeFrontio.xcdatamodel */,
 			);
-			currentVersion = 7C3BC56F18B0FBE700CA0FC0 /* Linz.xcdatamodel */;
-			path = Linz.xcdatamodeld;
+			currentVersion = 7C3BC56F18B0FBE700CA0FC0 /* CodeFrontio.xcdatamodel */;
+			path = CodeFrontio.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
