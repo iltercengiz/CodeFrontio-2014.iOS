@@ -11,6 +11,7 @@ target 'CodeFrontio-2014' do
 	pod 'MagicalRecord', '~> 2.2', :inhibit_warnings => true
 	pod 'MCSwipeTableViewCell', '~> 2.1.0'
 	pod 'TMCache', '~> 1.2.0'
+	pod 'MSDynamicsDrawerViewController', :git => 'https://github.com/monsieurje/MSDynamicsDrawerViewController.git'
 
 end
 
