@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Ilter Cengiz. All rights reserved.
 //
 
-#import "MSDynamicsDrawerViewController.h"
+#import <MSDynamicsDrawerViewController/MSDynamicsDrawerViewController.h>
 
 @interface BaseViewController : MSDynamicsDrawerViewController
 

@@ -24,7 +24,17 @@
 }
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
+    
+    [self setRevealWidth:240.0 forDirection:MSDynamicsDrawerDirectionLeft];
+    
+    UIViewController *masterViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MasterViewController"];
+    UIViewController *detailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailViewController"];
+    
+    [self setDrawerViewController:masterViewController forDirection:MSDynamicsDrawerDirectionLeft];
+    [self setPaneViewController:detailViewController];
+    
 }
 
 - (void)didReceiveMemoryWarning {

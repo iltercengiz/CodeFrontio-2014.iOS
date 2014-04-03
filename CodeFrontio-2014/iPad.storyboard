@@ -7,7 +7,7 @@
         <!--Master View Controller-->
         <scene sceneID="KH5-TJ-Lk1">
             <objects>
-                <tableViewController clearsSelectionOnViewWillAppear="NO" id="aXq-TQ-JKW" customClass="MasterViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MasterViewController" clearsSelectionOnViewWillAppear="NO" id="aXq-TQ-JKW" customClass="MasterViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="64" sectionHeaderHeight="354" sectionFooterHeight="22" id="UGz-0f-iOn">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -65,7 +65,7 @@
         <!--Navigation Controller-->
         <scene sceneID="CyR-Kw-X5f">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="blH-N8-b7N" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="DetailViewController" automaticallyAdjustsScrollViewInsets="NO" id="blH-N8-b7N" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="a86-ZH-BhJ">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
@@ -668,6 +668,6 @@ Since 1979, Ars Electronica has sought out interlinkages and congruities, causes
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Lnl-vi-dL0"/>
+        <segue reference="kaR-fg-M3l"/>
     </inferredMetricsTieBreakers>
 </document>
