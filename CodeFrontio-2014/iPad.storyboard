@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="uLl-6G-geC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="PDc-zx-dHe">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -9,20 +9,20 @@
             <objects>
                 <tableViewController clearsSelectionOnViewWillAppear="NO" id="aXq-TQ-JKW" customClass="MasterViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="64" sectionHeaderHeight="354" sectionFooterHeight="22" id="UGz-0f-iOn">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="menuCell" textLabel="gYz-fV-g6M" style="IBUITableViewCellStyleDefault" id="TOM-eM-Npn" userLabel="Table View Cell - menuCell" customClass="MenuCell">
-                                <rect key="frame" x="0.0" y="354" width="320" height="64"/>
+                                <rect key="frame" x="0.0" y="354" width="768" height="64"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TOM-eM-Npn" id="2Ze-4K-FvN">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="64"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gYz-fV-g6M">
-                                            <rect key="frame" x="15" y="0.0" width="290" height="64"/>
+                                            <rect key="frame" x="15" y="0.0" width="738" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -42,21 +42,25 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hZ4-QU-tf5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-80" y="410"/>
+            <point key="canvasLocation" x="-516" y="324"/>
         </scene>
-        <!--Split View Controller-->
-        <scene sceneID="Iab-Ut-0aH">
+        <!--Base View Controller-->
+        <scene sceneID="rKy-Xq-lIa">
             <objects>
-                <splitViewController id="uLl-6G-geC" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <connections>
-                        <segue destination="blH-N8-b7N" kind="relationship" relationship="detailViewController" id="3FG-DV-0TR"/>
-                        <segue destination="aXq-TQ-JKW" kind="relationship" relationship="masterViewController" id="lBe-Yr-xeX"/>
-                    </connections>
-                </splitViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4Rx-BW-V2H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="PDc-zx-dHe" customClass="BaseViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1wy-pa-QkN"/>
+                        <viewControllerLayoutGuide type="bottom" id="GoT-WS-MyC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wX2-2o-leZ">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DJZ-Fg-F16" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-986" y="324"/>
+            <point key="canvasLocation" x="-1409" y="324"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="CyR-Kw-X5f">
@@ -664,6 +668,6 @@ Since 1979, Ars Electronica has sought out interlinkages and congruities, causes
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="kaR-fg-M3l"/>
+        <segue reference="Lnl-vi-dL0"/>
     </inferredMetricsTieBreakers>
 </document>
