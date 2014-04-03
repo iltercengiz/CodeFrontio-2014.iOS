@@ -78,7 +78,7 @@
 - (void)customize {
     
     // UINavigationBar coloring
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageWithUIColor:[UIColor colorWithRed:0.255 green:0.255 blue:0.259 alpha:1]]
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageWithUIColor:[UIColor colorWithRed:0.125 green:0.306 blue:0.576 alpha:1]]
                                        forBarMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];

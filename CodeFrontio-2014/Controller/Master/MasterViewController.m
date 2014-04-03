@@ -15,20 +15,9 @@
 #pragma mark Controller
 #import "MasterViewController.h"
 #import "CalendarViewController.h"
-
-#pragma mark Constants
-// Thanks to @mkonutgan for warning me to change these to NSString from const char *
-// Greetings Mikael! :)
-static NSString * const calendarSceneIdentifier = @"CalendarScene";
-static NSString * const favouritesSceneIdentifier = @"FavouritesScene";
-static NSString * const notesSceneIdentifier = @"NotesScene";
-static NSString * const venueSceneIdentifier = @"VenueScene";
-static NSString * const supportersSceneIdentifier = @"SponsorsScene";
+#import "BaseViewController.h"
 
 @interface MasterViewController ()
-
-// This will be used to cache the scenes through run time
-@property (nonatomic) NSMutableArray *scenes;
 
 @end
 
@@ -42,12 +31,8 @@ static NSString * const supportersSceneIdentifier = @"SponsorsScene";
     // Prevent tableView from deselecting cells
     self.clearsSelectionOnViewWillAppear = NO;
     
-    // Create the scenes array with NSNulls but calendar scene
-    self.scenes = [NSMutableArray arrayWithObjects:[self.splitViewController.viewControllers lastObject],
-                   [NSNull null], [NSNull null], [NSNull null], [NSNull null], nil];
-    
     // Set background color
-    self.tableView.backgroundColor = [UIColor colorWithRed:0.255 green:0.255 blue:0.259 alpha:1];
+    self.tableView.backgroundColor = [UIColor colorWithRed:0.255 green:0.255 blue:0.259 alpha:0.0];
     
     // Select 'Calendar' cell
     [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
@@ -58,6 +43,14 @@ static NSString * const supportersSceneIdentifier = @"SponsorsScene";
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark - Getter
+- (NSMutableDictionary *)scenes {
+    if (!_scenes) {
+        _scenes = [NSMutableDictionary dictionary];
+    }
+    return _scenes;
 }
 
 #pragma mark - UITableViewDataSource
@@ -73,36 +66,30 @@ static NSString * const supportersSceneIdentifier = @"SponsorsScene";
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UIViewController *scene;
+    // Set identifier
+    NSString *identifier;
+    switch (indexPath.row) {
+        case ContentTypeCalendar: identifier = calendarSceneIdentifier; break;
+        case ContentTypeFavourites: identifier = favouritesSceneIdentifier; break;
+        case ContentTypeNotes: identifier = notesSceneIdentifier; break;
+        case ContentTypeVenue: identifier = venueSceneIdentifier; break;
+        case ContentTypeSponsors: identifier = supportersSceneIdentifier; break;
+        default: break;
+    }
     
-    // Check if the scene is available in cache array
-    id object = self.scenes[indexPath.row];
-    if (![object isEqual:[NSNull null]]) {
-        scene = object;
-    } else {
-        
-        // Set identifier
-        NSString *identifier;
-        switch (indexPath.row) {
-            case ContentTypeCalendar: identifier = calendarSceneIdentifier; break;
-            case ContentTypeFavourites: identifier = favouritesSceneIdentifier; break;
-            case ContentTypeNotes: identifier = notesSceneIdentifier; break;
-            case ContentTypeVenue: identifier = venueSceneIdentifier; break;
-            case ContentTypeSponsors: identifier = supportersSceneIdentifier; break;
-            default: break;
-        }
-        
+    UIViewController *scene = self.scenes[identifier];
+    
+    // Check if the scene is available in cache array and if not create and set it
+    if (!scene) {
         // Instantiate view controller
         UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:identifier];
         scene = [[UINavigationController alloc] initWithRootViewController:vc];
-        
         // Add the scene to the cache
-        [self.scenes replaceObjectAtIndex:indexPath.row withObject:scene];
-        
+        self.scenes[identifier] = scene;
     }
     
     // Present the scene
-    self.splitViewController.viewControllers = @[[self.splitViewController.viewControllers firstObject], scene];
+    [self.baseViewController setPaneViewController:scene animated:YES completion:nil];
     
 }
 

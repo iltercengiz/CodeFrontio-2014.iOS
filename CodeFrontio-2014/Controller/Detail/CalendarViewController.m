@@ -95,9 +95,11 @@
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
+    self.title = NSLocalizedString(@"Calendar", nil);
+    
     RFQuiltLayout *layout = (RFQuiltLayout *)self.collectionView.collectionViewLayout;
     layout.delegate = self;
-    layout.blockPixels = CGSizeMake(128.0, 64.0);
+    layout.blockPixels = UIInterfaceOrientationIsLandscape(self.interfaceOrientation) ? CGSizeMake(128.0, 64.0) : CGSizeMake(128.0, 87.27);;
     layout.direction = UICollectionViewScrollDirectionHorizontal;
     
     // Set background color of collectionView for custom drawing
@@ -134,6 +136,18 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         [[Manager sharedManager] setupWithCompletion:completion];
     });
+    
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    
+    RFQuiltLayout *layout = (RFQuiltLayout *)self.collectionView.collectionViewLayout;
+    
+    if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
+        layout.blockPixels = CGSizeMake(128.0, 64.0);
+    } else {
+        layout.blockPixels = CGSizeMake(128.0, 87.27);
+    }
     
 }
 

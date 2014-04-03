@@ -8,6 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+#pragma mark Constants
+static NSString * const calendarSceneIdentifier = @"CalendarScene";
+static NSString * const favouritesSceneIdentifier = @"FavouritesScene";
+static NSString * const notesSceneIdentifier = @"NotesScene";
+static NSString * const venueSceneIdentifier = @"VenueScene";
+static NSString * const supportersSceneIdentifier = @"SponsorsScene";
+
+@class BaseViewController;
+
 @interface MasterViewController : UITableViewController
+
+@property (weak, nonatomic) BaseViewController *baseViewController;
+
+// This will be used to cache the scenes through run time
+@property (nonatomic) NSMutableDictionary *scenes;
 
 @end

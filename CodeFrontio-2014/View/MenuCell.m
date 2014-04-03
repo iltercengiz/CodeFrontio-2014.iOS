@@ -28,7 +28,7 @@
     
     // Set text
     self.textLabel.text = [self stringForContentType:contentType];
-    self.textLabel.textColor = [UIColor colorWithRed:0.925 green:0.925 blue:0.925 alpha:1];
+    self.textLabel.textColor = [UIColor colorWithRed:0.149 green:0.161 blue:0.173 alpha:1];
     
 }
 
@@ -71,18 +71,13 @@
     
     UIBezierPath *bezierPath;
     
-    // Background
-    bezierPath = [UIBezierPath bezierPathWithRect:rect];
-    [[UIColor colorWithRed:0.255 green:0.255 blue:0.259 alpha:1] setFill];
-    [bezierPath fill];
-    
     // Lines
     // Upper line
     bezierPath = [UIBezierPath bezierPath];
     [bezierPath setLineWidth:1.0];
     [bezierPath moveToPoint:(CGPoint){0.0, 1.0}];
     [bezierPath addLineToPoint:(CGPoint){CGRectGetWidth(self.frame), 1.0}];
-    [[UIColor colorWithRed:0.325 green:0.325 blue:0.329 alpha:1] setStroke];
+    [[UIColor colorWithRed:0.376 green:0.808 blue:0.867 alpha:1] setStroke];
     [bezierPath stroke];
     
     // Lower line
@@ -90,7 +85,7 @@
     [bezierPath setLineWidth:1.0];
     [bezierPath moveToPoint:(CGPoint){0.0, CGRectGetHeight(self.frame)}];
     [bezierPath addLineToPoint:(CGPoint){CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)}];
-    [[UIColor colorWithRed:0.169 green:0.169 blue:0.173 alpha:1] setStroke];
+    [[UIColor colorWithRed:0.000 green:0.663 blue:0.855 alpha:1] setStroke];
     [bezierPath stroke];
     
     // Selected indicator and icon highlighting
@@ -115,7 +110,7 @@
     if (selected) {
         self.textLabel.textColor = [UIColor colorWithRed:0.965 green:0.620 blue:0.153 alpha:1];
     } else {
-        self.textLabel.textColor = [UIColor colorWithRed:0.925 green:0.925 blue:0.925 alpha:1];
+        self.textLabel.textColor = [UIColor colorWithRed:0.149 green:0.161 blue:0.173 alpha:1];
     }
     
     [self setNeedsDisplay];

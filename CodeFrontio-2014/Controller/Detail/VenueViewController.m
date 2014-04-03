@@ -28,6 +28,8 @@
     
     [super viewDidLoad];
     
+    self.title = NSLocalizedString(@"Venue", nil);
+    
     self.carousel.dataSource = self;
     self.carousel.delegate = self;
     self.carousel.type = iCarouselTypeRotary;

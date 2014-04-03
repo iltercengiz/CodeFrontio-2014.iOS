@@ -41,6 +41,8 @@
     
     [super viewDidLoad];
     
+    self.title = NSLocalizedString(@"Notes", nil);
+    
     // Edit button
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     

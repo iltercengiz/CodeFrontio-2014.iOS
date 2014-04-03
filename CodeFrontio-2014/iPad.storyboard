@@ -62,30 +62,12 @@
             </objects>
             <point key="canvasLocation" x="-1409" y="324"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="CyR-Kw-X5f">
-            <objects>
-                <navigationController storyboardIdentifier="DetailViewController" automaticallyAdjustsScrollViewInsets="NO" id="blH-N8-b7N" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="a86-ZH-BhJ">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="u6d-1Y-GYC" kind="relationship" relationship="rootViewController" id="UuF-id-uTX"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Hv3-OL-pff" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="370" y="324"/>
-        </scene>
         <!--Calendar View Controller-->
         <scene sceneID="uU0-dZ-frY">
             <objects>
                 <collectionViewController storyboardIdentifier="CalendarScene" autoresizesArchivedViewToFullSize="NO" id="u6d-1Y-GYC" customClass="CalendarViewController" sceneMemberID="viewController">
                     <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="MGH-HU-9ml" customClass="CalendarCollectionView">
-                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewLayout key="collectionViewLayout" id="akR-kZ-vln" customClass="RFQuiltLayout"/>
@@ -250,11 +232,11 @@
                                 </view>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="y0b-44-FWg" firstAttribute="top" secondItem="O9q-h0-ZkR" secondAttribute="top" constant="280" id="0x0-Cu-FBQ"/>
                                     <constraint firstAttribute="centerX" secondItem="y0b-44-FWg" secondAttribute="centerX" id="6hf-s3-Nql"/>
                                     <constraint firstItem="Xjq-Ff-VdM" firstAttribute="leading" secondItem="O9q-h0-ZkR" secondAttribute="leading" constant="20" id="7nx-bh-SHx"/>
                                     <constraint firstItem="Xjq-Ff-VdM" firstAttribute="top" secondItem="y0b-44-FWg" secondAttribute="bottom" constant="8" id="DUg-37-wds"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Xjq-Ff-VdM" secondAttribute="trailing" constant="20" id="Eby-63-SoC"/>
+                                    <constraint firstAttribute="centerY" secondItem="y0b-44-FWg" secondAttribute="centerY" constant="18" id="VTK-De-4UR"/>
                                     <constraint firstItem="Xjq-Ff-VdM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="O9q-h0-ZkR" secondAttribute="leading" constant="20" id="Y4O-3C-2Yf"/>
                                     <constraint firstAttribute="trailing" secondItem="Xjq-Ff-VdM" secondAttribute="trailing" constant="20" id="atk-Uk-pOa"/>
                                 </constraints>
@@ -270,7 +252,6 @@
                             <outlet property="delegate" destination="u6d-1Y-GYC" id="57X-Ej-6rF"/>
                         </connections>
                     </collectionView>
-                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="aaY-nW-rXg"/>
                     <connections>
                         <segue destination="OR0-dG-8hg" kind="push" identifier="sessionSegue" id="o8v-YS-hOf"/>
@@ -278,7 +259,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2m4-3c-8Nv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1271" y="324"/>
+            <point key="canvasLocation" x="363" y="324"/>
         </scene>
         <!--Session View Controller-->
         <scene sceneID="gTH-pM-xnr">
@@ -408,7 +389,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c8f-D5-sTj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2155" y="324"/>
+            <point key="canvasLocation" x="1247" y="324"/>
         </scene>
         <!--Sponsors View Controller-->
         <scene sceneID="8OD-vF-Ly3">
@@ -453,7 +434,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gLJ-m1-OuK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3927" y="1520"/>
+            <point key="canvasLocation" x="3019" y="1520"/>
         </scene>
         <!--Venue View Controller-->
         <scene sceneID="jGj-FP-3gC">
@@ -547,7 +528,7 @@ Since 1979, Ars Electronica has sought out interlinkages and congruities, causes
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i3q-vp-2FU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3039" y="1520"/>
+            <point key="canvasLocation" x="2131" y="1520"/>
         </scene>
         <!--Favourites View Controller-->
         <scene sceneID="zDP-vk-rqp">
@@ -601,7 +582,7 @@ Since 1979, Ars Electronica has sought out interlinkages and congruities, causes
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bce-t7-cjb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1271" y="1520"/>
+            <point key="canvasLocation" x="363" y="1520"/>
         </scene>
         <!--Notes View Controller-->
         <scene sceneID="X4H-hr-Wev">
@@ -651,7 +632,7 @@ Since 1979, Ars Electronica has sought out interlinkages and congruities, causes
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dAD-tg-Fkr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2155" y="1520"/>
+            <point key="canvasLocation" x="1247" y="1520"/>
         </scene>
     </scenes>
     <resources>
@@ -668,6 +649,6 @@ Since 1979, Ars Electronica has sought out interlinkages and congruities, causes
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="kaR-fg-M3l"/>
+        <segue reference="o8v-YS-hOf"/>
     </inferredMetricsTieBreakers>
 </document>

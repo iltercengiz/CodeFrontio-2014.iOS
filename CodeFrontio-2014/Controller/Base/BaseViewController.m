@@ -6,7 +6,9 @@
 //  Copyright (c) 2014 Ilter Cengiz. All rights reserved.
 //
 
+#pragma mark Controller
 #import "BaseViewController.h"
+#import "MasterViewController.h"
 
 @interface BaseViewController ()
 
@@ -27,13 +29,30 @@
     
     [super viewDidLoad];
     
+    // Set background color
+    self.view.backgroundColor = [UIColor colorWithRed:0.933 green:0.933 blue:0.992 alpha:1];
+    
+    // Side menu width
     [self setRevealWidth:240.0 forDirection:MSDynamicsDrawerDirectionLeft];
     
-    UIViewController *masterViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MasterViewController"];
-    UIViewController *detailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailViewController"];
+    // Add stylers
+    [self addStylersFromArray:@[[MSDynamicsDrawerShadowStyler styler],
+                                [MSDynamicsDrawerResizeStyler styler],
+                                [MSDynamicsDrawerScaleStyler styler],
+                                [MSDynamicsDrawerFadeStyler styler],
+                                [MSDynamicsDrawerParallaxStyler styler]
+                                ]
+                 forDirection:MSDynamicsDrawerDirectionLeft];
+    
+    MasterViewController *masterViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MasterViewController"];
+    UIViewController *calendarViewController = [self.storyboard instantiateViewControllerWithIdentifier:calendarSceneIdentifier];
+    UINavigationController *paneViewController = [[UINavigationController alloc] initWithRootViewController:calendarViewController];
     
     [self setDrawerViewController:masterViewController forDirection:MSDynamicsDrawerDirectionLeft];
-    [self setPaneViewController:detailViewController];
+    [self setPaneViewController:paneViewController];
+    
+    masterViewController.baseViewController = self;
+    masterViewController.scenes[calendarSceneIdentifier] = paneViewController;
     
 }
 
