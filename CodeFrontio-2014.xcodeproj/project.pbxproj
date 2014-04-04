@@ -54,6 +54,7 @@
 		7CCB107518AE5DF3007A2486 /* CalendarSessionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB107218AE5DF3007A2486 /* CalendarSessionCell.m */; };
 		7CCB107618AE5DF3007A2486 /* CalendarTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB107418AE5DF3007A2486 /* CalendarTimeCell.m */; };
 		7CDE9FEB18B4B9DA00E2F619 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDE9FEA18B4B9DA00E2F619 /* Photo.m */; };
+		7CFF7B2918EE9A9800A674F2 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CFF7B2818EE9A9800A674F2 /* iPhone.storyboard */; };
 		BCA93DB8D5A044DCBF5B4EA4 /* libPods-CodeFrontio-2014.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A302BFD5A71F4B95B3A6CFB0 /* libPods-CodeFrontio-2014.a */; };
 /* End PBXBuildFile section */
 
@@ -145,6 +146,7 @@
 		7CCB107418AE5DF3007A2486 /* CalendarTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarTimeCell.m; sourceTree = "<group>"; };
 		7CDE9FE918B4B9DA00E2F619 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
 		7CDE9FEA18B4B9DA00E2F619 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
+		7CFF7B2818EE9A9800A674F2 /* iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPhone.storyboard; sourceTree = "<group>"; };
 		A302BFD5A71F4B95B3A6CFB0 /* libPods-CodeFrontio-2014.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CodeFrontio-2014.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8D757C9049C42AEB515F8C2 /* Pods-CodeFrontio-2014.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CodeFrontio-2014.xcconfig"; path = "Pods/Pods-CodeFrontio-2014.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -201,6 +203,7 @@
 				7C00884618A8F84B00ED4B31 /* AppDelegate.h */,
 				7C00884718A8F84B00ED4B31 /* AppDelegate.m */,
 				7C422F9018A8FA4800195D6C /* iPad.storyboard */,
+				7CFF7B2818EE9A9800A674F2 /* iPhone.storyboard */,
 				7C3BC56E18B0FBE700CA0FC0 /* CodeFrontio.xcdatamodeld */,
 				7C00885218A8F84B00ED4B31 /* Images.xcassets */,
 				7C355C8218B6727000BB72B0 /* VenueImages.bundle */,
@@ -468,6 +471,7 @@
 				7CCB106B18AE4BF3007A2486 /* MasterViewHeader.xib in Resources */,
 				7C00884218A8F84B00ED4B31 /* InfoPlist.strings in Resources */,
 				7C355C8318B6727000BB72B0 /* VenueImages.bundle in Resources */,
+				7CFF7B2918EE9A9800A674F2 /* iPhone.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -660,6 +664,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "CodeFrontio-2014";
 				PROVISIONING_PROFILE = "6F7FF16E-06B8-4EFD-A1B4-9329A04912D9";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -677,6 +682,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "CodeFrontio-2014";
 				PROVISIONING_PROFILE = "346B88E4-C2B1-43C1-B5E0-0D0D1DFA55E8";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
