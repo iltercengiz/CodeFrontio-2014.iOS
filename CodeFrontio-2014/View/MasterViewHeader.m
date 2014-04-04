@@ -11,7 +11,7 @@
 @implementation MasterViewHeader
 
 - (IBAction)kodioButtonTapped:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://linz.kod.io"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://codefront.io"]];
 }
 - (IBAction)webBoxButtonTapped:(id)sender {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://webbox.io"]];

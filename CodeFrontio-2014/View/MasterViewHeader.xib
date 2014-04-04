@@ -17,21 +17,22 @@
                         <constraint firstAttribute="height" constant="160" id="5kJ-Cz-Dni"/>
                         <constraint firstAttribute="width" constant="160" id="dyD-PH-ZeX"/>
                     </constraints>
-                    <state key="normal" image="Kodio">
+                    <state key="normal" image="CodeFrontio">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="kodioButtonTapped:" destination="yEX-Ub-ZGH" eventType="touchUpInside" id="Vfn-Pq-da5"/>
                     </connections>
                 </button>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kod.io 2014" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K9L-sP-gyc">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CodeFront.io 2014" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K9L-sP-gyc">
                     <rect key="frame" x="76" y="208" width="168" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="Syy-GY-5rB"/>
                         <constraint firstAttribute="width" constant="168" id="jDI-Qf-JLd"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="31"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <color key="textColor" red="0.13725490196078433" green="0.30196078431372547" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Developer Conference" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YG8-Rz-h5z">
@@ -42,6 +43,7 @@
                         <constraint firstAttribute="width" constant="168" id="VaW-Cc-bYM"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" red="0.13725490196078433" green="0.30196078431372547" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="asE-qQ-hLz" userLabel="webBox Button">
@@ -74,7 +76,7 @@
         </view>
     </objects>
     <resources>
-        <image name="Kodio" width="200" height="200"/>
+        <image name="CodeFrontio" width="200" height="200"/>
         <image name="webBox" width="200" height="46"/>
     </resources>
 </document>
