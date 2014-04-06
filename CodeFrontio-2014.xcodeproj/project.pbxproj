@@ -15,6 +15,7 @@
 		7C00884818A8F84B00ED4B31 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C00884718A8F84B00ED4B31 /* AppDelegate.m */; };
 		7C00885318A8F84B00ED4B31 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C00885218A8F84B00ED4B31 /* Images.xcassets */; };
 		7C01A55B18B6AB2D007284F5 /* MasterViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C01A55A18B6AB2D007284F5 /* MasterViewHeader.m */; };
+		7C064FB918F1A328005CD375 /* PageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C064FB818F1A328005CD375 /* PageViewController.m */; };
 		7C213DCC18B34F2B00F96B01 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C213DCB18B34F2B00F96B01 /* Note.m */; };
 		7C213DCF18B3817300F96B01 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C213DCE18B3817300F96B01 /* Session.m */; };
 		7C213DD218B384B300F96B01 /* FavouritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C213DD118B384B300F96B01 /* FavouritesViewController.m */; };
@@ -72,6 +73,8 @@
 		7C00885218A8F84B00ED4B31 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7C01A55918B6AB2D007284F5 /* MasterViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewHeader.h; sourceTree = "<group>"; };
 		7C01A55A18B6AB2D007284F5 /* MasterViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewHeader.m; sourceTree = "<group>"; };
+		7C064FB718F1A328005CD375 /* PageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageViewController.h; sourceTree = "<group>"; };
+		7C064FB818F1A328005CD375 /* PageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageViewController.m; sourceTree = "<group>"; };
 		7C213DCA18B34F2B00F96B01 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
 		7C213DCB18B34F2B00F96B01 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 		7C213DCD18B3817300F96B01 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
@@ -237,6 +240,8 @@
 			children = (
 				7C2FC84F18ED745B00E3073F /* BaseViewController.h */,
 				7C2FC85018ED745B00E3073F /* BaseViewController.m */,
+				7C064FB718F1A328005CD375 /* PageViewController.h */,
+				7C064FB818F1A328005CD375 /* PageViewController.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -552,6 +557,7 @@
 				7C3840FE18AC0B4900A85C31 /* SponsorsViewController.m in Sources */,
 				7C213DD218B384B300F96B01 /* FavouritesViewController.m in Sources */,
 				7C2D195118BE3D36009C16E4 /* GrabberView.m in Sources */,
+				7C064FB918F1A328005CD375 /* PageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
