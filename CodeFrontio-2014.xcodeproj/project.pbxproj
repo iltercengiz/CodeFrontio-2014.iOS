@@ -20,6 +20,7 @@
 		7C064FC218F1AC85005CD375 /* CalendarSessionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C064FC118F1AC85005CD375 /* CalendarSessionCell.xib */; };
 		7C064FC518F1AD61005CD375 /* TrackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C064FC418F1AD61005CD375 /* TrackCell.m */; };
 		7C064FC718F1AD78005CD375 /* TrackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C064FC618F1AD78005CD375 /* TrackCell.xib */; };
+		7C064FCA18F1B17C005CD375 /* UIColor+Palette.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C064FC918F1B17C005CD375 /* UIColor+Palette.m */; };
 		7C213DCC18B34F2B00F96B01 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C213DCB18B34F2B00F96B01 /* Note.m */; };
 		7C213DCF18B3817300F96B01 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C213DCE18B3817300F96B01 /* Session.m */; };
 		7C213DD218B384B300F96B01 /* FavouritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C213DD118B384B300F96B01 /* FavouritesViewController.m */; };
@@ -85,6 +86,8 @@
 		7C064FC318F1AD61005CD375 /* TrackCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackCell.h; sourceTree = "<group>"; };
 		7C064FC418F1AD61005CD375 /* TrackCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackCell.m; sourceTree = "<group>"; };
 		7C064FC618F1AD78005CD375 /* TrackCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrackCell.xib; sourceTree = "<group>"; };
+		7C064FC818F1B17C005CD375 /* UIColor+Palette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Palette.h"; sourceTree = "<group>"; };
+		7C064FC918F1B17C005CD375 /* UIColor+Palette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Palette.m"; sourceTree = "<group>"; };
 		7C213DCA18B34F2B00F96B01 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
 		7C213DCB18B34F2B00F96B01 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 		7C213DCD18B3817300F96B01 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
@@ -413,6 +416,8 @@
 				7CCB106E18AE5BAA007A2486 /* UIImage+FromUIColor.m */,
 				7C34A64F18B26AD800EC31DA /* NSDictionary+SortedKeys.h */,
 				7C34A65018B26AD800EC31DA /* NSDictionary+SortedKeys.m */,
+				7C064FC818F1B17C005CD375 /* UIColor+Palette.h */,
+				7C064FC918F1B17C005CD375 /* UIColor+Palette.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -584,6 +589,7 @@
 				7C2FC85118ED745B00E3073F /* BaseViewController.m in Sources */,
 				7CDE9FEB18B4B9DA00E2F619 /* Photo.m in Sources */,
 				7C3840FE18AC0B4900A85C31 /* SponsorsViewController.m in Sources */,
+				7C064FCA18F1B17C005CD375 /* UIColor+Palette.m in Sources */,
 				7C213DD218B384B300F96B01 /* FavouritesViewController.m in Sources */,
 				7C2D195118BE3D36009C16E4 /* GrabberView.m in Sources */,
 			);
