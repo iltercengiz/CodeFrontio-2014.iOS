@@ -18,6 +18,8 @@
 		7C064FBD18F1A790005CD375 /* BounceLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C064FBC18F1A790005CD375 /* BounceLayout.m */; };
 		7C064FC018F1A99E005CD375 /* PagerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C064FBF18F1A99E005CD375 /* PagerLayout.m */; };
 		7C064FC218F1AC85005CD375 /* CalendarSessionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C064FC118F1AC85005CD375 /* CalendarSessionCell.xib */; };
+		7C064FC518F1AD61005CD375 /* TrackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C064FC418F1AD61005CD375 /* TrackCell.m */; };
+		7C064FC718F1AD78005CD375 /* TrackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C064FC618F1AD78005CD375 /* TrackCell.xib */; };
 		7C213DCC18B34F2B00F96B01 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C213DCB18B34F2B00F96B01 /* Note.m */; };
 		7C213DCF18B3817300F96B01 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C213DCE18B3817300F96B01 /* Session.m */; };
 		7C213DD218B384B300F96B01 /* FavouritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C213DD118B384B300F96B01 /* FavouritesViewController.m */; };
@@ -80,6 +82,9 @@
 		7C064FBE18F1A99E005CD375 /* PagerLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PagerLayout.h; sourceTree = "<group>"; };
 		7C064FBF18F1A99E005CD375 /* PagerLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PagerLayout.m; sourceTree = "<group>"; };
 		7C064FC118F1AC85005CD375 /* CalendarSessionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarSessionCell.xib; sourceTree = "<group>"; };
+		7C064FC318F1AD61005CD375 /* TrackCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackCell.h; sourceTree = "<group>"; };
+		7C064FC418F1AD61005CD375 /* TrackCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackCell.m; sourceTree = "<group>"; };
+		7C064FC618F1AD78005CD375 /* TrackCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrackCell.xib; sourceTree = "<group>"; };
 		7C213DCA18B34F2B00F96B01 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
 		7C213DCB18B34F2B00F96B01 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 		7C213DCD18B3817300F96B01 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
@@ -422,6 +427,9 @@
 				7CCB107418AE5DF3007A2486 /* CalendarTimeCell.m */,
 				7C34A64C18B24BE700EC31DA /* CalendarActivityCell.h */,
 				7C34A64D18B24BE700EC31DA /* CalendarActivityCell.m */,
+				7C064FC318F1AD61005CD375 /* TrackCell.h */,
+				7C064FC418F1AD61005CD375 /* TrackCell.m */,
+				7C064FC618F1AD78005CD375 /* TrackCell.xib */,
 			);
 			path = "Calendar Scene";
 			sourceTree = "<group>";
@@ -489,6 +497,7 @@
 				7C422F9118A8FA4800195D6C /* iPad.storyboard in Resources */,
 				7C00885318A8F84B00ED4B31 /* Images.xcassets in Resources */,
 				7C422F9218A8FA6800195D6C /* Localizable.strings in Resources */,
+				7C064FC718F1AD78005CD375 /* TrackCell.xib in Resources */,
 				7CCB106B18AE4BF3007A2486 /* MasterViewHeader.xib in Resources */,
 				7C00884218A8F84B00ED4B31 /* InfoPlist.strings in Resources */,
 				7C355C8318B6727000BB72B0 /* VenueImages.bundle in Resources */,
@@ -540,6 +549,7 @@
 				7C34A64E18B24BE700EC31DA /* CalendarActivityCell.m in Sources */,
 				7C00884818A8F84B00ED4B31 /* AppDelegate.m in Sources */,
 				7CACCFEA18A9142900D66A15 /* RFQuiltLayout.m in Sources */,
+				7C064FC518F1AD61005CD375 /* TrackCell.m in Sources */,
 				7C064FBD18F1A790005CD375 /* BounceLayout.m in Sources */,
 				7C83BB4E18AAD7B0003D3557 /* SpeakerCell.m in Sources */,
 				7C422F9D18A8FE5F00195D6C /* MasterViewController.m in Sources */,
