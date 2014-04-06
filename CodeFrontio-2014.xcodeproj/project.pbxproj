@@ -17,6 +17,7 @@
 		7C01A55B18B6AB2D007284F5 /* MasterViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C01A55A18B6AB2D007284F5 /* MasterViewHeader.m */; };
 		7C064FBD18F1A790005CD375 /* BounceLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C064FBC18F1A790005CD375 /* BounceLayout.m */; };
 		7C064FC018F1A99E005CD375 /* PagerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C064FBF18F1A99E005CD375 /* PagerLayout.m */; };
+		7C064FC218F1AC85005CD375 /* CalendarSessionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C064FC118F1AC85005CD375 /* CalendarSessionCell.xib */; };
 		7C213DCC18B34F2B00F96B01 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C213DCB18B34F2B00F96B01 /* Note.m */; };
 		7C213DCF18B3817300F96B01 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C213DCE18B3817300F96B01 /* Session.m */; };
 		7C213DD218B384B300F96B01 /* FavouritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C213DD118B384B300F96B01 /* FavouritesViewController.m */; };
@@ -78,6 +79,7 @@
 		7C064FBC18F1A790005CD375 /* BounceLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BounceLayout.m; sourceTree = "<group>"; };
 		7C064FBE18F1A99E005CD375 /* PagerLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PagerLayout.h; sourceTree = "<group>"; };
 		7C064FBF18F1A99E005CD375 /* PagerLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PagerLayout.m; sourceTree = "<group>"; };
+		7C064FC118F1AC85005CD375 /* CalendarSessionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarSessionCell.xib; sourceTree = "<group>"; };
 		7C213DCA18B34F2B00F96B01 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
 		7C213DCB18B34F2B00F96B01 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 		7C213DCD18B3817300F96B01 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
@@ -415,6 +417,7 @@
 			children = (
 				7CCB107118AE5DF3007A2486 /* CalendarSessionCell.h */,
 				7CCB107218AE5DF3007A2486 /* CalendarSessionCell.m */,
+				7C064FC118F1AC85005CD375 /* CalendarSessionCell.xib */,
 				7CCB107318AE5DF3007A2486 /* CalendarTimeCell.h */,
 				7CCB107418AE5DF3007A2486 /* CalendarTimeCell.m */,
 				7C34A64C18B24BE700EC31DA /* CalendarActivityCell.h */,
@@ -489,6 +492,7 @@
 				7CCB106B18AE4BF3007A2486 /* MasterViewHeader.xib in Resources */,
 				7C00884218A8F84B00ED4B31 /* InfoPlist.strings in Resources */,
 				7C355C8318B6727000BB72B0 /* VenueImages.bundle in Resources */,
+				7C064FC218F1AC85005CD375 /* CalendarSessionCell.xib in Resources */,
 				7CFF7B2918EE9A9800A674F2 /* iPhone.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
