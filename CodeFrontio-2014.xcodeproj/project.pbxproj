@@ -52,6 +52,9 @@
 		7CACCFEA18A9142900D66A15 /* RFQuiltLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CACCFE918A9142900D66A15 /* RFQuiltLayout.m */; };
 		7CBD1FB218F3EE1B002154BC /* SessionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBD1FB018F3EE1B002154BC /* SessionCell.m */; };
 		7CBD1FB318F3EE1B002154BC /* SessionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CBD1FB118F3EE1B002154BC /* SessionCell.xib */; };
+		7CBD1FB618F4284A002154BC /* SideMenuHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBD1FB518F4284A002154BC /* SideMenuHeader.m */; };
+		7CBD1FB818F42866002154BC /* SideMenuHeader_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CBD1FB718F42866002154BC /* SideMenuHeader_iPhone.xib */; };
+		7CBD1FBA18F42873002154BC /* SideMenuHeader_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CBD1FB918F42873002154BC /* SideMenuHeader_iPad.xib */; };
 		7CCB106918AE1D2A007A2486 /* LinzAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB106818AE1D2A007A2486 /* LinzAPIClient.m */; };
 		7CCB106B18AE4BF3007A2486 /* MasterViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CCB106A18AE4BF3007A2486 /* MasterViewHeader.xib */; };
 		7CCB106F18AE5BAA007A2486 /* UIImage+FromUIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB106E18AE5BAA007A2486 /* UIImage+FromUIColor.m */; };
@@ -144,6 +147,10 @@
 		7CBD1FAF18F3EE1B002154BC /* SessionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionCell.h; sourceTree = "<group>"; };
 		7CBD1FB018F3EE1B002154BC /* SessionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionCell.m; sourceTree = "<group>"; };
 		7CBD1FB118F3EE1B002154BC /* SessionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionCell.xib; sourceTree = "<group>"; };
+		7CBD1FB418F4284A002154BC /* SideMenuHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuHeader.h; sourceTree = "<group>"; };
+		7CBD1FB518F4284A002154BC /* SideMenuHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuHeader.m; sourceTree = "<group>"; };
+		7CBD1FB718F42866002154BC /* SideMenuHeader_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SideMenuHeader_iPhone.xib; sourceTree = "<group>"; };
+		7CBD1FB918F42873002154BC /* SideMenuHeader_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SideMenuHeader_iPad.xib; sourceTree = "<group>"; };
 		7CCB106718AE1D2A007A2486 /* LinzAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinzAPIClient.h; sourceTree = "<group>"; };
 		7CCB106818AE1D2A007A2486 /* LinzAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinzAPIClient.m; sourceTree = "<group>"; };
 		7CCB106A18AE4BF3007A2486 /* MasterViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MasterViewHeader.xib; sourceTree = "<group>"; };
@@ -331,6 +338,10 @@
 		7CACCFDA18A906EB00D66A15 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7CBD1FB418F4284A002154BC /* SideMenuHeader.h */,
+				7CBD1FB518F4284A002154BC /* SideMenuHeader.m */,
+				7CBD1FB718F42866002154BC /* SideMenuHeader_iPhone.xib */,
+				7CBD1FB918F42873002154BC /* SideMenuHeader_iPad.xib */,
 				7C01A55918B6AB2D007284F5 /* MasterViewHeader.h */,
 				7C01A55A18B6AB2D007284F5 /* MasterViewHeader.m */,
 				7CCB106A18AE4BF3007A2486 /* MasterViewHeader.xib */,
@@ -484,6 +495,8 @@
 				7C422F9118A8FA4800195D6C /* iPad.storyboard in Resources */,
 				7C00885318A8F84B00ED4B31 /* Images.xcassets in Resources */,
 				7C422F9218A8FA6800195D6C /* Localizable.strings in Resources */,
+				7CBD1FB818F42866002154BC /* SideMenuHeader_iPhone.xib in Resources */,
+				7CBD1FBA18F42873002154BC /* SideMenuHeader_iPad.xib in Resources */,
 				7CCB106B18AE4BF3007A2486 /* MasterViewHeader.xib in Resources */,
 				7C00884218A8F84B00ED4B31 /* InfoPlist.strings in Resources */,
 				7C355C8318B6727000BB72B0 /* VenueImages.bundle in Resources */,
@@ -556,6 +569,7 @@
 				7CBD1FB218F3EE1B002154BC /* SessionCell.m in Sources */,
 				7C3BC59618B10C9C00CA0FC0 /* Manager.m in Sources */,
 				7C3BC58618B1011500CA0FC0 /* Sponsor+Create.m in Sources */,
+				7CBD1FB618F4284A002154BC /* SideMenuHeader.m in Sources */,
 				7C00884418A8F84B00ED4B31 /* main.m in Sources */,
 				7C83BB5418AAD7C7003D3557 /* PhotosCell.m in Sources */,
 				7C213DD518B3A25F00F96B01 /* NotesViewController.m in Sources */,
