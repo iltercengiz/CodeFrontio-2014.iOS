@@ -12,7 +12,6 @@
 static NSString * const calendarSceneIdentifier = @"CalendarScene";
 static NSString * const favouritesSceneIdentifier = @"FavouritesScene";
 static NSString * const notesSceneIdentifier = @"NotesScene";
-static NSString * const venueSceneIdentifier = @"VenueScene";
 static NSString * const supportersSceneIdentifier = @"SponsorsScene";
 
 @class BaseViewController;

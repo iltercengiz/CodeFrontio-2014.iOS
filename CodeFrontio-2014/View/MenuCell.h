@@ -12,7 +12,6 @@ typedef NS_ENUM(NSInteger, ContentType) {
     ContentTypeCalendar = 0,
     ContentTypeFavourites,
     ContentTypeNotes,
-    ContentTypeVenue,
     ContentTypeSponsors
 };
 

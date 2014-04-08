@@ -62,7 +62,7 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return 4;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MenuCell *cell = [tableView dequeueReusableCellWithIdentifier:@"menuCell" forIndexPath:indexPath];
@@ -79,7 +79,6 @@
         case ContentTypeCalendar: identifier = calendarSceneIdentifier; break;
         case ContentTypeFavourites: identifier = favouritesSceneIdentifier; break;
         case ContentTypeNotes: identifier = notesSceneIdentifier; break;
-        case ContentTypeVenue: identifier = venueSceneIdentifier; break;
         case ContentTypeSponsors: identifier = supportersSceneIdentifier; break;
         default: break;
     }
