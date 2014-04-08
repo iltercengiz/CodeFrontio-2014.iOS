@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 Ilter Cengiz. All rights reserved.
 //
 
+#pragma mark Categories
+#import "UIColor+Palette.h"
+
 #pragma mark Networking
 #import "LinzAPIClient.h"
 
@@ -33,6 +36,10 @@
     
     // Set background color
     self.tableView.backgroundColor = [UIColor colorWithRed:0.255 green:0.255 blue:0.259 alpha:0.0];
+    
+    // Separator color
+    self.tableView.separatorInset = UIEdgeInsetsZero;
+    self.tableView.separatorColor = [UIColor P_lightBlueColor];
     
     // Select 'Calendar' cell
     [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]

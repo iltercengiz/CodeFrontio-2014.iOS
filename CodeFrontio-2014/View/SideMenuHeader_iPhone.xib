@@ -64,13 +64,13 @@
                 <constraint firstAttribute="bottom" secondItem="HGh-Kq-RYl" secondAttribute="bottom" constant="20" id="2Sg-2q-ucu"/>
                 <constraint firstItem="RGj-Pc-sru" firstAttribute="top" secondItem="Trx-LV-meb" secondAttribute="top" constant="10" id="6RG-dB-qvo"/>
                 <constraint firstItem="Acl-ya-kng" firstAttribute="leading" secondItem="RGj-Pc-sru" secondAttribute="trailing" constant="8" id="71f-6W-w3R"/>
-                <constraint firstAttribute="centerX" secondItem="HGh-Kq-RYl" secondAttribute="centerX" id="Acn-mQ-zdf"/>
                 <constraint firstItem="q0R-gX-tgw" firstAttribute="leading" secondItem="RGj-Pc-sru" secondAttribute="trailing" constant="8" id="JSl-t5-j47"/>
                 <constraint firstItem="Acl-ya-kng" firstAttribute="top" secondItem="Trx-LV-meb" secondAttribute="top" constant="20" id="KFC-jb-wls"/>
                 <constraint firstItem="q0R-gX-tgw" firstAttribute="top" secondItem="Acl-ya-kng" secondAttribute="bottom" id="Nmy-jn-ndd"/>
                 <constraint firstAttribute="trailing" secondItem="Acl-ya-kng" secondAttribute="trailing" constant="10" id="deM-lZ-8E8"/>
                 <constraint firstItem="RGj-Pc-sru" firstAttribute="leading" secondItem="Trx-LV-meb" secondAttribute="leading" constant="10" id="m1D-6j-ycZ"/>
                 <constraint firstAttribute="trailing" secondItem="q0R-gX-tgw" secondAttribute="trailing" constant="10" id="nfQ-jf-e3Q"/>
+                <constraint firstItem="HGh-Kq-RYl" firstAttribute="leading" secondItem="Trx-LV-meb" secondAttribute="leading" constant="63" id="teR-J1-XOx"/>
             </constraints>
         </view>
     </objects>

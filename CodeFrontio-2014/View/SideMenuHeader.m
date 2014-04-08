@@ -18,6 +18,17 @@
     self.backgroundColor = [UIColor P_blueishWhiteColor];
 }
 
+- (void)drawRect:(CGRect)rect {
+    
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:CGPointMake(0.0, CGRectGetHeight(rect))];
+    [path addLineToPoint:CGPointMake(CGRectGetWidth(rect), CGRectGetHeight(rect))];
+    [[UIColor P_lightBlueColor] setStroke];
+    [path setLineWidth:1.0];
+    [path stroke];
+    
+}
+
 - (IBAction)codefrontioIsPressed:(id)sender {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://codefront.io"]];
 }
