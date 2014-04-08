@@ -22,7 +22,7 @@
 - (void)awakeFromNib {
     
     // Set background color for custom drawing
-    self.backgroundColor = [UIColor clearColor];
+    self.contentView.backgroundColor = [UIColor P_blueishWhiteColor];
     
     // Set text attributes
     self.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18.0];

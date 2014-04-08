@@ -42,6 +42,7 @@
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LLl-EZ-rY4">
                                             <rect key="frame" x="15" y="0.0" width="290" height="63"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
@@ -353,31 +354,31 @@
         <scene sceneID="9XJ-Eu-smn">
             <objects>
                 <tableViewController storyboardIdentifier="SponsorsScene" id="g3e-hM-WXw" customClass="SponsorsViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="200" sectionHeaderHeight="32" sectionFooterHeight="22" id="zlN-iK-8cs">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="128" sectionHeaderHeight="22" sectionFooterHeight="22" id="zlN-iK-8cs">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="sponsorCell" id="sVi-q2-awz" customClass="SponsorCell">
-                                <rect key="frame" x="0.0" y="32" width="320" height="200"/>
+                                <rect key="frame" x="0.0" y="22" width="320" height="128"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sVi-q2-awz" id="A52-tS-rwk">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="127"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qdb-dL-wz9">
-                                            <rect key="frame" x="20" y="40" width="280" height="120"/>
+                                            <rect key="frame" x="10" y="12" width="300" height="103"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </imageView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="qdb-dL-wz9" secondAttribute="trailing" constant="20" symbolic="YES" id="GYc-cm-gfv"/>
-                                        <constraint firstItem="qdb-dL-wz9" firstAttribute="top" secondItem="A52-tS-rwk" secondAttribute="top" constant="40" id="Gxw-Yz-F63"/>
-                                        <constraint firstItem="qdb-dL-wz9" firstAttribute="leading" secondItem="A52-tS-rwk" secondAttribute="leading" constant="20" symbolic="YES" id="NOl-fa-aXF"/>
-                                        <constraint firstAttribute="bottom" secondItem="qdb-dL-wz9" secondAttribute="bottom" constant="40" id="xzI-Mq-LF3"/>
+                                        <constraint firstAttribute="trailing" secondItem="qdb-dL-wz9" secondAttribute="trailing" constant="10" id="GYc-cm-gfv"/>
+                                        <constraint firstItem="qdb-dL-wz9" firstAttribute="top" secondItem="A52-tS-rwk" secondAttribute="top" constant="12" id="Gxw-Yz-F63"/>
+                                        <constraint firstItem="qdb-dL-wz9" firstAttribute="leading" secondItem="A52-tS-rwk" secondAttribute="leading" constant="10" id="NOl-fa-aXF"/>
+                                        <constraint firstAttribute="bottom" secondItem="qdb-dL-wz9" secondAttribute="bottom" constant="12" id="xzI-Mq-LF3"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="sponsorImage" destination="qdb-dL-wz9" id="5Vo-36-lnw"/>
                                 </connections>
@@ -405,6 +406,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="8UN-GS-VDE"/>
+        <segue reference="Zzj-LP-hBW"/>
     </inferredMetricsTieBreakers>
 </document>

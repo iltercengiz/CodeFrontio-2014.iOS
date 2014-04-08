@@ -53,6 +53,7 @@
             
             UILabel *titleLabel = [UILabel new];
             titleLabel.frame = CGRectMake(0.0, 2.0, 200.0, 24.0);
+            titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18.0];
             titleLabel.text = NSLocalizedString(@"Calendar", nil);
             titleLabel.textAlignment = NSTextAlignmentCenter;
             titleLabel.textColor = [UIColor whiteColor];
