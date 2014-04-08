@@ -75,14 +75,14 @@
                                     <rect key="frame" x="0.0" y="0.0" width="280" height="360"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="256" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="imS-xh-itr">
+                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="256" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="imS-xh-itr">
                                             <rect key="frame" x="0.0" y="0.0" width="280" height="360"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                             <prototypes>
                                                 <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="sessionCell" id="sG2-1q-lhU">
-                                                    <rect key="frame" x="0.0" y="55" width="280" height="256"/>
+                                                    <rect key="frame" x="0.0" y="22" width="280" height="256"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sG2-1q-lhU" id="tz1-fV-7K7">
                                                         <rect key="frame" x="0.0" y="0.0" width="280" height="255"/>

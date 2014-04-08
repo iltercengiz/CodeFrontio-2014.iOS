@@ -19,6 +19,8 @@
     
     NSLog(@"prepareForReuse is called!");
     
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(self.tableView.frame), 10.0)];
+    
 }
 
 #pragma mark - UITableViewDataSource
@@ -31,6 +33,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sessionCell" forIndexPath:indexPath];
     return cell;
+}
+
+#pragma mark - UITableViewDelegate
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(self.tableView.frame), self.tableView.sectionHeaderHeight)];
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 10.0;
 }
 
 @end

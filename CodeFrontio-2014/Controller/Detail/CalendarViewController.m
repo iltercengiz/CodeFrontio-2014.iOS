@@ -77,7 +77,6 @@
     
     // Collection view stuff
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
-    layout.minimumInteritemSpacing = 16.0;
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.sectionInset = UIEdgeInsetsMake(10.0, 20.0, 10.0, 20.0);
     
@@ -124,13 +123,13 @@
 }
 - (void)viewWillLayoutSubviews {
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
-    layout.itemSize = CGSizeMake(280.0, CGRectGetHeight(self.collectionView.frame) - 20.0);
+    layout.itemSize = CGSizeMake(280.0, CGRectGetHeight(self.collectionView.frame));
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
-        layout.itemSize = CGSizeMake(280.0, CGRectGetWidth(self.collectionView.frame) - 20.0);
+        layout.itemSize = CGSizeMake(280.0, CGRectGetWidth(self.collectionView.frame));
     }
 }
 
@@ -146,7 +145,7 @@
 
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 4.0;
+    return 4;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
