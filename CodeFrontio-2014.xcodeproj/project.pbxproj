@@ -15,7 +15,6 @@
 		7C00884818A8F84B00ED4B31 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C00884718A8F84B00ED4B31 /* AppDelegate.m */; };
 		7C00885318A8F84B00ED4B31 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C00885218A8F84B00ED4B31 /* Images.xcassets */; };
 		7C01A55B18B6AB2D007284F5 /* MasterViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C01A55A18B6AB2D007284F5 /* MasterViewHeader.m */; };
-		7C064FBD18F1A790005CD375 /* BounceLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C064FBC18F1A790005CD375 /* BounceLayout.m */; };
 		7C064FC018F1A99E005CD375 /* PagerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C064FBF18F1A99E005CD375 /* PagerLayout.m */; };
 		7C064FC218F1AC85005CD375 /* CalendarSessionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C064FC118F1AC85005CD375 /* CalendarSessionCell.xib */; };
 		7C064FC518F1AD61005CD375 /* TrackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C064FC418F1AD61005CD375 /* TrackCell.m */; };
@@ -77,8 +76,6 @@
 		7C00885218A8F84B00ED4B31 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7C01A55918B6AB2D007284F5 /* MasterViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewHeader.h; sourceTree = "<group>"; };
 		7C01A55A18B6AB2D007284F5 /* MasterViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewHeader.m; sourceTree = "<group>"; };
-		7C064FBB18F1A790005CD375 /* BounceLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BounceLayout.h; sourceTree = "<group>"; };
-		7C064FBC18F1A790005CD375 /* BounceLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BounceLayout.m; sourceTree = "<group>"; };
 		7C064FBE18F1A99E005CD375 /* PagerLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PagerLayout.h; sourceTree = "<group>"; };
 		7C064FBF18F1A99E005CD375 /* PagerLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PagerLayout.m; sourceTree = "<group>"; };
 		7C064FC118F1AC85005CD375 /* CalendarSessionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarSessionCell.xib; sourceTree = "<group>"; };
@@ -249,8 +246,6 @@
 		7C064FBA18F1A720005CD375 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
-				7C064FBB18F1A790005CD375 /* BounceLayout.h */,
-				7C064FBC18F1A790005CD375 /* BounceLayout.m */,
 				7C064FBE18F1A99E005CD375 /* PagerLayout.h */,
 				7C064FBF18F1A99E005CD375 /* PagerLayout.m */,
 			);
@@ -551,7 +546,6 @@
 				7C00884818A8F84B00ED4B31 /* AppDelegate.m in Sources */,
 				7CACCFEA18A9142900D66A15 /* RFQuiltLayout.m in Sources */,
 				7C064FC518F1AD61005CD375 /* TrackCell.m in Sources */,
-				7C064FBD18F1A790005CD375 /* BounceLayout.m in Sources */,
 				7C83BB4E18AAD7B0003D3557 /* SpeakerCell.m in Sources */,
 				7C422F9D18A8FE5F00195D6C /* MasterViewController.m in Sources */,
 				7C064FC018F1A99E005CD375 /* PagerLayout.m in Sources */,
