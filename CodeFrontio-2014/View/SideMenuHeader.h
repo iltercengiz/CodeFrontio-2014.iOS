@@ -10,4 +10,7 @@
 
 @interface SideMenuHeader : UIView
 
+- (IBAction)codefrontioIsPressed:(id)sender;
+- (IBAction)webboxIsPressed:(id)sender;
+
 @end

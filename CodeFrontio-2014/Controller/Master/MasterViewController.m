@@ -94,8 +94,18 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *headerView = [[[NSBundle mainBundle] loadNibNamed:@"MasterViewHeader" owner:self options:nil] firstObject];
-    return headerView;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        return [[[NSBundle mainBundle] loadNibNamed:@"SideMenuHeader_iPad" owner:nil options:nil] firstObject];
+    } else { // if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+        return [[[NSBundle mainBundle] loadNibNamed:@"SideMenuHeader_iPhone" owner:nil options:nil] firstObject];
+    }
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        return 360.0;
+    } else { // if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+        return 128.0;
+    }
 }
 
 @end
