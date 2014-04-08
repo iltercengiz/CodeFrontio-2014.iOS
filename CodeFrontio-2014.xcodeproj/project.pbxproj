@@ -19,7 +19,6 @@
 		7C064FC018F1A99E005CD375 /* PagerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C064FBF18F1A99E005CD375 /* PagerLayout.m */; };
 		7C064FC218F1AC85005CD375 /* CalendarSessionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C064FC118F1AC85005CD375 /* CalendarSessionCell.xib */; };
 		7C064FC518F1AD61005CD375 /* TrackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C064FC418F1AD61005CD375 /* TrackCell.m */; };
-		7C064FC718F1AD78005CD375 /* TrackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C064FC618F1AD78005CD375 /* TrackCell.xib */; };
 		7C064FCA18F1B17C005CD375 /* UIColor+Palette.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C064FC918F1B17C005CD375 /* UIColor+Palette.m */; };
 		7C213DCC18B34F2B00F96B01 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C213DCB18B34F2B00F96B01 /* Note.m */; };
 		7C213DCF18B3817300F96B01 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C213DCE18B3817300F96B01 /* Session.m */; };
@@ -85,7 +84,6 @@
 		7C064FC118F1AC85005CD375 /* CalendarSessionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarSessionCell.xib; sourceTree = "<group>"; };
 		7C064FC318F1AD61005CD375 /* TrackCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackCell.h; sourceTree = "<group>"; };
 		7C064FC418F1AD61005CD375 /* TrackCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackCell.m; sourceTree = "<group>"; };
-		7C064FC618F1AD78005CD375 /* TrackCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrackCell.xib; sourceTree = "<group>"; };
 		7C064FC818F1B17C005CD375 /* UIColor+Palette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Palette.h"; sourceTree = "<group>"; };
 		7C064FC918F1B17C005CD375 /* UIColor+Palette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Palette.m"; sourceTree = "<group>"; };
 		7C213DCA18B34F2B00F96B01 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
@@ -434,7 +432,6 @@
 				7C34A64D18B24BE700EC31DA /* CalendarActivityCell.m */,
 				7C064FC318F1AD61005CD375 /* TrackCell.h */,
 				7C064FC418F1AD61005CD375 /* TrackCell.m */,
-				7C064FC618F1AD78005CD375 /* TrackCell.xib */,
 			);
 			path = "Calendar Scene";
 			sourceTree = "<group>";
@@ -502,7 +499,6 @@
 				7C422F9118A8FA4800195D6C /* iPad.storyboard in Resources */,
 				7C00885318A8F84B00ED4B31 /* Images.xcassets in Resources */,
 				7C422F9218A8FA6800195D6C /* Localizable.strings in Resources */,
-				7C064FC718F1AD78005CD375 /* TrackCell.xib in Resources */,
 				7CCB106B18AE4BF3007A2486 /* MasterViewHeader.xib in Resources */,
 				7C00884218A8F84B00ED4B31 /* InfoPlist.strings in Resources */,
 				7C355C8318B6727000BB72B0 /* VenueImages.bundle in Resources */,

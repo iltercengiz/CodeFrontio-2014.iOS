@@ -10,4 +10,6 @@
 
 @interface TrackCell : UICollectionViewCell
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @end

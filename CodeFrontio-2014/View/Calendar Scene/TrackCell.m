@@ -8,24 +8,29 @@
 
 #import "TrackCell.h"
 
+@interface TrackCell () <UITableViewDataSource, UITableViewDelegate>
+
+@end
+
 @implementation TrackCell
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
+#pragma mark - UICollectionReusableView
+- (void)prepareForReuse {
+    
+    NSLog(@"prepareForReuse is called!");
+    
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+#pragma mark - UITableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 10;
 }
-*/
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sessionCell" forIndexPath:indexPath];
+    return cell;
+}
 
 @end

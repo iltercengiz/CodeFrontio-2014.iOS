@@ -63,11 +63,54 @@
         <scene sceneID="k5T-v5-YFH">
             <objects>
                 <collectionViewController storyboardIdentifier="CalendarScene" autoresizesArchivedViewToFullSize="NO" id="nWd-lV-8W8" customClass="CalendarViewController" sceneMemberID="viewController">
-                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="FMW-66-xTp" customClass="CalendarCollectionView">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="FMW-66-xTp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewLayout key="collectionViewLayout" id="DHw-fV-t7O" customClass="PagerLayout"/>
-                        <cells/>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="trackCell" id="eBp-zO-DTb" customClass="TrackCell">
+                                <rect key="frame" x="20" y="0.0" width="280" height="360"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="280" height="360"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="256" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="imS-xh-itr">
+                                            <rect key="frame" x="0.0" y="0.0" width="280" height="360"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            <prototypes>
+                                                <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="sessionCell" id="sG2-1q-lhU">
+                                                    <rect key="frame" x="0.0" y="55" width="280" height="256"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sG2-1q-lhU" id="tz1-fV-7K7">
+                                                        <rect key="frame" x="0.0" y="0.0" width="280" height="255"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </tableViewCellContentView>
+                                                </tableViewCell>
+                                            </prototypes>
+                                            <connections>
+                                                <outlet property="dataSource" destination="eBp-zO-DTb" id="TFD-NS-yW2"/>
+                                                <outlet property="delegate" destination="eBp-zO-DTb" id="8Qd-Ak-W8w"/>
+                                            </connections>
+                                        </tableView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="imS-xh-itr" secondAttribute="bottom" id="5e9-AC-0Pu"/>
+                                    <constraint firstAttribute="trailing" secondItem="imS-xh-itr" secondAttribute="trailing" id="Ra6-kM-hOp"/>
+                                    <constraint firstItem="imS-xh-itr" firstAttribute="top" secondItem="eBp-zO-DTb" secondAttribute="top" id="qGB-Vk-G9G"/>
+                                    <constraint firstItem="imS-xh-itr" firstAttribute="leading" secondItem="eBp-zO-DTb" secondAttribute="leading" id="tvx-DE-huY"/>
+                                </constraints>
+                                <size key="customSize" width="280" height="360"/>
+                                <connections>
+                                    <outlet property="tableView" destination="imS-xh-itr" id="brd-6W-QOy"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
                         <connections>
                             <outlet property="dataSource" destination="nWd-lV-8W8" id="nT3-ks-9It"/>
                             <outlet property="delegate" destination="nWd-lV-8W8" id="SVy-D0-7V5"/>

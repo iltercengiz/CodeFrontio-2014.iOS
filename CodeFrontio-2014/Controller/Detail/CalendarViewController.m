@@ -12,9 +12,15 @@
 #pragma mark Networking
 #import "LinzAPIClient.h"
 
+#pragma mark Categories
+#import "UIColor+Palette.h"
+
 #pragma mark Model
 #import "Session.h"
 #import "Speaker.h"
+
+#pragma mark View
+#import "TrackCell.h"
 
 #pragma mark Controller
 #import "CalendarViewController.h"
@@ -75,9 +81,8 @@
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.sectionInset = UIEdgeInsetsMake(10.0, 20.0, 10.0, 20.0);
     
-    self.collectionView.backgroundColor = [UIColor clearColor];
+    self.collectionView.backgroundColor = [UIColor P_lightBlueColor];
     self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"trackCell"];
     
 }
 
@@ -145,8 +150,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"trackCell" forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor colorWithWhite:indexPath.item * 60.0/255.0 alpha:1.0];
+    TrackCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"trackCell" forIndexPath:indexPath];
     return cell;
 }
 
