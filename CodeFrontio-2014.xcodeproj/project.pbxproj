@@ -52,6 +52,8 @@
 		7CACCFDD18A906F900D66A15 /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CACCFDC18A906F900D66A15 /* MenuCell.m */; };
 		7CACCFE518A90CB200D66A15 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CACCFE418A90CB200D66A15 /* CalendarViewController.m */; };
 		7CACCFEA18A9142900D66A15 /* RFQuiltLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CACCFE918A9142900D66A15 /* RFQuiltLayout.m */; };
+		7CBD1FB218F3EE1B002154BC /* SessionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBD1FB018F3EE1B002154BC /* SessionCell.m */; };
+		7CBD1FB318F3EE1B002154BC /* SessionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CBD1FB118F3EE1B002154BC /* SessionCell.xib */; };
 		7CCB106918AE1D2A007A2486 /* LinzAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB106818AE1D2A007A2486 /* LinzAPIClient.m */; };
 		7CCB106B18AE4BF3007A2486 /* MasterViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CCB106A18AE4BF3007A2486 /* MasterViewHeader.xib */; };
 		7CCB106F18AE5BAA007A2486 /* UIImage+FromUIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB106E18AE5BAA007A2486 /* UIImage+FromUIColor.m */; };
@@ -146,6 +148,9 @@
 		7CACCFE418A90CB200D66A15 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
 		7CACCFE818A9142900D66A15 /* RFQuiltLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFQuiltLayout.h; sourceTree = "<group>"; };
 		7CACCFE918A9142900D66A15 /* RFQuiltLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFQuiltLayout.m; sourceTree = "<group>"; };
+		7CBD1FAF18F3EE1B002154BC /* SessionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionCell.h; sourceTree = "<group>"; };
+		7CBD1FB018F3EE1B002154BC /* SessionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionCell.m; sourceTree = "<group>"; };
+		7CBD1FB118F3EE1B002154BC /* SessionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionCell.xib; sourceTree = "<group>"; };
 		7CCB106718AE1D2A007A2486 /* LinzAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinzAPIClient.h; sourceTree = "<group>"; };
 		7CCB106818AE1D2A007A2486 /* LinzAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinzAPIClient.m; sourceTree = "<group>"; };
 		7CCB106A18AE4BF3007A2486 /* MasterViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MasterViewHeader.xib; sourceTree = "<group>"; };
@@ -427,6 +432,9 @@
 				7C34A64D18B24BE700EC31DA /* CalendarActivityCell.m */,
 				7C064FC318F1AD61005CD375 /* TrackCell.h */,
 				7C064FC418F1AD61005CD375 /* TrackCell.m */,
+				7CBD1FAF18F3EE1B002154BC /* SessionCell.h */,
+				7CBD1FB018F3EE1B002154BC /* SessionCell.m */,
+				7CBD1FB118F3EE1B002154BC /* SessionCell.xib */,
 			);
 			path = "Calendar Scene";
 			sourceTree = "<group>";
@@ -498,6 +506,7 @@
 				7C00884218A8F84B00ED4B31 /* InfoPlist.strings in Resources */,
 				7C355C8318B6727000BB72B0 /* VenueImages.bundle in Resources */,
 				7C064FC218F1AC85005CD375 /* CalendarSessionCell.xib in Resources */,
+				7CBD1FB318F3EE1B002154BC /* SessionCell.xib in Resources */,
 				7CFF7B2918EE9A9800A674F2 /* iPhone.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -564,6 +573,7 @@
 				7CACCFE518A90CB200D66A15 /* CalendarViewController.m in Sources */,
 				7C3BC58C18B1012900CA0FC0 /* Speaker+Create.m in Sources */,
 				7C3BC58918B1011F00CA0FC0 /* Session+Create.m in Sources */,
+				7CBD1FB218F3EE1B002154BC /* SessionCell.m in Sources */,
 				7CCB107618AE5DF3007A2486 /* CalendarTimeCell.m in Sources */,
 				7C3BC59618B10C9C00CA0FC0 /* Manager.m in Sources */,
 				7C3BC58618B1011500CA0FC0 /* Sponsor+Create.m in Sources */,
