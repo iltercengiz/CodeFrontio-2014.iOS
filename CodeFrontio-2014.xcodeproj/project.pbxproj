@@ -40,7 +40,6 @@
 		7C422F9118A8FA4800195D6C /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C422F9018A8FA4800195D6C /* iPad.storyboard */; };
 		7C422F9218A8FA6800195D6C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C422F9418A8FA6800195D6C /* Localizable.strings */; };
 		7C422F9D18A8FE5F00195D6C /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C422F9C18A8FE5F00195D6C /* MasterViewController.m */; };
-		7C83BB4718AAA954003D3557 /* VenueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C83BB4618AAA954003D3557 /* VenueViewController.m */; };
 		7C83BB4A18AAD12A003D3557 /* SessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C83BB4918AAD12A003D3557 /* SessionViewController.m */; };
 		7C83BB4E18AAD7B0003D3557 /* SpeakerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C83BB4D18AAD7B0003D3557 /* SpeakerCell.m */; };
 		7C83BB5118AAD7BE003D3557 /* NotesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C83BB5018AAD7BE003D3557 /* NotesCell.m */; };
@@ -122,8 +121,6 @@
 		7C422F9618A8FA7000195D6C /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7C422F9B18A8FE5F00195D6C /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		7C422F9C18A8FE5F00195D6C /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
-		7C83BB4518AAA954003D3557 /* VenueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VenueViewController.h; sourceTree = "<group>"; };
-		7C83BB4618AAA954003D3557 /* VenueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VenueViewController.m; sourceTree = "<group>"; };
 		7C83BB4818AAD12A003D3557 /* SessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionViewController.h; sourceTree = "<group>"; };
 		7C83BB4918AAD12A003D3557 /* SessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionViewController.m; sourceTree = "<group>"; };
 		7C83BB4C18AAD7B0003D3557 /* SpeakerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeakerCell.h; sourceTree = "<group>"; };
@@ -361,8 +358,6 @@
 				7CACCFE418A90CB200D66A15 /* CalendarViewController.m */,
 				7C83BB4818AAD12A003D3557 /* SessionViewController.h */,
 				7C83BB4918AAD12A003D3557 /* SessionViewController.m */,
-				7C83BB4518AAA954003D3557 /* VenueViewController.h */,
-				7C83BB4618AAA954003D3557 /* VenueViewController.m */,
 				7C213DD318B3A25F00F96B01 /* NotesViewController.h */,
 				7C213DD418B3A25F00F96B01 /* NotesViewController.m */,
 				7C213DD018B384B300F96B01 /* FavouritesViewController.h */,
@@ -566,7 +561,6 @@
 				7C3840FB18AC0B0300A85C31 /* SponsorCell.m in Sources */,
 				7C83BB4A18AAD12A003D3557 /* SessionViewController.m in Sources */,
 				7C213DCF18B3817300F96B01 /* Session.m in Sources */,
-				7C83BB4718AAA954003D3557 /* VenueViewController.m in Sources */,
 				7C2F3B5218B7417900A8A034 /* NoteCell.m in Sources */,
 				7C2FC85118ED745B00E3073F /* BaseViewController.m in Sources */,
 				7CDE9FEB18B4B9DA00E2F619 /* Photo.m in Sources */,
