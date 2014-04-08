@@ -8,7 +8,7 @@
 
 #import "LinzAPIClient.h"
 
-static NSString * const LinzAPIBaseURLString = @"http://json2014.kod.io/";
+static NSString * const LinzAPIBaseURLString = @"http://192.168.2.87:9393";
 
 @implementation LinzAPIClient
 

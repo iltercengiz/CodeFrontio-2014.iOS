@@ -13,23 +13,23 @@
 
 @implementation Session (Create)
 
-+ (Session *)sessionWithInfo:(NSDictionary *)info {
++ (Session *)sessionWithInfo:(NSDictionary *)info track:(NSNumber *)trackNumber {
     
     // Create session object in context
     Session *session = [Session MR_createInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
     session.title = info[@"title"];
     session.detail = info[@"detail"];
-    session.track = info[@"track"];
+    session.track = trackNumber;
     session.type = info[@"type"];
     session.timeInterval = info[@"time"];
     session.speakerIdentifier = info[@"speaker"];
-    session.sortingIndex = info[@"sortingIndex"];
+//    session.sortingIndex = info[@"sortingIndex"];
     session.identifier = info[@"id"];
     
     // Save changes
     [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if (success) NSLog(@"Save successful!");
-        else NSLog(@"Save failed with error: %@", error);
+        // if (success) NSLog(@"Save successful!");
+        // else NSLog(@"Save failed with error: %@", error);
     }];
     
     // Return

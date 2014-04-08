@@ -78,7 +78,7 @@
     // Collection view stuff
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    layout.sectionInset = UIEdgeInsetsMake(10.0, 20.0, 10.0, 20.0);
+    layout.sectionInset = UIEdgeInsetsMake(0.0, 20.0, 0.0, 20.0);
     
     self.collectionView.backgroundColor = [UIColor P_lightBlueColor];
     self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
@@ -145,11 +145,12 @@
 
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 4;
+    return self.sessions.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     TrackCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"trackCell" forIndexPath:indexPath];
+    cell.sessions = self.sessions[indexPath.row];
     return cell;
 }
 

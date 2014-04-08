@@ -10,6 +10,6 @@
 
 @interface Session (Create)
 
-+ (Session *)sessionWithInfo:(NSDictionary *)info;
++ (Session *)sessionWithInfo:(NSDictionary *)info track:(NSNumber *)trackNumber;
 
 @end

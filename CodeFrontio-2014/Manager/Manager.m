@@ -14,7 +14,7 @@
 
 #pragma mark Model
 #import "Sponsor.h"
-#import "Session.h"
+#import "Session+Create.h"
 #import "Speaker.h"
 
 #pragma mark Pods
@@ -49,8 +49,36 @@
     return _speakers;
 }
 - (NSArray *)sessions {
-    _sessions = [Session MR_findAllSortedBy:@"sortingIndex" ascending:YES];
+    
+    NSArray *sessions = [[Session MR_findAll] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"track" ascending:YES], [NSSortDescriptor sortDescriptorWithKey:@"timeInterval" ascending:YES]]];
+    NSMutableArray *tracks = [NSMutableArray array];
+    NSMutableArray *track;
+    
+    for (Session *session in sessions) {
+        
+        @try {
+            track = tracks[session.track.integerValue];
+        }
+        @catch (NSException *exception) {
+            track = [NSMutableArray array];
+            [tracks insertObject:track atIndex:session.track.integerValue];
+        }
+        @finally {
+            [track addObject:session];
+        }
+        
+    }
+    
+//    for (NSMutableArray *track in tracks) {
+//        [track sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"timeInterval" ascending:YES]]];
+//    }
+    
+//    _sessions = [Session MR_findAllSortedBy:@"sortingIndex" ascending:YES];
+    
+    _sessions = tracks;
+    
     return _sessions;
+    
 }
 - (NSArray *)sponsors {
     _sponsors = [[Sponsor MR_findAll] sortedArrayUsingDescriptors:@[
@@ -209,41 +237,21 @@
         [[LinzAPIClient sharedClient] GET:@"/sessions"
                                parameters:nil
                                   success:^(NSURLSessionDataTask *task, id responseObject) {
-                                      // responseObject holds info for all sessions
-                                      NSInteger sortingIndex = 0;
-                                      for (NSDictionary *sessionInfo in responseObject) {
-                                          // Add a small dictionary object to specify time cells
-                                          // Check type and track values of the sessions for appropriate placing
-                                          if ([sessionInfo[@"track"] isEqualToNumber:@0] || [sessionInfo[@"track"] isEqualToNumber:@1]) { // We check the track info instead of type to not to add time data twice for simultaneous sessions
+                                      
+                                      NSInteger trackNumber = 0;
+                                      
+                                      // Every track is an array
+                                      for (NSArray *track in responseObject) {
+                                          // In every track array there are its sessions
+                                          for (NSDictionary *sessionInfo in track) {
                                               // Create a session entity
-                                              Session *session = [Session MR_createInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
-                                              session.track = @(-1); // Track -1 means time cell level
-                                              session.type = sessionInfo[@"type"]; // Type will help us to adjust the width
-                                              session.timeInterval = sessionInfo[@"time"];
-                                              session.sortingIndex = @(sortingIndex);
-                                              // Increment index
-                                              sortingIndex++;
+                                              [Session sessionWithInfo:sessionInfo track:@(trackNumber)];
                                           }
-                                          // Create a session entity
-                                          Session *session = [Session MR_createInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
-                                          session.title = sessionInfo[@"title"];
-                                          session.detail = sessionInfo[@"detail"];
-                                          session.track = sessionInfo[@"track"];
-                                          session.type = sessionInfo[@"type"];
-                                          session.timeInterval = sessionInfo[@"time"];
-                                          session.speakerIdentifier = sessionInfo[@"speaker"];
-                                          session.sortingIndex = @(sortingIndex);
-                                          session.identifier = sessionInfo[@"id"];
-                                          // Increment index
-                                          sortingIndex++;
+                                          trackNumber++;
                                       }
                                       
-                                      [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-                                          // if (success) NSLog(@"Save successful!");
-                                          // else NSLog(@"Save failed with error: %@", error);
-                                      }];
-                                      
                                       completion(@"sessions", remoteVersion[@"sessions"], YES);
+                                      
                                   } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                       completion(@"sessions", remoteVersion[@"sessions"], NO);
                                   }];
