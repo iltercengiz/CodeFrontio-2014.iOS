@@ -7,8 +7,7 @@
 //
 
 #import "LinzAPIClient.h"
-
-static NSString * const LinzAPIBaseURLString = @"http://192.168.2.87:9393";
+#import "Constants.h"
 
 @implementation LinzAPIClient
 

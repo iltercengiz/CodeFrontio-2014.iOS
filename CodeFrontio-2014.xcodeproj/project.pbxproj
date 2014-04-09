@@ -47,7 +47,6 @@
 		7C83BB5718AADD40003D3557 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C83BB5618AADD40003D3557 /* PhotoCell.m */; };
 		7CACCFDD18A906F900D66A15 /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CACCFDC18A906F900D66A15 /* MenuCell.m */; };
 		7CACCFE518A90CB200D66A15 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CACCFE418A90CB200D66A15 /* CalendarViewController.m */; };
-		7CACCFEA18A9142900D66A15 /* RFQuiltLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CACCFE918A9142900D66A15 /* RFQuiltLayout.m */; };
 		7CBD1FB218F3EE1B002154BC /* SessionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBD1FB018F3EE1B002154BC /* SessionCell.m */; };
 		7CBD1FB318F3EE1B002154BC /* SessionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CBD1FB118F3EE1B002154BC /* SessionCell.xib */; };
 		7CBD1FB618F4284A002154BC /* SideMenuHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBD1FB518F4284A002154BC /* SideMenuHeader.m */; };
@@ -135,8 +134,6 @@
 		7CACCFDC18A906F900D66A15 /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 		7CACCFE318A90CB200D66A15 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
 		7CACCFE418A90CB200D66A15 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
-		7CACCFE818A9142900D66A15 /* RFQuiltLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFQuiltLayout.h; sourceTree = "<group>"; };
-		7CACCFE918A9142900D66A15 /* RFQuiltLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFQuiltLayout.m; sourceTree = "<group>"; };
 		7CBD1FAF18F3EE1B002154BC /* SessionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionCell.h; sourceTree = "<group>"; };
 		7CBD1FB018F3EE1B002154BC /* SessionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionCell.m; sourceTree = "<group>"; };
 		7CBD1FB118F3EE1B002154BC /* SessionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionCell.xib; sourceTree = "<group>"; };
@@ -150,6 +147,7 @@
 		7CCB106E18AE5BAA007A2486 /* UIImage+FromUIColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FromUIColor.m"; sourceTree = "<group>"; };
 		7CDE9FE918B4B9DA00E2F619 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
 		7CDE9FEA18B4B9DA00E2F619 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
+		7CE4FFBF18F52FDF0049AC9E /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		7CFF7B2818EE9A9800A674F2 /* iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPhone.storyboard; sourceTree = "<group>"; };
 		A302BFD5A71F4B95B3A6CFB0 /* libPods-CodeFrontio-2014.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CodeFrontio-2014.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8D757C9049C42AEB515F8C2 /* Pods-CodeFrontio-2014.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CodeFrontio-2014.xcconfig"; path = "Pods/Pods-CodeFrontio-2014.xcconfig"; sourceTree = "<group>"; };
@@ -218,7 +216,7 @@
 				7CCB106618AE1D04007A2486 /* Networking */,
 				7CACCFDA18A906EB00D66A15 /* View */,
 				7C422F9918A8FE4A00195D6C /* Controller */,
-				7CACCFE618A9141200D66A15 /* Libraries */,
+				7CE4FFBF18F52FDF0049AC9E /* Constants.h */,
 				7C00883E18A8F84B00ED4B31 /* Supporting Files */,
 			);
 			path = "CodeFrontio-2014";
@@ -368,23 +366,6 @@
 			path = Detail;
 			sourceTree = "<group>";
 		};
-		7CACCFE618A9141200D66A15 /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				7CACCFE718A9142900D66A15 /* RFQuiltLayout */,
-			);
-			path = Libraries;
-			sourceTree = "<group>";
-		};
-		7CACCFE718A9142900D66A15 /* RFQuiltLayout */ = {
-			isa = PBXGroup;
-			children = (
-				7CACCFE818A9142900D66A15 /* RFQuiltLayout.h */,
-				7CACCFE918A9142900D66A15 /* RFQuiltLayout.m */,
-			);
-			path = RFQuiltLayout;
-			sourceTree = "<group>";
-		};
 		7CCB106618AE1D04007A2486 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -532,7 +513,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C00884818A8F84B00ED4B31 /* AppDelegate.m in Sources */,
-				7CACCFEA18A9142900D66A15 /* RFQuiltLayout.m in Sources */,
 				7C064FC518F1AD61005CD375 /* TrackCell.m in Sources */,
 				7C83BB4E18AAD7B0003D3557 /* SpeakerCell.m in Sources */,
 				7C422F9D18A8FE5F00195D6C /* MasterViewController.m in Sources */,

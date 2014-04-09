@@ -8,12 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#pragma mark Constants
-static NSString * const calendarSceneIdentifier = @"CalendarScene";
-static NSString * const favouritesSceneIdentifier = @"FavouritesScene";
-static NSString * const notesSceneIdentifier = @"NotesScene";
-static NSString * const supportersSceneIdentifier = @"SponsorsScene";
-
 @class BaseViewController;
 
 @interface MasterViewController : UITableViewController
