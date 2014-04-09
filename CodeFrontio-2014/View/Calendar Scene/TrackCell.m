@@ -13,6 +13,9 @@
 #import "TrackCell.h"
 #import "SessionCell.h"
 
+#pragma mark Constants
+#import "Constants.h"
+
 @interface TrackCell () <UITableViewDataSource, UITableViewDelegate>
 
 @end
@@ -69,7 +72,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"tableView:didSelectRowAtIndexPath: %@", indexPath);
+    [[NSNotificationCenter defaultCenter] postNotificationName:didSelectSessionNotification object:nil userInfo:@{@"session": self.sessions[indexPath.section]}];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

@@ -13,5 +13,6 @@
 @interface SessionViewController : UITableViewController
 
 @property (nonatomic) Session *session;
+@property (nonatomic, assign, getter = isKeyboardOpen) BOOL keyboardOpen;
 
 @end

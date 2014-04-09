@@ -26,6 +26,9 @@
 #import "CalendarViewController.h"
 #import "SessionViewController.h"
 
+#pragma mark Constants
+#import "Constants.h"
+
 #pragma mark Pods
 #import <SVProgressHUD/SVProgressHUD.h>
 
@@ -46,9 +49,10 @@
     
     [super viewDidLoad];
     
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        self.title = NSLocalizedString(@"Calendar", nil);
-    } else { // if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+    self.title = NSLocalizedString(@"Calendar", nil);
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        
         self.navigationItem.titleView = ({
             
             UILabel *titleLabel = [UILabel new];
@@ -73,7 +77,9 @@
             [titleView addSubview:titleLabel];
             [titleView addSubview:self.pageControl];
             titleView;
+            
         });
+        
     }
     
     // Collection view stuff
@@ -93,6 +99,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
+    
+    // Register for notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(takeNote:) name:takeNoteNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectSession:) name:didSelectSessionNotification object:nil];
     
     // If setup is already done, reload and return
     if (self.speakers && self.sessions) {
@@ -122,6 +132,15 @@
     });
     
 }
+- (void)viewDidDisappear:(BOOL)animated {
+    
+    [super viewDidDisappear:animated];
+    
+    // Remove notification observer
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:takeNoteNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:didSelectSessionNotification object:nil];
+    
+}
 - (void)viewWillLayoutSubviews {
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
     layout.itemSize = CGSizeMake(280.0, CGRectGetHeight(self.collectionView.frame));
@@ -137,11 +156,25 @@
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"sessionSegue"]) {
-        NSIndexPath *indexPath = (NSIndexPath *)sender;
-        Session *session = self.sessions[indexPath.item];
+        NSDictionary *userInfo = sender;
+        Session *session = userInfo[@"session"];
+        BOOL keyboardOpen = [userInfo[@"isKeyboardOpen"] boolValue];
         SessionViewController *svc = segue.destinationViewController;
         svc.session = session;
+        svc.keyboardOpen = keyboardOpen;
     }
+}
+
+#pragma mark - Notifications
+- (IBAction)takeNote:(id)sender {
+    [self presentSession:((NSNotification *)sender).userInfo[@"session"] keyboardOpen:YES];
+}
+- (IBAction)didSelectSession:(id)sender {
+    [self presentSession:((NSNotification *)sender).userInfo[@"session"] keyboardOpen:NO];
+}
+
+- (void)presentSession:(Session *)session keyboardOpen:(BOOL)keyboardOpen {
+    [self performSegueWithIdentifier:@"sessionSegue" sender:@{@"session": session, @"isKeyboardOpen": @(keyboardOpen)}];
 }
 
 #pragma mark - UICollectionViewDataSource
