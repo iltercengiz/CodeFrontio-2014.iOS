@@ -13,7 +13,7 @@
 
 @interface FavouriteCell : MCSwipeTableViewCell
 
-#pragma mark - Configurator
+#pragma mark - FavouriteCell
 - (void)configureCellForSession:(Session *)session;
 
 @end

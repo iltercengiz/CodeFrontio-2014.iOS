@@ -12,7 +12,7 @@
 
 @interface SpeakerCell : UITableViewCell
 
-#pragma mark - Configurator
+#pragma mark - SpeakerCell
 - (void)configureCellForSpeaker:(Speaker *)speaker;
 
 @end

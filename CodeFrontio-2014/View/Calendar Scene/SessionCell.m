@@ -39,11 +39,11 @@
 #pragma mark - NSObject UIKit Additions
 - (void)awakeFromNib {
     
-    self.layer.cornerRadius = 6.0;
+    self.layer.cornerRadius = 8.0;
     self.clipsToBounds = YES;
     
-    self.placeholderImage.layer.cornerRadius = 4.0;
-    self.placeholderImage.layer.borderColor = [UIColor P_lightBlueColor].CGColor;
+    self.placeholderImage.layer.cornerRadius = 8.0;
+    self.placeholderImage.layer.borderColor = [UIColor P_lightGrayColor].CGColor;
     self.placeholderImage.layer.borderWidth = 1.0;
     self.placeholderImage.clipsToBounds = YES;
     

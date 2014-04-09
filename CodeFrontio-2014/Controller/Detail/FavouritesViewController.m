@@ -33,7 +33,11 @@
 
 #pragma mark - UIViewController
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
+    
+    self.title = NSLocalizedString(@"Favourites", nil);
+    
 }
 - (void)viewWillAppear:(BOOL)animated {
     
@@ -41,7 +45,7 @@
     
     // Get sessions
     NSArray *sessions;
-    sessions = [Manager sharedManager].sessions;
+    sessions = [Manager sharedManager].sessionsAll;
     sessions = [sessions filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"favourited == %@", @YES]];
     self.sessions = [sessions mutableCopy];
     

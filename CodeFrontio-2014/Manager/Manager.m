@@ -33,6 +33,8 @@
 @synthesize sessions = _sessions;
 @synthesize sponsors = _sponsors;
 
+@synthesize sessionsAll = _sessionsAll;
+
 #pragma mark - Singleton
 + (instancetype)sharedManager {
     static Manager *sharedManager = nil;
@@ -45,10 +47,20 @@
 
 #pragma mark - Getter
 - (NSArray *)speakers {
+    
+    if (_speakers) {
+        return _speakers;
+    }
+    
     _speakers = [Speaker MR_findAllSortedBy:@"identifier" ascending:YES];
     return _speakers;
+    
 }
 - (NSArray *)sessions {
+    
+    if (_sessions) {
+        return _sessions;
+    }
     
     NSArray *sessions = [[Session MR_findAll] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"track" ascending:YES], [NSSortDescriptor sortDescriptorWithKey:@"timeInterval" ascending:YES]]];
     NSMutableArray *tracks = [NSMutableArray array];
@@ -69,23 +81,35 @@
         
     }
     
-//    for (NSMutableArray *track in tracks) {
-//        [track sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"timeInterval" ascending:YES]]];
-//    }
-    
-//    _sessions = [Session MR_findAllSortedBy:@"sortingIndex" ascending:YES];
-    
     _sessions = tracks;
     
     return _sessions;
     
 }
 - (NSArray *)sponsors {
+    
+    if (_sponsors) {
+        return _sponsors;
+    }
+    
     _sponsors = [[Sponsor MR_findAll] sortedArrayUsingDescriptors:@[
                                                                     [NSSortDescriptor sortDescriptorWithKey:@"priority" ascending:YES],
                                                                     [NSSortDescriptor sortDescriptorWithKey:@"subpriority" ascending:YES]
                                                                     ]];
     return _sponsors;
+    
+}
+
+- (NSArray *)sessionsAll {
+    
+    if (_sessionsAll) {
+        return _sessionsAll;
+    }
+    
+    _sessionsAll = [[Session MR_findAll] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"track" ascending:YES], [NSSortDescriptor sortDescriptorWithKey:@"timeInterval" ascending:YES]]];
+    
+    return _sessionsAll;
+    
 }
 
 #pragma mark - Setter
@@ -97,6 +121,10 @@
 }
 - (void)setSponsors:(NSArray *)sponsors {
     _sponsors = sponsors;
+}
+
+- (void)setSessionsAll:(NSArray *)sessionsAll {
+    _sessionsAll = sessionsAll;
 }
 
 #pragma mark - Setup

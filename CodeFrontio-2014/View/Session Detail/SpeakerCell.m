@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 Ilter Cengiz. All rights reserved.
 //
 
+#pragma mark Categories
+#import "UIColor+Palette.h"
+
 #pragma mark Model
 #import "Speaker.h"
 
@@ -18,13 +21,30 @@
 
 @implementation SpeakerCell
 
-#pragma mark - Configurator
+#pragma mark - NSObject UIKit Additions
+- (void)awakeFromNib {
+    
+    // Image customisation
+    self.imageView.layer.cornerRadius = 8.0;
+    self.imageView.layer.borderColor = [UIColor P_lightGrayColor].CGColor;
+    self.imageView.layer.borderWidth = 1.0;
+    self.imageView.clipsToBounds = YES;
+    
+}
+
+#pragma mark - UIView
+- (void)layoutSubviews {
+    
+    [super layoutSubviews];
+    
+    self.imageView.frame = CGRectInset(self.imageView.frame, 4.0, 4.0);
+    
+}
+
+#pragma mark - SpeakerCell
 - (void)configureCellForSpeaker:(Speaker *)speaker {
     
     // Set image
-    self.imageView.layer.cornerRadius = 8.0;
-    self.imageView.clipsToBounds = YES;
-    
     NSString *imageURLString = speaker.avatar;
     UIImage *image = (UIImage *)[[TMDiskCache sharedCache] objectForKey:imageURLString];
     
@@ -49,15 +69,6 @@
     
     // Set name
     self.textLabel.text = speaker.name;
-    
-}
-
-#pragma mark - UIView
-- (void)layoutSubviews {
-    
-    [super layoutSubviews];
-    
-    self.imageView.frame = CGRectInset(self.imageView.frame, 4.0, 4.0);
     
 }
 
