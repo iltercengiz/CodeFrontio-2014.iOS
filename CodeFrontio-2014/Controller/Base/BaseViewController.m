@@ -10,6 +10,9 @@
 #import "BaseViewController.h"
 #import "MasterViewController.h"
 
+#pragma mark Constants
+#import "Constants.h"
+
 @interface BaseViewController ()
 
 @end
