@@ -17,7 +17,6 @@
 "Calendar" = "Calendar";
 "Favourites" = "Favourites";
 "Notes" = "Notes";
-"Venue" = "Venue";
 "Sponsors" = "Sponsors";
 
 "Confirm deletion" = "Confirm deletion";
@@ -31,3 +30,5 @@
 "Speaker" = "Speaker";
 "Notes" = "Notes";
 "Photos" = "Photos";
+
+"Favourite information" = "You'll receive notifications for the favourited sessions 15 minutes before it starts!";

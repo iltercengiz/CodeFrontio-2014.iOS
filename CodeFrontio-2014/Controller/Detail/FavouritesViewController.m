@@ -95,15 +95,28 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.sessions.count;
+    if (self.sessions.count) {
+        self.tableView.scrollEnabled = YES;
+        return self.sessions.count;
+    }
+    self.tableView.scrollEnabled = NO;
+    return 1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     // Session
-    Session *session = self.sessions[indexPath.row];
+    Session *session;
+    
+    @try {
+        session = self.sessions[indexPath.row];
+    } @catch (NSException *exception) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"noFavouriteCell" forIndexPath:indexPath];
+        cell.textLabel.text = NSLocalizedString(@"Favourite information", nil);
+        return cell;
+    }
     
     // Create and configure cell
-    FavouriteCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sessionCell" forIndexPath:indexPath];
+    FavouriteCell *cell = [tableView dequeueReusableCellWithIdentifier:@"favouriteCell" forIndexPath:indexPath];
     [cell configureCellForSession:session];
     
     // Swipes
@@ -129,9 +142,18 @@
 }
 
 #pragma mark - UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.sessions.count) {
+        return tableView.rowHeight;
+    }
+    return CGRectGetHeight(tableView.frame);
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self takeNoteForSessionAtIndexPath:indexPath];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (self.sessions.count) {
+        [self takeNoteForSessionAtIndexPath:indexPath];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
 }
 
 @end
