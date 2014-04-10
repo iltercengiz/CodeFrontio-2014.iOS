@@ -42,7 +42,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hZ4-QU-tf5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="44" y="2276"/>
+            <point key="canvasLocation" x="548" y="3620"/>
         </scene>
         <!--Base View Controller-->
         <scene sceneID="rKy-Xq-lIa">
@@ -60,7 +60,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DJZ-Fg-F16" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-849" y="2276"/>
+            <point key="canvasLocation" x="-345" y="3620"/>
         </scene>
         <!--Calendar View Controller-->
         <scene sceneID="uU0-dZ-frY">
@@ -120,7 +120,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2m4-3c-8Nv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="923" y="2276"/>
+            <point key="canvasLocation" x="1427" y="3620"/>
         </scene>
         <!--Session View Controller-->
         <scene sceneID="gTH-pM-xnr">
@@ -249,7 +249,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c8f-D5-sTj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1807" y="2276"/>
+            <point key="canvasLocation" x="2311" y="3620"/>
         </scene>
         <!--Sponsors View Controller-->
         <scene sceneID="8OD-vF-Ly3">
@@ -294,7 +294,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gLJ-m1-OuK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2683" y="3472"/>
+            <point key="canvasLocation" x="3187" y="4816"/>
         </scene>
         <!--Favourites View Controller-->
         <scene sceneID="zDP-vk-rqp">
@@ -366,7 +366,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bce-t7-cjb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="923" y="3472"/>
+            <point key="canvasLocation" x="1427" y="4816"/>
         </scene>
         <!--Notes View Controller-->
         <scene sceneID="X4H-hr-Wev">
@@ -403,6 +403,24 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="noNotesCell" textLabel="YqZ-o3-b9l" style="IBUITableViewCellStyleDefault" id="FtA-zN-HLk">
+                                <rect key="frame" x="0.0" y="94" width="768" height="72"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FtA-zN-HLk" id="1qT-16-JDN">
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="71"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Information" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999998807907104" adjustsLetterSpacingToFitWidth="YES" preferredMaxLayoutWidth="738" id="YqZ-o3-b9l">
+                                            <rect key="frame" x="15" y="0.0" width="738" height="71"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="gRt-2O-J82" id="82n-GV-o0y"/>
@@ -416,7 +434,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dAD-tg-Fkr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1807" y="3472"/>
+            <point key="canvasLocation" x="2311" y="4816"/>
         </scene>
     </scenes>
     <resources>

@@ -20,7 +20,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gHH-3k-Dec" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="490" y="783"/>
+            <point key="canvasLocation" x="818" y="723"/>
         </scene>
         <!--Master View Controller-->
         <scene sceneID="Zyd-GK-2Z1">
@@ -59,7 +59,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Gn-YB-xX7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="886" y="783"/>
+            <point key="canvasLocation" x="1214" y="723"/>
         </scene>
         <!--Calendar View Controller-->
         <scene sceneID="k5T-v5-YFH">
@@ -114,7 +114,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d6O-7B-dkk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1276" y="783"/>
+            <point key="canvasLocation" x="1604" y="723"/>
         </scene>
         <!--Session View Controller-->
         <scene sceneID="KH7-IX-n9D">
@@ -243,7 +243,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tAp-jP-4OG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1677" y="783"/>
+            <point key="canvasLocation" x="2005" y="723"/>
         </scene>
         <!--Favourites View Controller-->
         <scene sceneID="t4T-Zd-3EA">
@@ -315,7 +315,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ral-gR-gOy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1276" y="1474"/>
+            <point key="canvasLocation" x="1604" y="1414"/>
         </scene>
         <!--Notes View Controller-->
         <scene sceneID="ouq-yx-O24">
@@ -352,6 +352,24 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="noNotesCell" textLabel="RSR-eV-St7" style="IBUITableViewCellStyleDefault" id="sGT-0E-bmd">
+                                <rect key="frame" x="0.0" y="78" width="320" height="56"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sGT-0E-bmd" id="skn-1t-FSI">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Information" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999998807907104" adjustsLetterSpacingToFitWidth="YES" preferredMaxLayoutWidth="290" id="RSR-eV-St7">
+                                            <rect key="frame" x="15" y="0.0" width="290" height="55"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="zQW-by-X6F" id="Wws-pz-RbB"/>
@@ -365,7 +383,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="99s-my-vQt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1677" y="1474"/>
+            <point key="canvasLocation" x="2005" y="1414"/>
         </scene>
         <!--Sponsors View Controller-->
         <scene sceneID="9XJ-Eu-smn">
@@ -410,7 +428,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gwk-gJ-Cog" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2087" y="1474"/>
+            <point key="canvasLocation" x="2415" y="1414"/>
         </scene>
     </scenes>
     <resources>

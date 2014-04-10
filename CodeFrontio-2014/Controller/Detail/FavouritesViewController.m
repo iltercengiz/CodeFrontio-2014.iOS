@@ -27,6 +27,8 @@
 
 @property (nonatomic) NSMutableArray *sessions;
 
+@property (nonatomic, assign) BOOL shouldShowInformation;
+
 @end
 
 @implementation FavouritesViewController
@@ -39,6 +41,11 @@
     self.title = NSLocalizedString(@"Favourites", nil);
     
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
@@ -49,12 +56,10 @@
     sessions = [sessions filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"favourited == %@", @YES]];
     self.sessions = [sessions mutableCopy];
     
+    self.shouldShowInformation = self.sessions.count == 0 ? YES : NO;
+    
     [self.tableView reloadData];
     
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
 }
 
 #pragma mark - Navigation
@@ -87,20 +92,37 @@
     [self.sessions removeObjectAtIndex:indexPath.row];
     
     // Update tableView
+    [CATransaction begin];
+    
+    [CATransaction setCompletionBlock:^{
+        
+        self.shouldShowInformation = self.sessions.count == 0 ? YES : NO;
+        
+        if ([self shouldShowInformation]) {
+            [self.tableView reloadData];
+        }
+        
+    }];
+    
     [self.tableView beginUpdates];
     [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
     [self.tableView endUpdates];
+    
+    [CATransaction commit];
     
 }
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.sessions.count) {
-        self.tableView.scrollEnabled = YES;
+    if (self.sessions.count != 0) {
+        tableView.scrollEnabled = YES;
         return self.sessions.count;
+    } else if ([self shouldShowInformation]) {
+        tableView.scrollEnabled = NO;
+        return 1;
+    } else {
+        return 0;
     }
-    self.tableView.scrollEnabled = NO;
-    return 1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
