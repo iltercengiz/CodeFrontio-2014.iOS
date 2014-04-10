@@ -403,15 +403,15 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qdb-dL-wz9">
-                                            <rect key="frame" x="10" y="12" width="300" height="103"/>
+                                            <rect key="frame" x="10" y="20" width="300" height="87"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="qdb-dL-wz9" secondAttribute="trailing" constant="10" id="GYc-cm-gfv"/>
-                                        <constraint firstItem="qdb-dL-wz9" firstAttribute="top" secondItem="A52-tS-rwk" secondAttribute="top" constant="12" id="Gxw-Yz-F63"/>
+                                        <constraint firstItem="qdb-dL-wz9" firstAttribute="top" secondItem="A52-tS-rwk" secondAttribute="top" constant="20" id="Gxw-Yz-F63"/>
                                         <constraint firstItem="qdb-dL-wz9" firstAttribute="leading" secondItem="A52-tS-rwk" secondAttribute="leading" constant="10" id="NOl-fa-aXF"/>
-                                        <constraint firstAttribute="bottom" secondItem="qdb-dL-wz9" secondAttribute="bottom" constant="12" id="xzI-Mq-LF3"/>
+                                        <constraint firstAttribute="bottom" secondItem="qdb-dL-wz9" secondAttribute="bottom" constant="20" id="xzI-Mq-LF3"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
