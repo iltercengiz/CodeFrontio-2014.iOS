@@ -35,7 +35,7 @@
 @interface CalendarViewController () <UIScrollViewDelegate>
 
 @property (nonatomic) NSArray *speakers;
-@property (nonatomic) NSArray *sessions;
+@property (nonatomic) NSDictionary *sessionsTracked;
 
 @property (nonatomic) UIPageControl *pageControl;
 @property (nonatomic, assign, getter = isPageControlUsed) BOOL pageControlUsed;
@@ -105,7 +105,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectSession:) name:didSelectSessionNotification object:nil];
     
     // If setup is already done, reload and return
-    if (self.speakers && self.sessions) {
+    if (self.speakers && self.sessionsTracked) {
         [self.collectionView reloadData];
         return;
     }
@@ -116,7 +116,7 @@
     void (^completion)() = ^{
         
         self.speakers = [Manager sharedManager].speakers;
-        self.sessions = [Manager sharedManager].sessions;
+        self.sessionsTracked = [Manager sharedManager].sessionsTracked;
         
         // Reload calendar
         [self.collectionView reloadData];
@@ -179,12 +179,12 @@
 
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.sessions.count;
+    return self.sessionsTracked.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     TrackCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"trackCell" forIndexPath:indexPath];
-    cell.sessions = self.sessions[indexPath.row];
+    cell.sessions = self.sessionsTracked[@(indexPath.item + 1)];
     return cell;
 }
 

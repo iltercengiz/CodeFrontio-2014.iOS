@@ -33,7 +33,7 @@
 @synthesize sessions = _sessions;
 @synthesize sponsors = _sponsors;
 
-@synthesize sessionsAll = _sessionsAll;
+@synthesize sessionsTracked = _sessionsTracked;
 
 #pragma mark - Singleton
 + (instancetype)sharedManager {
@@ -62,26 +62,10 @@
         return _sessions;
     }
     
-    NSArray *sessions = [[Session MR_findAll] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"track" ascending:YES], [NSSortDescriptor sortDescriptorWithKey:@"timeInterval" ascending:YES]]];
-    NSMutableArray *tracks = [NSMutableArray array];
-    NSMutableArray *track;
+    NSArray *sessions = [[Session MR_findAll] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"track" ascending:YES],
+                                                                            [NSSortDescriptor sortDescriptorWithKey:@"timeInterval" ascending:YES]]];
     
-    for (Session *session in sessions) {
-        
-        @try {
-            track = tracks[session.track.integerValue];
-        }
-        @catch (NSException *exception) {
-            track = [NSMutableArray array];
-            [tracks insertObject:track atIndex:session.track.integerValue];
-        }
-        @finally {
-            [track addObject:session];
-        }
-        
-    }
-    
-    _sessions = tracks;
+    _sessions = sessions;
     
     return _sessions;
     
@@ -100,15 +84,36 @@
     
 }
 
-- (NSArray *)sessionsAll {
+- (NSDictionary *)sessionsTracked {
     
-    if (_sessionsAll) {
-        return _sessionsAll;
+    if (_sessionsTracked) {
+        return _sessionsTracked;
     }
     
-    _sessionsAll = [[Session MR_findAll] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"track" ascending:YES], [NSSortDescriptor sortDescriptorWithKey:@"timeInterval" ascending:YES]]];
+    NSMutableDictionary *sessionsTracked = [NSMutableDictionary dictionary];
+    NSMutableArray *track;
     
-    return _sessionsAll;
+    for (Session *session in self.sessions) {
+        
+        track = sessionsTracked[session.track];
+        
+        if (!track) {
+            track = [NSMutableArray array];
+            sessionsTracked[session.track] = track;
+        }
+        
+        [track addObject:session];
+        
+    }
+    
+    [sessionsTracked enumerateKeysAndObjectsUsingBlock:^(NSNumber *key, NSMutableArray *sessions, BOOL *stop) {
+        [sessions sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"track" ascending:YES],
+                                         [NSSortDescriptor sortDescriptorWithKey:@"timeInterval" ascending:YES]]];
+    }];
+    
+    _sessionsTracked = sessionsTracked;
+    
+    return _sessionsTracked;
     
 }
 
@@ -123,8 +128,8 @@
     _sponsors = sponsors;
 }
 
-- (void)setSessionsAll:(NSArray *)sessionsAll {
-    _sessionsAll = sessionsAll;
+- (void)setSessionsTracked:(NSDictionary *)sessionsTracked {
+    _sessionsTracked = sessionsTracked;
 }
 
 #pragma mark - Setup
@@ -266,16 +271,8 @@
                                parameters:nil
                                   success:^(NSURLSessionDataTask *task, id responseObject) {
                                       
-                                      NSInteger trackNumber = 0;
-                                      
-                                      // Every track is an array
-                                      for (NSArray *track in responseObject) {
-                                          // In every track array there are its sessions
-                                          for (NSDictionary *sessionInfo in track) {
-                                              // Create a session entity
-                                              [Session sessionWithInfo:sessionInfo track:@(trackNumber)];
-                                          }
-                                          trackNumber++;
+                                      for (NSDictionary *sessionInfo in responseObject) {
+                                          [Session sessionWithInfo:sessionInfo];
                                       }
                                       
                                       completion(@"sessions", remoteVersion[@"sessions"], YES);

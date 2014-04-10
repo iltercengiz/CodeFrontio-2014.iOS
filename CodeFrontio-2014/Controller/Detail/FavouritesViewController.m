@@ -45,7 +45,7 @@
     
     // Get sessions
     NSArray *sessions;
-    sessions = [Manager sharedManager].sessionsAll;
+    sessions = [Manager sharedManager].sessions;
     sessions = [sessions filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"favourited == %@", @YES]];
     self.sessions = [sessions mutableCopy];
     

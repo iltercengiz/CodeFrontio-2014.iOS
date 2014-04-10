@@ -17,11 +17,11 @@ typedef NS_ENUM(NSInteger, SessionType) {
 @interface Manager : NSObject
 
 #pragma mark - Properties
-@property (nonatomic) NSArray *speakers;
-@property (nonatomic) NSArray *sessions;
-@property (nonatomic) NSArray *sponsors;
+@property NSArray *speakers;
+@property NSArray *sessions;
+@property NSArray *sponsors;
 
-@property (nonatomic) NSArray *sessionsAll;
+@property NSDictionary *sessionsTracked;
 
 #pragma mark - Singleton
 + (instancetype)sharedManager;

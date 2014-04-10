@@ -13,17 +13,16 @@
 
 @implementation Session (Create)
 
-+ (Session *)sessionWithInfo:(NSDictionary *)info track:(NSNumber *)trackNumber {
++ (Session *)sessionWithInfo:(NSDictionary *)info {
     
     // Create session object in context
     Session *session = [Session MR_createInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
     session.title = info[@"title"];
     session.detail = info[@"detail"];
-    session.track = trackNumber;
+    session.track = info[@"track"];
     session.type = info[@"type"];
     session.timeInterval = info[@"time"];
     session.speakerIdentifier = info[@"speaker"];
-//    session.sortingIndex = info[@"sortingIndex"];
     session.identifier = info[@"id"];
     
     // Save changes
