@@ -12,6 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property (nonatomic) NSArray *sessions;
+- (void)configureCellForSessions:(NSArray *)sessions;
 
 @end

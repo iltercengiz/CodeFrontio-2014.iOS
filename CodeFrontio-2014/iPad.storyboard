@@ -77,14 +77,14 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="trackCell" id="gef-F3-TdR" customClass="TrackCell">
-                                <rect key="frame" x="0.0" y="0.0" width="280" height="360"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="360"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="280" height="360"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="360"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="320" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zdY-Id-h4b">
-                                            <rect key="frame" x="0.0" y="0.0" width="280" height="360"/>
+                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="256" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zdY-Id-h4b">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="360"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <connections>
@@ -102,7 +102,7 @@
                                     <constraint firstItem="zdY-Id-h4b" firstAttribute="leading" secondItem="gef-F3-TdR" secondAttribute="leading" id="ZXJ-0X-EpK"/>
                                     <constraint firstAttribute="bottom" secondItem="zdY-Id-h4b" secondAttribute="bottom" id="mJl-sK-9nf"/>
                                 </constraints>
-                                <size key="customSize" width="280" height="360"/>
+                                <size key="customSize" width="320" height="360"/>
                                 <connections>
                                     <outlet property="tableView" destination="zdY-Id-h4b" id="F4Z-fn-sKd"/>
                                 </connections>
@@ -411,6 +411,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Lnl-vi-dL0"/>
+        <segue reference="o8v-YS-hOf"/>
     </inferredMetricsTieBreakers>
 </document>

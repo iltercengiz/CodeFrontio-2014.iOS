@@ -40,6 +40,8 @@
 @property (nonatomic) UIPageControl *pageControl;
 @property (nonatomic, assign, getter = isPageControlUsed) BOOL pageControlUsed;
 
+@property (nonatomic) NSMutableDictionary *scrollPositions;
+
 @end
 
 @implementation CalendarViewController
@@ -143,13 +145,17 @@
 }
 - (void)viewWillLayoutSubviews {
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
-    layout.itemSize = CGSizeMake(280.0, CGRectGetHeight(self.collectionView.frame));
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        layout.itemSize = CGSizeMake(320.0, CGRectGetHeight(self.collectionView.frame));
+    } else { // if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+        layout.itemSize = CGSizeMake(280.0, CGRectGetHeight(self.collectionView.frame));
+    }
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
-        layout.itemSize = CGSizeMake(280.0, CGRectGetWidth(self.collectionView.frame));
+        layout.itemSize = CGSizeMake(320.0, CGRectGetWidth(self.collectionView.frame));
     }
 }
 
@@ -177,6 +183,14 @@
     [self performSegueWithIdentifier:@"sessionSegue" sender:@{@"session": session, @"isKeyboardOpen": @(keyboardOpen)}];
 }
 
+#pragma mark - Getter
+- (NSMutableDictionary *)scrollPositions {
+    if (!_scrollPositions) {
+        _scrollPositions = [NSMutableDictionary dictionary];
+    }
+    return _scrollPositions;
+}
+
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.sessionsTracked.count;
@@ -184,13 +198,8 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     TrackCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"trackCell" forIndexPath:indexPath];
-    cell.sessions = self.sessionsTracked[@(indexPath.item + 1)];
+    [cell configureCellForSessions:self.sessionsTracked[@(indexPath.item + 1)]];
     return cell;
-}
-
-#pragma mark - UICollectionViewDelegate
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -261,6 +270,11 @@
     // Set the boolean used when scrolls originate from the UIPageControl. See scrollViewDidScroll: above.
     self.pageControlUsed = YES;
     
+}
+
+#pragma mark - TrackCellDelegate
+- (void)track:(NSInteger)track didScrollToPosition:(CGPoint)scrollPosition {
+    self.scrollPositions[@(track)] = [NSValue valueWithCGPoint:scrollPosition];
 }
 
 @end
