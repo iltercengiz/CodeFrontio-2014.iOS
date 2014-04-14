@@ -25,12 +25,12 @@
 		7C2F3B5218B7417900A8A034 /* NoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2F3B5118B7417900A8A034 /* NoteCell.m */; };
 		7C2FC85118ED745B00E3073F /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2FC85018ED745B00E3073F /* BaseViewController.m */; };
 		7C34A64318B2268A00EC31DA /* Sponsor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34A64218B2268A00EC31DA /* Sponsor.m */; };
-		7C34A64918B2268A00EC31DA /* Speaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34A64818B2268A00EC31DA /* Speaker.m */; };
 		7C34A64B18B2379D00EC31DA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C34A64A18B2379D00EC31DA /* CoreData.framework */; };
 		7C34A65118B26AD800EC31DA /* NSDictionary+SortedKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34A65018B26AD800EC31DA /* NSDictionary+SortedKeys.m */; };
 		7C355C8318B6727000BB72B0 /* VenueImages.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7C355C8218B6727000BB72B0 /* VenueImages.bundle */; };
 		7C3840FB18AC0B0300A85C31 /* SponsorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3840FA18AC0B0300A85C31 /* SponsorCell.m */; };
 		7C3840FE18AC0B4900A85C31 /* SponsorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3840FD18AC0B4900A85C31 /* SponsorsViewController.m */; };
+		7C3B748118FC146000689B4F /* Speaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B748018FC146000689B4F /* Speaker.m */; };
 		7C3BC57018B0FBE700CA0FC0 /* CodeFrontio.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC56E18B0FBE700CA0FC0 /* CodeFrontio.xcdatamodeld */; };
 		7C3BC58618B1011500CA0FC0 /* Sponsor+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC58518B1011500CA0FC0 /* Sponsor+Create.m */; };
 		7C3BC58918B1011F00CA0FC0 /* Session+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC58818B1011F00CA0FC0 /* Session+Create.m */; };
@@ -96,8 +96,6 @@
 		7C2FC85018ED745B00E3073F /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		7C34A64118B2268A00EC31DA /* Sponsor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sponsor.h; sourceTree = "<group>"; };
 		7C34A64218B2268A00EC31DA /* Sponsor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sponsor.m; sourceTree = "<group>"; };
-		7C34A64718B2268A00EC31DA /* Speaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Speaker.h; sourceTree = "<group>"; };
-		7C34A64818B2268A00EC31DA /* Speaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Speaker.m; sourceTree = "<group>"; };
 		7C34A64A18B2379D00EC31DA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		7C34A64F18B26AD800EC31DA /* NSDictionary+SortedKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+SortedKeys.h"; sourceTree = "<group>"; };
 		7C34A65018B26AD800EC31DA /* NSDictionary+SortedKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+SortedKeys.m"; sourceTree = "<group>"; };
@@ -106,6 +104,8 @@
 		7C3840FA18AC0B0300A85C31 /* SponsorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SponsorCell.m; sourceTree = "<group>"; };
 		7C3840FC18AC0B4900A85C31 /* SponsorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SponsorsViewController.h; sourceTree = "<group>"; };
 		7C3840FD18AC0B4900A85C31 /* SponsorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SponsorsViewController.m; sourceTree = "<group>"; };
+		7C3B747F18FC146000689B4F /* Speaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Speaker.h; sourceTree = "<group>"; };
+		7C3B748018FC146000689B4F /* Speaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Speaker.m; sourceTree = "<group>"; };
 		7C3BC56F18B0FBE700CA0FC0 /* CodeFrontio.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CodeFrontio.xcdatamodel; sourceTree = "<group>"; };
 		7C3BC58418B1011500CA0FC0 /* Sponsor+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Sponsor+Create.h"; sourceTree = "<group>"; };
 		7C3BC58518B1011500CA0FC0 /* Sponsor+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Sponsor+Create.m"; sourceTree = "<group>"; };
@@ -264,14 +264,14 @@
 		7C3BC56D18B0FAF300CA0FC0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7C3B747F18FC146000689B4F /* Speaker.h */,
+				7C3B748018FC146000689B4F /* Speaker.m */,
 				7CB582C618F6921F00AA4014 /* Session.h */,
 				7CB582C718F6921F00AA4014 /* Session.m */,
 				7CDE9FE918B4B9DA00E2F619 /* Photo.h */,
 				7CDE9FEA18B4B9DA00E2F619 /* Photo.m */,
 				7C213DCA18B34F2B00F96B01 /* Note.h */,
 				7C213DCB18B34F2B00F96B01 /* Note.m */,
-				7C34A64718B2268A00EC31DA /* Speaker.h */,
-				7C34A64818B2268A00EC31DA /* Speaker.m */,
 				7C34A64118B2268A00EC31DA /* Sponsor.h */,
 				7C34A64218B2268A00EC31DA /* Sponsor.m */,
 			);
@@ -545,11 +545,11 @@
 				7C34A65118B26AD800EC31DA /* NSDictionary+SortedKeys.m in Sources */,
 				7CF7CE0E18FBD465000AFCB2 /* SocialCell.m in Sources */,
 				7CB582C818F6921F00AA4014 /* Session.m in Sources */,
-				7C34A64918B2268A00EC31DA /* Speaker.m in Sources */,
 				7C34A64318B2268A00EC31DA /* Sponsor.m in Sources */,
 				7C2F3B4F18B73A3300A8A034 /* FavouriteCell.m in Sources */,
 				7CCB106918AE1D2A007A2486 /* LinzAPIClient.m in Sources */,
 				7CCB106F18AE5BAA007A2486 /* UIImage+FromUIColor.m in Sources */,
+				7C3B748118FC146000689B4F /* Speaker.m in Sources */,
 				7C83BB5718AADD40003D3557 /* PhotoCell.m in Sources */,
 				7C213DCC18B34F2B00F96B01 /* Note.m in Sources */,
 				7CACCFDD18A906F900D66A15 /* MenuCell.m in Sources */,

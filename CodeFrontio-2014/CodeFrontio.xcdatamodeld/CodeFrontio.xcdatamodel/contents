@@ -22,6 +22,7 @@
     <entity name="Speaker" representedClassName="Speaker" syncable="YES">
         <attribute name="avatar" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="detail" attributeType="String" syncable="YES"/>
+        <attribute name="dribbble" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="github" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="identifier" attributeType="Integer 16" defaultValueString="0" indexed="YES" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
@@ -40,7 +41,7 @@
         <element name="Note" positionX="-2243" positionY="369" width="128" height="73"/>
         <element name="Photo" positionX="-2079" positionY="369" width="128" height="88"/>
         <element name="Session" positionX="-2162" positionY="171" width="128" height="163"/>
-        <element name="Speaker" positionX="-2324" positionY="194" width="128" height="148"/>
+        <element name="Speaker" positionX="-2324" positionY="180" width="128" height="163"/>
         <element name="Sponsor" positionX="-1998" positionY="209" width="128" height="133"/>
     </elements>
 </model>
