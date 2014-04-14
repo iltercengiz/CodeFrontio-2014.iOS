@@ -55,6 +55,7 @@
 		7CCB106918AE1D2A007A2486 /* LinzAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB106818AE1D2A007A2486 /* LinzAPIClient.m */; };
 		7CCB106F18AE5BAA007A2486 /* UIImage+FromUIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB106E18AE5BAA007A2486 /* UIImage+FromUIColor.m */; };
 		7CDE9FEB18B4B9DA00E2F619 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDE9FEA18B4B9DA00E2F619 /* Photo.m */; };
+		7CF7CE0718FBD201000AFCB2 /* SpeakerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF7CE0618FBD201000AFCB2 /* SpeakerViewController.m */; };
 		7CFF7B2918EE9A9800A674F2 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CFF7B2818EE9A9800A674F2 /* iPhone.storyboard */; };
 		BCA93DB8D5A044DCBF5B4EA4 /* libPods-CodeFrontio-2014.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A302BFD5A71F4B95B3A6CFB0 /* libPods-CodeFrontio-2014.a */; };
 /* End PBXBuildFile section */
@@ -148,6 +149,8 @@
 		7CDE9FE918B4B9DA00E2F619 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
 		7CDE9FEA18B4B9DA00E2F619 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 		7CE4FFBF18F52FDF0049AC9E /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		7CF7CE0518FBD201000AFCB2 /* SpeakerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeakerViewController.h; sourceTree = "<group>"; };
+		7CF7CE0618FBD201000AFCB2 /* SpeakerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeakerViewController.m; sourceTree = "<group>"; };
 		7CFF7B2818EE9A9800A674F2 /* iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPhone.storyboard; sourceTree = "<group>"; };
 		A302BFD5A71F4B95B3A6CFB0 /* libPods-CodeFrontio-2014.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CodeFrontio-2014.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8D757C9049C42AEB515F8C2 /* Pods-CodeFrontio-2014.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CodeFrontio-2014.xcconfig"; path = "Pods/Pods-CodeFrontio-2014.xcconfig"; sourceTree = "<group>"; };
@@ -356,6 +359,8 @@
 				7CACCFE418A90CB200D66A15 /* CalendarViewController.m */,
 				7C83BB4818AAD12A003D3557 /* SessionViewController.h */,
 				7C83BB4918AAD12A003D3557 /* SessionViewController.m */,
+				7CF7CE0518FBD201000AFCB2 /* SpeakerViewController.h */,
+				7CF7CE0618FBD201000AFCB2 /* SpeakerViewController.m */,
 				7C213DD318B3A25F00F96B01 /* NotesViewController.h */,
 				7C213DD418B3A25F00F96B01 /* NotesViewController.m */,
 				7C213DD018B384B300F96B01 /* FavouritesViewController.h */,
@@ -543,6 +548,7 @@
 				7C83BB4A18AAD12A003D3557 /* SessionViewController.m in Sources */,
 				7C2F3B5218B7417900A8A034 /* NoteCell.m in Sources */,
 				7C2FC85118ED745B00E3073F /* BaseViewController.m in Sources */,
+				7CF7CE0718FBD201000AFCB2 /* SpeakerViewController.m in Sources */,
 				7CDE9FEB18B4B9DA00E2F619 /* Photo.m in Sources */,
 				7C3840FE18AC0B4900A85C31 /* SponsorsViewController.m in Sources */,
 				7C064FCA18F1B17C005CD375 /* UIColor+Palette.m in Sources */,
