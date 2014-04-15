@@ -17,12 +17,11 @@
     
     // Create session object in context
     Session *session = [Session MR_createInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
-    session.title = info[@"title"];
-    session.detail = info[@"detail"];
+    session.title = info[@"talk_title"];
+    session.detail = [info[@"talk_detail"] isKindOfClass:[NSNull class]] ? nil : info[@"talk_detail"];
     session.track = info[@"track"];
-    session.type = info[@"type"];
     session.timeInterval = info[@"time"];
-    session.speakerIdentifier = info[@"speaker"];
+    session.speakerIdentifier = info[@"speaker_session_ids"];
     session.identifier = info[@"id"];
     
     // Save changes

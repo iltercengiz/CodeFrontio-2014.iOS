@@ -13,9 +13,9 @@
 #import "LinzAPIClient.h"
 
 #pragma mark Model
-#import "Sponsor.h"
+#import "Speaker+Create.h"
 #import "Session+Create.h"
-#import "Speaker.h"
+#import "Sponsor+Create.h"
 
 #pragma mark Pods
 #import <MagicalRecord/CoreData+MagicalRecord.h>
@@ -203,7 +203,7 @@
     };
     
     // Fetch the latest version numbers
-    [[LinzAPIClient sharedClient] GET:@"/version"
+    [[LinzAPIClient sharedClient] GET:@"/api/version/index.json"
                            parameters:nil
                               success:^(NSURLSessionDataTask *task, id responseObject) {
                                   [self setupSessionsWithRemoteVersion:responseObject completion:completionBlock];
@@ -232,28 +232,16 @@
         // Remove local data
         [Speaker MR_truncateAll];
         // Fetch all speakers
-        [[LinzAPIClient sharedClient] GET:@"/speakers"
+        [[LinzAPIClient sharedClient] GET:@"/api/speakers/index.json"
                                parameters:nil
                                   success:^(NSURLSessionDataTask *task, id responseObject) {
-                                      // responseObject holds info for all speakers
+                                      
                                       for (NSDictionary *speakerInfo in responseObject) {
-                                          // Create a speaker entity
-                                          Speaker *speaker = [Speaker MR_createInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
-                                          speaker.name = speakerInfo[@"full_name"];
-                                          speaker.title = speakerInfo[@"title"];
-                                          speaker.detail = speakerInfo[@"detail"];
-                                          speaker.identifier = speakerInfo[@"id"];
-                                          speaker.avatar = [speakerInfo[@"avatar"] isEqualToString:@""] ? nil : [@"http://linz.kod.io/public/images/speakers/" stringByAppendingString:speakerInfo[@"avatar"]];
-                                          speaker.github = [speakerInfo[@"github"] isEqualToString:@""] ? nil : [@"http://github.com/" stringByAppendingString:speakerInfo[@"github"]];
-                                          speaker.twitter = [speakerInfo[@"twitter"] isEqualToString:@""] ? nil : [@"http://twitter.com/" stringByAppendingString:speakerInfo[@"twitter"]];
+                                          [Speaker speakerWithInfo:speakerInfo];
                                       }
                                       
-                                      [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-                                          // if (success) NSLog(@"Save successful!");
-                                          // else NSLog(@"Save failed with error: %@", error);
-                                      }];
-                                      
                                       completion(@"speakers", remoteVersion[@"speakers"], YES);
+                                      
                                   } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                       completion(@"speakers", remoteVersion[@"speakers"], NO);
                                   }];
@@ -267,7 +255,7 @@
         // Remove local data
         [Session MR_truncateAll];
         // Fetch all sessions
-        [[LinzAPIClient sharedClient] GET:@"/sessions"
+        [[LinzAPIClient sharedClient] GET:@"/api/sessions/index.json"
                                parameters:nil
                                   success:^(NSURLSessionDataTask *task, id responseObject) {
                                       
@@ -290,10 +278,10 @@
         // Remove local data
         [Sponsor MR_truncateAll];
         // Fetch all sponsors
-        [[LinzAPIClient sharedClient] GET:@"/sponsors"
+        [[LinzAPIClient sharedClient] GET:@"/api/sponsors/index.json"
                                parameters:nil
                                   success:^(NSURLSessionDataTask *task, id responseObject) {
-                                      // responseObject holds info for all sponsors
+                                      
                                       for (NSDictionary *groupInfo in responseObject) {
                                           
                                           NSArray *sponsors = groupInfo[@"sponsors"];
@@ -303,23 +291,20 @@
                                           
                                           for (NSDictionary *sponsorInfo in sponsors) {
                                               NSInteger subpriority = [sponsors indexOfObject:sponsorInfo];
-                                              // Create a sponsor entity
-                                              Sponsor *sponsor = [Sponsor MR_createInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
-                                              sponsor.type = type;
-                                              sponsor.imageURL = sponsorInfo[@"imageURL"];
-                                              sponsor.websiteURL = sponsorInfo[@"websiteURL"];
-                                              sponsor.priority = @(priority);
-                                              sponsor.subpriority = @(subpriority);
-                                              sponsor.identifier = sponsorInfo[@"id"];
+                                              
+                                              [Sponsor sponsorWithInfo:@{@"type": type,
+                                                                         @"imageURL": sponsorInfo[@"imageURL"],
+                                                                         @"websiteURL": sponsorInfo[@"websiteURL"],
+                                                                         @"priority": @(priority),
+                                                                         @"subpriority": @(subpriority),
+                                                                         @"identifier": sponsorInfo[@"id"]}];
+                                              
                                           }
+                                          
                                       }
                                       
-                                      [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-                                          // if (success) NSLog(@"Save successful!");
-                                          // else NSLog(@"Save failed with error: %@", error);
-                                      }];
-                                      
                                       completion(@"sponsors", remoteVersion[@"sponsors"], YES);
+                                      
                                   } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                       completion(@"sponsors", remoteVersion[@"sponsors"], NO);
                                   }];
