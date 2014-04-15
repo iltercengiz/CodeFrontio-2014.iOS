@@ -42,6 +42,8 @@
 		7C422F9D18A8FE5F00195D6C /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C422F9C18A8FE5F00195D6C /* MasterViewController.m */; };
 		7C4D966518FD1D7C00D2829B /* ActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4D966318FD1D7C00D2829B /* ActivityCell.m */; };
 		7C4D966618FD1D7C00D2829B /* ActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4D966418FD1D7C00D2829B /* ActivityCell.xib */; };
+		7C4D966A18FD26FB00D2829B /* SessionCellDouble.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4D966818FD26FB00D2829B /* SessionCellDouble.m */; };
+		7C4D966B18FD26FB00D2829B /* SessionCellDouble.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4D966918FD26FB00D2829B /* SessionCellDouble.xib */; };
 		7C83BB4A18AAD12A003D3557 /* SessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C83BB4918AAD12A003D3557 /* SessionViewController.m */; };
 		7C83BB4E18AAD7B0003D3557 /* SpeakerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C83BB4D18AAD7B0003D3557 /* SpeakerCell.m */; };
 		7C83BB5118AAD7BE003D3557 /* NotesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C83BB5018AAD7BE003D3557 /* NotesCell.m */; };
@@ -128,6 +130,9 @@
 		7C4D966218FD1D7C00D2829B /* ActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityCell.h; sourceTree = "<group>"; };
 		7C4D966318FD1D7C00D2829B /* ActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityCell.m; sourceTree = "<group>"; };
 		7C4D966418FD1D7C00D2829B /* ActivityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityCell.xib; sourceTree = "<group>"; };
+		7C4D966718FD26FB00D2829B /* SessionCellDouble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionCellDouble.h; sourceTree = "<group>"; };
+		7C4D966818FD26FB00D2829B /* SessionCellDouble.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionCellDouble.m; sourceTree = "<group>"; };
+		7C4D966918FD26FB00D2829B /* SessionCellDouble.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionCellDouble.xib; sourceTree = "<group>"; };
 		7C83BB4818AAD12A003D3557 /* SessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionViewController.h; sourceTree = "<group>"; };
 		7C83BB4918AAD12A003D3557 /* SessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionViewController.m; sourceTree = "<group>"; };
 		7C83BB4C18AAD7B0003D3557 /* SpeakerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeakerCell.h; sourceTree = "<group>"; };
@@ -416,6 +421,9 @@
 				7C4D966218FD1D7C00D2829B /* ActivityCell.h */,
 				7C4D966318FD1D7C00D2829B /* ActivityCell.m */,
 				7C4D966418FD1D7C00D2829B /* ActivityCell.xib */,
+				7C4D966718FD26FB00D2829B /* SessionCellDouble.h */,
+				7C4D966818FD26FB00D2829B /* SessionCellDouble.m */,
+				7C4D966918FD26FB00D2829B /* SessionCellDouble.xib */,
 			);
 			path = "Calendar Scene";
 			sourceTree = "<group>";
@@ -492,6 +500,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C422F9118A8FA4800195D6C /* iPad.storyboard in Resources */,
+				7C4D966B18FD26FB00D2829B /* SessionCellDouble.xib in Resources */,
 				7C00885318A8F84B00ED4B31 /* Images.xcassets in Resources */,
 				7C422F9218A8FA6800195D6C /* Localizable.strings in Resources */,
 				7CBD1FB818F42866002154BC /* SideMenuHeader_iPhone.xib in Resources */,
@@ -550,6 +559,7 @@
 				7C422F9D18A8FE5F00195D6C /* MasterViewController.m in Sources */,
 				7C064FC018F1A99E005CD375 /* PagerLayout.m in Sources */,
 				7C83BB5118AAD7BE003D3557 /* NotesCell.m in Sources */,
+				7C4D966A18FD26FB00D2829B /* SessionCellDouble.m in Sources */,
 				7C3BC57018B0FBE700CA0FC0 /* CodeFrontio.xcdatamodeld in Sources */,
 				7C34A65118B26AD800EC31DA /* NSDictionary+SortedKeys.m in Sources */,
 				7CF7CE0E18FBD465000AFCB2 /* SocialCell.m in Sources */,
