@@ -69,7 +69,6 @@
                                            UIViewAutoresizingFlexibleHeight);
             
             self.pageControl = [UIPageControl new];
-            self.pageControl.numberOfPages = 4;
             self.pageControl.frame = CGRectMake(0.0, 27.0, 200.0, 14.0);
             self.pageControl.autoresizingMask = (UIViewAutoresizingFlexibleTopMargin |
                                                  UIViewAutoresizingFlexibleBottomMargin |
@@ -123,6 +122,9 @@
         
         // Reload calendar
         [self.collectionView reloadData];
+        
+        // Set page number
+        self.pageControl.numberOfPages = self.sessionsTracked.count;
         
         // Dismiss progress hud
         [SVProgressHUD showSuccessWithStatus:nil];

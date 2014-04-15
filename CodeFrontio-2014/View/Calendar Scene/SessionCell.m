@@ -43,8 +43,6 @@
     self.clipsToBounds = YES;
     
     self.placeholderImage.layer.cornerRadius = 8.0;
-    self.placeholderImage.layer.borderColor = [UIColor P_lightGrayColor].CGColor;
-    self.placeholderImage.layer.borderWidth = 1.0;
     self.placeholderImage.clipsToBounds = YES;
     
     self.takeNoteButton.backgroundColor = [UIColor P_lightBlueColor];
@@ -62,8 +60,15 @@
 
 #pragma mark - UITableViewCell
 - (void)prepareForReuse {
-    // Remove previous image
-    self.placeholderImage.image = [UIImage imageNamed:@"image-placeholder"];
+    
+    self.timeLabel.text = nil;
+    
+    self.placeholderImage.image = [UIImage imageNamed:@"Speaker-placeholder"];
+    
+    self.detailTextLabel.text = nil;
+    
+    self.favouriteButton.selected = NO;
+    
 }
 
 #pragma mark - SessionCell
@@ -80,40 +85,26 @@
     self.timeLabel.text = [formatter stringFromDate:date];
     
     // Set image
-    __weak typeof(self.placeholderImage) weakPlaceholderImage = self.placeholderImage;
-    __weak typeof(self.speaker.avatar) weakImageURLString = self.speaker.avatar;
+    __weak UIImageView *weakImageView = self.placeholderImage;
+    __weak NSString *weakString = self.speaker.avatar;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        
-        [[TMCache sharedCache] objectForKey:weakImageURLString
+        [[TMCache sharedCache] objectForKey:weakString
                                       block:^(TMCache *cache, NSString *key, id object) {
-                                          
                                           UIImage *image = object;
-                                          
-                                          if (image) {
-                                              dispatch_async(dispatch_get_main_queue(), ^{
-                                                  weakPlaceholderImage.image = image;
-                                              });
-                                          } else {
-                                              
-                                              NSURL *imageURL = [NSURL URLWithString:weakImageURLString];
+                                          if (image)
+                                              dispatch_async(dispatch_get_main_queue(), ^{ weakImageView.image = image; });
+                                          else {
+                                              NSURL *imageURL = [NSURL URLWithString:weakString];
                                               NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
-                                              
-                                              [weakPlaceholderImage setImageWithURLRequest:request
-                                                                          placeholderImage:nil
-                                                                                   success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                                                                       dispatch_async(dispatch_get_main_queue(), ^{
-                                                                                           weakPlaceholderImage.image = image;
-                                                                                       });
-                                                                                       [cache setObject:image forKey:weakImageURLString];
-                                                                                   } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                                                                       
-                                                                                   }];
-                                              
+                                              [weakImageView setImageWithURLRequest:request
+                                                                   placeholderImage:nil
+                                                                            success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                                                                dispatch_async(dispatch_get_main_queue(), ^{ weakImageView.image = image; });
+                                                                                [cache setObject:image forKey:weakString];
+                                                                            } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {}];
                                           }
-                                          
                                       }];
-        
     });
     
     // Set name

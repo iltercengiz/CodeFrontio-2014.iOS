@@ -13,6 +13,8 @@
 #pragma mark View
 #import "TrackCell.h"
 #import "SessionCell.h"
+#import "SessionCellDouble.h"
+#import "ActivityCell.h"
 
 #pragma mark Constants
 #import "Constants.h"
@@ -37,6 +39,8 @@
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(self.tableView.frame), 10.0)];
     [self.tableView registerNib:[UINib nibWithNibName:@"SessionCell" bundle:nil] forCellReuseIdentifier:@"sessionCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"SessionCellDouble" bundle:nil] forCellReuseIdentifier:@"sessionCellDouble"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"ActivityCell" bundle:nil] forCellReuseIdentifier:@"activityCell"];
     
 }
 
@@ -72,15 +76,44 @@
     return 1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SessionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sessionCell" forIndexPath:indexPath];
-    [cell configureCellForSession:self.sessions[indexPath.section]];
-    return cell;
+    
+    SessionCell *(^getSessionCell)(Session *session, NSIndexPath *indexPath) = ^SessionCell *(Session *session, NSIndexPath *indexPath) {
+        SessionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sessionCell" forIndexPath:indexPath];
+        [cell configureCellForSession:session];
+        return cell;
+    };
+    
+    SessionCellDouble *(^getSessionCellDouble)(Session *session, NSIndexPath *indexPath) = ^SessionCellDouble *(Session *session, NSIndexPath *indexPath) {
+        SessionCellDouble *cell = [tableView dequeueReusableCellWithIdentifier:@"sessionCellDouble" forIndexPath:indexPath];
+        [cell configureCellForSession:session];
+        return cell;
+    };
+    
+    ActivityCell *(^getActivityCell)(Session *session, NSIndexPath *indexPath) = ^ActivityCell *(Session *session, NSIndexPath *indexPath) {
+        ActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:@"activityCell" forIndexPath:indexPath];
+        [cell configureCellForSession:session];
+        return cell;
+    };
+    
+    Session *session = self.sessions[indexPath.section];
+    
+    if ([session.speakerIdentifier isKindOfClass:[NSNumber class]])
+        return getSessionCell(session, indexPath);
+    else if ([session.speakerIdentifier isKindOfClass:[NSArray class]])
+        return getSessionCellDouble(session, indexPath);
+    else
+        return getActivityCell(session, indexPath);
+    
 }
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     Session *session = self.sessions[indexPath.section];
+    
+    if (!session.speakerIdentifier) {
+        return 64.0;
+    }
     
     CGFloat height = [self.rowHeights[session.track][@(indexPath.section)] doubleValue];
     
@@ -114,8 +147,8 @@
                                                         options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin
                                                         context:nil].size;
     
-    if (ceil(size.height) > 87.0) {
-        height = tableView.rowHeight + ceil(size.height) - 87.0;
+    if (ceil(size.height) > 32.0) {
+        height = tableView.rowHeight + ceil(size.height) - 32.0;
     } else {
         height = tableView.rowHeight;
     }

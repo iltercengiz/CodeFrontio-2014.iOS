@@ -18,7 +18,16 @@
     // Create session object in context
     Session *session = [Session MR_createInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
     session.title = info[@"talk_title"];
-    session.detail = [info[@"talk_detail"] isKindOfClass:[NSNull class]] ? nil : info[@"talk_detail"];
+    
+    if ([info[@"talk_detail"] isKindOfClass:[NSNull class]]) {
+        session.detail = nil;
+    } else {
+        NSString *detail = info[@"talk_detail"];
+        detail = [detail stringByReplacingOccurrencesOfString:@"<p>" withString:@""];
+        detail = [detail stringByReplacingOccurrencesOfString:@"</p>" withString:@""];
+        session.detail = detail;
+    }
+    
     session.track = info[@"track"];
     session.timeInterval = info[@"time"];
     session.speakerIdentifier = info[@"speaker_session_ids"];

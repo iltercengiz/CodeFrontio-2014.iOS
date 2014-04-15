@@ -6,20 +6,28 @@
 //  Copyright (c) 2014 Ilter Cengiz. All rights reserved.
 //
 
+#pragma mark Model
+#import "Session.h"
+
+#pragma mark View
 #import "ActivityCell.h"
 
 @implementation ActivityCell
 
-- (void)awakeFromNib
-{
-    // Initialization code
+#pragma mark - NSObject UIKit Additions
+- (void)awakeFromNib {
+    self.layer.cornerRadius = 8.0;
+    self.clipsToBounds = YES;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
+#pragma mark - UITableViewCell
+- (void)prepareForReuse {
+    self.textLabel.text = nil;
+}
 
-    // Configure the view for the selected state
+#pragma mark - ActivityCell
+- (void)configureCellForSession:(Session *)session {
+    self.textLabel.text = session.title;
 }
 
 @end

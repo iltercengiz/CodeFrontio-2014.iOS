@@ -1,18 +1,153 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5023" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="SessionCellDouble">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="sessionCellDouble" rowHeight="365" id="btV-Zv-qbw" customClass="SessionCellDouble">
+            <rect key="frame" x="0.0" y="0.0" width="280" height="365"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="btV-Zv-qbw" id="xvo-CE-jdg">
+                <rect key="frame" x="0.0" y="0.0" width="280" height="364"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Clock" translatesAutoresizingMaskIntoConstraints="NO" id="ZxB-ZC-PX9" userLabel="Clock">
+                        <rect key="frame" x="10" y="10" width="16" height="16"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="Kjj-Y8-IHs"/>
+                            <constraint firstAttribute="width" constant="16" id="amY-EV-APk"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="14:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6HA-M3-QVc" userLabel="Time">
+                        <rect key="frame" x="28" y="10" width="108" height="16"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="108" id="LHK-NI-F9f"/>
+                            <constraint firstAttribute="height" constant="16" id="b1Y-X0-KiS"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Speaker-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="MfK-cb-P1M" userLabel="First Placeholder">
+                        <rect key="frame" x="10" y="34" width="260" height="84"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="84" id="zPh-z7-Iz1"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speaker Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fob-7Q-ccz" userLabel="First Speaker Name">
+                        <rect key="frame" x="10" y="126" width="260" height="22"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="uMX-pb-b51"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Speaker-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="Fea-yJ-RvH" userLabel="Second Placeholder">
+                        <rect key="frame" x="10" y="156" width="260" height="84"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="84" id="Vyk-Bw-q4Q"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speaker Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VBd-83-Rco" userLabel="Second Speaker Name">
+                        <rect key="frame" x="10" y="248" width="260" height="22"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="Z3V-Ne-plQ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Session Detail" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000001192092896" adjustsLetterSpacingToFitWidth="YES" preferredMaxLayoutWidth="260" translatesAutoresizingMaskIntoConstraints="NO" id="dtK-0d-9aQ" userLabel="Session Detail">
+                        <rect key="frame" x="10" y="278" width="260" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ikz-1W-2z4" userLabel="Take Note">
+                        <rect key="frame" x="10" y="318" width="126" height="36"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="36" id="4n4-an-lBK"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <state key="normal" title="Take Note" image="Pencil">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="takeNote:" destination="btV-Zv-qbw" eventType="touchUpInside" id="tPd-5a-Y37"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QeJ-8d-hUx" userLabel="Favourite">
+                        <rect key="frame" x="144" y="318" width="126" height="36"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="36" id="ZRv-J4-hot"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <state key="normal" title="Favourite" image="Star">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="selected" image="Star-selected"/>
+                        <connections>
+                            <action selector="favourite:" destination="btV-Zv-qbw" eventType="touchUpInside" id="5cC-9d-y9E"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Ikz-1W-2z4" firstAttribute="top" secondItem="dtK-0d-9aQ" secondAttribute="bottom" constant="8" id="3ag-Fz-x45"/>
+                    <constraint firstAttribute="trailing" secondItem="VBd-83-Rco" secondAttribute="trailing" constant="10" id="3g8-Fb-sAC"/>
+                    <constraint firstItem="MfK-cb-P1M" firstAttribute="leading" secondItem="xvo-CE-jdg" secondAttribute="leading" constant="10" id="B9A-kf-QT7"/>
+                    <constraint firstItem="VBd-83-Rco" firstAttribute="leading" secondItem="xvo-CE-jdg" secondAttribute="leading" constant="10" id="FG3-x3-kDZ"/>
+                    <constraint firstItem="VBd-83-Rco" firstAttribute="top" secondItem="Fea-yJ-RvH" secondAttribute="bottom" constant="8" id="HBD-ft-toH"/>
+                    <constraint firstItem="dtK-0d-9aQ" firstAttribute="leading" secondItem="xvo-CE-jdg" secondAttribute="leading" constant="10" id="JJO-tk-boF"/>
+                    <constraint firstAttribute="trailing" secondItem="QeJ-8d-hUx" secondAttribute="trailing" constant="10" id="K6U-m1-b8q"/>
+                    <constraint firstItem="Ikz-1W-2z4" firstAttribute="leading" secondItem="xvo-CE-jdg" secondAttribute="leading" constant="10" id="QL6-KW-U9s"/>
+                    <constraint firstAttribute="trailing" secondItem="Fea-yJ-RvH" secondAttribute="trailing" constant="10" id="RM9-hB-J2m"/>
+                    <constraint firstItem="QeJ-8d-hUx" firstAttribute="width" secondItem="Ikz-1W-2z4" secondAttribute="width" id="SyW-qe-ort"/>
+                    <constraint firstAttribute="trailing" secondItem="dtK-0d-9aQ" secondAttribute="trailing" constant="10" id="WYN-Vi-Lfg"/>
+                    <constraint firstItem="QeJ-8d-hUx" firstAttribute="centerY" secondItem="Ikz-1W-2z4" secondAttribute="centerY" id="b3e-90-5sG"/>
+                    <constraint firstItem="fob-7Q-ccz" firstAttribute="leading" secondItem="xvo-CE-jdg" secondAttribute="leading" constant="10" id="cpM-L2-SsD"/>
+                    <constraint firstItem="Fea-yJ-RvH" firstAttribute="leading" secondItem="xvo-CE-jdg" secondAttribute="leading" constant="10" id="gys-RJ-WcC"/>
+                    <constraint firstAttribute="bottom" secondItem="Ikz-1W-2z4" secondAttribute="bottom" constant="10" id="hgb-ou-M2p"/>
+                    <constraint firstItem="QeJ-8d-hUx" firstAttribute="leading" secondItem="Ikz-1W-2z4" secondAttribute="trailing" constant="8" id="kAn-I0-cl9"/>
+                    <constraint firstItem="6HA-M3-QVc" firstAttribute="leading" secondItem="ZxB-ZC-PX9" secondAttribute="trailing" constant="2" id="kQ0-B1-i00"/>
+                    <constraint firstItem="ZxB-ZC-PX9" firstAttribute="leading" secondItem="xvo-CE-jdg" secondAttribute="leading" constant="10" id="p8j-M3-UwK"/>
+                    <constraint firstItem="Fea-yJ-RvH" firstAttribute="top" secondItem="fob-7Q-ccz" secondAttribute="bottom" constant="8" id="pF1-bG-md4"/>
+                    <constraint firstItem="MfK-cb-P1M" firstAttribute="top" secondItem="ZxB-ZC-PX9" secondAttribute="bottom" constant="8" id="pqN-cc-9an"/>
+                    <constraint firstItem="fob-7Q-ccz" firstAttribute="top" secondItem="MfK-cb-P1M" secondAttribute="bottom" constant="8" id="s2R-pT-YxP"/>
+                    <constraint firstItem="ZxB-ZC-PX9" firstAttribute="centerY" secondItem="6HA-M3-QVc" secondAttribute="centerY" id="sIe-CR-4p6"/>
+                    <constraint firstItem="dtK-0d-9aQ" firstAttribute="top" secondItem="VBd-83-Rco" secondAttribute="bottom" constant="8" id="vGl-Zq-ISQ"/>
+                    <constraint firstAttribute="trailing" secondItem="MfK-cb-P1M" secondAttribute="trailing" constant="10" id="yRZ-Wl-G0f"/>
+                    <constraint firstAttribute="trailing" secondItem="fob-7Q-ccz" secondAttribute="trailing" constant="10" id="yVt-sd-XsL"/>
+                    <constraint firstItem="ZxB-ZC-PX9" firstAttribute="top" secondItem="xvo-CE-jdg" secondAttribute="top" constant="10" id="ys5-5t-ZxN"/>
+                </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="favouriteButton" destination="QeJ-8d-hUx" id="cCU-1v-gbB"/>
+                <outlet property="firstPlaceholderImage" destination="MfK-cb-P1M" id="pEx-aQ-2Ul"/>
+                <outlet property="firstSpeakerNameLabel" destination="fob-7Q-ccz" id="JNz-AR-4ih"/>
+                <outlet property="secondPlaceholderImage" destination="Fea-yJ-RvH" id="5XI-9p-D4b"/>
+                <outlet property="secondSpeakerNameLabel" destination="VBd-83-Rco" id="BBo-zH-E2Q"/>
+                <outlet property="sessionDetailLabel" destination="dtK-0d-9aQ" id="NH1-UL-2Pq"/>
+                <outlet property="takeNoteButton" destination="Ikz-1W-2z4" id="H1t-U4-MqY"/>
+                <outlet property="timeLabel" destination="6HA-M3-QVc" id="RxC-Dy-YZi"/>
+            </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="Clock" width="16" height="16"/>
+        <image name="Pencil" width="36" height="30"/>
+        <image name="Speaker-placeholder" width="72" height="72"/>
+        <image name="Star" width="36" height="30"/>
+        <image name="Star-selected" width="36" height="30"/>
+    </resources>
 </document>

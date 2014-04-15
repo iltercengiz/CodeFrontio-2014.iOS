@@ -10,4 +10,7 @@
 
 @interface ActivityCell : UITableViewCell
 
+#pragma mark - ActivityCell
+- (void)configureCellForSession:(Session *)session;
+
 @end
