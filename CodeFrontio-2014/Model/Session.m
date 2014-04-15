@@ -2,7 +2,7 @@
 //  Session.m
 //  CodeFrontio-2014
 //
-//  Created by Ilter Cengiz on 10/04/14.
+//  Created by Ilter Cengiz on 14/04/14.
 //  Copyright (c) 2014 Ilter Cengiz. All rights reserved.
 //
 
@@ -18,6 +18,5 @@
 @dynamic timeInterval;
 @dynamic title;
 @dynamic track;
-@dynamic type;
 
 @end

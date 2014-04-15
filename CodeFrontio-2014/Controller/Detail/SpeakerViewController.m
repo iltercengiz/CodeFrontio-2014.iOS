@@ -6,44 +6,79 @@
 //  Copyright (c) 2014 Ilter Cengiz. All rights reserved.
 //
 
+#pragma mark Model
+#import "Speaker.h"
+
+#pragma mark View
+#import "AvatarView.h"
+#import "SocialCell.h"
+
+#pragma mark Controller
 #import "SpeakerViewController.h"
 
-@interface SpeakerViewController ()
+@interface SpeakerViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+
+@property (nonatomic) NSMutableArray *profiles;
 
 @end
 
 @implementation SpeakerViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)viewDidLoad
-{
+#pragma mark - UIViewController
+- (void)viewDidLoad {
+    
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.title = self.speaker.name;
+    
+    if (self.speaker.twitter && ![self.speaker.twitter isEqualToString:@""]) {
+        [self.profiles addObject:@(Twitter)];
+    }
+    if (self.speaker.github && ![self.speaker.github isEqualToString:@""]) {
+        [self.profiles addObject:@(GitHub)];
+    }
+    if (self.speaker.dribbble && ![self.speaker.dribbble isEqualToString:@""]) {
+        [self.profiles addObject:@(Dribbble)];
+    }
+    
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
+    
+    self.textView.text = self.speaker.detail;
+    
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - Getter
+- (NSMutableArray *)profiles {
+    if (!_profiles) {
+        _profiles = [NSMutableArray array];
+    }
+    return _profiles;
 }
-*/
+
+#pragma mark - UICollectionViewDataSource
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.profiles.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    SocialCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"socialCell" forIndexPath:indexPath];
+    [cell configureCellForProfileType:[self.profiles[indexPath.item] unsignedIntegerValue]];
+    return cell;
+}
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    AvatarView *view = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"avatarView" forIndexPath:indexPath];
+    [view configureViewForSpeaker:self.speaker];
+    return view;
+}
+
+#pragma mark - UICollectionViewDelegate
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
 
 @end

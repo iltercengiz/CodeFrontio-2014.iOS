@@ -126,20 +126,20 @@
         <scene sceneID="gTH-pM-xnr">
             <objects>
                 <tableViewController id="OR0-dG-8hg" customClass="SessionViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="80" sectionHeaderHeight="22" sectionFooterHeight="22" id="Yle-t7-z72">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="144" sectionHeaderHeight="22" sectionFooterHeight="22" id="Yle-t7-z72">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="speakerCell" textLabel="sDh-lC-lKJ" style="IBUITableViewCellStyleDefault" id="EKq-92-Uvm" userLabel="Speaker Cell" customClass="SpeakerCell">
-                                <rect key="frame" x="0.0" y="22" width="768" height="80"/>
+                                <rect key="frame" x="0.0" y="22" width="768" height="144"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EKq-92-Uvm" id="DNm-yG-Sa8">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="80"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="144"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.70000000000000018" adjustsLetterSpacingToFitWidth="YES" preferredMaxLayoutWidth="738" id="sDh-lC-lKJ">
-                                            <rect key="frame" x="15" y="0.0" width="738" height="80"/>
+                                            <rect key="frame" x="15" y="0.0" width="738" height="144"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -149,14 +149,14 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="notesCell" id="bOU-xH-4Jw" userLabel="Notes Cell" customClass="NotesCell">
-                                <rect key="frame" x="0.0" y="102" width="768" height="80"/>
+                                <rect key="frame" x="0.0" y="166" width="768" height="144"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bOU-xH-4Jw" id="zrh-FP-jIL">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="80"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="144"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Og4-WA-OwI">
-                                            <rect key="frame" x="10" y="0.0" width="758" height="80"/>
+                                            <rect key="frame" x="10" y="0.0" width="758" height="144"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -174,7 +174,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="photosCell" rowHeight="144" id="BpG-H4-7zH" userLabel="Photos Cell" customClass="PhotosCell">
-                                <rect key="frame" x="0.0" y="182" width="768" height="144"/>
+                                <rect key="frame" x="0.0" y="310" width="768" height="144"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BpG-H4-7zH" id="80n-fg-vfZ">
                                     <rect key="frame" x="0.0" y="0.0" width="768" height="144"/>

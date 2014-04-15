@@ -8,12 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, ContentType) {
-    ContentTypeCalendar = 0,
-    ContentTypeFavourites,
-    ContentTypeNotes,
-    ContentTypeSponsors
-};
+#import "Constants.h"
 
 @interface MenuCell : UITableViewCell
 

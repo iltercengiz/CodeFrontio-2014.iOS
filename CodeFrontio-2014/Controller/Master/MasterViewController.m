@@ -25,6 +25,9 @@
 
 @interface MasterViewController ()
 
+// This will be used to cache the scenes through run time
+@property (nonatomic) NSMutableDictionary *scenes;
+
 @end
 
 @implementation MasterViewController
@@ -63,22 +66,12 @@
     return _scenes;
 }
 
-#pragma mark - UITableViewDataSource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
-}
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MenuCell *cell = [tableView dequeueReusableCellWithIdentifier:@"menuCell" forIndexPath:indexPath];
-    [cell configureCellForType:indexPath.row];
-    return cell;
-}
-
-#pragma mark - UITableViewDelegate
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+#pragma mark - Helper
+- (void)presentContentWithType:(ContentType)type animated:(BOOL)animated {
     
     // Set identifier
     NSString *identifier;
-    switch (indexPath.row) {
+    switch (type) {
         case ContentTypeCalendar: identifier = calendarSceneIdentifier; break;
         case ContentTypeFavourites: identifier = favouritesSceneIdentifier; break;
         case ContentTypeNotes: identifier = notesSceneIdentifier; break;
@@ -93,13 +86,39 @@
         // Instantiate view controller
         UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:identifier];
         scene = [[UINavigationController alloc] initWithRootViewController:vc];
+        // Add side menu button
+        vc.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Side-menu"]
+                                                                               style:UIBarButtonItemStyleBordered
+                                                                              target:self
+                                                                              action:@selector(toggleSideMenu:)];
         // Add the scene to the cache
         self.scenes[identifier] = scene;
     }
     
     // Present the scene
-    [self.baseViewController setPaneViewController:scene animated:YES completion:nil];
+    [self.baseViewController setPaneViewController:scene animated:animated completion:nil];
     
+}
+
+#pragma mark - IBAction
+- (IBAction)toggleSideMenu:(id)sender {
+    MSDynamicsDrawerPaneState state = self.baseViewController.paneState == MSDynamicsDrawerPaneStateClosed ? MSDynamicsDrawerPaneStateOpen : MSDynamicsDrawerPaneStateClosed;
+    [self.baseViewController setPaneState:state animated:YES allowUserInterruption:YES completion:nil];
+}
+
+#pragma mark - UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 4;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    MenuCell *cell = [tableView dequeueReusableCellWithIdentifier:@"menuCell" forIndexPath:indexPath];
+    [cell configureCellForType:indexPath.row];
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self presentContentWithType:indexPath.row animated:YES];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

@@ -8,6 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, ProfileType) {
+    Twitter,
+    GitHub,
+    Dribbble
+};
+
+@class Speaker;
+
 @interface SocialCell : UICollectionViewCell
+
+#pragma mark - IBOutlets
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
+#pragma mark - SocialCell
+- (void)configureCellForProfileType:(ProfileType)type;
 
 @end

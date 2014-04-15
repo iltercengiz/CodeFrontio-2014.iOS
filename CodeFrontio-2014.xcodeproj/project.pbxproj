@@ -25,12 +25,13 @@
 		7C2F3B5218B7417900A8A034 /* NoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2F3B5118B7417900A8A034 /* NoteCell.m */; };
 		7C2FC85118ED745B00E3073F /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2FC85018ED745B00E3073F /* BaseViewController.m */; };
 		7C34A64318B2268A00EC31DA /* Sponsor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34A64218B2268A00EC31DA /* Sponsor.m */; };
-		7C34A64918B2268A00EC31DA /* Speaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34A64818B2268A00EC31DA /* Speaker.m */; };
 		7C34A64B18B2379D00EC31DA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C34A64A18B2379D00EC31DA /* CoreData.framework */; };
 		7C34A65118B26AD800EC31DA /* NSDictionary+SortedKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34A65018B26AD800EC31DA /* NSDictionary+SortedKeys.m */; };
 		7C355C8318B6727000BB72B0 /* VenueImages.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7C355C8218B6727000BB72B0 /* VenueImages.bundle */; };
 		7C3840FB18AC0B0300A85C31 /* SponsorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3840FA18AC0B0300A85C31 /* SponsorCell.m */; };
 		7C3840FE18AC0B4900A85C31 /* SponsorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3840FD18AC0B4900A85C31 /* SponsorsViewController.m */; };
+		7C3B748118FC146000689B4F /* Speaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B748018FC146000689B4F /* Speaker.m */; };
+		7C3B748718FC31C200689B4F /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B748618FC31C200689B4F /* Session.m */; };
 		7C3BC57018B0FBE700CA0FC0 /* CodeFrontio.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC56E18B0FBE700CA0FC0 /* CodeFrontio.xcdatamodeld */; };
 		7C3BC58618B1011500CA0FC0 /* Sponsor+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC58518B1011500CA0FC0 /* Sponsor+Create.m */; };
 		7C3BC58918B1011F00CA0FC0 /* Session+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC58818B1011F00CA0FC0 /* Session+Create.m */; };
@@ -39,6 +40,10 @@
 		7C422F9118A8FA4800195D6C /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C422F9018A8FA4800195D6C /* iPad.storyboard */; };
 		7C422F9218A8FA6800195D6C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C422F9418A8FA6800195D6C /* Localizable.strings */; };
 		7C422F9D18A8FE5F00195D6C /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C422F9C18A8FE5F00195D6C /* MasterViewController.m */; };
+		7C4D966518FD1D7C00D2829B /* ActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4D966318FD1D7C00D2829B /* ActivityCell.m */; };
+		7C4D966618FD1D7C00D2829B /* ActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4D966418FD1D7C00D2829B /* ActivityCell.xib */; };
+		7C4D966A18FD26FB00D2829B /* SessionCellDouble.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4D966818FD26FB00D2829B /* SessionCellDouble.m */; };
+		7C4D966B18FD26FB00D2829B /* SessionCellDouble.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4D966918FD26FB00D2829B /* SessionCellDouble.xib */; };
 		7C83BB4A18AAD12A003D3557 /* SessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C83BB4918AAD12A003D3557 /* SessionViewController.m */; };
 		7C83BB4E18AAD7B0003D3557 /* SpeakerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C83BB4D18AAD7B0003D3557 /* SpeakerCell.m */; };
 		7C83BB5118AAD7BE003D3557 /* NotesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C83BB5018AAD7BE003D3557 /* NotesCell.m */; };
@@ -46,7 +51,6 @@
 		7C83BB5718AADD40003D3557 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C83BB5618AADD40003D3557 /* PhotoCell.m */; };
 		7CACCFDD18A906F900D66A15 /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CACCFDC18A906F900D66A15 /* MenuCell.m */; };
 		7CACCFE518A90CB200D66A15 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CACCFE418A90CB200D66A15 /* CalendarViewController.m */; };
-		7CB582C818F6921F00AA4014 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CB582C718F6921F00AA4014 /* Session.m */; };
 		7CBD1FB218F3EE1B002154BC /* SessionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBD1FB018F3EE1B002154BC /* SessionCell.m */; };
 		7CBD1FB318F3EE1B002154BC /* SessionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CBD1FB118F3EE1B002154BC /* SessionCell.xib */; };
 		7CBD1FB618F4284A002154BC /* SideMenuHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBD1FB518F4284A002154BC /* SideMenuHeader.m */; };
@@ -96,8 +100,6 @@
 		7C2FC85018ED745B00E3073F /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		7C34A64118B2268A00EC31DA /* Sponsor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sponsor.h; sourceTree = "<group>"; };
 		7C34A64218B2268A00EC31DA /* Sponsor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sponsor.m; sourceTree = "<group>"; };
-		7C34A64718B2268A00EC31DA /* Speaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Speaker.h; sourceTree = "<group>"; };
-		7C34A64818B2268A00EC31DA /* Speaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Speaker.m; sourceTree = "<group>"; };
 		7C34A64A18B2379D00EC31DA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		7C34A64F18B26AD800EC31DA /* NSDictionary+SortedKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+SortedKeys.h"; sourceTree = "<group>"; };
 		7C34A65018B26AD800EC31DA /* NSDictionary+SortedKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+SortedKeys.m"; sourceTree = "<group>"; };
@@ -106,6 +108,10 @@
 		7C3840FA18AC0B0300A85C31 /* SponsorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SponsorCell.m; sourceTree = "<group>"; };
 		7C3840FC18AC0B4900A85C31 /* SponsorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SponsorsViewController.h; sourceTree = "<group>"; };
 		7C3840FD18AC0B4900A85C31 /* SponsorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SponsorsViewController.m; sourceTree = "<group>"; };
+		7C3B747F18FC146000689B4F /* Speaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Speaker.h; sourceTree = "<group>"; };
+		7C3B748018FC146000689B4F /* Speaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Speaker.m; sourceTree = "<group>"; };
+		7C3B748518FC31C200689B4F /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
+		7C3B748618FC31C200689B4F /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
 		7C3BC56F18B0FBE700CA0FC0 /* CodeFrontio.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CodeFrontio.xcdatamodel; sourceTree = "<group>"; };
 		7C3BC58418B1011500CA0FC0 /* Sponsor+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Sponsor+Create.h"; sourceTree = "<group>"; };
 		7C3BC58518B1011500CA0FC0 /* Sponsor+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Sponsor+Create.m"; sourceTree = "<group>"; };
@@ -121,6 +127,12 @@
 		7C422F9618A8FA7000195D6C /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7C422F9B18A8FE5F00195D6C /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		7C422F9C18A8FE5F00195D6C /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
+		7C4D966218FD1D7C00D2829B /* ActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityCell.h; sourceTree = "<group>"; };
+		7C4D966318FD1D7C00D2829B /* ActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityCell.m; sourceTree = "<group>"; };
+		7C4D966418FD1D7C00D2829B /* ActivityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityCell.xib; sourceTree = "<group>"; };
+		7C4D966718FD26FB00D2829B /* SessionCellDouble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionCellDouble.h; sourceTree = "<group>"; };
+		7C4D966818FD26FB00D2829B /* SessionCellDouble.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionCellDouble.m; sourceTree = "<group>"; };
+		7C4D966918FD26FB00D2829B /* SessionCellDouble.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionCellDouble.xib; sourceTree = "<group>"; };
 		7C83BB4818AAD12A003D3557 /* SessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionViewController.h; sourceTree = "<group>"; };
 		7C83BB4918AAD12A003D3557 /* SessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionViewController.m; sourceTree = "<group>"; };
 		7C83BB4C18AAD7B0003D3557 /* SpeakerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeakerCell.h; sourceTree = "<group>"; };
@@ -135,8 +147,6 @@
 		7CACCFDC18A906F900D66A15 /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 		7CACCFE318A90CB200D66A15 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
 		7CACCFE418A90CB200D66A15 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
-		7CB582C618F6921F00AA4014 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
-		7CB582C718F6921F00AA4014 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
 		7CBD1FAF18F3EE1B002154BC /* SessionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionCell.h; sourceTree = "<group>"; };
 		7CBD1FB018F3EE1B002154BC /* SessionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionCell.m; sourceTree = "<group>"; };
 		7CBD1FB118F3EE1B002154BC /* SessionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionCell.xib; sourceTree = "<group>"; };
@@ -264,14 +274,14 @@
 		7C3BC56D18B0FAF300CA0FC0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7CB582C618F6921F00AA4014 /* Session.h */,
-				7CB582C718F6921F00AA4014 /* Session.m */,
+				7C3B748518FC31C200689B4F /* Session.h */,
+				7C3B748618FC31C200689B4F /* Session.m */,
+				7C3B747F18FC146000689B4F /* Speaker.h */,
+				7C3B748018FC146000689B4F /* Speaker.m */,
 				7CDE9FE918B4B9DA00E2F619 /* Photo.h */,
 				7CDE9FEA18B4B9DA00E2F619 /* Photo.m */,
 				7C213DCA18B34F2B00F96B01 /* Note.h */,
 				7C213DCB18B34F2B00F96B01 /* Note.m */,
-				7C34A64718B2268A00EC31DA /* Speaker.h */,
-				7C34A64818B2268A00EC31DA /* Speaker.m */,
 				7C34A64118B2268A00EC31DA /* Sponsor.h */,
 				7C34A64218B2268A00EC31DA /* Sponsor.m */,
 			);
@@ -408,6 +418,12 @@
 				7CBD1FAF18F3EE1B002154BC /* SessionCell.h */,
 				7CBD1FB018F3EE1B002154BC /* SessionCell.m */,
 				7CBD1FB118F3EE1B002154BC /* SessionCell.xib */,
+				7C4D966218FD1D7C00D2829B /* ActivityCell.h */,
+				7C4D966318FD1D7C00D2829B /* ActivityCell.m */,
+				7C4D966418FD1D7C00D2829B /* ActivityCell.xib */,
+				7C4D966718FD26FB00D2829B /* SessionCellDouble.h */,
+				7C4D966818FD26FB00D2829B /* SessionCellDouble.m */,
+				7C4D966918FD26FB00D2829B /* SessionCellDouble.xib */,
 			);
 			path = "Calendar Scene";
 			sourceTree = "<group>";
@@ -484,11 +500,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C422F9118A8FA4800195D6C /* iPad.storyboard in Resources */,
+				7C4D966B18FD26FB00D2829B /* SessionCellDouble.xib in Resources */,
 				7C00885318A8F84B00ED4B31 /* Images.xcassets in Resources */,
 				7C422F9218A8FA6800195D6C /* Localizable.strings in Resources */,
 				7CBD1FB818F42866002154BC /* SideMenuHeader_iPhone.xib in Resources */,
 				7CBD1FBA18F42873002154BC /* SideMenuHeader_iPad.xib in Resources */,
 				7C00884218A8F84B00ED4B31 /* InfoPlist.strings in Resources */,
+				7C4D966618FD1D7C00D2829B /* ActivityCell.xib in Resources */,
 				7C355C8318B6727000BB72B0 /* VenueImages.bundle in Resources */,
 				7CBD1FB318F3EE1B002154BC /* SessionCell.xib in Resources */,
 				7CFF7B2918EE9A9800A674F2 /* iPhone.storyboard in Resources */,
@@ -541,15 +559,15 @@
 				7C422F9D18A8FE5F00195D6C /* MasterViewController.m in Sources */,
 				7C064FC018F1A99E005CD375 /* PagerLayout.m in Sources */,
 				7C83BB5118AAD7BE003D3557 /* NotesCell.m in Sources */,
+				7C4D966A18FD26FB00D2829B /* SessionCellDouble.m in Sources */,
 				7C3BC57018B0FBE700CA0FC0 /* CodeFrontio.xcdatamodeld in Sources */,
 				7C34A65118B26AD800EC31DA /* NSDictionary+SortedKeys.m in Sources */,
 				7CF7CE0E18FBD465000AFCB2 /* SocialCell.m in Sources */,
-				7CB582C818F6921F00AA4014 /* Session.m in Sources */,
-				7C34A64918B2268A00EC31DA /* Speaker.m in Sources */,
 				7C34A64318B2268A00EC31DA /* Sponsor.m in Sources */,
 				7C2F3B4F18B73A3300A8A034 /* FavouriteCell.m in Sources */,
 				7CCB106918AE1D2A007A2486 /* LinzAPIClient.m in Sources */,
 				7CCB106F18AE5BAA007A2486 /* UIImage+FromUIColor.m in Sources */,
+				7C3B748118FC146000689B4F /* Speaker.m in Sources */,
 				7C83BB5718AADD40003D3557 /* PhotoCell.m in Sources */,
 				7C213DCC18B34F2B00F96B01 /* Note.m in Sources */,
 				7CACCFDD18A906F900D66A15 /* MenuCell.m in Sources */,
@@ -565,6 +583,8 @@
 				7C213DD518B3A25F00F96B01 /* NotesViewController.m in Sources */,
 				7C3840FB18AC0B0300A85C31 /* SponsorCell.m in Sources */,
 				7C83BB4A18AAD12A003D3557 /* SessionViewController.m in Sources */,
+				7C3B748718FC31C200689B4F /* Session.m in Sources */,
+				7C4D966518FD1D7C00D2829B /* ActivityCell.m in Sources */,
 				7C2F3B5218B7417900A8A034 /* NoteCell.m in Sources */,
 				7C2FC85118ED745B00E3073F /* BaseViewController.m in Sources */,
 				7CF7CE0B18FBD453000AFCB2 /* AvatarView.m in Sources */,

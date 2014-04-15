@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+#import "Constants.h"
+
 @class BaseViewController;
 
 @interface MasterViewController : UITableViewController
 
 @property (weak, nonatomic) BaseViewController *baseViewController;
 
-// This will be used to cache the scenes through run time
-@property (nonatomic) NSMutableDictionary *scenes;
+- (void)presentContentWithType:(ContentType)type animated:(BOOL)animated;
 
 @end

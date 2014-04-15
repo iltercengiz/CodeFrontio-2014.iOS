@@ -10,22 +10,26 @@
 
 @implementation SocialCell
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
+#pragma mark - UICollectionViewCell
+- (void)prepareForReuse {
+    self.imageView.image = nil;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+#pragma mark - SocialCell
+- (void)configureCellForProfileType:(ProfileType)type {
+    switch (type) {
+        case Twitter:
+            self.imageView.image = [UIImage imageNamed:@"Twitter"];
+            break;
+        case GitHub:
+            self.imageView.image = [UIImage imageNamed:@"GitHub"];
+            break;
+        case Dribbble:
+            self.imageView.image = [UIImage imageNamed:@"Dribbble"];
+            break;
+        default:
+            break;
+    }
 }
-*/
 
 @end

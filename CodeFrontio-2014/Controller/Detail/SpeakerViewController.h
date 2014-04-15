@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class Speaker;
+
 @interface SpeakerViewController : UIViewController
+
+@property (nonatomic) Speaker *speaker;
+
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UITextView *textView;
 
 @end

@@ -43,8 +43,6 @@
     self.clipsToBounds = YES;
     
     self.placeholderImage.layer.cornerRadius = 8.0;
-    self.placeholderImage.layer.borderColor = [UIColor P_lightGrayColor].CGColor;
-    self.placeholderImage.layer.borderWidth = 1.0;
     self.placeholderImage.clipsToBounds = YES;
     
     self.takeNoteButton.backgroundColor = [UIColor P_lightBlueColor];
@@ -53,12 +51,24 @@
     self.takeNoteButton.layer.cornerRadius = 4.0;
     self.favouriteButton.layer.cornerRadius = 4.0;
     
+    UITapGestureRecognizer *taptaptap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSpeakerDetails:)];
+    UITapGestureRecognizer *taptap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSpeakerDetails:)];
+    [self.placeholderImage addGestureRecognizer:taptaptap];
+    [self.speakerNameLabel addGestureRecognizer:taptap];
+    
 }
 
 #pragma mark - UITableViewCell
 - (void)prepareForReuse {
-    // Remove previous image
-    self.placeholderImage.image = [UIImage imageNamed:@"image-placeholder"];
+    
+    self.timeLabel.text = nil;
+    
+    self.placeholderImage.image = [UIImage imageNamed:@"Speaker-placeholder"];
+    
+    self.detailTextLabel.text = nil;
+    
+    self.favouriteButton.selected = NO;
+    
 }
 
 #pragma mark - SessionCell
@@ -75,56 +85,51 @@
     self.timeLabel.text = [formatter stringFromDate:date];
     
     // Set image
-    __weak typeof(self.placeholderImage) weakPlaceholderImage = self.placeholderImage;
-    __weak typeof(self.speaker.avatar) weakImageURLString = self.speaker.avatar;
+    __weak UIImageView *weakImageView = self.placeholderImage;
+    __weak NSString *weakString = self.speaker.avatar;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        
-        [[TMCache sharedCache] objectForKey:weakImageURLString
+        [[TMCache sharedCache] objectForKey:weakString
                                       block:^(TMCache *cache, NSString *key, id object) {
-                                          
                                           UIImage *image = object;
-                                          
-                                          if (image) {
-                                              dispatch_async(dispatch_get_main_queue(), ^{
-                                                  weakPlaceholderImage.image = image;
-                                              });
-                                          } else {
-                                              
-                                              NSURL *imageURL = [NSURL URLWithString:weakImageURLString];
+                                          if (image)
+                                              dispatch_async(dispatch_get_main_queue(), ^{ weakImageView.image = image; });
+                                          else {
+                                              NSURL *imageURL = [NSURL URLWithString:weakString];
                                               NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
-                                              
-                                              [weakPlaceholderImage setImageWithURLRequest:request
-                                                                          placeholderImage:nil
-                                                                                   success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                                                                       dispatch_async(dispatch_get_main_queue(), ^{
-                                                                                           weakPlaceholderImage.image = image;
-                                                                                       });
-                                                                                       [cache setObject:image forKey:weakImageURLString];
-                                                                                   } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                                                                       
-                                                                                   }];
-                                              
+                                              [weakImageView setImageWithURLRequest:request
+                                                                   placeholderImage:nil
+                                                                            success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                                                                dispatch_async(dispatch_get_main_queue(), ^{ weakImageView.image = image; });
+                                                                                [cache setObject:image forKey:weakString];
+                                                                            } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {}];
                                           }
-                                          
                                       }];
-        
     });
     
     // Set name
     self.speakerNameLabel.text = self.speaker.name;
     
-    // Set session title
-    self.sessionTitleLabel.text = self.session.title;
-    
     // Set session detail
-    self.sessionDetailLabel.text = self.session.detail;
+    NSAttributedString *title = [[NSAttributedString alloc] initWithString:self.session.title
+                                                                attributes:@{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0]}];
+    NSAttributedString *detail = [[NSAttributedString alloc] initWithString:self.session.detail
+                                                                 attributes:@{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0]}];
+    NSMutableAttributedString *mutableAttributedString = [NSMutableAttributedString new];
+    [mutableAttributedString appendAttributedString:title];
+    [mutableAttributedString appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n\n"]];
+    [mutableAttributedString appendAttributedString:detail];
+    
+    self.sessionDetailLabel.attributedText = mutableAttributedString;
     
     // Set de/selected favourite button
     self.favouriteButton.selected = [self.session.favourited boolValue];
     
 }
 
+- (IBAction)showSpeakerDetails:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:didSelectSessionNotification object:nil userInfo:@{@"speaker": self.speaker}];
+}
 - (IBAction)takeNote:(id)sender {
     [[NSNotificationCenter defaultCenter] postNotificationName:takeNoteNotification object:nil userInfo:@{@"session": self.session}];
 }

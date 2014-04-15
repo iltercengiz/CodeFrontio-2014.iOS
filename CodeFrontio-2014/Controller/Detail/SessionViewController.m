@@ -8,11 +8,9 @@
 
 #pragma mark Model
 #import "Session.h"
-#import "Speaker.h"
 #import "Note.h"
 
 #pragma mark View
-#import "SpeakerCell.h"
 #import "NotesCell.h"
 #import "PhotosCell.h"
 
@@ -52,9 +50,6 @@
     
     // Edit button for note and photo editing
     self.navigationItem.rightBarButtonItem = self.editButton;
-    
-    //
-    self.tableView.scrollEnabled = YES;
     
 }
 
@@ -269,26 +264,25 @@
     
     NSDictionary *userInfo = note.userInfo;
     
-    NSValue *value = userInfo[UIKeyboardFrameEndUserInfoKey];
-    CGRect keyboardFrame = [value CGRectValue];
+    CGRect keyboardFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     keyboardFrame = [self.view convertRect:keyboardFrame fromView:nil];
     self.keyboardHeight = CGRectGetHeight(keyboardFrame);
     
-    NSNumber *animationCurve = userInfo[UIKeyboardAnimationCurveUserInfoKey];
-    UIViewAnimationCurve keyboardAnimationCurve = [animationCurve integerValue];
+//    NSNumber *animationCurve = userInfo[UIKeyboardAnimationCurveUserInfoKey];
+//    UIViewAnimationCurve keyboardAnimationCurve = [animationCurve integerValue];
     
-    NSNumber *animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey];
-    CGFloat keyboardAnimationDuration = [animationDuration doubleValue];
+//    NSNumber *animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey];
+//    CGFloat keyboardAnimationDuration = [animationDuration doubleValue];
     
-    [UIView animateWithDuration:keyboardAnimationDuration
-                          delay:0.0
-                        options:keyboardAnimationCurve << 16
-                     animations:^{
+//    [UIView animateWithDuration:keyboardAnimationDuration
+//                          delay:0.0
+//                        options:keyboardAnimationCurve << 16
+//                     animations:^{
                          [self.tableView beginUpdates];
                          [self.tableView endUpdates];
-                     } completion:^(BOOL finished) {
-                         
-                     }];
+//                     } completion:^(BOOL finished) {
+//                         
+//                     }];
     
 }
 - (void)keyboardWillHide:(NSNotification *)note {
@@ -297,26 +291,25 @@
     
     NSDictionary *userInfo = note.userInfo;
     
-    NSValue *value = userInfo[UIKeyboardFrameEndUserInfoKey];
-    CGRect keyboardFrame = [value CGRectValue];
+    CGRect keyboardFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     keyboardFrame = [self.view convertRect:keyboardFrame fromView:nil];
     self.keyboardHeight = CGRectGetHeight(keyboardFrame);
     
-    NSNumber *animationCurve = userInfo[UIKeyboardAnimationCurveUserInfoKey];
-    UIViewAnimationCurve keyboardAnimationCurve = [animationCurve integerValue];
+//    NSNumber *animationCurve = userInfo[UIKeyboardAnimationCurveUserInfoKey];
+//    UIViewAnimationCurve keyboardAnimationCurve = [animationCurve integerValue];
     
-    NSNumber *animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey];
-    CGFloat keyboardAnimationDuration = [animationDuration doubleValue];
+//    NSNumber *animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey];
+//    CGFloat keyboardAnimationDuration = [animationDuration doubleValue];
     
-    [UIView animateWithDuration:keyboardAnimationDuration
-                          delay:0.0
-                        options:keyboardAnimationCurve << 16
-                     animations:^{
+//    [UIView animateWithDuration:keyboardAnimationDuration
+//                          delay:0.0
+//                        options:keyboardAnimationCurve << 16
+//                     animations:^{
                          [self.tableView beginUpdates];
                          [self.tableView endUpdates];
-                     } completion:^(BOOL finished) {
-                         
-                     }];
+//                     } completion:^(BOOL finished) {
+//                         
+//                     }];
     
 }
 
@@ -333,19 +326,12 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 2;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    SpeakerCell *(^createSpeakerCell)() = ^SpeakerCell *(){
-        SpeakerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"speakerCell" forIndexPath:indexPath];
-        Speaker *speaker = [[Speaker MR_findByAttribute:@"identifier" withValue:self.session.speakerIdentifier] firstObject]; // Speaker of the session
-        [cell configureCellForSpeaker:speaker];
-        return cell;
-    };
     
     NotesCell *(^createNotesCell)() = ^NotesCell *(){
         NotesCell *cell = [tableView dequeueReusableCellWithIdentifier:@"notesCell" forIndexPath:indexPath];
@@ -361,8 +347,6 @@
     };
     
     if (indexPath.section == 0) {
-        return createSpeakerCell();
-    } else if (indexPath.section == 1) {
         self.notesCell = createNotesCell();
         return self.notesCell;
     } else {
@@ -375,8 +359,6 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     // Return the appropriate title
     if (section == 0) {
-        return NSLocalizedString(@"Speaker", nil);
-    } else if (section == 1) {
         return NSLocalizedString(@"Notes", nil);
     } else {
         return NSLocalizedString(@"Photos", nil);
@@ -391,46 +373,46 @@
      * If you came all the way to here, a little help would be appreciated. :)
      */
     
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+    if (indexPath.section == 0) {
         
-        if (indexPath.section == 1) {
-            if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
-                if ([self isTextViewFirstResponder]) {
-                    static CGFloat height = 0;
-                    if (height == 0) height = CGRectGetHeight(tableView.frame) - 1.0 * tableView.sectionHeaderHeight - self.keyboardHeight; //*/ 352.0;
-                    return height;
-                }
-                static CGFloat height = 0;
-                if (height == 0) height = CGRectGetHeight(tableView.frame) - 3.0 * tableView.sectionHeaderHeight - tableView.rowHeight - 144.0;
-                return height;
-            } else { // if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation))
-                if ([self isTextViewFirstResponder]) {
-                    static CGFloat height = 0;
-                    if (height == 0) height = CGRectGetHeight(tableView.frame) - 1.0 * tableView.sectionHeaderHeight - self.keyboardHeight; //*/ 352.0;
-                    return height;
-                }
-                static CGFloat height = 0;
-                if (height == 0) height = CGRectGetHeight(tableView.frame) - 3.0 * tableView.sectionHeaderHeight - tableView.rowHeight - 144.0;
-                return height;
-            }
-        } else if (indexPath.section == 2) {
-            return 144.0;
+        CGFloat height = 0;
+        
+        if ([self isTextViewFirstResponder]) {
+//            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+//                if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation))
+//                    height = CGRectGetHeight(tableView.frame) - 1.0 * tableView.sectionHeaderHeight - self.keyboardHeight; // 352.0
+//                else // if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation))
+//                    height = CGRectGetHeight(tableView.frame) - 1.0 * tableView.sectionHeaderHeight - self.keyboardHeight; // 2xx.0
+//            } else { // if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+//                height = CGRectGetHeight(tableView.frame) - 1.0 * tableView.sectionHeaderHeight - self.keyboardHeight; // 216.0
+//            }
+            height = CGRectGetHeight(tableView.frame) - 1.0 * tableView.sectionHeaderHeight - self.keyboardHeight;
+        } else {
+            height = CGRectGetHeight(tableView.frame) - 2.0 * tableView.sectionHeaderHeight - tableView.rowHeight;
         }
         
-    } else { // if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+        return height;
         
-        if (indexPath.section == 1) {
-            if ([self isTextViewFirstResponder]) {
-                static CGFloat height = 0;
-                if (height == 0) height = CGRectGetHeight(tableView.frame) - 1.0 * tableView.sectionHeaderHeight - self.keyboardHeight; //*/ 216.0;
-                return height;
-            }
-            static CGFloat height = 0;
-            if (height == 0) height = CGRectGetHeight(tableView.frame) - 3.0 * tableView.sectionHeaderHeight - tableView.rowHeight - 108.0;
+/*
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            
+            CGFloat height = 0;
+            
+            if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation))
+                height = [self isTextViewFirstResponder] ? CGRectGetHeight(tableView.frame) - 1.0 * tableView.sectionHeaderHeight - self.keyboardHeight // 352.0
+                                                         : CGRectGetHeight(tableView.frame) - 2.0 * tableView.sectionHeaderHeight - tableView.rowHeight;
+            else // if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation))
+                height = [self isTextViewFirstResponder] ? CGRectGetHeight(tableView.frame) - 1.0 * tableView.sectionHeaderHeight - self.keyboardHeight // 2xx.0
+                                                         : CGRectGetHeight(tableView.frame) - 2.0 * tableView.sectionHeaderHeight - tableView.rowHeight;
+            
             return height;
-        } else if (indexPath.section == 2) {
-            return 108.0;
+            
+        } else { // if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+            CGFloat height = [self isTextViewFirstResponder] ? CGRectGetHeight(tableView.frame) - 1.0 * tableView.sectionHeaderHeight - self.keyboardHeight // 216.0;
+                                                             : CGRectGetHeight(tableView.frame) - 2.0 * tableView.sectionHeaderHeight - tableView.rowHeight;
+            return height;
         }
+ */
         
     }
     

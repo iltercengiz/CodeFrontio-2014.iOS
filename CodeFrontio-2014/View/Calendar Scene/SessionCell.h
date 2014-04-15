@@ -18,7 +18,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *placeholderImage;
 @property (weak, nonatomic) IBOutlet UILabel *speakerNameLabel;
 
-@property (weak, nonatomic) IBOutlet UILabel *sessionTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sessionDetailLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *takeNoteButton;

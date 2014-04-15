@@ -9,7 +9,7 @@
 #ifndef CodeFrontio_2014_Constants_h
 #define CodeFrontio_2014_Constants_h
 
-static NSString * const LinzAPIBaseURLString = @"http://192.168.2.87:9393";
+static NSString * const LinzAPIBaseURLString = @"http://codefront.io/";
 
 static NSString * const calendarSceneIdentifier = @"CalendarScene";
 static NSString * const favouritesSceneIdentifier = @"FavouritesScene";
@@ -18,5 +18,12 @@ static NSString * const supportersSceneIdentifier = @"SponsorsScene";
 
 static NSString * const takeNoteNotification = @"io.webBox.CodeFrontio-2014.takeNoteNotification";
 static NSString * const didSelectSessionNotification = @"io.webBox.CodeFrontio-2014.didSelectSessionNotification";
+
+typedef NS_ENUM(NSInteger, ContentType) {
+    ContentTypeCalendar = 0,
+    ContentTypeFavourites,
+    ContentTypeNotes,
+    ContentTypeSponsors
+};
 
 #endif
