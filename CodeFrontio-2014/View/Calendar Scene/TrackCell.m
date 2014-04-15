@@ -8,6 +8,7 @@
 
 #pragma mark Model
 #import "Session.h"
+#import "Speaker.h"
 
 #pragma mark View
 #import "TrackCell.h"
@@ -15,6 +16,9 @@
 
 #pragma mark Constants
 #import "Constants.h"
+
+#pragma mark Pods
+#import <MagicalRecord/CoreData+MagicalRecord.h>
 
 @interface TrackCell () <UITableViewDataSource, UITableViewDelegate>
 
@@ -91,10 +95,24 @@
         desiredSize = CGSizeMake(260.0, CGFLOAT_MAX);
     }
     
-    CGSize size = [session.detail boundingRectWithSize:desiredSize
-                                               options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin
-                                            attributes:@{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0]}
-                                               context:NULL].size;
+    NSAttributedString *title = [[NSAttributedString alloc] initWithString:session.title
+                                                                attributes:@{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0]}];
+    NSAttributedString *detail;
+    if (session.detail) {
+        detail = [[NSAttributedString alloc] initWithString:session.detail
+                                                 attributes:@{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0]}];
+    }
+    
+    NSMutableAttributedString *mutableAttributedString = [NSMutableAttributedString new];
+    [mutableAttributedString appendAttributedString:title];
+    [mutableAttributedString appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n\n"]];
+    if (detail) {
+        [mutableAttributedString appendAttributedString:detail];
+    }
+    
+    CGSize size = [mutableAttributedString boundingRectWithSize:desiredSize
+                                                        options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin
+                                                        context:nil].size;
     
     if (ceil(size.height) > 87.0) {
         height = tableView.rowHeight + ceil(size.height) - 87.0;
@@ -111,10 +129,6 @@
     
     return height;
     
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [[NSNotificationCenter defaultCenter] postNotificationName:didSelectSessionNotification object:nil userInfo:@{@"session": self.sessions[indexPath.section]}];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

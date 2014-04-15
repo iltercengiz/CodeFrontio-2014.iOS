@@ -25,6 +25,7 @@
 #pragma mark Controller
 #import "CalendarViewController.h"
 #import "SessionViewController.h"
+#import "SpeakerViewController.h"
 
 #pragma mark Constants
 #import "Constants.h"
@@ -168,15 +169,20 @@
         SessionViewController *svc = segue.destinationViewController;
         svc.session = session;
         svc.keyboardOpen = keyboardOpen;
+    } else if ([segue.identifier isEqualToString:@"speakerSegue"]) {
+        Speaker *speaker = (Speaker *)sender;
+        SpeakerViewController *svc = segue.destinationViewController;
+        svc.speaker = speaker;
     }
 }
 
 #pragma mark - Notifications
-- (IBAction)takeNote:(id)sender {
-    [self presentSession:((NSNotification *)sender).userInfo[@"session"] keyboardOpen:YES];
+- (void)takeNote:(NSNotification *)note {
+    [self presentSession:note.userInfo[@"session"] keyboardOpen:NO];
 }
-- (IBAction)didSelectSession:(id)sender {
-    [self presentSession:((NSNotification *)sender).userInfo[@"session"] keyboardOpen:NO];
+- (void)didSelectSession:(NSNotification *)note {
+//    [self presentSession:note.userInfo[@"session"] keyboardOpen:NO];
+    [self performSegueWithIdentifier:@"speakerSegue" sender:note.userInfo[@"speaker"]];
 }
 
 - (void)presentSession:(Session *)session keyboardOpen:(BOOL)keyboardOpen {

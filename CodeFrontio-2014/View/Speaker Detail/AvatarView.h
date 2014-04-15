@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class Speaker;
+
 @interface AvatarView : UICollectionReusableView
+
+#pragma mark - IBOutlets
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
+#pragma mark - AvatarView
+- (void)configureViewForSpeaker:(Speaker *)speaker;
 
 @end

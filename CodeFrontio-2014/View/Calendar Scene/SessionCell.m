@@ -53,6 +53,11 @@
     self.takeNoteButton.layer.cornerRadius = 4.0;
     self.favouriteButton.layer.cornerRadius = 4.0;
     
+    UITapGestureRecognizer *taptaptap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSpeakerDetails:)];
+    UITapGestureRecognizer *taptap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSpeakerDetails:)];
+    [self.placeholderImage addGestureRecognizer:taptaptap];
+    [self.speakerNameLabel addGestureRecognizer:taptap];
+    
 }
 
 #pragma mark - UITableViewCell
@@ -114,17 +119,26 @@
     // Set name
     self.speakerNameLabel.text = self.speaker.name;
     
-    // Set session title
-    self.sessionTitleLabel.text = self.session.title;
-    
     // Set session detail
-    self.sessionDetailLabel.text = self.session.detail;
+    NSAttributedString *title = [[NSAttributedString alloc] initWithString:self.session.title
+                                                                attributes:@{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0]}];
+    NSAttributedString *detail = [[NSAttributedString alloc] initWithString:self.session.detail
+                                                                 attributes:@{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0]}];
+    NSMutableAttributedString *mutableAttributedString = [NSMutableAttributedString new];
+    [mutableAttributedString appendAttributedString:title];
+    [mutableAttributedString appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n\n"]];
+    [mutableAttributedString appendAttributedString:detail];
+    
+    self.sessionDetailLabel.attributedText = mutableAttributedString;
     
     // Set de/selected favourite button
     self.favouriteButton.selected = [self.session.favourited boolValue];
     
 }
 
+- (IBAction)showSpeakerDetails:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:didSelectSessionNotification object:nil userInfo:@{@"speaker": self.speaker}];
+}
 - (IBAction)takeNote:(id)sender {
     [[NSNotificationCenter defaultCenter] postNotificationName:takeNoteNotification object:nil userInfo:@{@"session": self.session}];
 }
