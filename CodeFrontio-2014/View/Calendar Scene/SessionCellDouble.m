@@ -160,10 +160,10 @@
 }
 
 - (IBAction)showFirstSpeakerDetails:(id)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:didSelectSessionNotification object:nil userInfo:@{@"speaker": self.firstSpeaker}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:didSelectSpeakerNotification object:nil userInfo:@{@"speaker": self.firstSpeaker}];
 }
 - (IBAction)showSecondSpeakerDetails:(id)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:didSelectSessionNotification object:nil userInfo:@{@"speaker": self.secondSpeaker}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:didSelectSpeakerNotification object:nil userInfo:@{@"speaker": self.secondSpeaker}];
 }
 
 - (IBAction)takeNote:(id)sender {

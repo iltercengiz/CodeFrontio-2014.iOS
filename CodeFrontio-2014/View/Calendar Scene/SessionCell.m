@@ -128,7 +128,7 @@
 }
 
 - (IBAction)showSpeakerDetails:(id)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:didSelectSessionNotification object:nil userInfo:@{@"speaker": self.speaker}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:didSelectSpeakerNotification object:nil userInfo:@{@"speaker": self.speaker}];
 }
 - (IBAction)takeNote:(id)sender {
     [[NSNotificationCenter defaultCenter] postNotificationName:takeNoteNotification object:nil userInfo:@{@"session": self.session}];

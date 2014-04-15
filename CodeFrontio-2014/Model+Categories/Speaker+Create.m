@@ -23,23 +23,14 @@
     speaker.identifier = info[@"id"];
     speaker.avatar = [info[@"avatar"] isEqualToString:@""] ? nil : [@"http://codefront.io/public/images/speakers/" stringByAppendingString:info[@"avatar"]];
     
-    if (![info[@"twitter"] boolValue]) {
-        speaker.twitter = nil;
-    } else if (![info[@"twitter"] isEqualToString:@""]) {
-        speaker.twitter = [@"http://twitter.com/" stringByAppendingString:info[@"twitter"]];
-    }
+    if ([info[@"twitter"] isKindOfClass:[NSString class]] && ![info[@"twitter"] isEqualToString:@""])
+        speaker.twitter = info[@"twitter"];
     
-    if (![info[@"github"] boolValue]) {
-        speaker.github = nil;
-    } else if (![info[@"github"] isEqualToString:@""]) {
-        speaker.github = [@"http://github.com/" stringByAppendingString:info[@"github"]];
-    }
+    if ([info[@"github"] isKindOfClass:[NSString class]] && ![info[@"github"] isEqualToString:@""])
+        speaker.github = info[@"github"];
     
-    if (![info[@"dribbble"] boolValue]) {
-        speaker.dribbble = nil;
-    } else if (![info[@"dribbble"] isEqualToString:@""]) {
-        speaker.dribbble = [@"http://dribbble.com/" stringByAppendingString:info[@"dribbble"]];
-    }
+    if ([info[@"dribbble"] isKindOfClass:[NSString class]] && ![info[@"dribbble"] isEqualToString:@""])
+        speaker.dribbble = info[@"dribbble"];
     
     // Save changes
     [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {

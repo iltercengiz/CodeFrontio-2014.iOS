@@ -16,12 +16,15 @@ typedef NS_ENUM(NSUInteger, ProfileType) {
 
 @class Speaker;
 
-@interface SocialCell : UICollectionViewCell
+@interface SocialCell : UITableViewCell
 
 #pragma mark - IBOutlets
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+
+#pragma mark - Properties
+@property (nonatomic) Speaker *speaker;
 
 #pragma mark - SocialCell
-- (void)configureCellForProfileType:(ProfileType)type;
+- (void)configureCellForSpeaker:(Speaker *)speaker;
 
 @end

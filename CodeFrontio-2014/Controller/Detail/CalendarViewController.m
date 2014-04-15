@@ -52,6 +52,9 @@
     
     [super viewDidLoad];
     
+    // Remove title from back button
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
     self.title = NSLocalizedString(@"Calendar", nil);
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
@@ -104,7 +107,7 @@
     
     // Register for notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(takeNote:) name:takeNoteNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectSession:) name:didSelectSessionNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectSpeaker:) name:didSelectSpeakerNotification object:nil];
     
     // If setup is already done, reload and return
     if (self.speakers && self.sessionsTracked) {
@@ -137,13 +140,13 @@
     });
     
 }
-- (void)viewDidDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated {
     
-    [super viewDidDisappear:animated];
+    [super viewWillDisappear:animated];
     
     // Remove notification observer
     [[NSNotificationCenter defaultCenter] removeObserver:self name:takeNoteNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:didSelectSessionNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:didSelectSpeakerNotification object:nil];
     
 }
 - (void)viewWillLayoutSubviews {
@@ -172,9 +175,9 @@
         svc.session = session;
         svc.keyboardOpen = keyboardOpen;
     } else if ([segue.identifier isEqualToString:@"speakerSegue"]) {
-        Speaker *speaker = (Speaker *)sender;
+        NSDictionary *userInfo = (NSDictionary *)sender;
         SpeakerViewController *svc = segue.destinationViewController;
-        svc.speaker = speaker;
+        svc.speaker = userInfo[@"speaker"];
     }
 }
 
@@ -182,9 +185,8 @@
 - (void)takeNote:(NSNotification *)note {
     [self presentSession:note.userInfo[@"session"] keyboardOpen:NO];
 }
-- (void)didSelectSession:(NSNotification *)note {
-//    [self presentSession:note.userInfo[@"session"] keyboardOpen:NO];
-    [self performSegueWithIdentifier:@"speakerSegue" sender:note.userInfo[@"speaker"]];
+- (void)didSelectSpeaker:(NSNotification *)note {
+    [self performSegueWithIdentifier:@"speakerSegue" sender:note.userInfo];
 }
 
 - (void)presentSession:(Session *)session keyboardOpen:(BOOL)keyboardOpen {
