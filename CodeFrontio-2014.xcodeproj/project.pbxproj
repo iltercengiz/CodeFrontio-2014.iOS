@@ -40,6 +40,8 @@
 		7C422F9118A8FA4800195D6C /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C422F9018A8FA4800195D6C /* iPad.storyboard */; };
 		7C422F9218A8FA6800195D6C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C422F9418A8FA6800195D6C /* Localizable.strings */; };
 		7C422F9D18A8FE5F00195D6C /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C422F9C18A8FE5F00195D6C /* MasterViewController.m */; };
+		7C4D966518FD1D7C00D2829B /* ActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4D966318FD1D7C00D2829B /* ActivityCell.m */; };
+		7C4D966618FD1D7C00D2829B /* ActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4D966418FD1D7C00D2829B /* ActivityCell.xib */; };
 		7C83BB4A18AAD12A003D3557 /* SessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C83BB4918AAD12A003D3557 /* SessionViewController.m */; };
 		7C83BB4E18AAD7B0003D3557 /* SpeakerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C83BB4D18AAD7B0003D3557 /* SpeakerCell.m */; };
 		7C83BB5118AAD7BE003D3557 /* NotesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C83BB5018AAD7BE003D3557 /* NotesCell.m */; };
@@ -123,6 +125,9 @@
 		7C422F9618A8FA7000195D6C /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7C422F9B18A8FE5F00195D6C /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		7C422F9C18A8FE5F00195D6C /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
+		7C4D966218FD1D7C00D2829B /* ActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityCell.h; sourceTree = "<group>"; };
+		7C4D966318FD1D7C00D2829B /* ActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityCell.m; sourceTree = "<group>"; };
+		7C4D966418FD1D7C00D2829B /* ActivityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityCell.xib; sourceTree = "<group>"; };
 		7C83BB4818AAD12A003D3557 /* SessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionViewController.h; sourceTree = "<group>"; };
 		7C83BB4918AAD12A003D3557 /* SessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionViewController.m; sourceTree = "<group>"; };
 		7C83BB4C18AAD7B0003D3557 /* SpeakerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeakerCell.h; sourceTree = "<group>"; };
@@ -408,6 +413,9 @@
 				7CBD1FAF18F3EE1B002154BC /* SessionCell.h */,
 				7CBD1FB018F3EE1B002154BC /* SessionCell.m */,
 				7CBD1FB118F3EE1B002154BC /* SessionCell.xib */,
+				7C4D966218FD1D7C00D2829B /* ActivityCell.h */,
+				7C4D966318FD1D7C00D2829B /* ActivityCell.m */,
+				7C4D966418FD1D7C00D2829B /* ActivityCell.xib */,
 			);
 			path = "Calendar Scene";
 			sourceTree = "<group>";
@@ -489,6 +497,7 @@
 				7CBD1FB818F42866002154BC /* SideMenuHeader_iPhone.xib in Resources */,
 				7CBD1FBA18F42873002154BC /* SideMenuHeader_iPad.xib in Resources */,
 				7C00884218A8F84B00ED4B31 /* InfoPlist.strings in Resources */,
+				7C4D966618FD1D7C00D2829B /* ActivityCell.xib in Resources */,
 				7C355C8318B6727000BB72B0 /* VenueImages.bundle in Resources */,
 				7CBD1FB318F3EE1B002154BC /* SessionCell.xib in Resources */,
 				7CFF7B2918EE9A9800A674F2 /* iPhone.storyboard in Resources */,
@@ -565,6 +574,7 @@
 				7C3840FB18AC0B0300A85C31 /* SponsorCell.m in Sources */,
 				7C83BB4A18AAD12A003D3557 /* SessionViewController.m in Sources */,
 				7C3B748718FC31C200689B4F /* Session.m in Sources */,
+				7C4D966518FD1D7C00D2829B /* ActivityCell.m in Sources */,
 				7C2F3B5218B7417900A8A034 /* NoteCell.m in Sources */,
 				7C2FC85118ED745B00E3073F /* BaseViewController.m in Sources */,
 				7CF7CE0B18FBD453000AFCB2 /* AvatarView.m in Sources */,
