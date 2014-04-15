@@ -10,9 +10,6 @@
 #import "BaseViewController.h"
 #import "MasterViewController.h"
 
-#pragma mark Constants
-#import "Constants.h"
-
 @interface BaseViewController ()
 
 @end
@@ -48,14 +45,10 @@
                  forDirection:MSDynamicsDrawerDirectionLeft];
     
     MasterViewController *masterViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MasterViewController"];
-    UIViewController *calendarViewController = [self.storyboard instantiateViewControllerWithIdentifier:calendarSceneIdentifier];
-    UINavigationController *paneViewController = [[UINavigationController alloc] initWithRootViewController:calendarViewController];
-    
     [self setDrawerViewController:masterViewController forDirection:MSDynamicsDrawerDirectionLeft];
-    [self setPaneViewController:paneViewController];
     
-    masterViewController.baseViewController = self;
-    masterViewController.scenes[calendarSceneIdentifier] = paneViewController;
+    [masterViewController setBaseViewController:self];
+    [masterViewController presentContentWithType:0 animated:NO];
     
 }
 

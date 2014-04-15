@@ -38,8 +38,10 @@
     // Change text color
     if (selected) {
         self.textLabel.textColor = [UIColor P_blueColor];
+        self.imageView.highlighted = YES;
     } else {
         self.textLabel.textColor = [UIColor P_lightBlueColor];
+        self.imageView.highlighted = NO;
     }
     
 }
@@ -48,8 +50,8 @@
 - (void)configureCellForType:(ContentType)contentType {
     
     // Set icon
-//    self.imageView.image = [self imageForContentType:contentType];
-//    self.imageView.highlightedImage = [self highlightedImageForContentType:contentType];
+    self.imageView.image = [self imageForContentType:contentType];
+    self.imageView.highlightedImage = [self highlightedImageForContentType:contentType];
     
     // Set text
     self.textLabel.text = [self stringForContentType:contentType];
@@ -68,20 +70,20 @@
 }
 - (UIImage *)imageForContentType:(ContentType)contentType {
     switch (contentType) {
-        case ContentTypeCalendar: return [UIImage imageNamed:@"side-menu-calendar"]; break;
-        case ContentTypeFavourites: return [UIImage imageNamed:@"side-menu-favourites"]; break;
-        case ContentTypeNotes: return [UIImage imageNamed:@"side-menu-notes"]; break;
-        case ContentTypeSponsors: return [UIImage imageNamed:@"side-menu-supporters"]; break;
+        case ContentTypeCalendar: return [UIImage imageNamed:@"Calendar"]; break;
+        case ContentTypeFavourites: return [UIImage imageNamed:@"Favourites"]; break;
+        case ContentTypeNotes: return [UIImage imageNamed:@"Notes"]; break;
+        case ContentTypeSponsors: return [UIImage imageNamed:@"Sponsors"]; break;
         default: break;
     }
     return nil;
 }
 - (UIImage *)highlightedImageForContentType:(ContentType)contentType {
     switch (contentType) {
-        case ContentTypeCalendar: return [UIImage imageNamed:@"side-menu-calendar-selected"]; break;
-        case ContentTypeFavourites: return [UIImage imageNamed:@"side-menu-favourites-selected"]; break;
-        case ContentTypeNotes: return [UIImage imageNamed:@"side-menu-notes-selected"]; break;
-        case ContentTypeSponsors: return [UIImage imageNamed:@"side-menu-supporters-selected"]; break;
+        case ContentTypeCalendar: return [UIImage imageNamed:@"Calendar-selected"]; break;
+        case ContentTypeFavourites: return [UIImage imageNamed:@"Favourites-selected"]; break;
+        case ContentTypeNotes: return [UIImage imageNamed:@"Notes-selected"]; break;
+        case ContentTypeSponsors: return [UIImage imageNamed:@"Sponsors-selected"]; break;
         default: break;
     }
     return nil;
