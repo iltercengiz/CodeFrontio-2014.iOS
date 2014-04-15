@@ -12,6 +12,7 @@ target 'CodeFrontio-2014' do
 	pod 'TMCache', '~> 1.2.0'
 	pod 'MSDynamicsDrawerViewController', :git => 'https://github.com/monsieurje/MSDynamicsDrawerViewController.git'
 	pod 'Fleksy', :git => 'https://github.com/Fleksy/FleksySDK.git'
+    pod 'CHTwitterCover', :git => 'https://github.com/cyndibaby905/TwitterCover.git'
 
 end
 
