@@ -45,7 +45,6 @@
 		7C4D966A18FD26FB00D2829B /* SessionCellDouble.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4D966818FD26FB00D2829B /* SessionCellDouble.m */; };
 		7C4D966B18FD26FB00D2829B /* SessionCellDouble.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4D966918FD26FB00D2829B /* SessionCellDouble.xib */; };
 		7C83BB4A18AAD12A003D3557 /* SessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C83BB4918AAD12A003D3557 /* SessionViewController.m */; };
-		7C83BB4E18AAD7B0003D3557 /* SpeakerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C83BB4D18AAD7B0003D3557 /* SpeakerCell.m */; };
 		7C83BB5118AAD7BE003D3557 /* NotesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C83BB5018AAD7BE003D3557 /* NotesCell.m */; };
 		7C83BB5418AAD7C7003D3557 /* PhotosCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C83BB5318AAD7C7003D3557 /* PhotosCell.m */; };
 		7C83BB5718AADD40003D3557 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C83BB5618AADD40003D3557 /* PhotoCell.m */; };
@@ -60,7 +59,6 @@
 		7CCB106F18AE5BAA007A2486 /* UIImage+FromUIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB106E18AE5BAA007A2486 /* UIImage+FromUIColor.m */; };
 		7CDE9FEB18B4B9DA00E2F619 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDE9FEA18B4B9DA00E2F619 /* Photo.m */; };
 		7CF7CE0718FBD201000AFCB2 /* SpeakerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF7CE0618FBD201000AFCB2 /* SpeakerViewController.m */; };
-		7CF7CE0B18FBD453000AFCB2 /* AvatarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF7CE0A18FBD453000AFCB2 /* AvatarView.m */; };
 		7CF7CE0E18FBD465000AFCB2 /* SocialCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF7CE0D18FBD465000AFCB2 /* SocialCell.m */; };
 		7CFF7B2918EE9A9800A674F2 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CFF7B2818EE9A9800A674F2 /* iPhone.storyboard */; };
 		BCA93DB8D5A044DCBF5B4EA4 /* libPods-CodeFrontio-2014.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A302BFD5A71F4B95B3A6CFB0 /* libPods-CodeFrontio-2014.a */; };
@@ -135,8 +133,6 @@
 		7C4D966918FD26FB00D2829B /* SessionCellDouble.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionCellDouble.xib; sourceTree = "<group>"; };
 		7C83BB4818AAD12A003D3557 /* SessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionViewController.h; sourceTree = "<group>"; };
 		7C83BB4918AAD12A003D3557 /* SessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionViewController.m; sourceTree = "<group>"; };
-		7C83BB4C18AAD7B0003D3557 /* SpeakerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeakerCell.h; sourceTree = "<group>"; };
-		7C83BB4D18AAD7B0003D3557 /* SpeakerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeakerCell.m; sourceTree = "<group>"; };
 		7C83BB4F18AAD7BE003D3557 /* NotesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesCell.h; sourceTree = "<group>"; };
 		7C83BB5018AAD7BE003D3557 /* NotesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesCell.m; sourceTree = "<group>"; };
 		7C83BB5218AAD7C7003D3557 /* PhotosCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotosCell.h; sourceTree = "<group>"; };
@@ -163,8 +159,6 @@
 		7CE4FFBF18F52FDF0049AC9E /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		7CF7CE0518FBD201000AFCB2 /* SpeakerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeakerViewController.h; sourceTree = "<group>"; };
 		7CF7CE0618FBD201000AFCB2 /* SpeakerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeakerViewController.m; sourceTree = "<group>"; };
-		7CF7CE0918FBD453000AFCB2 /* AvatarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvatarView.h; sourceTree = "<group>"; };
-		7CF7CE0A18FBD453000AFCB2 /* AvatarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvatarView.m; sourceTree = "<group>"; };
 		7CF7CE0C18FBD465000AFCB2 /* SocialCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialCell.h; sourceTree = "<group>"; };
 		7CF7CE0D18FBD465000AFCB2 /* SocialCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialCell.m; sourceTree = "<group>"; };
 		7CFF7B2818EE9A9800A674F2 /* iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPhone.storyboard; sourceTree = "<group>"; };
@@ -332,8 +326,6 @@
 		7C83BB4B18AAD795003D3557 /* Session Detail */ = {
 			isa = PBXGroup;
 			children = (
-				7C83BB4C18AAD7B0003D3557 /* SpeakerCell.h */,
-				7C83BB4D18AAD7B0003D3557 /* SpeakerCell.m */,
 				7C83BB4F18AAD7BE003D3557 /* NotesCell.h */,
 				7C83BB5018AAD7BE003D3557 /* NotesCell.m */,
 				7C83BB5218AAD7C7003D3557 /* PhotosCell.h */,
@@ -418,12 +410,12 @@
 				7CBD1FAF18F3EE1B002154BC /* SessionCell.h */,
 				7CBD1FB018F3EE1B002154BC /* SessionCell.m */,
 				7CBD1FB118F3EE1B002154BC /* SessionCell.xib */,
-				7C4D966218FD1D7C00D2829B /* ActivityCell.h */,
-				7C4D966318FD1D7C00D2829B /* ActivityCell.m */,
-				7C4D966418FD1D7C00D2829B /* ActivityCell.xib */,
 				7C4D966718FD26FB00D2829B /* SessionCellDouble.h */,
 				7C4D966818FD26FB00D2829B /* SessionCellDouble.m */,
 				7C4D966918FD26FB00D2829B /* SessionCellDouble.xib */,
+				7C4D966218FD1D7C00D2829B /* ActivityCell.h */,
+				7C4D966318FD1D7C00D2829B /* ActivityCell.m */,
+				7C4D966418FD1D7C00D2829B /* ActivityCell.xib */,
 			);
 			path = "Calendar Scene";
 			sourceTree = "<group>";
@@ -431,8 +423,6 @@
 		7CF7CE0818FBD424000AFCB2 /* Speaker Detail */ = {
 			isa = PBXGroup;
 			children = (
-				7CF7CE0918FBD453000AFCB2 /* AvatarView.h */,
-				7CF7CE0A18FBD453000AFCB2 /* AvatarView.m */,
 				7CF7CE0C18FBD465000AFCB2 /* SocialCell.h */,
 				7CF7CE0D18FBD465000AFCB2 /* SocialCell.m */,
 			);
@@ -555,7 +545,6 @@
 			files = (
 				7C00884818A8F84B00ED4B31 /* AppDelegate.m in Sources */,
 				7C064FC518F1AD61005CD375 /* TrackCell.m in Sources */,
-				7C83BB4E18AAD7B0003D3557 /* SpeakerCell.m in Sources */,
 				7C422F9D18A8FE5F00195D6C /* MasterViewController.m in Sources */,
 				7C064FC018F1A99E005CD375 /* PagerLayout.m in Sources */,
 				7C83BB5118AAD7BE003D3557 /* NotesCell.m in Sources */,
@@ -587,7 +576,6 @@
 				7C4D966518FD1D7C00D2829B /* ActivityCell.m in Sources */,
 				7C2F3B5218B7417900A8A034 /* NoteCell.m in Sources */,
 				7C2FC85118ED745B00E3073F /* BaseViewController.m in Sources */,
-				7CF7CE0B18FBD453000AFCB2 /* AvatarView.m in Sources */,
 				7CF7CE0718FBD201000AFCB2 /* SpeakerViewController.m in Sources */,
 				7CDE9FEB18B4B9DA00E2F619 /* Photo.m in Sources */,
 				7C3840FE18AC0B4900A85C31 /* SponsorsViewController.m in Sources */,

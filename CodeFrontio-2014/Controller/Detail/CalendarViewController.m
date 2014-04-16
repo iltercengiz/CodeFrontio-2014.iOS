@@ -41,7 +41,7 @@
 @property (nonatomic) UIPageControl *pageControl;
 @property (nonatomic, assign, getter = isPageControlUsed) BOOL pageControlUsed;
 
-@property (nonatomic) NSMutableDictionary *scrollPositions;
+@property (nonatomic) NSMutableDictionary *trackTableViews;
 
 @end
 
@@ -51,6 +51,9 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    // Remove title from back button
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     self.title = NSLocalizedString(@"Calendar", nil);
     
@@ -91,6 +94,7 @@
     
     self.collectionView.backgroundColor = [UIColor P_lightBlueColor];
     self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
+    self.collectionView.scrollsToTop = NO;
     
 }
 
@@ -104,7 +108,7 @@
     
     // Register for notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(takeNote:) name:takeNoteNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectSession:) name:didSelectSessionNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectSpeaker:) name:didSelectSpeakerNotification object:nil];
     
     // If setup is already done, reload and return
     if (self.speakers && self.sessionsTracked) {
@@ -137,13 +141,13 @@
     });
     
 }
-- (void)viewDidDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated {
     
-    [super viewDidDisappear:animated];
+    [super viewWillDisappear:animated];
     
     // Remove notification observer
     [[NSNotificationCenter defaultCenter] removeObserver:self name:takeNoteNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:didSelectSessionNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:didSelectSpeakerNotification object:nil];
     
 }
 - (void)viewWillLayoutSubviews {
@@ -166,37 +170,55 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"sessionSegue"]) {
         NSDictionary *userInfo = sender;
-        Session *session = userInfo[@"session"];
-        BOOL keyboardOpen = [userInfo[@"isKeyboardOpen"] boolValue];
-        SessionViewController *svc = segue.destinationViewController;
-        svc.session = session;
-        svc.keyboardOpen = keyboardOpen;
+        SessionViewController *svc;
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            UINavigationController *nc = segue.destinationViewController;
+            svc = [nc.viewControllers firstObject];
+        } else { // if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+            svc = segue.destinationViewController;
+        }
+        svc.session = userInfo[@"session"];
     } else if ([segue.identifier isEqualToString:@"speakerSegue"]) {
-        Speaker *speaker = (Speaker *)sender;
-        SpeakerViewController *svc = segue.destinationViewController;
-        svc.speaker = speaker;
+        NSDictionary *userInfo = (NSDictionary *)sender;
+        SpeakerViewController *svc;
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            UINavigationController *nc = segue.destinationViewController;
+            svc = [nc.viewControllers firstObject];
+        } else { // if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+            svc = segue.destinationViewController;
+        }
+        svc.speaker = userInfo[@"speaker"];
     }
 }
 
 #pragma mark - Notifications
 - (void)takeNote:(NSNotification *)note {
-    [self presentSession:note.userInfo[@"session"] keyboardOpen:NO];
+    [self performSegueWithIdentifier:@"sessionSegue" sender:note.userInfo];
 }
-- (void)didSelectSession:(NSNotification *)note {
-//    [self presentSession:note.userInfo[@"session"] keyboardOpen:NO];
-    [self performSegueWithIdentifier:@"speakerSegue" sender:note.userInfo[@"speaker"]];
+- (void)didSelectSpeaker:(NSNotification *)note {
+    [self performSegueWithIdentifier:@"speakerSegue" sender:note.userInfo];
 }
 
-- (void)presentSession:(Session *)session keyboardOpen:(BOOL)keyboardOpen {
-    [self performSegueWithIdentifier:@"sessionSegue" sender:@{@"session": session, @"isKeyboardOpen": @(keyboardOpen)}];
+#pragma mark - Helper
+- (void)enableScrollToTopForTrack:(NSInteger)track {
+    
+    // Disable scrollsToTop for all tableViews
+    [self.trackTableViews enumerateKeysAndObjectsUsingBlock:^(NSNumber *track, UITableView *tableView, BOOL *stop) {
+        tableView.scrollsToTop = NO;
+    }];
+    
+    // Enable only for the current tableView
+    UITableView *tableView = self.trackTableViews[@(track)];
+    tableView.scrollsToTop = YES;
+    
 }
 
 #pragma mark - Getter
-- (NSMutableDictionary *)scrollPositions {
-    if (!_scrollPositions) {
-        _scrollPositions = [NSMutableDictionary dictionary];
+- (NSMutableDictionary *)trackTableViews {
+    if (!_trackTableViews) {
+        _trackTableViews = [NSMutableDictionary dictionary];
     }
-    return _scrollPositions;
+    return _trackTableViews;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -205,9 +227,22 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
     TrackCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"trackCell" forIndexPath:indexPath];
+    
     [cell configureCellForSessions:self.sessionsTracked[@(indexPath.item + 1)]];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        
+        [self.trackTableViews setObject:cell.tableView forKey:@(indexPath.item)];
+        
+        if (indexPath.item == self.pageControl.currentPage)
+            [self enableScrollToTopForTrack:self.pageControl.currentPage];
+        
+    }
+    
     return cell;
+    
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -231,7 +266,14 @@
     
     pageWidth += pageSpacing;
     
-    self.pageControl.currentPage = floor((scrollView.contentOffset.x - pageWidth / 2.0) / pageWidth) + 1;
+    NSInteger currentPage = floor((scrollView.contentOffset.x - pageWidth / 2.0) / pageWidth) + 1;
+    
+    if (self.pageControl.currentPage != currentPage) {
+        self.pageControl.currentPage = currentPage;
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+            [self enableScrollToTopForTrack:currentPage];
+        }
+    }
     
 }
 
@@ -275,14 +317,13 @@
     
     [self.collectionView scrollRectToVisible:frame animated:YES];
     
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [self enableScrollToTopForTrack:currentPage];
+    }
+
     // Set the boolean used when scrolls originate from the UIPageControl. See scrollViewDidScroll: above.
     self.pageControlUsed = YES;
     
-}
-
-#pragma mark - TrackCellDelegate
-- (void)track:(NSInteger)track didScrollToPosition:(CGPoint)scrollPosition {
-    self.scrollPositions[@(track)] = [NSValue valueWithCGPoint:scrollPosition];
 }
 
 @end

@@ -17,7 +17,7 @@ static NSString * const notesSceneIdentifier = @"NotesScene";
 static NSString * const supportersSceneIdentifier = @"SponsorsScene";
 
 static NSString * const takeNoteNotification = @"io.webBox.CodeFrontio-2014.takeNoteNotification";
-static NSString * const didSelectSessionNotification = @"io.webBox.CodeFrontio-2014.didSelectSessionNotification";
+static NSString * const didSelectSpeakerNotification = @"io.webBox.CodeFrontio-2014.didSelectSpeakerNotification";
 
 typedef NS_ENUM(NSInteger, ContentType) {
     ContentTypeCalendar = 0,

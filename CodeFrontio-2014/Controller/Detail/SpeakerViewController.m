@@ -10,15 +10,17 @@
 #import "Speaker.h"
 
 #pragma mark View
-#import "AvatarView.h"
 #import "SocialCell.h"
 
 #pragma mark Controller
 #import "SpeakerViewController.h"
 
-@interface SpeakerViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+#pragma mark Pods
+#import <CHTwitterCover/UIScrollView+TwitterCover.h>
+#import <AFNetworking/AFNetworking.h>
+#import <TMCache/TMCache.h>
 
-@property (nonatomic) NSMutableArray *profiles;
+@interface SpeakerViewController ()
 
 @end
 
@@ -31,20 +33,40 @@
     
     self.title = self.speaker.name;
     
-    if (self.speaker.twitter && ![self.speaker.twitter isEqualToString:@""]) {
-        [self.profiles addObject:@(Twitter)];
-    }
-    if (self.speaker.github && ![self.speaker.github isEqualToString:@""]) {
-        [self.profiles addObject:@(GitHub)];
-    }
-    if (self.speaker.dribbble && ![self.speaker.dribbble isEqualToString:@""]) {
-        [self.profiles addObject:@(Dribbble)];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                              target:self
+                                                                                              action:@selector(dismiss:)];
     }
     
-    self.collectionView.dataSource = self;
-    self.collectionView.delegate = self;
+    UIScrollView *scrollView = self.tableView;
     
-    self.textView.text = self.speaker.detail;
+//    [scrollView addTwitterCoverWithImage:[UIImage imageNamed:@"Speaker-placeholder"]];
+    
+    __weak NSString *weakString = self.speaker.avatar;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        [[TMCache sharedCache] objectForKey:weakString
+                                      block:^(TMCache *cache, NSString *key, id object) {
+                                          UIImage *image = object;
+                                          if (image)
+                                              dispatch_async(dispatch_get_main_queue(), ^{ [scrollView addTwitterCoverWithImage:image]; });
+                                          else {
+                                              NSURL *imageURL = [NSURL URLWithString:weakString];
+                                              NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
+                                              AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+                                              requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
+                                              [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                                  UIImage *image = responseObject;
+                                                  [scrollView addTwitterCoverWithImage:image];
+                                                  [cache setObject:image forKey:weakString];
+                                              } failure:nil];
+                                              [requestOperation start];
+                                          }
+                                      }];
+    });
+    
+    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(self.tableView.frame), CHTwitterCoverViewHeight)];
     
 }
 
@@ -52,32 +74,65 @@
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark - Getter
-- (NSMutableArray *)profiles {
-    if (!_profiles) {
-        _profiles = [NSMutableArray array];
+- (void)viewDidDisappear:(BOOL)animated {
+    
+    [super viewDidDisappear:animated];
+    
+    UIScrollView *scrollView = self.tableView;
+    [scrollView removeTwitterCoverView];
+    
+}
+
+#pragma mark - IBActions
+- (IBAction)dismiss:(id)sender {
+    [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 2;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    SocialCell *(^getSocialCell)(Speaker *speaker, NSIndexPath *indexPath) = ^SocialCell *(Speaker *speaker, NSIndexPath *indexPath) {
+        SocialCell *cell = [tableView dequeueReusableCellWithIdentifier:@"socialCell" forIndexPath:indexPath];
+        [cell configureCellForSpeaker:speaker];
+        return cell;
+    };
+    
+    UITableViewCell *(^getBioCell)(Speaker *speaker, NSIndexPath *indexPath) = ^UITableViewCell *(Speaker *speaker, NSIndexPath *indexPath) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"bioCell" forIndexPath:indexPath];
+        cell.textLabel.text = speaker.detail;
+        return cell;
+    };
+    
+    if (indexPath.row == 0)
+        return getSocialCell(self.speaker, indexPath);
+    else
+        return getBioCell(self.speaker, indexPath);
+    
+}
+
+#pragma mark - UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.row == 0)
+        return tableView.rowHeight;
+    else {
+        
+        NSString *bio = self.speaker.detail;
+        
+        CGSize size = [bio boundingRectWithSize:CGSizeMake(CGRectGetWidth(tableView.frame), CGFLOAT_MAX)
+                                        options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin
+                                     attributes:@{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:16.0]}
+                                        context:nil].size;
+        
+        if (size.height > 64.0)
+            return size.height + 8.0;
+        
     }
-    return _profiles;
-}
-
-#pragma mark - UICollectionViewDataSource
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.profiles.count;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    SocialCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"socialCell" forIndexPath:indexPath];
-    [cell configureCellForProfileType:[self.profiles[indexPath.item] unsignedIntegerValue]];
-    return cell;
-}
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-    AvatarView *view = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"avatarView" forIndexPath:indexPath];
-    [view configureViewForSpeaker:self.speaker];
-    return view;
-}
-
-#pragma mark - UICollectionViewDelegate
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return tableView.rowHeight;
     
 }
 

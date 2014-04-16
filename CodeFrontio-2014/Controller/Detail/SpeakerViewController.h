@@ -10,11 +10,8 @@
 
 @class Speaker;
 
-@interface SpeakerViewController : UIViewController
+@interface SpeakerViewController : UITableViewController
 
 @property (nonatomic) Speaker *speaker;
-
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (weak, nonatomic) IBOutlet UITextView *textView;
 
 @end

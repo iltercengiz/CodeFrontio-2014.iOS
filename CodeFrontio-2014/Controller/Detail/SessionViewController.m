@@ -32,9 +32,9 @@
 
 @property (nonatomic) UIBarButtonItem *editButton, *hideKeyboardButton, *doneButton, *deletePhotosButton, *deleteNoteButton;
 
- @property (nonatomic, getter = isTextViewFirstResponder) BOOL textViewIsFirstResponder;
+@property (nonatomic, getter = isTextViewFirstResponder) BOOL textViewIsFirstResponder;
 
-@property (nonatomic) CGFloat keyboardHeight;
+@property (nonatomic) CGFloat notesCellHeight;
 
 @end
 
@@ -44,6 +44,12 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                              target:self
+                                                                                              action:@selector(dismiss:)];
+    }
     
     // Set title
     self.navigationItem.title = self.session.title;
@@ -64,15 +70,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChangeFrame:) name:UIKeyboardDidChangeFrameNotification object:nil];
-    
-}
-- (void)viewDidAppear:(BOOL)animated {
-    
-    [super viewDidAppear:animated];
-    
-    if ([self isKeyboardOpen]) {
-        [self.notesCell.textView becomeFirstResponder];
-    }
     
 }
 - (void)viewWillDisappear:(BOOL)animated {
@@ -188,6 +185,10 @@
 }
 
 #pragma mark - IBAction
+- (IBAction)dismiss:(id)sender {
+    [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (IBAction)edit:(id)sender {
     
     // Set title to nil
@@ -259,68 +260,29 @@
 
 #pragma mark - Notifications
 - (void)keyboardWillShow:(NSNotification *)note {
-    
     self.textViewIsFirstResponder = YES;
-    
-    NSDictionary *userInfo = note.userInfo;
-    
-    CGRect keyboardFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    keyboardFrame = [self.view convertRect:keyboardFrame fromView:nil];
-    self.keyboardHeight = CGRectGetHeight(keyboardFrame);
-    
-//    NSNumber *animationCurve = userInfo[UIKeyboardAnimationCurveUserInfoKey];
-//    UIViewAnimationCurve keyboardAnimationCurve = [animationCurve integerValue];
-    
-//    NSNumber *animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey];
-//    CGFloat keyboardAnimationDuration = [animationDuration doubleValue];
-    
-//    [UIView animateWithDuration:keyboardAnimationDuration
-//                          delay:0.0
-//                        options:keyboardAnimationCurve << 16
-//                     animations:^{
-                         [self.tableView beginUpdates];
-                         [self.tableView endUpdates];
-//                     } completion:^(BOOL finished) {
-//                         
-//                     }];
-    
 }
 - (void)keyboardWillHide:(NSNotification *)note {
-    
     self.textViewIsFirstResponder = NO;
-    
-    NSDictionary *userInfo = note.userInfo;
-    
-    CGRect keyboardFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    keyboardFrame = [self.view convertRect:keyboardFrame fromView:nil];
-    self.keyboardHeight = CGRectGetHeight(keyboardFrame);
-    
-//    NSNumber *animationCurve = userInfo[UIKeyboardAnimationCurveUserInfoKey];
-//    UIViewAnimationCurve keyboardAnimationCurve = [animationCurve integerValue];
-    
-//    NSNumber *animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey];
-//    CGFloat keyboardAnimationDuration = [animationDuration doubleValue];
-    
-//    [UIView animateWithDuration:keyboardAnimationDuration
-//                          delay:0.0
-//                        options:keyboardAnimationCurve << 16
-//                     animations:^{
-                         [self.tableView beginUpdates];
-                         [self.tableView endUpdates];
-//                     } completion:^(BOOL finished) {
-//                         
-//                     }];
-    
 }
 
 - (void)keyboardDidChangeFrame:(NSNotification *)note {
     
     NSDictionary *userInfo = note.userInfo;
     
-    NSValue *value = userInfo[UIKeyboardFrameEndUserInfoKey];
-    CGRect keyboardFrame = [value CGRectValue];
+    CGRect keyboardFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     keyboardFrame = [self.view convertRect:keyboardFrame fromView:nil];
-    self.keyboardHeight = CGRectGetHeight(keyboardFrame);
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        self.notesCellHeight = keyboardFrame.origin.y - 86.0; // tableView.sectionHeaderHeight + navigation bar
+    } else { // if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+        self.notesCellHeight = CGRectGetHeight(self.tableView.frame) - CGRectGetHeight(keyboardFrame) - self.tableView.sectionHeaderHeight;
+    }
+    
+    [self.tableView beginUpdates];
+    [self.tableView endUpdates];
+    
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
     
 }
 
@@ -368,51 +330,16 @@
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    /**
-     * I'm not too happy from this part.
-     * If you came all the way to here, a little help would be appreciated. :)
-     */
-    
     if (indexPath.section == 0) {
         
         CGFloat height = 0;
         
-        if ([self isTextViewFirstResponder]) {
-//            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-//                if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation))
-//                    height = CGRectGetHeight(tableView.frame) - 1.0 * tableView.sectionHeaderHeight - self.keyboardHeight; // 352.0
-//                else // if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation))
-//                    height = CGRectGetHeight(tableView.frame) - 1.0 * tableView.sectionHeaderHeight - self.keyboardHeight; // 2xx.0
-//            } else { // if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-//                height = CGRectGetHeight(tableView.frame) - 1.0 * tableView.sectionHeaderHeight - self.keyboardHeight; // 216.0
-//            }
-            height = CGRectGetHeight(tableView.frame) - 1.0 * tableView.sectionHeaderHeight - self.keyboardHeight;
-        } else {
+        if ([self isTextViewFirstResponder])
+            height = self.notesCellHeight;
+        else
             height = CGRectGetHeight(tableView.frame) - 2.0 * tableView.sectionHeaderHeight - tableView.rowHeight;
-        }
         
         return height;
-        
-/*
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            
-            CGFloat height = 0;
-            
-            if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation))
-                height = [self isTextViewFirstResponder] ? CGRectGetHeight(tableView.frame) - 1.0 * tableView.sectionHeaderHeight - self.keyboardHeight // 352.0
-                                                         : CGRectGetHeight(tableView.frame) - 2.0 * tableView.sectionHeaderHeight - tableView.rowHeight;
-            else // if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation))
-                height = [self isTextViewFirstResponder] ? CGRectGetHeight(tableView.frame) - 1.0 * tableView.sectionHeaderHeight - self.keyboardHeight // 2xx.0
-                                                         : CGRectGetHeight(tableView.frame) - 2.0 * tableView.sectionHeaderHeight - tableView.rowHeight;
-            
-            return height;
-            
-        } else { // if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-            CGFloat height = [self isTextViewFirstResponder] ? CGRectGetHeight(tableView.frame) - 1.0 * tableView.sectionHeaderHeight - self.keyboardHeight // 216.0;
-                                                             : CGRectGetHeight(tableView.frame) - 2.0 * tableView.sectionHeaderHeight - tableView.rowHeight;
-            return height;
-        }
- */
         
     }
     

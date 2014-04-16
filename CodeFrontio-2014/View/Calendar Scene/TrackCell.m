@@ -38,6 +38,8 @@
     [super awakeFromNib];
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(self.tableView.frame), 10.0)];
+    self.tableView.scrollsToTop = NO;
+    
     [self.tableView registerNib:[UINib nibWithNibName:@"SessionCell" bundle:nil] forCellReuseIdentifier:@"sessionCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"SessionCellDouble" bundle:nil] forCellReuseIdentifier:@"sessionCellDouble"];
     [self.tableView registerNib:[UINib nibWithNibName:@"ActivityCell" bundle:nil] forCellReuseIdentifier:@"activityCell"];
