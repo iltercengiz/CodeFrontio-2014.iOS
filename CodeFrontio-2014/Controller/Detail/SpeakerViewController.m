@@ -33,6 +33,12 @@
     
     self.title = self.speaker.name;
     
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                              target:self
+                                                                                              action:@selector(dismiss:)];
+    }
+    
     UIScrollView *scrollView = self.tableView;
     
 //    [scrollView addTwitterCoverWithImage:[UIImage imageNamed:@"Speaker-placeholder"]];
@@ -54,7 +60,7 @@
                                                   UIImage *image = responseObject;
                                                   [scrollView addTwitterCoverWithImage:image];
                                                   [cache setObject:image forKey:weakString];
-                                              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {}];
+                                              } failure:nil];
                                               [requestOperation start];
                                           }
                                       }];
@@ -75,6 +81,11 @@
     UIScrollView *scrollView = self.tableView;
     [scrollView removeTwitterCoverView];
     
+}
+
+#pragma mark - IBActions
+- (IBAction)dismiss:(id)sender {
+    [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UITableViewDataSource

@@ -20,6 +20,19 @@
 
 @implementation PhotoCell
 
+#pragma mark - NSObject UIKit Additions
+- (void)awakeFromNib {
+    
+    // Set background color for custom drawing
+    self.backgroundColor = [UIColor colorWithRed:0.153 green:0.153 blue:0.157 alpha:1];
+    
+    // Set frame
+    self.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.layer.borderWidth = 0.5;
+    self.layer.cornerRadius = 12.0;
+    
+}
+
 #pragma mark - Configurator
 - (void)configureCellForPhoto:(Photo *)photoEntity {
     
@@ -57,41 +70,6 @@
     
     _marked = marked;
     
-}
-
-- (void)setup {
-    
-    // Set background color for custom drawing
-    self.backgroundColor = [UIColor colorWithRed:0.153 green:0.153 blue:0.157 alpha:1];
-    
-    // Set frame
-    self.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    self.layer.borderWidth = 0.5;
-    self.layer.cornerRadius = 12.0;
-    
-}
-
-- (id)init {
-    self = [super init];
-    if (self) {
-        [self setup];
-    }
-    return self;
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        [self setup];
-    }
-    return self;
-}
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self setup];
-    }
-    return self;
 }
 
 @end

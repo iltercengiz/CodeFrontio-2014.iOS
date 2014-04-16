@@ -112,7 +112,8 @@
     
     // Set session detail
     NSAttributedString *title = [[NSAttributedString alloc] initWithString:self.session.title
-                                                                attributes:@{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0]}];
+                                                                attributes:@{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0],
+                                                                             NSForegroundColorAttributeName: [UIColor P_blueColor]}];
     NSAttributedString *detail = [[NSAttributedString alloc] initWithString:self.session.detail
                                                                  attributes:@{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0]}];
     NSMutableAttributedString *mutableAttributedString = [NSMutableAttributedString new];
