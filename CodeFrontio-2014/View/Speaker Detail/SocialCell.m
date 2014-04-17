@@ -12,9 +12,7 @@
 #pragma mark View
 #import "SocialCell.h"
 
-@interface SocialCell () <UICollectionViewDataSource, UICollectionViewDelegate>
-
-@property (nonatomic) NSMutableArray *profiles;
+@interface SocialCell ()
 
 @end
 
@@ -23,66 +21,35 @@
 #pragma mark - NSObject UIKit Additions
 - (void)awakeFromNib {
     
-    self.collectionView.dataSource = self;
-    self.collectionView.delegate = self;
-    
 }
 
 #pragma mark - UICollectionViewCell
 - (void)prepareForReuse {
-    self.profiles = nil;
-    [self.collectionView reloadData];
+    self.imageView.image = nil;
 }
 
 #pragma mark - SocialCell
-- (void)configureCellForSpeaker:(Speaker *)speaker {
-    
-    self.speaker = speaker;
-    
-    if (speaker.twitter)
-        [self.profiles addObject:@(Twitter)];
-
-    if (speaker.github)
-        [self.profiles addObject:@(GitHub)];
-
-    if (speaker.dribbble)
-        [self.profiles addObject:@(Dribbble)];
-    
-    [self.collectionView reloadData];
-    
+- (void)configureCellForProfileType:(ProfileType)type {
+    self.imageView.image = [self imageForProfileType:type];
 }
 
-#pragma mark - Getter
-- (NSMutableArray *)profiles {
-    if (!_profiles) {
-        _profiles = [NSMutableArray array];
-    }
-    return _profiles;
-}
-
-#pragma mark - UICollectionViewDataSource
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.profiles.count;
-}
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"socialCell" forIndexPath:indexPath];
-    
-    ProfileType type = [self.profiles[indexPath.item] unsignedIntegerValue];
-    
+#pragma mark - Helper
+- (UIImage *)imageForProfileType:(ProfileType)type {
     switch (type) {
-        case Twitter: cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Twitter"]]; break;
-        case GitHub: cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GitHub"]]; break;
-        case Dribbble: cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Dribbble"]]; break;
-        default: break;
+        case Twitter: return [UIImage imageNamed:@"Twitter"];
+        case GitHub: return [UIImage imageNamed:@"GitHub"];
+        case Dribbble: return [UIImage imageNamed:@"Dribbble"];
+        default: return nil;
     }
-    
-    return cell;
-    
 }
 
-#pragma mark - UICollectionViewDelegate
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+#pragma mark - UIView
+- (void)layoutSubviews {
+    
+    [super layoutSubviews];
+    
+    self.imageView.frame = CGRectInset(self.imageView.frame, 12.0, 12.0);
+    self.textLabel.frame = CGRectOffset(self.textLabel.frame, -8.0, 0.0);
     
 }
 

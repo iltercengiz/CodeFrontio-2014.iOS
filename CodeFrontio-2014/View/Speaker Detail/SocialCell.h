@@ -18,13 +18,14 @@ typedef NS_ENUM(NSUInteger, ProfileType) {
 
 @interface SocialCell : UITableViewCell
 
-#pragma mark - IBOutlets
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+//#pragma mark - IBOutlets
+//@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 #pragma mark - Properties
 @property (nonatomic) Speaker *speaker;
 
 #pragma mark - SocialCell
-- (void)configureCellForSpeaker:(Speaker *)speaker;
+//- (void)configureCellForSpeaker:(Speaker *)speaker;
+- (void)configureCellForProfileType:(ProfileType)type;
 
 @end
