@@ -30,7 +30,7 @@
 - (void)configureCellForSponsor:(Sponsor *)sponsor {
     
     // Set image
-    NSString *imageURLString = sponsor.imageURL;
+    NSString *imageURLString = [@"http://codefront.io/public/images/sponsors" stringByAppendingString:sponsor.imageURL];
     UIImage *image = (UIImage *)[[TMDiskCache sharedCache] objectForKey:imageURLString];
     
     if (image) {
@@ -42,6 +42,7 @@
         }
         
     } else {
+        
         __weak typeof(self.imageView) weakImageView = self.sponsorImage;
         __weak typeof(imageURLString) weakImageURLString = imageURLString;
         
@@ -68,6 +69,7 @@
                                           } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
                                               // NSLog(@"Error getting image: %@", error.description);
                                           }];
+        
     }
     
 }
