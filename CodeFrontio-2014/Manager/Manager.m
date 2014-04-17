@@ -16,6 +16,7 @@
 #import "Speaker+Create.h"
 #import "Session+Create.h"
 #import "Sponsor+Create.h"
+#import "News+Create.h"
 
 #pragma mark Pods
 #import <MagicalRecord/CoreData+MagicalRecord.h>
@@ -32,8 +33,12 @@
 @synthesize speakers = _speakers;
 @synthesize sessions = _sessions;
 @synthesize sponsors = _sponsors;
+@synthesize news = _news;
 
 @synthesize sessionsTracked = _sessionsTracked;
+
+@synthesize localVersion = _localVersion;
+@synthesize localStatus = _localStatus;
 
 #pragma mark - Singleton
 + (instancetype)sharedManager {
@@ -83,6 +88,16 @@
     return _sponsors;
     
 }
+- (NSArray *)news {
+    
+    if (_news) {
+        return _news;
+    }
+    
+    _news = [News MR_findAllSortedBy:@"identifier" ascending:YES];
+    return _news;
+    
+}
 
 - (NSDictionary *)sessionsTracked {
     
@@ -117,6 +132,19 @@
     
 }
 
+- (NSMutableDictionary *)localVersion {
+    if (!_localVersion) {
+        _localVersion = [@{} mutableCopy];
+    }
+    return _localVersion;
+}
+- (NSMutableDictionary *)localStatus {
+    if (!_localStatus) {
+        _localStatus = [@{} mutableCopy];
+    }
+    return _localStatus;
+}
+
 #pragma mark - Setter
 - (void)setSpeakers:(NSArray *)speakers {
     _speakers = speakers;
@@ -127,9 +155,19 @@
 - (void)setSponsors:(NSArray *)sponsors {
     _sponsors = sponsors;
 }
+- (void)setNews:(NSArray *)news {
+    _news = news;
+}
 
 - (void)setSessionsTracked:(NSDictionary *)sessionsTracked {
     _sessionsTracked = sessionsTracked;
+}
+
+- (void)setLocalVersion:(NSMutableDictionary *)localVersion {
+    _localVersion = localVersion;
+}
+- (void)setLocalStatus:(NSMutableDictionary *)localStatus {
+    _localStatus = localStatus;
 }
 
 #pragma mark - Setup
@@ -138,14 +176,15 @@
     // Get the latest download version info
     self.localVersion = [[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"version"] mutableCopy];
     // If there isn't any version stored, create a version data with zeros
-    if (!self.localVersion) {
-        self.localVersion = [@{@"speakers": @0, @"sessions": @0, @"sponsors": @0} mutableCopy];
-    }
+    if (!self.localVersion[@"speakers"]) self.localVersion[@"speakers"] = @0;
+    if (!self.localVersion[@"sessions"]) self.localVersion[@"sessions"] = @0;
+    if (!self.localVersion[@"sponsors"]) self.localVersion[@"sponsors"] = @0;
+    if (!self.localVersion[@"news"]) self.localVersion[@"news"] = @0;
     
-    // Initiate localStatus
-    if (!self.localStatus) {
-        self.localStatus = [@{@"speakers": @NO, @"sessions": @NO, @"sponsors": @NO} mutableCopy];
-    }
+    if (!self.localStatus[@"speakers"]) self.localStatus[@"speakers"] = @NO;
+    if (!self.localStatus[@"sessions"]) self.localStatus[@"sessions"] = @NO;
+    if (!self.localStatus[@"sponsors"]) self.localStatus[@"sponsors"] = @NO;
+    if (!self.localStatus[@"news"]) self.localStatus[@"news"] = @NO;
     
     // Error block
     // Will be used to terminate the app if there is an connection error and there's not any stored data
@@ -184,7 +223,8 @@
             // Check if all statuses are O.K.
             if ([self.localStatus[@"speakers"] boolValue] &&
                 [self.localStatus[@"sessions"] boolValue] &&
-                [self.localStatus[@"sponsors"] boolValue])
+                [self.localStatus[@"sponsors"] boolValue] &&
+                [self.localStatus[@"news"] boolValue])
             {
                 
                 // Call completion
@@ -209,15 +249,17 @@
                                   [self setupSessionsWithRemoteVersion:responseObject completion:completionBlock];
                                   [self setupSponsorsWithRemoteVersion:responseObject completion:completionBlock];
                                   [self setupSpeakersWithRemoteVersion:responseObject completion:completionBlock];
+                                  [self setupNewsWithRemoteVersion:responseObject completion:completionBlock];
                               } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                   
                                   double speakers = [self.localVersion[@"speakers"] doubleValue];
                                   double sessions = [self.localVersion[@"sessions"] doubleValue];
                                   double sponsors = [self.localVersion[@"sponsors"] doubleValue];
+                                  double news = [self.localVersion[@"news"] doubleValue];
                                   
                                   // Check the latest download version
                                   // And decide to proceed or terminate
-                                  if (speakers >= 1.0 && sessions >= 1.0 && sponsors >= 1.0) {
+                                  if (speakers >= 1.0 && sessions >= 1.0 && sponsors >= 1.0 && news >= 1.0) {
                                       // proceedBlock(nil, YES, self.localVersion);
                                       completion();
                                   } else {
@@ -310,6 +352,31 @@
                                   }];
     } else {
         completion(@"sponsors", self.localVersion[@"sponsors"], YES);
+    }
+}
+- (void)setupNewsWithRemoteVersion:(NSDictionary *)remoteVersion completion:(void (^)(NSString *identifier, NSNumber *versionNumber, BOOL success))completion {
+    // Check version and download new data if needed
+    if ([self.localVersion[@"news"] compare:remoteVersion[@"news"]] == NSOrderedAscending) {
+        // Remove local data
+        [News MR_truncateAll];
+        // Fetch all news
+        [[LinzAPIClient sharedClient] GET:@"/api/news/index.json"
+                               parameters:nil
+                                  success:^(NSURLSessionDataTask *task, id responseObject) {
+                                      
+                                      for (NSDictionary *newsInfo in responseObject) {
+                                          NSMutableDictionary *mutableNewsInfo = [newsInfo mutableCopy];
+                                          mutableNewsInfo[@"identifier"] = @([responseObject indexOfObject:newsInfo]);
+                                          [News newsWithInfo:mutableNewsInfo];
+                                      }
+                                      
+                                      completion(@"news", remoteVersion[@"news"], YES);
+                                      
+                                  } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                      completion(@"news", remoteVersion[@"news"], NO);
+                                  }];
+    } else {
+        completion(@"news", self.localVersion[@"news"], YES);
     }
 }
 

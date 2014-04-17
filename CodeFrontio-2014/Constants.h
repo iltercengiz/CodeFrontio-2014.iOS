@@ -14,6 +14,7 @@ static NSString * const LinzAPIBaseURLString = @"http://codefront.io/";
 static NSString * const calendarSceneIdentifier = @"CalendarScene";
 static NSString * const favouritesSceneIdentifier = @"FavouritesScene";
 static NSString * const notesSceneIdentifier = @"NotesScene";
+static NSString * const newsSceneIdentifier = @"NewsScene";
 static NSString * const supportersSceneIdentifier = @"SponsorsScene";
 
 static NSString * const takeNoteNotification = @"io.webBox.CodeFrontio-2014.takeNoteNotification";
@@ -23,6 +24,7 @@ typedef NS_ENUM(NSInteger, ContentType) {
     ContentTypeCalendar = 0,
     ContentTypeFavourites,
     ContentTypeNotes,
+    ContentTypeNews,
     ContentTypeSponsors
 };
 

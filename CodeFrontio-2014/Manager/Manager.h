@@ -20,6 +20,7 @@ typedef NS_ENUM(NSInteger, SessionType) {
 @property NSArray *speakers;
 @property NSArray *sessions;
 @property NSArray *sponsors;
+@property NSArray *news;
 
 @property NSDictionary *sessionsTracked;
 

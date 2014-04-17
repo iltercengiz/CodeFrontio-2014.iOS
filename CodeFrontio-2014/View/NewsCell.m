@@ -10,25 +10,16 @@
 
 @implementation NewsCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
-- (void)awakeFromNib
-{
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+#pragma mark - NSObject UIKit Additions
+- (void)awakeFromNib {
+    
+    self.textView.scrollsToTop = NO;
+    self.textView.scrollEnabled = NO;
+//    self.textView.contentInset = UIEdgeInsetsMake(-8.0, 0.0, 0.0, 0.0); // top, left, bottom, right
+    self.textView.textContainerInset = UIEdgeInsetsMake(0.0, 0.0, -10.0, 0.0);
+    
+    self.detailLabel.clipsToBounds = NO;
+    
 }
 
 @end

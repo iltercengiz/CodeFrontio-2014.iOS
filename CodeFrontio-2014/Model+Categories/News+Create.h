@@ -10,4 +10,6 @@
 
 @interface News (Create)
 
++ (News *)newsWithInfo:(NSDictionary *)info;
+
 @end

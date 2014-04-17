@@ -6,114 +6,113 @@
 //  Copyright (c) 2014 Ilter Cengiz. All rights reserved.
 //
 
+#pragma mark Manager
+#import "Manager.h"
+
+#pragma mark Model
+#import "News.h"
+
+#pragma mark View
+#import "NewsCell.h"
+
+#pragma mark Controller
 #import "NewsViewController.h"
 
+#pragma mark Pods
+#import <MagicalRecord/CoreData+MagicalRecord.h>
+
 @interface NewsViewController ()
+
+@property (nonatomic) NSArray *news;
+
+@property (nonatomic) NSMutableDictionary *rowHeights;
 
 @end
 
 @implementation NewsViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)viewDidLoad
-{
+#pragma mark - UIViewController
+- (void)viewDidLoad {
+    
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    self.title = NSLocalizedString(@"News", nil);
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
-}
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+- (void)viewWillAppear:(BOOL)animated {
     
-    // Configure the cell...
+    [super viewWillAppear:animated];
+    
+    // Get news
+    self.news = [Manager sharedManager].news;
+    
+    [self.tableView reloadData];
+    
+}
+
+#pragma mark - Getter
+- (NSMutableDictionary *)rowHeights {
+    if (!_rowHeights) {
+        _rowHeights = [NSMutableDictionary dictionary];
+    }
+    return _rowHeights;
+}
+
+#pragma mark - UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.news.count;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NewsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"newsCell" forIndexPath:indexPath];
+    
+    News *news = self.news[indexPath.row];
+    
+    NSString *htmlString = [NSString stringWithFormat:@"<div style='font-size:16px; font-family:HelveticaNeue-Light;'>%@</div>", news.detail];
+    
+    cell.textView.attributedText = [[NSAttributedString alloc] initWithData:[htmlString dataUsingEncoding:NSUnicodeStringEncoding]
+                                                                    options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType}
+                                                         documentAttributes:nil
+                                                                      error:nil];
+    
+    cell.detailLabel.text = news.date;
     
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+#pragma mark - UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    CGFloat height = [self.rowHeights[@(indexPath.row)] doubleValue];
+    
+    if (height != 0)
+        return height;
+    
+    News *news = self.news[indexPath.row];
+    
+    NSRegularExpression *regularExpression = [NSRegularExpression regularExpressionWithPattern:@"<.*?>" options:0 error:nil];
+    NSString *string = [regularExpression stringByReplacingMatchesInString:news.detail options:0 range:NSMakeRange(0, news.detail.length) withTemplate:@""];
+    
+    CGSize size = [string boundingRectWithSize:CGSizeMake(CGRectGetWidth(tableView.frame) - 30.0, CGFLOAT_MAX)
+                                       options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin
+                                    attributes:@{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:16.0]}
+                                       context:nil].size;
+    
+    if (ceil(size.height) > 40.0)
+        height = tableView.rowHeight + ceil(size.height) - 40.0;
+    else
+        height = tableView.rowHeight;
+    
+    // Cache the calculated height
+    self.rowHeights[@(indexPath.row)] = @(height);
+    
+    return height;
+    
 }
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

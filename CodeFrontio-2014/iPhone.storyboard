@@ -20,7 +20,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gHH-3k-Dec" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="818" y="723"/>
+            <point key="canvasLocation" x="802" y="723"/>
         </scene>
         <!--Master View Controller-->
         <scene sceneID="Zyd-GK-2Z1">
@@ -59,7 +59,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Gn-YB-xX7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1214" y="723"/>
+            <point key="canvasLocation" x="1203" y="723"/>
         </scene>
         <!--Calendar View Controller-->
         <scene sceneID="k5T-v5-YFH">
@@ -446,7 +446,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FXo-Ji-ybn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2415" y="723"/>
+            <point key="canvasLocation" x="2406" y="723"/>
         </scene>
         <!--Sponsors View Controller-->
         <scene sceneID="9XJ-Eu-smn">
@@ -491,7 +491,68 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gwk-gJ-Cog" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2415" y="1414"/>
+            <point key="canvasLocation" x="2807" y="1414"/>
+        </scene>
+        <!--News View Controller-->
+        <scene sceneID="Sw1-r7-0k1">
+            <objects>
+                <tableViewController storyboardIdentifier="NewsScene" id="KgM-zo-liK" customClass="NewsViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="84" sectionHeaderHeight="22" sectionFooterHeight="22" id="RYq-K5-mxc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="newsCell" id="vKi-cB-qUS" customClass="NewsCell">
+                                <rect key="frame" x="0.0" y="22" width="320" height="84"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vKi-cB-qUS" id="tI5-6a-O7k">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="83"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Lorem ipsum" translatesAutoresizingMaskIntoConstraints="NO" id="fJ5-e8-rR2">
+                                            <rect key="frame" x="10" y="10" width="300" height="47"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
+                                        </textView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1wi-sM-u9y">
+                                            <rect key="frame" x="15" y="57" width="96" height="16"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="96" id="Ibe-4x-7IQ"/>
+                                                <constraint firstAttribute="height" constant="16" id="ZJU-Fv-CdT"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="1wi-sM-u9y" firstAttribute="top" secondItem="fJ5-e8-rR2" secondAttribute="bottom" id="AHX-Du-HZ4"/>
+                                        <constraint firstItem="fJ5-e8-rR2" firstAttribute="leading" secondItem="tI5-6a-O7k" secondAttribute="leading" constant="10" id="ILX-eo-tSd"/>
+                                        <constraint firstItem="fJ5-e8-rR2" firstAttribute="top" secondItem="tI5-6a-O7k" secondAttribute="top" constant="10" id="OsP-aa-ayE"/>
+                                        <constraint firstAttribute="trailing" secondItem="fJ5-e8-rR2" secondAttribute="trailing" constant="10" id="nvk-3b-TEg"/>
+                                        <constraint firstAttribute="bottom" secondItem="1wi-sM-u9y" secondAttribute="bottom" constant="10" id="pQP-Eb-kpg"/>
+                                        <constraint firstItem="1wi-sM-u9y" firstAttribute="leading" secondItem="tI5-6a-O7k" secondAttribute="leading" constant="15" id="xOn-zg-kf6"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="detailLabel" destination="1wi-sM-u9y" id="ETP-x9-qW4"/>
+                                    <outlet property="textView" destination="fJ5-e8-rR2" id="Eo7-eS-9VI"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="KgM-zo-liK" id="byJ-cZ-Uw1"/>
+                            <outlet property="delegate" destination="KgM-zo-liK" id="EOV-f4-amh"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CZU-uf-yEv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2406" y="1414"/>
         </scene>
     </scenes>
     <resources>
@@ -504,6 +565,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="8UN-GS-VDE"/>
+        <segue reference="Zzj-LP-hBW"/>
     </inferredMetricsTieBreakers>
 </document>

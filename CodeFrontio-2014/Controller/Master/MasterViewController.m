@@ -75,6 +75,7 @@
         case ContentTypeCalendar: identifier = calendarSceneIdentifier; break;
         case ContentTypeFavourites: identifier = favouritesSceneIdentifier; break;
         case ContentTypeNotes: identifier = notesSceneIdentifier; break;
+        case ContentTypeNews: identifier = newsSceneIdentifier; break;
         case ContentTypeSponsors: identifier = supportersSceneIdentifier; break;
         default: break;
     }
@@ -108,7 +109,7 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return 5;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MenuCell *cell = [tableView dequeueReusableCellWithIdentifier:@"menuCell" forIndexPath:indexPath];
