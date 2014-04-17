@@ -32,6 +32,8 @@
 
 @property (nonatomic) UIBarButtonItem *selectAllButton, *deleteButton, *exportButton;
 
+@property (nonatomic, assign) BOOL shouldShowInformation;
+
 @end
 
 @implementation NotesViewController
@@ -41,8 +43,7 @@
     
     [super viewDidLoad];
     
-    // Edit button
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.title = NSLocalizedString(@"Notes", nil);
     
     // Set toolbar items
     self.selectAllButton = [[UIBarButtonItem alloc] initWithTitle:@"Select All"
@@ -61,6 +62,11 @@
     self.toolbarItems = @[self.selectAllButton, space, self.deleteButton, space, self.exportButton];
     
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
@@ -68,12 +74,10 @@
     // Get notes
     self.notes = [[Note MR_findAllSortedBy:@"sessionIdentifier" ascending:YES] mutableCopy];
     
+    self.shouldShowInformation = self.notes.count == 0 ? YES : NO;
+    
     [self.tableView reloadData];
     
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
 }
 
 #pragma mark - Navigation
@@ -188,12 +192,30 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.notes.count;
+    if (self.notes.count != 0) {
+        tableView.scrollEnabled = YES;
+        self.navigationItem.rightBarButtonItem = self.editButtonItem;
+        return self.notes.count;
+    } else if ([self shouldShowInformation]) {
+        tableView.scrollEnabled = NO;
+        self.navigationItem.rightBarButtonItem = nil;
+        return 1;
+    } else {
+        return 0;
+    }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     // Note
-    Note *note = self.notes[indexPath.row];
+    Note *note;
+    
+    @try {
+        note = self.notes[indexPath.row];
+    } @catch (NSException *exception) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"noNotesCell" forIndexPath:indexPath];
+        cell.textLabel.text = NSLocalizedString(@"Notes information", nil);
+        return cell;
+    }
     
     // Create and configure cell
     NoteCell *cell = [tableView dequeueReusableCellWithIdentifier:@"notesCell" forIndexPath:indexPath];
@@ -228,7 +250,19 @@
 }
 
 #pragma mark - UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.notes.count == 0) {
+        return CGRectGetHeight(tableView.frame);
+    }
+    return tableView.rowHeight;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (self.notes.count == 0) {
+        return;
+    }
+    
     // If tableView is not in editing mode, push Session scene
     if (!self.editing) {
         [self startEditingForNoteAtIndexPath:indexPath];
@@ -238,6 +272,7 @@
         self.deleteButton.enabled = self.tableView.indexPathsForSelectedRows.count;
         self.exportButton.enabled = self.tableView.indexPathsForSelectedRows.count;
     }
+    
 }
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Update buttons
@@ -270,9 +305,25 @@
             [self.notes removeObjectsAtIndexes:indexSet];
             
             // Update tableView
+            [CATransaction begin];
+            
+            [CATransaction setCompletionBlock:^{
+                
+                self.editing = NO;
+                
+                self.shouldShowInformation = self.notes.count == 0 ? YES : NO;
+                
+                if ([self shouldShowInformation]) {
+                    [self.tableView reloadData];
+                }
+                
+            }];
+            
             [self.tableView beginUpdates];
             [self.tableView deleteRowsAtIndexPaths:self.tableView.indexPathsForSelectedRows withRowAnimation:UITableViewRowAnimationLeft];
             [self.tableView endUpdates];
+            
+            [CATransaction commit];
             
             // Enable/Disable buttons
             self.deleteButton.enabled = self.tableView.indexPathsForSelectedRows.count;
@@ -288,9 +339,25 @@
             [self.notes removeObjectAtIndex:self.removingNoteIndexPath.row];
             
             // Update tableView
+            [CATransaction begin];
+            
+            [CATransaction setCompletionBlock:^{
+                
+                self.editing = NO;
+                
+                self.shouldShowInformation = self.notes.count == 0 ? YES : NO;
+                
+                if ([self shouldShowInformation]) {
+                    [self.tableView reloadData];
+                }
+                
+            }];
+            
             [self.tableView beginUpdates];
             [self.tableView deleteRowsAtIndexPaths:@[self.removingNoteIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
             [self.tableView endUpdates];
+            
+            [CATransaction commit];
             
         } else {
             NoteCell *cell = (NoteCell *)[self.tableView cellForRowAtIndexPath:self.removingNoteIndexPath];

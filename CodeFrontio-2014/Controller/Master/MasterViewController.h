@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+#import "Constants.h"
+
+@class BaseViewController;
+
 @interface MasterViewController : UITableViewController
+
+@property (weak, nonatomic) BaseViewController *baseViewController;
+
+- (void)presentContentWithType:(ContentType)type animated:(BOOL)animated;
 
 @end

@@ -12,77 +12,36 @@
 #pragma mark Networking
 #import "LinzAPIClient.h"
 
+#pragma mark Categories
+#import "UIColor+Palette.h"
+
 #pragma mark Model
 #import "Session.h"
 #import "Speaker.h"
 
 #pragma mark View
-#import "CalendarTimeCell.h"
-#import "CalendarSessionCell.h"
-#import "CalendarActivityCell.h"
+#import "TrackCell.h"
 
 #pragma mark Controller
 #import "CalendarViewController.h"
 #import "SessionViewController.h"
+#import "SpeakerViewController.h"
 
-#pragma mark Libraries
-#import "RFQuiltLayout.h"
+#pragma mark Constants
+#import "Constants.h"
 
 #pragma mark Pods
 #import <SVProgressHUD/SVProgressHUD.h>
 
-@interface CalendarCollectionView : UICollectionView
-
-@end
-
-@implementation CalendarCollectionView
-
-- (void)drawRect:(CGRect)rect {
-    
-    UIBezierPath *path;
-    
-    // Background
-    path = [UIBezierPath bezierPathWithRect:rect];
-    [[UIColor colorWithRed:0.255 green:0.255 blue:0.259 alpha:1] setFill];
-    [path fill];
-    
-    // Dark place for time cells
-    path = [UIBezierPath bezierPathWithRect:CGRectMake(0.0, 0.0, CGRectGetWidth(rect), 64.0)];
-    [[UIColor colorWithRed:0.153 green:0.153 blue:0.157 alpha:1] setFill];
-    [path fill];
-    
-    // Thin line above the 'dark place'
-    path = [UIBezierPath bezierPath];
-    [path moveToPoint:CGPointMake(0.0, 0.0)];
-    [path addLineToPoint:CGPointMake(CGRectGetWidth(rect), 0.0)];
-    path.lineWidth = 1.0;
-    [[UIColor lightGrayColor] setStroke];
-    [path stroke];
-    
-    // Thin line below the 'dark place'
-    path = [UIBezierPath bezierPath];
-    [path moveToPoint:CGPointMake(0.0, 64.0)];
-    [path addLineToPoint:CGPointMake(CGRectGetWidth(rect), 64.0)];
-    path.lineWidth = 1.0;
-    [[UIColor lightGrayColor] setStroke];
-    [path stroke];
-    
-    // Thin line at the bottom of collection view
-    path = [UIBezierPath bezierPath];
-    [path moveToPoint:CGPointMake(0.0, CGRectGetHeight(rect))];
-    [path addLineToPoint:CGPointMake(CGRectGetWidth(rect), CGRectGetHeight(rect))];
-    path.lineWidth = 1.0;
-    [[UIColor lightGrayColor] setStroke];
-    [path stroke];
-    
-}
-
-@end
-
-@interface CalendarViewController () <RFQuiltLayoutDelegate>
+@interface CalendarViewController () <UIScrollViewDelegate>
 
 @property (nonatomic) NSArray *speakers;
-@property (nonatomic) NSArray *sessions;
+@property (nonatomic) NSDictionary *sessionsTracked;
+
+@property (nonatomic) UIPageControl *pageControl;
+@property (nonatomic, assign, getter = isPageControlUsed) BOOL pageControlUsed;
+
+@property (nonatomic) NSMutableDictionary *trackTableViews;
 
 @end
 
@@ -93,23 +52,66 @@
     
     [super viewDidLoad];
     
-    self.edgesForExtendedLayout = UIRectEdgeNone;
+    // Remove title from back button
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
-    RFQuiltLayout *layout = (RFQuiltLayout *)self.collectionView.collectionViewLayout;
-    layout.delegate = self;
-    layout.blockPixels = CGSizeMake(128.0, 64.0);
-    layout.direction = UICollectionViewScrollDirectionHorizontal;
+    self.title = NSLocalizedString(@"Calendar", nil);
     
-    // Set background color of collectionView for custom drawing
-    self.collectionView.backgroundColor = [UIColor clearColor];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        
+        self.navigationItem.titleView = ({
+            
+            UILabel *titleLabel = [UILabel new];
+            titleLabel.frame = CGRectMake(0.0, 2.0, 200.0, 24.0);
+            titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18.0];
+            titleLabel.text = NSLocalizedString(@"Calendar", nil);
+            titleLabel.textAlignment = NSTextAlignmentCenter;
+            titleLabel.textColor = [UIColor whiteColor];
+            titleLabel.autoresizingMask = (UIViewAutoresizingFlexibleTopMargin |
+                                           UIViewAutoresizingFlexibleBottomMargin |
+                                           UIViewAutoresizingFlexibleHeight);
+            
+            self.pageControl = [UIPageControl new];
+            self.pageControl.frame = CGRectMake(0.0, 27.0, 200.0, 14.0);
+            self.pageControl.autoresizingMask = (UIViewAutoresizingFlexibleTopMargin |
+                                                 UIViewAutoresizingFlexibleBottomMargin |
+                                                 UIViewAutoresizingFlexibleHeight);
+            [self.pageControl addTarget:self action:@selector(changePage:) forControlEvents:UIControlEventValueChanged];
+            
+            UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 200.0, 44.0)];
+            [titleView addSubview:titleLabel];
+            [titleView addSubview:self.pageControl];
+            titleView;
+            
+        });
+        
+    }
+    
+    // Collection view stuff
+    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    layout.sectionInset = UIEdgeInsetsMake(0.0, 20.0, 0.0, 20.0);
+    
+    self.collectionView.backgroundColor = [UIColor P_lightBlueColor];
+    self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
+    self.collectionView.scrollsToTop = NO;
     
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
     
+    // Register for notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(takeNote:) name:takeNoteNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectSpeaker:) name:didSelectSpeakerNotification object:nil];
+    
     // If setup is already done, reload and return
-    if (self.speakers && self.sessions) {
+    if (self.speakers && self.sessionsTracked) {
         [self.collectionView reloadData];
         return;
     }
@@ -120,10 +122,13 @@
     void (^completion)() = ^{
         
         self.speakers = [Manager sharedManager].speakers;
-        self.sessions = [Manager sharedManager].sessions;
+        self.sessionsTracked = [Manager sharedManager].sessionsTracked;
         
         // Reload calendar
         [self.collectionView reloadData];
+        
+        // Set page number
+        self.pageControl.numberOfPages = self.sessionsTracked.count;
         
         // Dismiss progress hud
         [SVProgressHUD showSuccessWithStatus:nil];
@@ -136,91 +141,188 @@
     });
     
 }
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [super viewWillDisappear:animated];
+    
+    // Remove notification observer
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:takeNoteNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:didSelectSpeakerNotification object:nil];
+    
+}
+- (void)viewWillLayoutSubviews {
+    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        layout.itemSize = CGSizeMake(320.0, CGRectGetHeight(self.collectionView.frame));
+    } else { // if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+        layout.itemSize = CGSizeMake(280.0, CGRectGetHeight(self.collectionView.frame));
+    }
+}
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+        layout.itemSize = CGSizeMake(320.0, CGRectGetWidth(self.collectionView.frame));
+    }
 }
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"sessionSegue"]) {
-        NSIndexPath *indexPath = (NSIndexPath *)sender;
-        Session *session = self.sessions[indexPath.item];
-        SessionViewController *svc = segue.destinationViewController;
-        svc.session = session;
+        NSDictionary *userInfo = sender;
+        SessionViewController *svc;
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            UINavigationController *nc = segue.destinationViewController;
+            svc = [nc.viewControllers firstObject];
+        } else { // if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+            svc = segue.destinationViewController;
+        }
+        svc.session = userInfo[@"session"];
+    } else if ([segue.identifier isEqualToString:@"speakerSegue"]) {
+        NSDictionary *userInfo = (NSDictionary *)sender;
+        SpeakerViewController *svc;
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            UINavigationController *nc = segue.destinationViewController;
+            svc = [nc.viewControllers firstObject];
+        } else { // if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+            svc = segue.destinationViewController;
+        }
+        svc.speaker = userInfo[@"speaker"];
     }
+}
+
+#pragma mark - Notifications
+- (void)takeNote:(NSNotification *)note {
+    [self performSegueWithIdentifier:@"sessionSegue" sender:note.userInfo];
+}
+- (void)didSelectSpeaker:(NSNotification *)note {
+    [self performSegueWithIdentifier:@"speakerSegue" sender:note.userInfo];
+}
+
+#pragma mark - Helper
+- (void)enableScrollToTopForTrack:(NSInteger)track {
+    
+    // Disable scrollsToTop for all tableViews
+    [self.trackTableViews enumerateKeysAndObjectsUsingBlock:^(NSNumber *track, UITableView *tableView, BOOL *stop) {
+        tableView.scrollsToTop = NO;
+    }];
+    
+    // Enable only for the current tableView
+    UITableView *tableView = self.trackTableViews[@(track)];
+    tableView.scrollsToTop = YES;
+    
+}
+
+#pragma mark - Getter
+- (NSMutableDictionary *)trackTableViews {
+    if (!_trackTableViews) {
+        _trackTableViews = [NSMutableDictionary dictionary];
+    }
+    return _trackTableViews;
 }
 
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.sessions.count;
+    return self.sessionsTracked.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    CalendarTimeCell *(^createTimeCell)(Session *session) = ^CalendarTimeCell *(Session *session) {
-        CalendarTimeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TimeCell" forIndexPath:indexPath];
-        [cell configureCellForSession:session];
-        return cell;
-    };
+    TrackCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"trackCell" forIndexPath:indexPath];
     
-    CalendarActivityCell *(^createActivityCell)(Session *session) = ^CalendarActivityCell *(Session *session) {
-        CalendarActivityCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ActivityCell" forIndexPath:indexPath];
-        [cell configureCellForSession:session];
-        return cell;
-    };
+    [cell configureCellForSessions:self.sessionsTracked[@(indexPath.item + 1)]];
     
-    CalendarSessionCell *(^createSessionCell)(Session *session, Speaker *speaker) = ^CalendarSessionCell *(Session *session, Speaker *speaker) {
-        CalendarSessionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"SessionCell" forIndexPath:indexPath];
-        [cell configureCellForSession:session speaker:speaker collectionView:collectionView];
-        return cell;
-    };
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        
+        [self.trackTableViews setObject:cell.tableView forKey:@(indexPath.item)];
+        
+        if (indexPath.item == self.pageControl.currentPage)
+            [self enableScrollToTopForTrack:self.pageControl.currentPage];
+        
+    }
     
-    Session *session = self.sessions[indexPath.item];
+    return cell;
     
-    if ([session.track isEqualToNumber:@(SessionTypeBreak)]) {
-        return createTimeCell(session);
-    } else if ([session.track isEqualToNumber:@(SessionTypeActivity)]) {
-        return createActivityCell(session);
-    } else { // if ([session.track isEqualToNumber:@1] || [session.track isEqualToNumber:@2])
-        Speaker *speaker = [[self.speakers filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"identifier == %@", session.speakerIdentifier]] firstObject];
-        return createSessionCell(session, speaker);
+}
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    // If we are on iPad, simply return
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        return;
+    }
+    
+    // We don't want a "feedback loop" between the UIPageControl and the scroll delegate in
+    // which a scroll event generated from the user hitting the page control triggers updates from
+    // the delegate method. We use a boolean to disable the delegate logic when the page control is used
+    if ([self isPageControlUsed]) {
+        return;
+    }
+    
+    // Switch the indicator when more than 50% of the previous/next page is visible
+    CGFloat pageWidth = 280.0;
+    CGFloat pageSpacing = 10.0;
+    
+    pageWidth += pageSpacing;
+    
+    NSInteger currentPage = floor((scrollView.contentOffset.x - pageWidth / 2.0) / pageWidth) + 1;
+    
+    if (self.pageControl.currentPage != currentPage) {
+        self.pageControl.currentPage = currentPage;
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+            [self enableScrollToTopForTrack:currentPage];
+        }
     }
     
 }
 
-#pragma mark - UICollectionViewDelegate
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    Session *session = self.sessions[indexPath.item];
-    if ([session.type isEqualToNumber:@1] && ![session.track isEqualToNumber:@(-1)]) {
-        [self performSegueWithIdentifier:@"sessionSegue" sender:indexPath];
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    
+    // If we are on iPad, simply return
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        return;
     }
+    
+    // At the begin of scroll dragging, reset the boolean used when scrolls originate from the UIPageControl
+    _pageControlUsed = NO;
+    
+}
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    
+    // If we are on iPad, simply return
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        return;
+    }
+    
+    // At the end of scroll animation, reset the boolean used when scrolls originate from the UIPageControl
+    _pageControlUsed = NO;
+    
 }
 
-#pragma mark - RFQuiltLayoutDelegate
-- (CGSize)blockSizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+#pragma mark - UIPageControl
+- (IBAction)changePage:(id)sender {
     
-    // Session data
-    Session *session = self.sessions[indexPath.row];
+    // Update the scroll view to the appropriate page
+    NSInteger currentPage = ((UIPageControl *)sender).currentPage;
     
-    // Size
-    CGSize size = CGSizeZero;
+    CGFloat pageWidth = 280.0;
+    CGFloat pageSpacing = 10.0;
     
-    if ([session.track isEqualToNumber:@(SessionTypeBreak)]) { // Time cell level
-        if ([session.type isEqualToNumber:@(-1)])
-            size = (CGSize){.width = 1.0, .height = 1.0};
-        else
-            size = (CGSize){.width = 2.0, .height = 1.0};
-    } else if ([session.track isEqualToNumber:@(SessionTypeActivity)]) { // Activity
-        if ([session.type isEqualToNumber:@(-1)]) // Break, Lunch, etc.
-            size = (CGSize){.width = 1.0, .height = 10.0};
-        else // Registration, Welcome speech, etc.
-            size = (CGSize){.width = 2.0, .height = 10.0};
-    } else { // if ([session.track isEqualToNumber:@1] || [session.track isEqualToNumber:@2]) // Keynote
-        size = (CGSize){.width = 2.0, .height = 5.0};
+    pageWidth += pageSpacing;
+    
+    CGRect frame = self.collectionView.frame;
+    frame.origin.x = pageWidth * currentPage;
+    frame.origin.y = 0.0;
+    
+    [self.collectionView scrollRectToVisible:frame animated:YES];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [self enableScrollToTopForTrack:currentPage];
     }
-    
-    return size;
+
+    // Set the boolean used when scrolls originate from the UIPageControl. See scrollViewDidScroll: above.
+    self.pageControlUsed = YES;
     
 }
 

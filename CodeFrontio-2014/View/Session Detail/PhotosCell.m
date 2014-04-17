@@ -137,9 +137,6 @@
     
     UICollectionViewCell *(^createAddPhotoCell)() = ^UICollectionViewCell *(){
         UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"addPhotoCell" forIndexPath:indexPath];
-        cell.layer.borderColor = [UIColor lightGrayColor].CGColor;
-        cell.layer.borderWidth = 0.5;
-        cell.layer.cornerRadius = 12.0;
         return cell;
     };
     

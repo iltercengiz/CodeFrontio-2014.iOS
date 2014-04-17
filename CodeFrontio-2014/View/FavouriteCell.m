@@ -27,7 +27,38 @@
 
 @implementation FavouriteCell
 
-#pragma mark - Configurator
+#pragma mark - NSObject UIKit Additions
+- (void)awakeFromNib {
+    
+    // Set background color for custom drawing
+    self.backgroundColor = [UIColor clearColor];
+    
+    if (!self.grabberView) {
+        self.grabberView = [[GrabberView alloc] initWithFrame:self.bounds];
+        [self.contentView insertSubview:self.grabberView atIndex:0];
+    }
+    
+}
+
+#pragma mark - UIView
+- (void)layoutSubviews {
+    
+    [super layoutSubviews];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        self.imageView.frame = CGRectInset(self.imageView.frame, 8.0, 8.0);
+        self.imageView.frame = CGRectOffset(self.imageView.frame, 28.0, 0.0);
+        self.textLabel.frame = CGRectOffset(self.textLabel.frame, 48.0, -2.0);
+        self.detailTextLabel.frame = CGRectOffset(self.detailTextLabel.frame, 48.0, -2.0);
+    } else { // if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+        self.imageView.frame = CGRectInset(self.imageView.frame, 4.0, 4.0);
+        self.textLabel.frame = CGRectOffset(self.textLabel.frame, -8.0, 0.0);
+        self.detailTextLabel.frame = CGRectOffset(self.detailTextLabel.frame, -8.0, 0.0);
+    }
+    
+}
+
+#pragma mark - FavouriteCell
 - (void)configureCellForSession:(Session *)session {
     
     // Speaker
@@ -68,52 +99,6 @@
     // Configure swipe stuff
     self.defaultColor = [UIColor lightGrayColor];
     self.shouldAnimateIcons = NO;
-    
-}
-
-#pragma mark - UIView
-- (void)setup {
-    
-    // Set background color for custom drawing
-    self.backgroundColor = [UIColor clearColor];
-    
-    if (!self.grabberView) {
-        self.grabberView = [[GrabberView alloc] initWithFrame:self.bounds];
-        [self.contentView insertSubview:self.grabberView atIndex:0];
-    }
-    
-}
-
-- (id)init {
-    self = [super init];
-    if (self) {
-        [self setup];
-    }
-    return self;
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        [self setup];
-    }
-    return self;
-}
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self setup];
-    }
-    return self;
-}
-
-- (void)layoutSubviews {
-    
-    [super layoutSubviews];
-    
-    self.imageView.frame = CGRectInset(self.imageView.frame, 16.0, 16.0);
-    self.textLabel.frame = CGRectOffset(self.textLabel.frame, -16.0, 0.0);
-    self.detailTextLabel.frame = CGRectOffset(self.detailTextLabel.frame, -16.0, 0.0);
     
 }
 

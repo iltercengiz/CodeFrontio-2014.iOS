@@ -1,8 +1,8 @@
 //
 //  Session.m
-//  Linz
+//  CodeFrontio-2014
 //
-//  Created by Ilter Cengiz on 18/02/14.
+//  Created by Ilter Cengiz on 14/04/14.
 //  Copyright (c) 2014 Ilter Cengiz. All rights reserved.
 //
 
@@ -12,13 +12,11 @@
 @implementation Session
 
 @dynamic detail;
+@dynamic favourited;
 @dynamic identifier;
-@dynamic sortingIndex;
 @dynamic speakerIdentifier;
 @dynamic timeInterval;
 @dynamic title;
 @dynamic track;
-@dynamic type;
-@dynamic favourited;
 
 @end

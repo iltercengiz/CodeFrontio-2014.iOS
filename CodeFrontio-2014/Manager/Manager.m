@@ -13,9 +13,10 @@
 #import "LinzAPIClient.h"
 
 #pragma mark Model
-#import "Sponsor.h"
-#import "Session.h"
-#import "Speaker.h"
+#import "Speaker+Create.h"
+#import "Session+Create.h"
+#import "Sponsor+Create.h"
+#import "News+Create.h"
 
 #pragma mark Pods
 #import <MagicalRecord/CoreData+MagicalRecord.h>
@@ -32,6 +33,12 @@
 @synthesize speakers = _speakers;
 @synthesize sessions = _sessions;
 @synthesize sponsors = _sponsors;
+@synthesize news = _news;
+
+@synthesize sessionsTracked = _sessionsTracked;
+
+@synthesize localVersion = _localVersion;
+@synthesize localStatus = _localStatus;
 
 #pragma mark - Singleton
 + (instancetype)sharedManager {
@@ -45,19 +52,97 @@
 
 #pragma mark - Getter
 - (NSArray *)speakers {
+    
+    if (_speakers) {
+        return _speakers;
+    }
+    
     _speakers = [Speaker MR_findAllSortedBy:@"identifier" ascending:YES];
     return _speakers;
+    
 }
 - (NSArray *)sessions {
-    _sessions = [Session MR_findAllSortedBy:@"sortingIndex" ascending:YES];
+    
+    if (_sessions) {
+        return _sessions;
+    }
+    
+    NSArray *sessions = [[Session MR_findAll] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"track" ascending:YES],
+                                                                            [NSSortDescriptor sortDescriptorWithKey:@"timeInterval" ascending:YES]]];
+    
+    _sessions = sessions;
+    
     return _sessions;
+    
 }
 - (NSArray *)sponsors {
+    
+    if (_sponsors) {
+        return _sponsors;
+    }
+    
     _sponsors = [[Sponsor MR_findAll] sortedArrayUsingDescriptors:@[
                                                                     [NSSortDescriptor sortDescriptorWithKey:@"priority" ascending:YES],
                                                                     [NSSortDescriptor sortDescriptorWithKey:@"subpriority" ascending:YES]
                                                                     ]];
     return _sponsors;
+    
+}
+- (NSArray *)news {
+    
+    if (_news) {
+        return _news;
+    }
+    
+    _news = [News MR_findAllSortedBy:@"identifier" ascending:YES];
+    return _news;
+    
+}
+
+- (NSDictionary *)sessionsTracked {
+    
+    if (_sessionsTracked) {
+        return _sessionsTracked;
+    }
+    
+    NSMutableDictionary *sessionsTracked = [NSMutableDictionary dictionary];
+    NSMutableArray *track;
+    
+    for (Session *session in self.sessions) {
+        
+        track = sessionsTracked[session.track];
+        
+        if (!track) {
+            track = [NSMutableArray array];
+            sessionsTracked[session.track] = track;
+        }
+        
+        [track addObject:session];
+        
+    }
+    
+    [sessionsTracked enumerateKeysAndObjectsUsingBlock:^(NSNumber *key, NSMutableArray *sessions, BOOL *stop) {
+        [sessions sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"track" ascending:YES],
+                                         [NSSortDescriptor sortDescriptorWithKey:@"timeInterval" ascending:YES]]];
+    }];
+    
+    _sessionsTracked = sessionsTracked;
+    
+    return _sessionsTracked;
+    
+}
+
+- (NSMutableDictionary *)localVersion {
+    if (!_localVersion) {
+        _localVersion = [@{} mutableCopy];
+    }
+    return _localVersion;
+}
+- (NSMutableDictionary *)localStatus {
+    if (!_localStatus) {
+        _localStatus = [@{} mutableCopy];
+    }
+    return _localStatus;
 }
 
 #pragma mark - Setter
@@ -70,6 +155,20 @@
 - (void)setSponsors:(NSArray *)sponsors {
     _sponsors = sponsors;
 }
+- (void)setNews:(NSArray *)news {
+    _news = news;
+}
+
+- (void)setSessionsTracked:(NSDictionary *)sessionsTracked {
+    _sessionsTracked = sessionsTracked;
+}
+
+- (void)setLocalVersion:(NSMutableDictionary *)localVersion {
+    _localVersion = localVersion;
+}
+- (void)setLocalStatus:(NSMutableDictionary *)localStatus {
+    _localStatus = localStatus;
+}
 
 #pragma mark - Setup
 - (void)setupWithCompletion:(void (^)())completion {
@@ -77,14 +176,15 @@
     // Get the latest download version info
     self.localVersion = [[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"version"] mutableCopy];
     // If there isn't any version stored, create a version data with zeros
-    if (!self.localVersion) {
-        self.localVersion = [@{@"speakers": @0, @"sessions": @0, @"sponsors": @0} mutableCopy];
-    }
+    if (!self.localVersion[@"speakers"]) self.localVersion[@"speakers"] = @0;
+    if (!self.localVersion[@"sessions"]) self.localVersion[@"sessions"] = @0;
+    if (!self.localVersion[@"sponsors"]) self.localVersion[@"sponsors"] = @0;
+    if (!self.localVersion[@"news"]) self.localVersion[@"news"] = @0;
     
-    // Initiate localStatus
-    if (!self.localStatus) {
-        self.localStatus = [@{@"speakers": @NO, @"sessions": @NO, @"sponsors": @NO} mutableCopy];
-    }
+    if (!self.localStatus[@"speakers"]) self.localStatus[@"speakers"] = @NO;
+    if (!self.localStatus[@"sessions"]) self.localStatus[@"sessions"] = @NO;
+    if (!self.localStatus[@"sponsors"]) self.localStatus[@"sponsors"] = @NO;
+    if (!self.localStatus[@"news"]) self.localStatus[@"news"] = @NO;
     
     // Error block
     // Will be used to terminate the app if there is an connection error and there's not any stored data
@@ -123,7 +223,8 @@
             // Check if all statuses are O.K.
             if ([self.localStatus[@"speakers"] boolValue] &&
                 [self.localStatus[@"sessions"] boolValue] &&
-                [self.localStatus[@"sponsors"] boolValue])
+                [self.localStatus[@"sponsors"] boolValue] &&
+                [self.localStatus[@"news"] boolValue])
             {
                 
                 // Call completion
@@ -142,21 +243,23 @@
     };
     
     // Fetch the latest version numbers
-    [[LinzAPIClient sharedClient] GET:@"/version"
+    [[LinzAPIClient sharedClient] GET:@"/api/version/index.json"
                            parameters:nil
                               success:^(NSURLSessionDataTask *task, id responseObject) {
                                   [self setupSessionsWithRemoteVersion:responseObject completion:completionBlock];
                                   [self setupSponsorsWithRemoteVersion:responseObject completion:completionBlock];
                                   [self setupSpeakersWithRemoteVersion:responseObject completion:completionBlock];
+                                  [self setupNewsWithRemoteVersion:responseObject completion:completionBlock];
                               } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                   
                                   double speakers = [self.localVersion[@"speakers"] doubleValue];
                                   double sessions = [self.localVersion[@"sessions"] doubleValue];
                                   double sponsors = [self.localVersion[@"sponsors"] doubleValue];
+                                  double news = [self.localVersion[@"news"] doubleValue];
                                   
                                   // Check the latest download version
                                   // And decide to proceed or terminate
-                                  if (speakers >= 1.0 && sessions >= 1.0 && sponsors >= 1.0) {
+                                  if (speakers >= 1.0 && sessions >= 1.0 && sponsors >= 1.0 && news >= 1.0) {
                                       // proceedBlock(nil, YES, self.localVersion);
                                       completion();
                                   } else {
@@ -171,28 +274,16 @@
         // Remove local data
         [Speaker MR_truncateAll];
         // Fetch all speakers
-        [[LinzAPIClient sharedClient] GET:@"/speakers"
+        [[LinzAPIClient sharedClient] GET:@"/api/speakers/index.json"
                                parameters:nil
                                   success:^(NSURLSessionDataTask *task, id responseObject) {
-                                      // responseObject holds info for all speakers
+                                      
                                       for (NSDictionary *speakerInfo in responseObject) {
-                                          // Create a speaker entity
-                                          Speaker *speaker = [Speaker MR_createInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
-                                          speaker.name = speakerInfo[@"full_name"];
-                                          speaker.title = speakerInfo[@"title"];
-                                          speaker.detail = speakerInfo[@"detail"];
-                                          speaker.identifier = speakerInfo[@"id"];
-                                          speaker.avatar = [speakerInfo[@"avatar"] isEqualToString:@""] ? nil : [@"http://linz.kod.io/public/images/speakers/" stringByAppendingString:speakerInfo[@"avatar"]];
-                                          speaker.github = [speakerInfo[@"github"] isEqualToString:@""] ? nil : [@"http://github.com/" stringByAppendingString:speakerInfo[@"github"]];
-                                          speaker.twitter = [speakerInfo[@"twitter"] isEqualToString:@""] ? nil : [@"http://twitter.com/" stringByAppendingString:speakerInfo[@"twitter"]];
+                                          [Speaker speakerWithInfo:speakerInfo];
                                       }
                                       
-                                      [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-                                          // if (success) NSLog(@"Save successful!");
-                                          // else NSLog(@"Save failed with error: %@", error);
-                                      }];
-                                      
                                       completion(@"speakers", remoteVersion[@"speakers"], YES);
+                                      
                                   } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                       completion(@"speakers", remoteVersion[@"speakers"], NO);
                                   }];
@@ -206,44 +297,16 @@
         // Remove local data
         [Session MR_truncateAll];
         // Fetch all sessions
-        [[LinzAPIClient sharedClient] GET:@"/sessions"
+        [[LinzAPIClient sharedClient] GET:@"/api/sessions/index.json"
                                parameters:nil
                                   success:^(NSURLSessionDataTask *task, id responseObject) {
-                                      // responseObject holds info for all sessions
-                                      NSInteger sortingIndex = 0;
+                                      
                                       for (NSDictionary *sessionInfo in responseObject) {
-                                          // Add a small dictionary object to specify time cells
-                                          // Check type and track values of the sessions for appropriate placing
-                                          if ([sessionInfo[@"track"] isEqualToNumber:@0] || [sessionInfo[@"track"] isEqualToNumber:@1]) { // We check the track info instead of type to not to add time data twice for simultaneous sessions
-                                              // Create a session entity
-                                              Session *session = [Session MR_createInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
-                                              session.track = @(-1); // Track -1 means time cell level
-                                              session.type = sessionInfo[@"type"]; // Type will help us to adjust the width
-                                              session.timeInterval = sessionInfo[@"time"];
-                                              session.sortingIndex = @(sortingIndex);
-                                              // Increment index
-                                              sortingIndex++;
-                                          }
-                                          // Create a session entity
-                                          Session *session = [Session MR_createInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
-                                          session.title = sessionInfo[@"title"];
-                                          session.detail = sessionInfo[@"detail"];
-                                          session.track = sessionInfo[@"track"];
-                                          session.type = sessionInfo[@"type"];
-                                          session.timeInterval = sessionInfo[@"time"];
-                                          session.speakerIdentifier = sessionInfo[@"speaker"];
-                                          session.sortingIndex = @(sortingIndex);
-                                          session.identifier = sessionInfo[@"id"];
-                                          // Increment index
-                                          sortingIndex++;
+                                          [Session sessionWithInfo:sessionInfo];
                                       }
                                       
-                                      [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-                                          // if (success) NSLog(@"Save successful!");
-                                          // else NSLog(@"Save failed with error: %@", error);
-                                      }];
-                                      
                                       completion(@"sessions", remoteVersion[@"sessions"], YES);
+                                      
                                   } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                       completion(@"sessions", remoteVersion[@"sessions"], NO);
                                   }];
@@ -257,10 +320,10 @@
         // Remove local data
         [Sponsor MR_truncateAll];
         // Fetch all sponsors
-        [[LinzAPIClient sharedClient] GET:@"/sponsors"
+        [[LinzAPIClient sharedClient] GET:@"/api/sponsors/index.json"
                                parameters:nil
                                   success:^(NSURLSessionDataTask *task, id responseObject) {
-                                      // responseObject holds info for all sponsors
+                                      
                                       for (NSDictionary *groupInfo in responseObject) {
                                           
                                           NSArray *sponsors = groupInfo[@"sponsors"];
@@ -270,28 +333,50 @@
                                           
                                           for (NSDictionary *sponsorInfo in sponsors) {
                                               NSInteger subpriority = [sponsors indexOfObject:sponsorInfo];
-                                              // Create a sponsor entity
-                                              Sponsor *sponsor = [Sponsor MR_createInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
-                                              sponsor.type = type;
-                                              sponsor.imageURL = sponsorInfo[@"imageURL"];
-                                              sponsor.websiteURL = sponsorInfo[@"websiteURL"];
-                                              sponsor.priority = @(priority);
-                                              sponsor.subpriority = @(subpriority);
-                                              sponsor.identifier = sponsorInfo[@"id"];
+                                              
+                                              [Sponsor sponsorWithInfo:@{@"type": type,
+                                                                         @"imageURL": sponsorInfo[@"imageURL"],
+                                                                         @"websiteURL": sponsorInfo[@"websiteURL"],
+                                                                         @"priority": @(priority),
+                                                                         @"subpriority": @(subpriority),
+                                                                         @"identifier": sponsorInfo[@"id"]}];
+                                              
                                           }
+                                          
                                       }
                                       
-                                      [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-                                          // if (success) NSLog(@"Save successful!");
-                                          // else NSLog(@"Save failed with error: %@", error);
-                                      }];
-                                      
                                       completion(@"sponsors", remoteVersion[@"sponsors"], YES);
+                                      
                                   } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                       completion(@"sponsors", remoteVersion[@"sponsors"], NO);
                                   }];
     } else {
         completion(@"sponsors", self.localVersion[@"sponsors"], YES);
+    }
+}
+- (void)setupNewsWithRemoteVersion:(NSDictionary *)remoteVersion completion:(void (^)(NSString *identifier, NSNumber *versionNumber, BOOL success))completion {
+    // Check version and download new data if needed
+    if ([self.localVersion[@"news"] compare:remoteVersion[@"news"]] == NSOrderedAscending) {
+        // Remove local data
+        [News MR_truncateAll];
+        // Fetch all news
+        [[LinzAPIClient sharedClient] GET:@"/api/news/index.json"
+                               parameters:nil
+                                  success:^(NSURLSessionDataTask *task, id responseObject) {
+                                      
+                                      for (NSDictionary *newsInfo in responseObject) {
+                                          NSMutableDictionary *mutableNewsInfo = [newsInfo mutableCopy];
+                                          mutableNewsInfo[@"identifier"] = @([responseObject indexOfObject:newsInfo]);
+                                          [News newsWithInfo:mutableNewsInfo];
+                                      }
+                                      
+                                      completion(@"news", remoteVersion[@"news"], YES);
+                                      
+                                  } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                      completion(@"news", remoteVersion[@"news"], NO);
+                                  }];
+    } else {
+        completion(@"news", self.localVersion[@"news"], YES);
     }
 }
 

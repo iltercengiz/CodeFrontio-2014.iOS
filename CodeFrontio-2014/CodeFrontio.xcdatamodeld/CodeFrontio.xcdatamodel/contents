@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13B42" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5063" systemVersion="13C64" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="News" representedClassName="News" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="detail" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="identifier" attributeType="Integer 16" defaultValueString="-1" indexed="YES" syncable="YES"/>
+    </entity>
     <entity name="Note" representedClassName="Note" syncable="YES">
         <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sessionIdentifier" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -13,16 +18,15 @@
         <attribute name="detail" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="favourited" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="identifier" attributeType="Integer 16" defaultValueString="0" indexed="YES" syncable="YES"/>
-        <attribute name="sortingIndex" attributeType="Integer 16" defaultValueString="-1" indexed="YES" syncable="YES"/>
-        <attribute name="speakerIdentifier" optional="YES" attributeType="Integer 16" defaultValueString="-1" syncable="YES"/>
+        <attribute name="speakerIdentifier" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="timeInterval" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="track" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="type" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="Speaker" representedClassName="Speaker" syncable="YES">
         <attribute name="avatar" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="detail" attributeType="String" syncable="YES"/>
+        <attribute name="dribbble" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="github" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="identifier" attributeType="Integer 16" defaultValueString="0" indexed="YES" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
@@ -38,10 +42,11 @@
         <attribute name="websiteURL" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Note" positionX="-2243" positionY="369" width="128" height="73"/>
-        <element name="Session" positionX="-2162" positionY="171" width="128" height="178"/>
-        <element name="Speaker" positionX="-2324" positionY="194" width="128" height="148"/>
+        <element name="News" positionX="-1998" positionY="360" width="128" height="88"/>
+        <element name="Note" positionX="-2324" positionY="369" width="128" height="73"/>
+        <element name="Photo" positionX="-2160" positionY="371" width="128" height="88"/>
+        <element name="Session" positionX="-2162" positionY="171" width="128" height="148"/>
+        <element name="Speaker" positionX="-2324" positionY="180" width="128" height="163"/>
         <element name="Sponsor" positionX="-1998" positionY="209" width="128" height="133"/>
-        <element name="Photo" positionX="-2079" positionY="369" width="128" height="88"/>
     </elements>
 </model>

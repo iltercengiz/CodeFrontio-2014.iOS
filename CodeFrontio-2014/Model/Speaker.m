@@ -1,8 +1,8 @@
 //
 //  Speaker.m
-//  Linz
+//  CodeFrontio-2014
 //
-//  Created by Ilter Cengiz on 17/02/14.
+//  Created by Ilter Cengiz on 14/04/14.
 //  Copyright (c) 2014 Ilter Cengiz. All rights reserved.
 //
 
@@ -18,5 +18,6 @@
 @dynamic name;
 @dynamic title;
 @dynamic twitter;
+@dynamic dribbble;
 
 @end

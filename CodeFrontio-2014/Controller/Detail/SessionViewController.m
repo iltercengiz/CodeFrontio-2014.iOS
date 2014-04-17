@@ -8,11 +8,9 @@
 
 #pragma mark Model
 #import "Session.h"
-#import "Speaker.h"
 #import "Note.h"
 
 #pragma mark View
-#import "SpeakerCell.h"
 #import "NotesCell.h"
 #import "PhotosCell.h"
 
@@ -32,9 +30,11 @@
 @property (nonatomic) NotesCell *notesCell;
 @property (nonatomic) PhotosCell *photosCell;
 
-@property (nonatomic) UIBarButtonItem *editButton, *doneButton, *deletePhotosButton, *deleteNoteButton;
+@property (nonatomic) UIBarButtonItem *editButton, *hideKeyboardButton, *doneButton, *deletePhotosButton, *deleteNoteButton;
 
-@property (nonatomic, getter = willTextViewBeFirstResponder) BOOL textViewWillBeFirstResponder;
+@property (nonatomic, getter = isTextViewFirstResponder) BOOL textViewIsFirstResponder;
+
+@property (nonatomic) CGFloat notesCellHeight;
 
 @end
 
@@ -45,11 +45,31 @@
     
     [super viewDidLoad];
     
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                              target:self
+                                                                                              action:@selector(dismiss:)];
+    }
+    
     // Set title
     self.navigationItem.title = self.session.title;
     
     // Edit button for note and photo editing
     self.navigationItem.rightBarButtonItem = self.editButton;
+    
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChangeFrame:) name:UIKeyboardDidChangeFrameNotification object:nil];
     
 }
 - (void)viewWillDisappear:(BOOL)animated {
@@ -59,9 +79,14 @@
     [self saveNoteIfValid];
     
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+- (void)viewDidDisappear:(BOOL)animated {
+    
+    [super viewDidDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidChangeFrameNotification object:nil];
+    
 }
 
 #pragma mark - Getter
@@ -88,15 +113,24 @@
     if (!_editButton) {
         _editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
                                                                     target:self
-                                                                    action:@selector(editTapped:)];
+                                                                    action:@selector(edit:)];
     }
     return _editButton;
+}
+- (UIBarButtonItem *)hideKeyboardButton {
+    if (!_hideKeyboardButton) {
+        _hideKeyboardButton = [[UIBarButtonItem alloc] initWithTitle:@"Hide"
+                                                               style:UIBarButtonItemStyleBordered
+                                                              target:self
+                                                              action:@selector(hideKeyboard:)];
+    }
+    return _hideKeyboardButton;
 }
 - (UIBarButtonItem *)doneButton {
     if (!_doneButton) {
         _doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                     target:self
-                                                                    action:@selector(doneTapped:)];
+                                                                    action:@selector(done:)];
     }
     return _doneButton;
 }
@@ -105,7 +139,7 @@
         _deletePhotosButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Delete photos", nil)
                                                                style:UIBarButtonItemStylePlain
                                                               target:self
-                                                              action:@selector(deletePhotosTapped:)];
+                                                              action:@selector(deletePhotos:)];
     }
     return _deletePhotosButton;
 }
@@ -114,7 +148,7 @@
         _deleteNoteButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Delete note", nil)
                                                              style:UIBarButtonItemStylePlain
                                                             target:self
-                                                            action:@selector(deleteNoteTapped:)];
+                                                            action:@selector(deleteNote:)];
     }
     return _deleteNoteButton;
 }
@@ -151,7 +185,11 @@
 }
 
 #pragma mark - IBAction
-- (IBAction)editTapped:(id)sender {
+- (IBAction)dismiss:(id)sender {
+    [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)edit:(id)sender {
     
     // Set title to nil
     self.navigationItem.title = nil;
@@ -180,33 +218,16 @@
     self.photosCell.editing = YES;
     
 }
-- (IBAction)deleteNoteTapped:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Confirm deletion", nil)
-                                                    message:NSLocalizedString(@"Confirm deletion message", nil)
-                                                   delegate:self
-                                          cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                          otherButtonTitles:NSLocalizedString(@"Continue", nil), nil];
-    alert.tag = TAG_NOTE;
-    [alert show];
+- (IBAction)hideKeyboard:(id)sender {
+    [self.notesCell.textView resignFirstResponder];
 }
-- (IBAction)deletePhotosTapped:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Confirm deletion", nil)
-                                                    message:NSLocalizedString(@"Confirm deletion message", nil)
-                                                   delegate:self
-                                          cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                          otherButtonTitles:NSLocalizedString(@"Continue", nil), nil];
-    alert.tag = TAG_PHOTO;
-    [alert show];
-}
-- (IBAction)doneTapped:(id)sender {
+- (IBAction)done:(id)sender {
     
     // Set title back
     self.navigationItem.title = self.session.title;
     
     // Change buttons
-    self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
-                                                                                              target:self
-                                                                                              action:@selector(editTapped:)]];
+    self.navigationItem.rightBarButtonItems = @[self.editButton];
     
     // Remove self from notification observers
     [[NSNotificationCenter defaultCenter] removeObserver:self
@@ -218,22 +239,61 @@
     self.photosCell.editing = NO;
     
 }
+- (IBAction)deletePhotos:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Confirm deletion", nil)
+                                                    message:NSLocalizedString(@"Confirm deletion message", nil)
+                                                   delegate:self
+                                          cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                          otherButtonTitles:NSLocalizedString(@"Continue", nil), nil];
+    alert.tag = TAG_PHOTO;
+    [alert show];
+}
+- (IBAction)deleteNote:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Confirm deletion", nil)
+                                                    message:NSLocalizedString(@"Confirm deletion message", nil)
+                                                   delegate:self
+                                          cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                          otherButtonTitles:NSLocalizedString(@"Continue", nil), nil];
+    alert.tag = TAG_NOTE;
+    [alert show];
+}
+
+#pragma mark - Notifications
+- (void)keyboardWillShow:(NSNotification *)note {
+    self.textViewIsFirstResponder = YES;
+}
+- (void)keyboardWillHide:(NSNotification *)note {
+    self.textViewIsFirstResponder = NO;
+}
+
+- (void)keyboardDidChangeFrame:(NSNotification *)note {
+    
+    NSDictionary *userInfo = note.userInfo;
+    
+    CGRect keyboardFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    keyboardFrame = [self.view convertRect:keyboardFrame fromView:nil];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        self.notesCellHeight = keyboardFrame.origin.y - 86.0; // tableView.sectionHeaderHeight + navigation bar
+    } else { // if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+        self.notesCellHeight = CGRectGetHeight(self.tableView.frame) - CGRectGetHeight(keyboardFrame) - self.tableView.sectionHeaderHeight;
+    }
+    
+    [self.tableView beginUpdates];
+    [self.tableView endUpdates];
+    
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    
+}
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 2;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    SpeakerCell *(^createSpeakerCell)() = ^SpeakerCell *(){
-        SpeakerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"speakerCell" forIndexPath:indexPath];
-        Speaker *speaker = [[Speaker MR_findByAttribute:@"identifier" withValue:self.session.speakerIdentifier] firstObject]; // Speaker of the session
-        [cell configureCellForSpeaker:speaker];
-        return cell;
-    };
     
     NotesCell *(^createNotesCell)() = ^NotesCell *(){
         NotesCell *cell = [tableView dequeueReusableCellWithIdentifier:@"notesCell" forIndexPath:indexPath];
@@ -249,8 +309,6 @@
     };
     
     if (indexPath.section == 0) {
-        return createSpeakerCell();
-    } else if (indexPath.section == 1) {
         self.notesCell = createNotesCell();
         return self.notesCell;
     } else {
@@ -263,8 +321,6 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     // Return the appropriate title
     if (section == 0) {
-        return NSLocalizedString(@"Speaker", nil);
-    } else if (section == 1) {
         return NSLocalizedString(@"Notes", nil);
     } else {
         return NSLocalizedString(@"Photos", nil);
@@ -273,15 +329,22 @@
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 1) {
-        if ([self willTextViewBeFirstResponder]) {
-            return CGRectGetHeight(tableView.frame) - 1.0 * tableView.sectionHeaderHeight - 352.0;
-        }
-        return CGRectGetHeight(tableView.frame) - 3.0 * tableView.sectionHeaderHeight - tableView.rowHeight - 144.0;
-    } else if (indexPath.section == 2) {
-        return 144.0;
+    
+    if (indexPath.section == 0) {
+        
+        CGFloat height = 0;
+        
+        if ([self isTextViewFirstResponder])
+            height = self.notesCellHeight;
+        else
+            height = CGRectGetHeight(tableView.frame) - 2.0 * tableView.sectionHeaderHeight - tableView.rowHeight;
+        
+        return height;
+        
     }
+    
     return tableView.rowHeight;
+    
 }
 
 #pragma mark - UITextViewDelegate
@@ -291,37 +354,24 @@
         return NO;
     }
     
-    // Update notes cell
-    self.textViewWillBeFirstResponder = YES;
-    
-    [self.tableView beginUpdates];
-    [self.tableView endUpdates];
-    
     return YES;
     
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     
-    // Remove edit item
-    [self.navigationItem setRightBarButtonItem:nil animated:YES];
-    
-    // Scroll table view
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]
-                          atScrollPosition:UITableViewScrollPositionTop
-                                  animated:YES];
+    // Remove/Replace edit item
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        [self.navigationItem setRightBarButtonItem:nil animated:YES];
+    } else { // if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+        [self.navigationItem setRightBarButtonItem:self.hideKeyboardButton animated:YES];
+    }
     
 }
 - (void)textViewDidEndEditing:(UITextView *)textView {
     
     // Save note
     [self saveNoteIfValid];
-    
-    // Update notes cell
-    self.textViewWillBeFirstResponder = NO;
-    
-    [self.tableView beginUpdates];
-    [self.tableView endUpdates];
     
     // Place the edit button back
     [self.navigationItem setRightBarButtonItem:self.editButton animated:YES];

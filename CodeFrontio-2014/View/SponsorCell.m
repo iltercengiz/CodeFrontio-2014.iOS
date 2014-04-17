@@ -18,16 +18,31 @@
 
 @implementation SponsorCell
 
+#pragma mark - NSObject UIKit Additions
+- (void)awakeFromNib {
+    
+    // Set background color
+    self.backgroundColor = [UIColor clearColor];
+    
+}
+
 #pragma mark - Configurator
 - (void)configureCellForSponsor:(Sponsor *)sponsor {
     
     // Set image
-    NSString *imageURLString = sponsor.imageURL;
+    NSString *imageURLString = [@"http://codefront.io/public/images/sponsors" stringByAppendingString:sponsor.imageURL];
     UIImage *image = (UIImage *)[[TMDiskCache sharedCache] objectForKey:imageURLString];
     
     if (image) {
+        
         self.sponsorImage.image = image;
+        
+        if (CGRectGetWidth(self.sponsorImage.bounds) < image.size.width || CGRectGetHeight(self.sponsorImage.bounds) < image.size.height) {
+            self.sponsorImage.contentMode = UIViewContentModeScaleAspectFit;
+        }
+        
     } else {
+        
         __weak typeof(self.imageView) weakImageView = self.sponsorImage;
         __weak typeof(imageURLString) weakImageURLString = imageURLString;
         
@@ -37,36 +52,25 @@
         [self.sponsorImage setImageWithURLRequest:request
                                  placeholderImage:[UIImage imageNamed:@"Placeholder"]
                                           success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                              
                                               if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 1) {
                                                   image = [image initWithCGImage:image.CGImage scale:2.0 orientation:UIImageOrientationUp];
                                               }
+                                              
                                               weakImageView.image = image;
+                                              
+                                              if (CGRectGetWidth(weakImageView.bounds) < image.size.width || CGRectGetHeight(weakImageView.bounds) < image.size.height) {
+                                                  weakImageView.contentMode = UIViewContentModeScaleAspectFit;
+                                              }
+                                              
+                                              // Cache the downloaded image
                                               [[TMDiskCache sharedCache] setObject:image forKey:weakImageURLString];
+                                              
                                           } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
                                               // NSLog(@"Error getting image: %@", error.description);
                                           }];
+        
     }
-    
-}
-
-#pragma mark - UIView
-- (void)drawRect:(CGRect)rect {
-    
-    self.backgroundColor = [UIColor clearColor];
-    
-    UIBezierPath *bezierPath = [UIBezierPath bezierPath];
-    
-    // Upper line
-    [bezierPath moveToPoint:(CGPoint){0.0, 0.0}];
-    [bezierPath addLineToPoint:(CGPoint){CGRectGetWidth(self.frame), 0.0}];
-    
-    // Lower line
-    [bezierPath moveToPoint:(CGPoint){0.0, CGRectGetHeight(self.frame)}];
-    [bezierPath addLineToPoint:(CGPoint){CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)}];
-    
-    [[UIColor lightGrayColor] setStroke];
-    [bezierPath setLineWidth:0.5];
-    [bezierPath stroke];
     
 }
 

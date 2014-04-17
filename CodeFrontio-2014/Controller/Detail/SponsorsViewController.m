@@ -11,6 +11,7 @@
 
 #pragma mark Categories
 #import "NSDictionary+SortedKeys.h"
+#import "UIColor+Palette.h"
 
 #pragma mark Model
 #import "Sponsor.h"
@@ -32,7 +33,15 @@
 
 #pragma mark - UIViewController
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
+    
+    self.title = NSLocalizedString(@"Sponsors", nil);
+    
+    // Set separator stuff
+    self.tableView.separatorInset = UIEdgeInsetsZero;
+    self.tableView.separatorColor = [UIColor P_lightBlueColor];
+    
 }
 - (void)viewWillAppear:(BOOL)animated {
     
@@ -141,11 +150,11 @@
     
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(tableView.frame), tableView.sectionHeaderHeight)];
     
-    titleLabel.backgroundColor = [UIColor colorWithRed:0.153 green:0.153 blue:0.157 alpha:1];
-    titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0];
+    titleLabel.backgroundColor = [UIColor P_lightGrayColor];
+    titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
     titleLabel.text = sponsor.type;
     titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.textColor = [UIColor colorWithRed:0.925 green:0.925 blue:0.925 alpha:1];
+    titleLabel.textColor = [UIColor P_blueColor];
     
     return titleLabel;
     

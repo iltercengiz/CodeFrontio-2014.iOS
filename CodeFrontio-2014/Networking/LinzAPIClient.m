@@ -7,8 +7,7 @@
 //
 
 #import "LinzAPIClient.h"
-
-static NSString * const LinzAPIBaseURLString = @"http://json2014.kod.io/";
+#import "Constants.h"
 
 @implementation LinzAPIClient
 
