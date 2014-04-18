@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="3vV-au-toj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="3vV-au-toj">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -80,26 +80,38 @@
                                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="256" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="imS-xh-itr">
                                             <rect key="frame" x="0.0" y="0.0" width="280" height="360"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                             <connections>
                                                 <outlet property="dataSource" destination="eBp-zO-DTb" id="TFD-NS-yW2"/>
                                                 <outlet property="delegate" destination="eBp-zO-DTb" id="8Qd-Ak-W8w"/>
                                             </connections>
                                         </tableView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="okM-oG-rei" userLabel="Track Label">
+                                            <rect key="frame" x="98" y="10" width="84" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="60b-zj-Ukm"/>
+                                                <constraint firstAttribute="width" constant="84" id="O85-3w-xuw"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="okM-oG-rei" firstAttribute="top" secondItem="eBp-zO-DTb" secondAttribute="top" constant="10" id="1sy-FA-4Ce"/>
                                     <constraint firstAttribute="bottom" secondItem="imS-xh-itr" secondAttribute="bottom" id="5e9-AC-0Pu"/>
                                     <constraint firstAttribute="trailing" secondItem="imS-xh-itr" secondAttribute="trailing" id="Ra6-kM-hOp"/>
                                     <constraint firstItem="imS-xh-itr" firstAttribute="top" secondItem="eBp-zO-DTb" secondAttribute="top" id="qGB-Vk-G9G"/>
                                     <constraint firstItem="imS-xh-itr" firstAttribute="leading" secondItem="eBp-zO-DTb" secondAttribute="leading" id="tvx-DE-huY"/>
+                                    <constraint firstAttribute="centerX" secondItem="okM-oG-rei" secondAttribute="centerX" id="uaj-9B-Bgw"/>
                                 </constraints>
                                 <size key="customSize" width="280" height="360"/>
                                 <connections>
                                     <outlet property="tableView" destination="imS-xh-itr" id="brd-6W-QOy"/>
+                                    <outlet property="trackLabel" destination="okM-oG-rei" id="2EY-fN-uOL"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -162,15 +174,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="18" minimumInteritemSpacing="18" id="4Ca-6b-SXu">
+                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="12" minimumInteritemSpacing="12" id="4Ca-6b-SXu">
                                                 <size key="itemSize" width="84" height="84"/>
                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                <inset key="sectionInset" minX="18" minY="18" maxX="64" maxY="18"/>
+                                                <inset key="sectionInset" minX="12" minY="12" maxX="64" maxY="12"/>
                                             </collectionViewFlowLayout>
                                             <cells>
                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="photoCell" id="7T9-XS-w3N" customClass="PhotoCell">
-                                                    <rect key="frame" x="18" y="12" width="84" height="84"/>
+                                                    <rect key="frame" x="12" y="12" width="84" height="84"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                         <rect key="frame" x="0.0" y="0.0" width="84" height="84"/>
@@ -188,7 +200,7 @@
                                                     </connections>
                                                 </collectionViewCell>
                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="addPhotoCell" id="Rpb-dh-LGN">
-                                                    <rect key="frame" x="120" y="12" width="84" height="84"/>
+                                                    <rect key="frame" x="108" y="12" width="84" height="84"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                         <rect key="frame" x="0.0" y="0.0" width="84" height="84"/>
@@ -548,6 +560,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Zzj-LP-hBW"/>
+        <segue reference="8UN-GS-VDE"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -65,6 +65,13 @@
     
     self.placeholderImage.image = [UIImage imageNamed:@"Speaker-placeholder"];
     
+//    CATransition *transition = [CATransition animation];
+//    transition.duration = 3.0f;
+//    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+//    transition.type = kCATransitionFade;
+//    
+//    [self.placeholderImage.layer addAnimation:transition forKey:nil];
+    
     self.detailTextLabel.text = nil;
     
     self.favouriteButton.selected = NO;
@@ -88,19 +95,32 @@
     __weak UIImageView *weakImageView = self.placeholderImage;
     __weak NSString *weakString = self.speaker.avatar;
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+    void (^setImage)(UIImageView *imageView, UIImage *image) = ^(UIImageView *imageView, UIImage *image) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [UIView transitionWithView:imageView
+                              duration:0.5
+                               options:UIViewAnimationOptionTransitionCrossDissolve
+                            animations:^{
+                                imageView.image = image;
+                            } completion:^(BOOL finished) {
+                                
+                            }];
+        });
+    };
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         [[TMCache sharedCache] objectForKey:weakString
                                       block:^(TMCache *cache, NSString *key, id object) {
                                           UIImage *image = object;
                                           if (image)
-                                              dispatch_async(dispatch_get_main_queue(), ^{ weakImageView.image = image; });
+                                              setImage(weakImageView, image);
                                           else {
                                               NSURL *imageURL = [NSURL URLWithString:weakString];
                                               NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
                                               [weakImageView setImageWithURLRequest:request
                                                                    placeholderImage:nil
                                                                             success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                                                                dispatch_async(dispatch_get_main_queue(), ^{ weakImageView.image = image; });
+                                                                                setImage(weakImageView, image);
                                                                                 [cache setObject:image forKey:weakString];
                                                                             } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {}];
                                           }

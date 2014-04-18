@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="PDc-zx-dHe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="PDc-zx-dHe">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -92,19 +92,33 @@
                                                 <outlet property="delegate" destination="gef-F3-TdR" id="Q4m-CE-R1N"/>
                                             </connections>
                                         </tableView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cns-dI-7VW" userLabel="Track Label">
+                                            <rect key="frame" x="118" y="10" width="84" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="84" id="H23-qc-xSf"/>
+                                                <constraint firstAttribute="height" constant="20" id="jXX-WG-Vti"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="zdY-Id-h4b" secondAttribute="trailing" id="4aC-G7-rQV"/>
+                                    <constraint firstAttribute="centerX" secondItem="Cns-dI-7VW" secondAttribute="centerX" id="X4T-qO-Pyr"/>
                                     <constraint firstItem="zdY-Id-h4b" firstAttribute="top" secondItem="gef-F3-TdR" secondAttribute="top" id="Xbj-2r-Brg"/>
                                     <constraint firstItem="zdY-Id-h4b" firstAttribute="leading" secondItem="gef-F3-TdR" secondAttribute="leading" id="ZXJ-0X-EpK"/>
+                                    <constraint firstItem="Cns-dI-7VW" firstAttribute="top" secondItem="gef-F3-TdR" secondAttribute="top" constant="10" id="cBT-Uh-Li6"/>
                                     <constraint firstAttribute="bottom" secondItem="zdY-Id-h4b" secondAttribute="bottom" id="mJl-sK-9nf"/>
                                 </constraints>
                                 <size key="customSize" width="320" height="360"/>
                                 <connections>
                                     <outlet property="tableView" destination="zdY-Id-h4b" id="F4Z-fn-sKd"/>
+                                    <outlet property="trackLabel" destination="Cns-dI-7VW" id="muY-Ue-J0N"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>

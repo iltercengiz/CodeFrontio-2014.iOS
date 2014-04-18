@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 Ilter Cengiz. All rights reserved.
 //
 
+#pragma mark Categories
+#import "UIColor+Palette.h"
+
 #pragma mark Model
 #import "Session.h"
 #import "Speaker.h"
@@ -37,6 +40,14 @@
     
     [super awakeFromNib];
     
+    self.backgroundColor = [UIColor clearColor];
+    
+    self.trackLabel.backgroundColor = [UIColor whiteColor];
+    self.trackLabel.textColor = [UIColor P_blueColor];
+    self.trackLabel.layer.cornerRadius = 8.0;
+    
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.contentInset = UIEdgeInsetsMake(30.0, 0.0, 0.0, 0.0);
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(self.tableView.frame), 10.0)];
     self.tableView.scrollsToTop = NO;
     
@@ -58,6 +69,9 @@
 - (void)configureCellForSessions:(NSArray *)sessions {
     
     self.sessions = sessions;
+    
+    Session *session = [sessions firstObject];
+    self.trackLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Track %@", nil), session.track];
     
     [self.tableView reloadData];
     
