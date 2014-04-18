@@ -10,6 +10,7 @@
 
 @interface TrackCell : UICollectionViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *trackLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 - (void)configureCellForSessions:(NSArray *)sessions;
