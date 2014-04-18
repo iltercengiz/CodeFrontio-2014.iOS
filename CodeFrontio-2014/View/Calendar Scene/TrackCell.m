@@ -45,6 +45,8 @@
     self.trackLabel.backgroundColor = [UIColor whiteColor];
     self.trackLabel.textColor = [UIColor P_blueColor];
     self.trackLabel.layer.cornerRadius = 8.0;
+    self.trackLabel.layer.borderColor = [UIColor P_lightBlueColor].CGColor;
+    self.trackLabel.layer.borderWidth = 1.0;
     
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.contentInset = UIEdgeInsetsMake(30.0, 0.0, 0.0, 0.0);
