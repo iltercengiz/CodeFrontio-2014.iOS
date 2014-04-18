@@ -75,6 +75,7 @@
                               duration:0.5
                                options:UIViewAnimationOptionTransitionCrossDissolve
                             animations:^{
+                                [scrollView removeTwitterCoverView];
                                 [scrollView addTwitterCoverWithImage:image];
                             } completion:^(BOOL finished) {
                                 
