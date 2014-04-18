@@ -41,34 +41,11 @@
                                                                                               action:@selector(dismiss:)];
     }
     
-    UIScrollView *scrollView = self.tableView;
-    
-    [scrollView addTwitterCoverWithImage:[UIImage imageNamed:@"Speaker-placeholder"]];
-    
-    __weak NSString *weakString = self.speaker.avatar;
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        [[TMCache sharedCache] objectForKey:weakString
-                                      block:^(TMCache *cache, NSString *key, id object) {
-                                          UIImage *image = object;
-                                          if (image)
-                                              dispatch_async(dispatch_get_main_queue(), ^{ [scrollView addTwitterCoverWithImage:image]; });
-                                          else {
-                                              NSURL *imageURL = [NSURL URLWithString:weakString];
-                                              NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
-                                              AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-                                              requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
-                                              [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                                  UIImage *image = responseObject;
-                                                  [scrollView addTwitterCoverWithImage:image];
-                                                  [cache setObject:image forKey:weakString];
-                                              } failure:nil];
-                                              [requestOperation start];
-                                          }
-                                      }];
-    });
-    
+    // Table view header as profile image
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(self.tableView.frame), CHTwitterCoverViewHeight)];
+    
+    UIScrollView *scrollView = self.tableView;
+    [scrollView addTwitterCoverWithImage:[UIImage imageNamed:@"Speaker-placeholder"]];
     
     // Get profile details
     if (self.speaker.twitter)
@@ -86,6 +63,47 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    
+    __weak UIScrollView *scrollView = self.tableView;
+    
+    __weak NSString *weakString = self.speaker.avatar;
+    
+    void (^setImage)(UIScrollView *scrollView, UIImage *image) = ^(UIScrollView *scrollView, UIImage *image) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [UIView transitionWithView:scrollView
+                              duration:0.5
+                               options:UIViewAnimationOptionTransitionCrossDissolve
+                            animations:^{
+                                [scrollView addTwitterCoverWithImage:image];
+                            } completion:^(BOOL finished) {
+                                
+                            }];
+        });
+    };
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [[TMCache sharedCache] objectForKey:weakString
+                                      block:^(TMCache *cache, NSString *key, id object) {
+                                          UIImage *image = object;
+                                          if (image)
+                                              setImage(scrollView, image);
+                                          else {
+                                              NSURL *imageURL = [NSURL URLWithString:weakString];
+                                              NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
+                                              AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+                                              requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
+                                              [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                                  UIImage *image = responseObject;
+                                                  setImage(scrollView, image);
+                                                  [cache setObject:image forKey:weakString];
+                                              } failure:nil];
+                                              [requestOperation start];
+                                          }
+                                      }];
+    });
+    
+}
 - (void)viewDidDisappear:(BOOL)animated {
     
     [super viewDidDisappear:animated];
