@@ -21,14 +21,6 @@
 
 @implementation SponsorCell
 
-#pragma mark - NSObject UIKit Additions
-- (void)awakeFromNib {
-    
-    // Set background color
-    self.backgroundColor = [UIColor clearColor];
-    
-}
-
 #pragma mark - UITableViewCell
 - (void)prepareForReuse {
     
@@ -83,24 +75,6 @@
                                           }];
         
     }
-    
-}
-
-#pragma mark - UIView
-- (void)drawRect:(CGRect)rect {
-    
-    UIBezierPath *path = [UIBezierPath bezierPath];
-    
-    [path moveToPoint:(CGPoint){.x = CGRectGetMinX(rect), .y = CGRectGetMinY(rect)}];
-    [path addLineToPoint:(CGPoint){.x = CGRectGetMaxX(rect), .y = CGRectGetMinY(rect)}];
-    
-    [path moveToPoint:(CGPoint){.x = CGRectGetMinX(rect), .y = CGRectGetMaxY(rect)}];
-    [path addLineToPoint:(CGPoint){.x = CGRectGetMaxX(rect), .y = CGRectGetMaxY(rect)}];
-    
-    [path setLineWidth:0.5];
-    
-    [[UIColor P_blueColor] setStroke];
-    [path stroke];
     
 }
 

@@ -38,6 +38,9 @@
     
     self.title = NSLocalizedString(@"Sponsors", nil);
     
+    // Table view stuff
+    self.tableView.separatorColor = [UIColor P_blueColor];
+    
 }
 - (void)viewWillAppear:(BOOL)animated {
     

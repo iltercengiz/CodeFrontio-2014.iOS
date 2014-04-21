@@ -40,6 +40,9 @@
     
     self.title = NSLocalizedString(@"Favourites", nil);
     
+    // Remove title from back button
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
 }
 
 - (void)didReceiveMemoryWarning {

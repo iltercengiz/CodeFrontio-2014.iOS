@@ -87,17 +87,30 @@
         // Instantiate view controller
         UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:identifier];
         scene = [[UINavigationController alloc] initWithRootViewController:vc];
-        // Add side menu button
-        vc.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Side-menu"]
-                                                                               style:UIBarButtonItemStyleBordered
-                                                                              target:self
-                                                                              action:@selector(toggleSideMenu:)];
+        // Add side menu button or dismiss button
+        if (type != ContentTypeCalendar && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            vc.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Dismiss", nil)
+                                                                                   style:UIBarButtonItemStyleBordered
+                                                                                  target:self
+                                                                                  action:@selector(dismiss:)];
+        } else { // if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+            vc.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Side-menu"]
+                                                                                   style:UIBarButtonItemStyleBordered
+                                                                                  target:self
+                                                                                  action:@selector(toggleSideMenu:)];
+        }
         // Add the scene to the cache
         self.scenes[identifier] = scene;
     }
     
     // Present the scene
-    [self.baseViewController setPaneViewController:scene animated:animated completion:nil];
+    
+    if (type != ContentTypeCalendar && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        scene.modalPresentationStyle = UIModalPresentationFormSheet;
+        [self presentViewController:scene animated:YES completion:nil];
+    } else { // if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+        [self.baseViewController setPaneViewController:scene animated:animated completion:nil];
+    }
     
 }
 
@@ -105,6 +118,10 @@
 - (IBAction)toggleSideMenu:(id)sender {
     MSDynamicsDrawerPaneState state = self.baseViewController.paneState == MSDynamicsDrawerPaneStateClosed ? MSDynamicsDrawerPaneStateOpen : MSDynamicsDrawerPaneStateClosed;
     [self.baseViewController setPaneState:state animated:YES allowUserInterruption:YES completion:nil];
+}
+- (IBAction)dismiss:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
 }
 
 #pragma mark - UITableViewDataSource
