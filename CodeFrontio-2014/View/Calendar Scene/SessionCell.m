@@ -69,13 +69,6 @@
     
     self.placeholderImage.image = [UIImage imageNamed:@"Speaker-placeholder"];
     
-//    CATransition *transition = [CATransition animation];
-//    transition.duration = 3.0f;
-//    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-//    transition.type = kCATransitionFade;
-//    
-//    [self.placeholderImage.layer addAnimation:transition forKey:nil];
-    
     self.detailTextLabel.text = nil;
     
     self.favouriteButton.selected = NO;
