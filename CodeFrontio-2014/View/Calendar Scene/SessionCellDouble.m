@@ -9,6 +9,9 @@
 #pragma mark Categories
 #import "UIColor+Palette.h"
 
+#pragma mark Helpers
+#import "DateFormatter.h"
+
 #pragma mark Model
 #import "Session.h"
 #import "Speaker.h"
@@ -96,9 +99,7 @@
     
     // Set time
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:[self.session.timeInterval doubleValue]];
-    NSDateFormatter *formatter = [NSDateFormatter new];
-    formatter.timeStyle = NSDateFormatterShortStyle;
-    self.timeLabel.text = [formatter stringFromDate:date];
+    self.timeLabel.text = [[DateFormatter sharedFormatter] stringFromDate:date];
     
     // Set image
     __weak UIImageView *weakImageView;

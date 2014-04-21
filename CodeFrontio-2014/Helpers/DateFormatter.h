@@ -10,4 +10,8 @@
 
 @interface DateFormatter : NSObject
 
++ (instancetype)sharedFormatter;
+
+- (NSString *)stringFromDate:(NSDate *)date;
+
 @end
