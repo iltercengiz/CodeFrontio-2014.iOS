@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 Ilter Cengiz. All rights reserved.
 //
 
+#pragma mark Categories
+#import "UIColor+Palette.h"
+
 #pragma mark Model
 #import "Sponsor.h"
 
@@ -71,6 +74,24 @@
                                           }];
         
     }
+    
+}
+
+#pragma mark - UIView
+- (void)drawRect:(CGRect)rect {
+    
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    
+    [path moveToPoint:(CGPoint){.x = CGRectGetMinX(rect), .y = CGRectGetMinY(rect)}];
+    [path addLineToPoint:(CGPoint){.x = CGRectGetMaxX(rect), .y = CGRectGetMinY(rect)}];
+    
+    [path moveToPoint:(CGPoint){.x = CGRectGetMinX(rect), .y = CGRectGetMaxY(rect)}];
+    [path addLineToPoint:(CGPoint){.x = CGRectGetMaxX(rect), .y = CGRectGetMaxY(rect)}];
+    
+    [path setLineWidth:0.5];
+    
+    [[UIColor P_blueColor] setStroke];
+    [path stroke];
     
 }
 
