@@ -65,6 +65,8 @@
         case ContentTypeNotes: return NSLocalizedString(@"Notes", nil); break;
         case ContentTypeNews: return NSLocalizedString(@"News", nil);
         case ContentTypeSponsors: return NSLocalizedString(@"Sponsors", nil); break;
+        case ContentTypeTicket: return NSLocalizedString(@"Buy a Ticket", nil); break;
+        case ContentTypeTwitter: return NSLocalizedString(@"@codefrontio", nil); break;
         default: break;
     }
     return nil;
@@ -76,6 +78,8 @@
         case ContentTypeNotes: return [UIImage imageNamed:@"Notes"]; break;
         case ContentTypeNews: return [UIImage imageNamed:@"Bullhorn"]; break;
         case ContentTypeSponsors: return [UIImage imageNamed:@"Sponsors"]; break;
+        case ContentTypeTicket: return [UIImage imageNamed:@"Ticket"]; break;
+        case ContentTypeTwitter: return [UIImage imageNamed:@"Twitter-sidemenu"]; break;
         default: break;
     }
     return nil;
@@ -87,6 +91,9 @@
         case ContentTypeNotes: return [UIImage imageNamed:@"Notes-selected"]; break;
         case ContentTypeNews: return [UIImage imageNamed:@"Bullhorn-selected"]; break;
         case ContentTypeSponsors: return [UIImage imageNamed:@"Sponsors-selected"]; break;
+        case ContentTypeTicket:
+        case ContentTypeTwitter:
+            return nil; break;
         default: break;
     }
     return nil;

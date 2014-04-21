@@ -33,7 +33,7 @@
 #pragma mark Pods
 #import <SVProgressHUD/SVProgressHUD.h>
 
-@interface CalendarViewController () <UIScrollViewDelegate>
+@interface CalendarViewController () <TrackCellDelegate, UIScrollViewDelegate>
 
 @property (nonatomic) NSArray *speakers;
 @property (nonatomic) NSDictionary *sessionsTracked;
@@ -42,6 +42,7 @@
 @property (nonatomic, assign, getter = isPageControlUsed) BOOL pageControlUsed;
 
 @property (nonatomic) NSMutableDictionary *trackTableViews;
+@property (nonatomic) NSMutableDictionary *trackTableViewOffsets;
 
 @end
 
@@ -112,7 +113,6 @@
     
     // If setup is already done, reload and return
     if (self.speakers && self.sessionsTracked) {
-        [self.collectionView reloadData];
         return;
     }
     
@@ -220,6 +220,12 @@
     }
     return _trackTableViews;
 }
+- (NSMutableDictionary *)trackTableViewOffsets {
+    if (!_trackTableViewOffsets) {
+        _trackTableViewOffsets = [NSMutableDictionary dictionary];
+    }
+    return _trackTableViewOffsets;
+}
 
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -230,14 +236,27 @@
     
     TrackCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"trackCell" forIndexPath:indexPath];
     
-    [cell configureCellForSessions:self.sessionsTracked[@(indexPath.item + 1)]];
-    
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        
+        [cell configureCellForSessions:self.sessionsTracked[@(indexPath.item + 1)] offset:nil];
+        
+    } else { // if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+        
+        cell.trackCellDelegate = self;
         
         [self.trackTableViews setObject:cell.tableView forKey:@(indexPath.item)];
         
         if (indexPath.item == self.pageControl.currentPage)
             [self enableScrollToTopForTrack:self.pageControl.currentPage];
+        
+        NSValue *offset = self.trackTableViewOffsets[@(indexPath.item + 1)];
+        if (!offset) {
+            // Set initial offset to prevent any re-used table view from scrolling
+            offset = [NSValue valueWithCGPoint:CGPointMake(0.0, -30.0)]; // tableViewContentOffset = -30.0
+            self.trackTableViewOffsets[@(indexPath.item + 1)] = offset;
+        }
+        
+        [cell configureCellForSessions:self.sessionsTracked[@(indexPath.item + 1)] offset:offset];
         
     }
     
@@ -324,6 +343,11 @@
     // Set the boolean used when scrolls originate from the UIPageControl. See scrollViewDidScroll: above.
     self.pageControlUsed = YES;
     
+}
+
+#pragma mark - TrackCellDelegate
+- (void)trackTableView:(NSNumber *)trackNumber didScroll:(CGPoint)offset {
+    self.trackTableViewOffsets[trackNumber] = [NSValue valueWithCGPoint:offset];
 }
 
 @end

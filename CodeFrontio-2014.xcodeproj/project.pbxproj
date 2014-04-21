@@ -27,7 +27,6 @@
 		7C34A64318B2268A00EC31DA /* Sponsor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34A64218B2268A00EC31DA /* Sponsor.m */; };
 		7C34A64B18B2379D00EC31DA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C34A64A18B2379D00EC31DA /* CoreData.framework */; };
 		7C34A65118B26AD800EC31DA /* NSDictionary+SortedKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34A65018B26AD800EC31DA /* NSDictionary+SortedKeys.m */; };
-		7C355C8318B6727000BB72B0 /* VenueImages.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7C355C8218B6727000BB72B0 /* VenueImages.bundle */; };
 		7C3840FB18AC0B0300A85C31 /* SponsorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3840FA18AC0B0300A85C31 /* SponsorCell.m */; };
 		7C3840FE18AC0B4900A85C31 /* SponsorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3840FD18AC0B4900A85C31 /* SponsorsViewController.m */; };
 		7C3B748118FC146000689B4F /* Speaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B748018FC146000689B4F /* Speaker.m */; };
@@ -44,6 +43,7 @@
 		7C4D966618FD1D7C00D2829B /* ActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4D966418FD1D7C00D2829B /* ActivityCell.xib */; };
 		7C4D966A18FD26FB00D2829B /* SessionCellDouble.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4D966818FD26FB00D2829B /* SessionCellDouble.m */; };
 		7C4D966B18FD26FB00D2829B /* SessionCellDouble.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4D966918FD26FB00D2829B /* SessionCellDouble.xib */; };
+		7C55A38A19052D4E000CAF38 /* DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C55A38919052D4E000CAF38 /* DateFormatter.m */; };
 		7C83BB4A18AAD12A003D3557 /* SessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C83BB4918AAD12A003D3557 /* SessionViewController.m */; };
 		7C83BB5118AAD7BE003D3557 /* NotesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C83BB5018AAD7BE003D3557 /* NotesCell.m */; };
 		7C83BB5418AAD7C7003D3557 /* PhotosCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C83BB5318AAD7C7003D3557 /* PhotosCell.m */; };
@@ -105,7 +105,6 @@
 		7C34A64A18B2379D00EC31DA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		7C34A64F18B26AD800EC31DA /* NSDictionary+SortedKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+SortedKeys.h"; sourceTree = "<group>"; };
 		7C34A65018B26AD800EC31DA /* NSDictionary+SortedKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+SortedKeys.m"; sourceTree = "<group>"; };
-		7C355C8218B6727000BB72B0 /* VenueImages.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = VenueImages.bundle; sourceTree = "<group>"; };
 		7C3840F918AC0B0300A85C31 /* SponsorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SponsorCell.h; sourceTree = "<group>"; };
 		7C3840FA18AC0B0300A85C31 /* SponsorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SponsorCell.m; sourceTree = "<group>"; };
 		7C3840FC18AC0B4900A85C31 /* SponsorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SponsorsViewController.h; sourceTree = "<group>"; };
@@ -135,6 +134,8 @@
 		7C4D966718FD26FB00D2829B /* SessionCellDouble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionCellDouble.h; sourceTree = "<group>"; };
 		7C4D966818FD26FB00D2829B /* SessionCellDouble.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionCellDouble.m; sourceTree = "<group>"; };
 		7C4D966918FD26FB00D2829B /* SessionCellDouble.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionCellDouble.xib; sourceTree = "<group>"; };
+		7C55A38819052D4E000CAF38 /* DateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateFormatter.h; sourceTree = "<group>"; };
+		7C55A38919052D4E000CAF38 /* DateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateFormatter.m; sourceTree = "<group>"; };
 		7C83BB4818AAD12A003D3557 /* SessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionViewController.h; sourceTree = "<group>"; };
 		7C83BB4918AAD12A003D3557 /* SessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionViewController.m; sourceTree = "<group>"; };
 		7C83BB4F18AAD7BE003D3557 /* NotesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesCell.h; sourceTree = "<group>"; };
@@ -233,15 +234,15 @@
 				7CFF7B2818EE9A9800A674F2 /* iPhone.storyboard */,
 				7C3BC56E18B0FBE700CA0FC0 /* CodeFrontio.xcdatamodeld */,
 				7C00885218A8F84B00ED4B31 /* Images.xcassets */,
-				7C355C8218B6727000BB72B0 /* VenueImages.bundle */,
+				7CE4FFBF18F52FDF0049AC9E /* Constants.h */,
+				7CCB106C18AE5B58007A2486 /* Categories */,
+				7C55A38719052D3D000CAF38 /* Helpers */,
 				7C3BC59318B10C8F00CA0FC0 /* Manager */,
+				7CCB106618AE1D04007A2486 /* Networking */,
 				7C3BC56D18B0FAF300CA0FC0 /* Model */,
 				7C3BC58318B100F700CA0FC0 /* Model+Categories */,
-				7CCB106C18AE5B58007A2486 /* Categories */,
-				7CCB106618AE1D04007A2486 /* Networking */,
 				7CACCFDA18A906EB00D66A15 /* View */,
 				7C422F9918A8FE4A00195D6C /* Controller */,
-				7CE4FFBF18F52FDF0049AC9E /* Constants.h */,
 				7C00883E18A8F84B00ED4B31 /* Supporting Files */,
 			);
 			path = "CodeFrontio-2014";
@@ -337,6 +338,15 @@
 				7C422F9C18A8FE5F00195D6C /* MasterViewController.m */,
 			);
 			path = Master;
+			sourceTree = "<group>";
+		};
+		7C55A38719052D3D000CAF38 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				7C55A38819052D4E000CAF38 /* DateFormatter.h */,
+				7C55A38919052D4E000CAF38 /* DateFormatter.m */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		7C83BB4B18AAD795003D3557 /* Session Detail */ = {
@@ -517,7 +527,6 @@
 				7CBD1FBA18F42873002154BC /* SideMenuHeader_iPad.xib in Resources */,
 				7C00884218A8F84B00ED4B31 /* InfoPlist.strings in Resources */,
 				7C4D966618FD1D7C00D2829B /* ActivityCell.xib in Resources */,
-				7C355C8318B6727000BB72B0 /* VenueImages.bundle in Resources */,
 				7CBD1FB318F3EE1B002154BC /* SessionCell.xib in Resources */,
 				7CFF7B2918EE9A9800A674F2 /* iPhone.storyboard in Resources */,
 			);
@@ -579,6 +588,7 @@
 				7CCB106F18AE5BAA007A2486 /* UIImage+FromUIColor.m in Sources */,
 				7C3B748118FC146000689B4F /* Speaker.m in Sources */,
 				7C83BB5718AADD40003D3557 /* PhotoCell.m in Sources */,
+				7C55A38A19052D4E000CAF38 /* DateFormatter.m in Sources */,
 				7C213DCC18B34F2B00F96B01 /* Note.m in Sources */,
 				7CACCFDD18A906F900D66A15 /* MenuCell.m in Sources */,
 				7CACCFE518A90CB200D66A15 /* CalendarViewController.m in Sources */,

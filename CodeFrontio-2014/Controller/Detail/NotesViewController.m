@@ -45,6 +45,9 @@
     
     self.title = NSLocalizedString(@"Notes", nil);
     
+    // Remove title from back button
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
     // Set toolbar items
     self.selectAllButton = [[UIBarButtonItem alloc] initWithTitle:@"Select All"
                                                             style:UIBarButtonItemStylePlain

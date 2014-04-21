@@ -38,9 +38,8 @@
     
     self.title = NSLocalizedString(@"Sponsors", nil);
     
-    // Set separator stuff
-    self.tableView.separatorInset = UIEdgeInsetsZero;
-    self.tableView.separatorColor = [UIColor P_lightBlueColor];
+    // Table view stuff
+    self.tableView.separatorColor = [UIColor P_blueColor];
     
 }
 - (void)viewWillAppear:(BOOL)animated {
@@ -151,7 +150,7 @@
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(tableView.frame), tableView.sectionHeaderHeight)];
     
     titleLabel.backgroundColor = [UIColor P_lightGrayColor];
-    titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
+    titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0];
     titleLabel.text = sponsor.type;
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.textColor = [UIColor P_blueColor];

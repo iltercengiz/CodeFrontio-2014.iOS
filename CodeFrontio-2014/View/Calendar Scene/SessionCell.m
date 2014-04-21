@@ -9,6 +9,9 @@
 #pragma mark Categories
 #import "UIColor+Palette.h"
 
+#pragma mark Helpers
+#import "DateFormatter.h"
+
 #pragma mark Model
 #import "Session.h"
 #import "Speaker.h"
@@ -51,10 +54,14 @@
     self.takeNoteButton.layer.cornerRadius = 4.0;
     self.favouriteButton.layer.cornerRadius = 4.0;
     
-    UITapGestureRecognizer *taptaptap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSpeakerDetails:)];
-    UITapGestureRecognizer *taptap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSpeakerDetails:)];
-    [self.placeholderImage addGestureRecognizer:taptaptap];
-    [self.speakerNameLabel addGestureRecognizer:taptap];
+    self.takeNoteButton.imageEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 12.0);
+    self.favouriteButton.imageEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 12.0);
+    
+    self.takeNoteButton.titleEdgeInsets = UIEdgeInsetsMake(1.0, 0.0, 0.0, 0.0);
+    self.favouriteButton.titleEdgeInsets = UIEdgeInsetsMake(1.0, 0.0, 0.0, 0.0);
+    
+    [self.placeholderImage addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSpeakerDetails:)]];
+    [self.speakerNameLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSpeakerDetails:)]];
     
 }
 
@@ -64,13 +71,6 @@
     self.timeLabel.text = nil;
     
     self.placeholderImage.image = [UIImage imageNamed:@"Speaker-placeholder"];
-    
-//    CATransition *transition = [CATransition animation];
-//    transition.duration = 3.0f;
-//    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-//    transition.type = kCATransitionFade;
-//    
-//    [self.placeholderImage.layer addAnimation:transition forKey:nil];
     
     self.detailTextLabel.text = nil;
     
@@ -87,9 +87,7 @@
     
     // Set time
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:[self.session.timeInterval doubleValue]];
-    NSDateFormatter *formatter = [NSDateFormatter new];
-    formatter.timeStyle = NSDateFormatterShortStyle;
-    self.timeLabel.text = [formatter stringFromDate:date];
+    self.timeLabel.text = [[DateFormatter sharedFormatter] stringFromDate:date];
     
     // Set image
     __weak UIImageView *weakImageView = self.placeholderImage;

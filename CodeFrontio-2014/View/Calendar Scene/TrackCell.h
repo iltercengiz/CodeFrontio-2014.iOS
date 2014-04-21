@@ -8,11 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol TrackCellDelegate;
+
 @interface TrackCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *trackLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-- (void)configureCellForSessions:(NSArray *)sessions;
+@property (weak, nonatomic) id<TrackCellDelegate> trackCellDelegate;
+
+- (void)configureCellForSessions:(NSArray *)sessions offset:(NSValue *)offsetValue;
+
+@end
+
+@protocol TrackCellDelegate <NSObject>
+
+- (void)trackTableView:(NSNumber *)trackNumber didScroll:(CGPoint)offset;
 
 @end

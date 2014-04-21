@@ -46,14 +46,11 @@
     [super layoutSubviews];
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        self.imageView.frame = CGRectInset(self.imageView.frame, 8.0, 8.0);
-        self.imageView.frame = CGRectOffset(self.imageView.frame, 28.0, 0.0);
-        self.textLabel.frame = CGRectOffset(self.textLabel.frame, 48.0, -2.0);
-        self.detailTextLabel.frame = CGRectOffset(self.detailTextLabel.frame, 48.0, -2.0);
+        self.textLabel.frame = CGRectOffset(self.textLabel.frame, 24.0, -2.0);
+        self.detailTextLabel.frame = CGRectOffset(self.detailTextLabel.frame, 24.0, -2.0);
     } else { // if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-        self.imageView.frame = CGRectInset(self.imageView.frame, 4.0, 4.0);
-        self.textLabel.frame = CGRectOffset(self.textLabel.frame, -8.0, 0.0);
-        self.detailTextLabel.frame = CGRectOffset(self.detailTextLabel.frame, -8.0, 0.0);
+        self.textLabel.frame = CGRectOffset(self.textLabel.frame, 8.0, 0.0);
+        self.detailTextLabel.frame = CGRectOffset(self.detailTextLabel.frame, 8.0, 0.0);
     }
     
 }
@@ -61,40 +58,23 @@
 #pragma mark - FavouriteCell
 - (void)configureCellForSession:(Session *)session {
     
-    // Speaker
-    Speaker *speaker = [[Speaker MR_findByAttribute:@"identifier" withValue:session.speakerIdentifier] firstObject];
+    NSString *detailText;
     
-    // Set image
-    self.imageView.layer.cornerRadius = 8.0;
-    self.imageView.clipsToBounds = YES;
-    
-    NSString *imageURLString = speaker.avatar;
-    UIImage *image = (UIImage *)[[TMDiskCache sharedCache] objectForKey:imageURLString];
-    
-    if (image) {
-        self.imageView.image = image;
-    } else {
-        __weak typeof(self.imageView) weakImageView = self.imageView;
-        __weak typeof(imageURLString) weakImageURLString = imageURLString;
-        
-        NSURL *imageURL = [NSURL URLWithString:imageURLString];
-        NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
-        
-        [self.imageView setImageWithURLRequest:request
-                              placeholderImage:[UIImage imageNamed:@"image-placeholder"]
-                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                           weakImageView.image = image;
-                                           [[TMDiskCache sharedCache] setObject:image forKey:weakImageURLString];
-                                       } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                           // NSLog(@"Error getting image: %@", error.description);
-                                       }];
+    // Get Speaker(s)'s name(s)
+    if ([session.speakerIdentifier isKindOfClass:[NSNumber class]]) {
+        Speaker *speaker = [[Speaker MR_findByAttribute:@"identifier" withValue:session.speakerIdentifier] firstObject];
+        detailText = speaker.name;
+    } else if ([session.speakerIdentifier isKindOfClass:[NSArray class]]) {
+        Speaker *firstSpeaker = [[Speaker MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"identifier == %@", [session.speakerIdentifier firstObject]]] firstObject];
+        Speaker *secondSpeaker = [[Speaker MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"identifier == %@", [session.speakerIdentifier lastObject]]] firstObject];
+        detailText = [NSString stringWithFormat:@"%@ & %@", firstSpeaker.name, secondSpeaker.name];
     }
     
     // Set title
     self.textLabel.text = session.title;
     
     // Set subtitle
-    self.detailTextLabel.text = speaker.name;
+    self.detailTextLabel.text = detailText;
     
     // Configure swipe stuff
     self.defaultColor = [UIColor lightGrayColor];

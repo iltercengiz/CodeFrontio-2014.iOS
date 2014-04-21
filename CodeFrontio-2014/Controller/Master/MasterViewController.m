@@ -69,6 +69,30 @@
 #pragma mark - Helper
 - (void)presentContentWithType:(ContentType)type animated:(BOOL)animated {
     
+    if (type == ContentTypeTicket) {
+        NSURL *url = [NSURL URLWithString:@"http://codefront.io/#tickets"];
+        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url];
+        }
+        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+        return;
+    } else if (type == ContentTypeTwitter) {
+        NSURL *tweetbotAppURL = [NSURL URLWithString:@"tweetbot://codefrontio/user_profile/codefrontio"];
+        if ([[UIApplication sharedApplication] canOpenURL:tweetbotAppURL]) {
+            [[UIApplication sharedApplication] openURL:tweetbotAppURL];
+        }
+        NSURL *twitterAppURL = [NSURL URLWithString:@"twitter://user?screen_name=codefrontio"];
+        if ([[UIApplication sharedApplication] canOpenURL:twitterAppURL]) {
+            [[UIApplication sharedApplication] openURL:twitterAppURL];
+        }
+        NSURL *url = [NSURL URLWithString:@"http://twitter.com/codefrontio"];
+        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url];
+        }
+        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+        return;
+    }
+    
     // Set identifier
     NSString *identifier;
     switch (type) {
@@ -87,17 +111,30 @@
         // Instantiate view controller
         UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:identifier];
         scene = [[UINavigationController alloc] initWithRootViewController:vc];
-        // Add side menu button
-        vc.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Side-menu"]
-                                                                               style:UIBarButtonItemStyleBordered
-                                                                              target:self
-                                                                              action:@selector(toggleSideMenu:)];
+        // Add side menu button or dismiss button
+        if (type != ContentTypeCalendar && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            vc.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Dismiss", nil)
+                                                                                   style:UIBarButtonItemStyleBordered
+                                                                                  target:self
+                                                                                  action:@selector(dismiss:)];
+        } else { // if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+            vc.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Side-menu"]
+                                                                                   style:UIBarButtonItemStyleBordered
+                                                                                  target:self
+                                                                                  action:@selector(toggleSideMenu:)];
+        }
         // Add the scene to the cache
         self.scenes[identifier] = scene;
     }
     
     // Present the scene
-    [self.baseViewController setPaneViewController:scene animated:animated completion:nil];
+    
+    if (type != ContentTypeCalendar && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        scene.modalPresentationStyle = UIModalPresentationFormSheet;
+        [self presentViewController:scene animated:YES completion:nil];
+    } else { // if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+        [self.baseViewController setPaneViewController:scene animated:animated completion:nil];
+    }
     
 }
 
@@ -106,10 +143,14 @@
     MSDynamicsDrawerPaneState state = self.baseViewController.paneState == MSDynamicsDrawerPaneStateClosed ? MSDynamicsDrawerPaneStateOpen : MSDynamicsDrawerPaneStateClosed;
     [self.baseViewController setPaneState:state animated:YES allowUserInterruption:YES completion:nil];
 }
+- (IBAction)dismiss:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+}
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return 7;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MenuCell *cell = [tableView dequeueReusableCellWithIdentifier:@"menuCell" forIndexPath:indexPath];

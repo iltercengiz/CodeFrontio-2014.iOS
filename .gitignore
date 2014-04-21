@@ -34,3 +34,6 @@ build
 !*.xcworkspace/contents.xcworkspacedata
 
 .idea
+
+### Statics ###
+CHANGES_IN_PODS

@@ -9,6 +9,9 @@
 #pragma mark Categories
 #import "UIColor+Palette.h"
 
+#pragma mark Helpers
+#import "DateFormatter.h"
+
 #pragma mark Model
 #import "Session.h"
 #import "Speaker.h"
@@ -55,7 +58,17 @@
     self.takeNoteButton.layer.cornerRadius = 4.0;
     self.favouriteButton.layer.cornerRadius = 4.0;
     
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector()];
+    self.takeNoteButton.imageEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 12.0);
+    self.favouriteButton.imageEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 12.0);
+    
+    self.takeNoteButton.titleEdgeInsets = UIEdgeInsetsMake(1.0, 0.0, 0.0, 0.0);
+    self.favouriteButton.titleEdgeInsets = UIEdgeInsetsMake(1.0, 0.0, 0.0, 0.0);
+    
+    [self.firstPlaceholderImage addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFirstSpeakerDetails:)]];
+    [self.firstSpeakerNameLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFirstSpeakerDetails:)]];
+    
+    [self.secondPlaceholderImage addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSecondSpeakerDetails:)]];
+    [self.secondSpeakerNameLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSecondSpeakerDetails:)]];
     
 }
 
@@ -86,9 +99,7 @@
     
     // Set time
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:[self.session.timeInterval doubleValue]];
-    NSDateFormatter *formatter = [NSDateFormatter new];
-    formatter.timeStyle = NSDateFormatterShortStyle;
-    self.timeLabel.text = [formatter stringFromDate:date];
+    self.timeLabel.text = [[DateFormatter sharedFormatter] stringFromDate:date];
     
     // Set image
     __weak UIImageView *weakImageView;

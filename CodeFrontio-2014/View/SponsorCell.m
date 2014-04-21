@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 Ilter Cengiz. All rights reserved.
 //
 
+#pragma mark Categories
+#import "UIColor+Palette.h"
+
 #pragma mark Model
 #import "Sponsor.h"
 
@@ -18,11 +21,10 @@
 
 @implementation SponsorCell
 
-#pragma mark - NSObject UIKit Additions
-- (void)awakeFromNib {
+#pragma mark - UITableViewCell
+- (void)prepareForReuse {
     
-    // Set background color
-    self.backgroundColor = [UIColor clearColor];
+    self.sponsorImage.image = [UIImage imageNamed:@"Speaker-placeholder"];
     
 }
 
@@ -37,9 +39,10 @@
         
         self.sponsorImage.image = image;
         
-        if (CGRectGetWidth(self.sponsorImage.bounds) < image.size.width || CGRectGetHeight(self.sponsorImage.bounds) < image.size.height) {
+        if (CGRectGetWidth(self.sponsorImage.bounds) < image.size.width || CGRectGetHeight(self.sponsorImage.bounds) < image.size.height)
             self.sponsorImage.contentMode = UIViewContentModeScaleAspectFit;
-        }
+        else
+            self.sponsorImage.contentMode = UIViewContentModeCenter;
         
     } else {
         
@@ -59,9 +62,10 @@
                                               
                                               weakImageView.image = image;
                                               
-                                              if (CGRectGetWidth(weakImageView.bounds) < image.size.width || CGRectGetHeight(weakImageView.bounds) < image.size.height) {
+                                              if (CGRectGetWidth(weakImageView.bounds) < image.size.width || CGRectGetHeight(weakImageView.bounds) < image.size.height)
                                                   weakImageView.contentMode = UIViewContentModeScaleAspectFit;
-                                              }
+                                              else
+                                                  self.sponsorImage.contentMode = UIViewContentModeCenter;
                                               
                                               // Cache the downloaded image
                                               [[TMDiskCache sharedCache] setObject:image forKey:weakImageURLString];

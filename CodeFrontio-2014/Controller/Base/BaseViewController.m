@@ -32,8 +32,9 @@
     // Set background color
     self.view.backgroundColor = [UIColor colorWithRed:0.933 green:0.933 blue:0.992 alpha:1];
     
-    // Side menu width
+    // Side menu stuff
     [self setRevealWidth:240.0 forDirection:MSDynamicsDrawerDirectionLeft];
+    [self setGravityMagnitude:4.0];
     
     // Add stylers
     [self addStylersFromArray:@[[MSDynamicsDrawerShadowStyler styler],

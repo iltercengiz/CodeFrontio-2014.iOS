@@ -27,6 +27,7 @@
 
 @interface TrackCell () <UITableViewDataSource, UITableViewDelegate>
 
+@property (nonatomic) NSNumber *trackNumber;
 @property (nonatomic) NSArray *sessions;
 
 @property (nonatomic) NSMutableDictionary *rowHeights;
@@ -45,6 +46,8 @@
     self.trackLabel.backgroundColor = [UIColor whiteColor];
     self.trackLabel.textColor = [UIColor P_blueColor];
     self.trackLabel.layer.cornerRadius = 8.0;
+    self.trackLabel.layer.borderColor = [UIColor P_lightBlueColor].CGColor;
+    self.trackLabel.layer.borderWidth = 1.0;
     
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.contentInset = UIEdgeInsetsMake(30.0, 0.0, 0.0, 0.0);
@@ -66,12 +69,21 @@
 }
 
 #pragma mark - TrackCell
-- (void)configureCellForSessions:(NSArray *)sessions {
+- (void)configureCellForSessions:(NSArray *)sessions offset:(NSValue *)offsetValue {
     
     self.sessions = sessions;
     
     Session *session = [sessions firstObject];
+    self.trackNumber = session.track;
     self.trackLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Track %@", nil), session.track];
+    
+    if (offsetValue) {
+        [self.tableView scrollRectToVisible:(CGRect){.origin = [offsetValue CGPointValue], .size = CGSizeMake(1.0, CGRectGetHeight(self.tableView.frame))}
+                                   animated:NO];
+    } else {
+        [self.tableView scrollRectToVisible:(CGRect){.origin = CGPointZero, .size = CGSizeMake(1.0, CGRectGetHeight(self.tableView.frame))}
+                                   animated:NO];
+    }
     
     [self.tableView reloadData];
     
@@ -81,7 +93,7 @@
 - (void)prepareForReuse {
     self.sessions = nil;
     self.rowHeights = nil;
-    [self.tableView scrollRectToVisible:(CGRect){.origin = CGPointZero, .size = CGSizeMake(1.0, 1.0)} animated:NO];
+    self.trackNumber = nil;
 }
 
 #pragma mark - UITableViewDataSource
@@ -185,6 +197,13 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 10.0;
+}
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if ([self.trackCellDelegate respondsToSelector:@selector(trackTableView:didScroll:)]) {
+        [self.trackCellDelegate trackTableView:self.trackNumber didScroll:scrollView.contentOffset];
+    }
 }
 
 @end
