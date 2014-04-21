@@ -80,6 +80,9 @@
     if (offsetValue) {
         [self.tableView scrollRectToVisible:(CGRect){.origin = [offsetValue CGPointValue], .size = CGSizeMake(1.0, CGRectGetHeight(self.tableView.frame))}
                                    animated:NO];
+    } else {
+        [self.tableView scrollRectToVisible:(CGRect){.origin = CGPointZero, .size = CGSizeMake(1.0, CGRectGetHeight(self.tableView.frame))}
+                                   animated:NO];
     }
     
     [self.tableView reloadData];
