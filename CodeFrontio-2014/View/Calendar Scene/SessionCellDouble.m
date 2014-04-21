@@ -55,7 +55,17 @@
     self.takeNoteButton.layer.cornerRadius = 4.0;
     self.favouriteButton.layer.cornerRadius = 4.0;
     
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector()];
+    self.takeNoteButton.imageEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 12.0);
+    self.favouriteButton.imageEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 12.0);
+    
+    self.takeNoteButton.titleEdgeInsets = UIEdgeInsetsMake(1.0, 0.0, 0.0, 0.0);
+    self.favouriteButton.titleEdgeInsets = UIEdgeInsetsMake(1.0, 0.0, 0.0, 0.0);
+    
+    [self.firstPlaceholderImage addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFirstSpeakerDetails:)]];
+    [self.firstSpeakerNameLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFirstSpeakerDetails:)]];
+    
+    [self.secondPlaceholderImage addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSecondSpeakerDetails:)]];
+    [self.secondSpeakerNameLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSecondSpeakerDetails:)]];
     
 }
 
