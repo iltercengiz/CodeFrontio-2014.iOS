@@ -25,7 +25,9 @@ typedef NS_ENUM(NSInteger, ContentType) {
     ContentTypeFavourites,
     ContentTypeNotes,
     ContentTypeNews,
-    ContentTypeSponsors
+    ContentTypeSponsors,
+    ContentTypeTicket,
+    ContentTypeTwitter
 };
 
 #endif

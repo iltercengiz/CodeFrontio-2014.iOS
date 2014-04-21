@@ -69,6 +69,30 @@
 #pragma mark - Helper
 - (void)presentContentWithType:(ContentType)type animated:(BOOL)animated {
     
+    if (type == ContentTypeTicket) {
+        NSURL *url = [NSURL URLWithString:@"http://codefront.io/#tickets"];
+        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url];
+        }
+        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+        return;
+    } else if (type == ContentTypeTwitter) {
+        NSURL *tweetbotAppURL = [NSURL URLWithString:@"tweetbot://codefrontio/user_profile/codefrontio"];
+        if ([[UIApplication sharedApplication] canOpenURL:tweetbotAppURL]) {
+            [[UIApplication sharedApplication] openURL:tweetbotAppURL];
+        }
+        NSURL *twitterAppURL = [NSURL URLWithString:@"twitter://user?screen_name=codefrontio"];
+        if ([[UIApplication sharedApplication] canOpenURL:twitterAppURL]) {
+            [[UIApplication sharedApplication] openURL:twitterAppURL];
+        }
+        NSURL *url = [NSURL URLWithString:@"http://twitter.com/codefrontio"];
+        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url];
+        }
+        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+        return;
+    }
+    
     // Set identifier
     NSString *identifier;
     switch (type) {
@@ -126,7 +150,7 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return 7;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MenuCell *cell = [tableView dequeueReusableCellWithIdentifier:@"menuCell" forIndexPath:indexPath];
