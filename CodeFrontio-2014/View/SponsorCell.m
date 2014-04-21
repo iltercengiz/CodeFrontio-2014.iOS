@@ -29,6 +29,13 @@
     
 }
 
+#pragma mark - UITableViewCell
+- (void)prepareForReuse {
+    
+    self.sponsorImage.image = [UIImage imageNamed:@"Speaker-placeholder"];
+    
+}
+
 #pragma mark - Configurator
 - (void)configureCellForSponsor:(Sponsor *)sponsor {
     
@@ -40,9 +47,10 @@
         
         self.sponsorImage.image = image;
         
-        if (CGRectGetWidth(self.sponsorImage.bounds) < image.size.width || CGRectGetHeight(self.sponsorImage.bounds) < image.size.height) {
+        if (CGRectGetWidth(self.sponsorImage.bounds) < image.size.width || CGRectGetHeight(self.sponsorImage.bounds) < image.size.height)
             self.sponsorImage.contentMode = UIViewContentModeScaleAspectFit;
-        }
+        else
+            self.sponsorImage.contentMode = UIViewContentModeCenter;
         
     } else {
         
@@ -62,9 +70,10 @@
                                               
                                               weakImageView.image = image;
                                               
-                                              if (CGRectGetWidth(weakImageView.bounds) < image.size.width || CGRectGetHeight(weakImageView.bounds) < image.size.height) {
+                                              if (CGRectGetWidth(weakImageView.bounds) < image.size.width || CGRectGetHeight(weakImageView.bounds) < image.size.height)
                                                   weakImageView.contentMode = UIViewContentModeScaleAspectFit;
-                                              }
+                                              else
+                                                  self.sponsorImage.contentMode = UIViewContentModeCenter;
                                               
                                               // Cache the downloaded image
                                               [[TMDiskCache sharedCache] setObject:image forKey:weakImageURLString];
