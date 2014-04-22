@@ -70,7 +70,7 @@
 - (void)presentContentWithType:(ContentType)type animated:(BOOL)animated {
     
     if (type == ContentTypeTicket) {
-        NSURL *url = [NSURL URLWithString:@"http://codefront.io/#tickets"];
+        NSURL *url = [NSURL URLWithString:@"http://codefront2014.eventbrite.com/"];
         if ([[UIApplication sharedApplication] canOpenURL:url]) {
             [[UIApplication sharedApplication] openURL:url];
         }
