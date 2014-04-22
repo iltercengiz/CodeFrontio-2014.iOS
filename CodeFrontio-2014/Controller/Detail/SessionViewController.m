@@ -120,7 +120,7 @@
 }
 - (UIBarButtonItem *)hideKeyboardButton {
     if (!_hideKeyboardButton) {
-        _hideKeyboardButton = [[UIBarButtonItem alloc] initWithTitle:@"Hide"
+        _hideKeyboardButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Hide-keyboard"]
                                                                style:UIBarButtonItemStyleBordered
                                                               target:self
                                                               action:@selector(hideKeyboard:)];
