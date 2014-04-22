@@ -145,7 +145,7 @@
     [cell configureCellForSession:session];
     
     // Swipes
-    [cell setSwipeGestureWithView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"calendar-note"]]
+    [cell setSwipeGestureWithView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Pencil"]]
                             color:[UIColor colorWithRed:0.169 green:0.357 blue:0.616 alpha:1]
                              mode:MCSwipeTableViewCellModeExit
                             state:MCSwipeTableViewCellState1
@@ -153,7 +153,7 @@
                       NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
                       [self takeNoteForSessionAtIndexPath:indexPath];
                   }];
-    [cell setSwipeGestureWithView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"calendar-favourite-selected"]]
+    [cell setSwipeGestureWithView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Star-selected"]]
                             color:[UIColor colorWithRed:0.973 green:0.306 blue:0.306 alpha:1.0]
                              mode:MCSwipeTableViewCellModeExit
                             state:MCSwipeTableViewCellState3
