@@ -477,7 +477,7 @@
 			dependencies = (
 			);
 			name = "CodeFrontio-2014";
-			productName = Linz;
+			productName = CodeFront.io;
 			productReference = 7C00883418A8F84B00ED4B31 /* CodeFrontio-2014.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -677,6 +677,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "CodeFrontio-2014";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -709,6 +710,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = "CodeFrontio-2014";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
